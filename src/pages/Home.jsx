@@ -412,7 +412,12 @@ function Home() {
           </div>
 
           {/* Text and Button Details */}
-          <div className="space-y-3.5 max-w-2xl px-4 flex flex-col items-center -mt-5">
+          <motion.div 
+            initial={{ opacity: 0, y: 25 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 1.2, ease: "easeInOut" }}
+            className="space-y-3.5 max-w-2xl px-4 flex flex-col items-center -mt-5"
+          >
             {/* Dark copper name with gold light reflection shimmer effect */}
             <TextShimmer
               as="h1"
@@ -440,7 +445,7 @@ function Home() {
                 BOOK A CONSULTATION
               </Link>
             </div>
-          </div>
+          </motion.div>
 
         </div>
       </section>
@@ -458,55 +463,48 @@ function Home() {
 
 
       {/* Our Goal Section */}
-      <section 
-        className="relative z-10 py-24 bg-cover bg-center flex flex-col items-center justify-center"
-        style={{ backgroundImage: "url('/marble-bg.jpg')" }}
-      >
-        {/* Soft dark overlay to make text pop against marble */}
-        <div className="absolute inset-0 bg-[#f9f6f0]/20 z-0 pointer-events-none" />
-
-        <div className="max-w-7xl mx-auto px-6 relative z-10 w-full flex flex-col items-center space-y-16">
-          
-          {/* Header */}
-          <div className="text-center space-y-4 max-w-3xl">
-            <h2 className="font-serif text-3xl sm:text-4xl font-bold text-[#4f3129] tracking-widest uppercase">
+      <section className="relative w-full overflow-hidden border-b border-[#deb18a]/10 bg-[#f9f6f0] flex flex-col items-center justify-center">
+        {/* The Background Image, taking full width and scaling height naturally */}
+        <img 
+          src="/goal.png" 
+          alt="Our Goal Background" 
+          className="w-full h-auto pointer-events-none block z-0" 
+        />
+        
+        {/* Text Content Overlay (Left-aligned & Vertically Centered) */}
+        <div className="absolute inset-0 z-10 flex flex-col items-start justify-center p-6 sm:p-12 lg:p-24 text-left">
+          <motion.div 
+            initial={{ opacity: 0, y: 25 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, margin: "-100px" }}
+            transition={{ duration: 1.2, ease: "easeInOut" }}
+            className="-mt-8 sm:-mt-12 lg:-mt-16 max-w-xs sm:max-w-md md:max-w-xl space-y-3 sm:space-y-4"
+          >
+            <h2 className="font-serif text-lg sm:text-3xl md:text-4xl font-bold text-[#4f3129] tracking-widest uppercase">
               OUR GOAL
             </h2>
-            <div className="w-16 h-[1.5px] bg-[#4f3129]/40 mx-auto" />
-            <p className="font-sans text-sm sm:text-base text-[#5c3d31] max-w-2xl mx-auto leading-relaxed">
-              Helping you navigate life's challenges, find inner peace, and unlock your true potential through cosmic wisdom.
+            <div className="w-12 sm:w-16 h-[1.5px] bg-[#4f3129]/40" />
+            
+            <p className="font-sans text-[10px] sm:text-sm md:text-base text-[#5c3d31] leading-relaxed">
+              Bridging ancient celestial wisdom with modern life choices to bring you clarity, balance, and alignment.
             </p>
-          </div>
-
-          {/* Horizontal Timeline Container */}
-          <div className="relative w-full py-8">
-            {/* Horizontal Timeline Path Cord Wrapper */}
-            <div className="absolute top-[7px] left-[5%] right-[5%] h-[2px] z-0 hidden md:block">
-              {/* ScaleX Entry Animation */}
-              <motion.div
-                initial={{ scaleX: 0 }}
-                whileInView={{ scaleX: 1 }}
-                viewport={{ once: true }}
-                transition={{ duration: 1.5, ease: "easeOut" }}
-                className="w-full h-full origin-left"
-              >
-                {/* Wind-blown vertical sway Animation */}
-                <motion.div
-                  animate={{ y: [0, 1.5, -0.8, 0] }}
-                  transition={{ repeat: Infinity, duration: 6, ease: "easeInOut" }}
-                  className="w-full h-full bg-gradient-to-r from-transparent via-[#deb18a] to-transparent"
-                />
-              </motion.div>
-            </div>
-
-            {/* Scroll Cards Layout */}
-            <div className="grid grid-cols-1 md:grid-cols-4 gap-8 relative z-10 w-full">
-              {phases.map((phase, idx) => (
-                <ScrollCard key={idx} phase={phase} idx={idx} />
-              ))}
-            </div>
-          </div>
-
+            
+            {/* Goal Points */}
+            <ul className="space-y-2 pt-2 font-serif text-xs sm:text-sm md:text-base text-[#4a312a] font-bold tracking-wide flex flex-col items-start">
+              <li className="flex items-center space-x-2">
+                <span className="text-[#4a312a] font-bold text-[10px] sm:text-[12px] select-none">◆</span>
+                <span>Unlocking Your True Potential</span>
+              </li>
+              <li className="flex items-center space-x-2">
+                <span className="text-[#4a312a] font-bold text-[10px] sm:text-[12px] select-none">◆</span>
+                <span>Helping You Navigate Life’s Transitions</span>
+              </li>
+              <li className="flex items-center space-x-2">
+                <span className="text-[#4a312a] font-bold text-[10px] sm:text-[12px] select-none">◆</span>
+                <span>Connecting You to the Wisdom of the Universe</span>
+              </li>
+            </ul>
+          </motion.div>
         </div>
       </section>
 
@@ -514,58 +512,73 @@ function Home() {
       <section id="about" className="relative z-10 py-24 bg-cover bg-center" style={{ backgroundImage: "url('/marble-bg.jpg')" }}>
         <div className="absolute inset-0 bg-[#f9f6f0]/20 z-0 pointer-events-none" />
         
-        <div className="max-w-6xl mx-auto px-6 relative z-10 grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
-          {/* Left: Image Container */}
-          <div className="flex justify-center">
-            <motion.div 
-              initial={{ opacity: 0, x: -30 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.8 }}
-              className="relative w-64 h-64 sm:w-80 sm:h-80 rounded-2xl overflow-hidden border border-[#deb18a]/35 bg-gradient-to-br from-[#4a312a] to-[#2d1b16] shadow-2xl flex items-end justify-center p-2"
-            >
-              {/* Radial glow highlight behind the person */}
-              <div className="absolute inset-0 bg-[radial-gradient(circle,rgba(222,177,138,0.15)_0%,transparent_70%)]" />
-              
-              <img 
-                src="/Hero_person.png" 
-                alt="Madhuri Gupta" 
-                className="h-[95%] w-auto object-contain object-bottom pointer-events-none relative z-10" 
-              />
-            </motion.div>
-          </div>
-
-          {/* Right: Copy & CTA */}
-          <motion.div 
-            initial={{ opacity: 0, x: 30 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.8 }}
-            className="space-y-6 text-center md:text-left"
-          >
+        <div className="max-w-6xl mx-auto px-6 relative z-10 flex flex-col items-center space-y-12">
+          
+          {/* Top Centre Header */}
+          <div className="text-center space-y-4">
             <h2 className="font-serif text-3xl sm:text-4xl font-bold text-[#4f3129] tracking-widest uppercase">
               ABOUT ME
             </h2>
-            <div className="w-16 h-[1.5px] bg-[#4f3129]/40 mx-auto md:mx-0" />
-            
-            <div className="space-y-4 font-sans text-sm sm:text-base text-[#4a312a]/95 leading-relaxed font-light">
-              <p>
-                I am a dedicated, spiritual Vedic astrologer and counselor with over ten years of experience guiding souls along their cosmic paths.
-              </p>
-              <p>
-                My approach combines classical Parashari and Jaimini Vedic astrology principles with practical, real-world remedies. I decode the complex transits (Gocharas) and planetary cycles (Dashas) to help you make informed choices in career, relationship synastry, and spiritual growth.
-              </p>
+            <div className="w-16 h-[1.5px] bg-[#4f3129]/40 mx-auto" />
+          </div>
+
+          {/* Grid: Image and Details */}
+          <div className="w-full grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
+            {/* Left: Image Container */}
+            <div className="flex justify-center">
+              <motion.div 
+                initial={{ opacity: 0, x: -30 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.8 }}
+                className="relative w-64 h-64 sm:w-80 sm:h-80 rounded-2xl overflow-hidden border border-[#deb18a]/35 bg-gradient-to-br from-[#4a312a] to-[#2d1b16] shadow-2xl flex items-end justify-center p-2"
+              >
+                {/* Radial glow highlight behind the person */}
+                <div className="absolute inset-0 bg-[radial-gradient(circle,rgba(222,177,138,0.15)_0%,transparent_70%)]" />
+                
+                <img 
+                  src="/Hero_person.png" 
+                  alt="Madhuri Gupta" 
+                  className="h-[95%] w-auto object-contain object-bottom pointer-events-none relative z-10" 
+                />
+              </motion.div>
             </div>
 
-            <div className="pt-4">
-              <Link
-                to="/about"
-                className="inline-block px-8 py-3.5 bg-[#3a1906] hover:bg-[#4f210b] text-[#deb18a] border border-[#deb18a] font-serif text-[11px] font-bold tracking-widest uppercase rounded-sm shadow-md transition-all duration-300 transform hover:-translate-y-0.5"
-              >
-                MORE ABOUT ME
-              </Link>
-            </div>
+            {/* Right: Copy/Details */}
+            <motion.div 
+              initial={{ opacity: 0, x: 30 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.8 }}
+              className="space-y-6 text-center md:text-left"
+            >
+              <div className="space-y-4 font-sans text-sm sm:text-base text-[#4a312a]/95 leading-relaxed font-light">
+                <p>
+                  I am a dedicated, spiritual Vedic astrologer and counselor with over ten years of experience guiding souls along their cosmic paths.
+                </p>
+                <p>
+                  My approach combines classical Parashari and Jaimini Vedic astrology principles with practical, real-world remedies. I decode the complex transits (Gocharas) and planetary cycles (Dashas) to help you make informed choices in career, relationship synastry, and spiritual growth.
+                </p>
+              </div>
+            </motion.div>
+          </div>
+
+          {/* Bottom Centre CTA Button */}
+          <motion.div 
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.8, delay: 0.2 }}
+            className="pt-4 text-center w-full"
+          >
+            <Link
+              to="/about"
+              className="inline-block px-8 py-3.5 bg-[#3a1906] hover:bg-[#4f210b] text-[#deb18a] border border-[#deb18a] font-serif text-[11px] font-bold tracking-widest uppercase rounded-sm shadow-md transition-all duration-300 transform hover:-translate-y-0.5"
+            >
+              MORE ABOUT ME
+            </Link>
           </motion.div>
+
         </div>
       </section>
 
