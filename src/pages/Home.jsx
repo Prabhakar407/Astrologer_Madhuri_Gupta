@@ -169,14 +169,12 @@ function ScrollCard({ phase, idx }) {
   );
 }
 
-function ServiceAccordion({ service }) {
-  const [isOpen, setIsOpen] = React.useState(false);
-
+function ServiceAccordion({ service, isOpen, onToggle }) {
   return (
     <div className="w-full max-w-2xl mx-auto flex flex-col items-center select-none">
       {/* Accordion Header */}
       <button 
-        onClick={() => setIsOpen(!isOpen)}
+        onClick={onToggle}
         className="w-full px-6 py-4 flex items-center justify-between bg-gradient-to-r from-[#deb18a] via-[#f3dbaf] to-[#deb18a] border border-[#3a1906]/35 rounded-sm hover:scale-[1.01] transition-transform duration-200 cursor-pointer shadow-md text-left"
       >
         <span className="font-serif text-sm sm:text-base font-bold text-[#3a1906] tracking-wider uppercase">
@@ -220,9 +218,16 @@ function ServiceAccordion({ service }) {
           <div className="pt-2">
             <Link
               to={`/booking?service=${service.id}`}
-              className="inline-block px-6 py-2 bg-[#3a1906] hover:bg-[#4f210b] text-[#deb18a] font-serif text-[10px] font-bold tracking-widest uppercase rounded-sm border border-[#deb18a]/30 transition-all duration-200"
+              className="btn-10"
             >
-              Book Reading Session
+              <div className="slide-bg"></div>
+              <span className="arrow-icon">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+                  <line x1="5" y1="12" x2="19" y2="12"></line>
+                  <polyline points="12 5 19 12 12 19"></polyline>
+                </svg>
+              </span>
+              <span className="btn-text">Book Session</span>
             </Link>
           </div>
         </div>
@@ -232,6 +237,8 @@ function ServiceAccordion({ service }) {
 }
 
 function Home() {
+  const [activeServiceId, setActiveServiceId] = React.useState(null);
+
   const zodiacSigns = [
     'Aries ♈', 'Taurus ♉', 'Gemini ♊', 'Cancer ♋', 
     'Leo ♌', 'Virgo ♍', 'Libra ♎', 'Scorpio ♏', 
@@ -437,12 +444,18 @@ function Home() {
             </p>
             
             <div className="pt-4">
-              {/* Gold gradient button with dark text and border matching Hero2.png */}
               <Link
                 to="/booking"
-                className="inline-block px-8 py-3.5 font-serif text-sm font-bold tracking-widest text-[#321300] bg-gradient-to-r from-[#deb18a] via-[#f3dbaf] to-[#deb18a] rounded-md hover:from-[#f4e6c1] hover:to-[#deb18a] shadow-[0_4px_15px_rgba(79,49,41,0.15)] hover:shadow-[0_6px_20px_rgba(79,49,41,0.25)] transition-all duration-300 transform hover:-translate-y-0.5 border border-[#b8922b]/30"
+                className="animated-button"
               >
-                BOOK A CONSULTATION
+                <svg viewBox="0 0 24 24" className="arr-2" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M16.1716 10.9999L10.8076 5.63589L12.2218 4.22168L20 11.9999L12.2218 19.778L10.8076 18.3638L16.1716 12.9999H4V10.9999H16.1716Z"></path>
+                </svg>
+                <span className="text">Book A Consultation</span>
+                <span className="circle"></span>
+                <svg viewBox="0 0 24 24" className="arr-1" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M16.1716 10.9999L10.8076 5.63589L12.2218 4.22168L20 11.9999L12.2218 19.778L10.8076 18.3638L16.1716 12.9999H4V10.9999H16.1716Z"></path>
+                </svg>
               </Link>
             </div>
           </motion.div>
@@ -450,20 +463,10 @@ function Home() {
         </div>
       </section>
 
-      {/* Marquee Banner */}
-      <section className="relative z-10 bg-cosmic-900/40 backdrop-blur-sm border-y border-gold-500/10 py-6 overflow-hidden">
-        <div className="flex whitespace-nowrap gap-12 animate-marquee">
-          {[...zodiacSigns, ...zodiacSigns].map((sign, idx) => (
-            <span key={idx} className="font-serif text-lg tracking-widest text-gold-300/60 uppercase select-none">
-              {sign}
-            </span>
-          ))}
-        </div>
-      </section>
 
 
       {/* Our Goal Section */}
-      <section className="relative w-full overflow-hidden border-b border-[#deb18a]/10 bg-[#f9f6f0] flex flex-col items-center justify-center">
+      <section className="relative w-full overflow-hidden border-b border-[#deb18a]/10 bg-[#d1b5a7] flex flex-col items-center justify-center">
         {/* The Background Image, taking full width and scaling height naturally */}
         <img 
           src="/goal.png" 
@@ -480,9 +483,17 @@ function Home() {
             transition={{ duration: 1.2, ease: "easeInOut" }}
             className="-mt-8 sm:-mt-12 lg:-mt-16 max-w-xs sm:max-w-md md:max-w-xl space-y-3 sm:space-y-4"
           >
-            <h2 className="font-serif text-lg sm:text-3xl md:text-4xl font-bold text-[#4f3129] tracking-widest uppercase">
+            <TextShimmer
+              as="h2"
+              duration={3.5}
+              className="font-serif text-lg sm:text-3xl md:text-4xl font-bold tracking-widest uppercase"
+              style={{
+                '--base-color': '#4f3129',
+                '--base-gradient-color': '#deb18a'
+              }}
+            >
               OUR GOAL
-            </h2>
+            </TextShimmer>
             <div className="w-12 sm:w-16 h-[1.5px] bg-[#4f3129]/40" />
             
             <p className="font-sans text-[10px] sm:text-sm md:text-base text-[#5c3d31] leading-relaxed">
@@ -512,13 +523,27 @@ function Home() {
       <section id="about" className="relative z-10 py-24 bg-cover bg-center" style={{ backgroundImage: "url('/marble-bg.jpg')" }}>
         <div className="absolute inset-0 bg-[#f9f6f0]/20 z-0 pointer-events-none" />
         
-        <div className="max-w-6xl mx-auto px-6 relative z-10 flex flex-col items-center space-y-12">
+        <motion.div 
+          initial={{ opacity: 0, y: 35 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: "-100px" }}
+          transition={{ duration: 1.0, ease: "easeOut" }}
+          className="max-w-6xl mx-auto px-6 relative z-10 flex flex-col items-center space-y-12"
+        >
           
           {/* Top Centre Header */}
           <div className="text-center space-y-4">
-            <h2 className="font-serif text-3xl sm:text-4xl font-bold text-[#4f3129] tracking-widest uppercase">
+            <TextShimmer
+              as="h2"
+              duration={3.5}
+              className="font-serif text-3xl sm:text-4xl font-bold tracking-widest uppercase"
+              style={{
+                '--base-color': '#4f3129',
+                '--base-gradient-color': '#deb18a'
+              }}
+            >
               ABOUT ME
-            </h2>
+            </TextShimmer>
             <div className="w-16 h-[1.5px] bg-[#4f3129]/40 mx-auto" />
           </div>
 
@@ -573,25 +598,189 @@ function Home() {
           >
             <Link
               to="/about"
-              className="inline-block px-8 py-3.5 bg-[#3a1906] hover:bg-[#4f210b] text-[#deb18a] border border-[#deb18a] font-serif text-[11px] font-bold tracking-widest uppercase rounded-sm shadow-md transition-all duration-300 transform hover:-translate-y-0.5"
+              className="animated-button"
             >
-              MORE ABOUT ME
+              <svg viewBox="0 0 24 24" className="arr-2" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M16.1716 10.9999L10.8076 5.63589L12.2218 4.22168L20 11.9999L12.2218 19.778L10.8076 18.3638L16.1716 12.9999H4V10.9999H16.1716Z"></path>
+              </svg>
+              <span className="text">More About Me</span>
+              <span className="circle"></span>
+              <svg viewBox="0 0 24 24" className="arr-1" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M16.1716 10.9999L10.8076 5.63589L12.2218 4.22168L20 11.9999L12.2218 19.778L10.8076 18.3638L16.1716 12.9999H4V10.9999H16.1716Z"></path>
+              </svg>
             </Link>
           </motion.div>
 
+        </motion.div>
+      </section>
+
+      {/* Marquee Banner Section (Placed above Services) */}
+      <section className="relative z-10 bg-[#3a1906] border-y border-[#deb18a]/20 py-4 overflow-hidden shadow-md">
+        <div className="flex whitespace-nowrap gap-12 animate-marquee">
+          {[...zodiacSigns, ...zodiacSigns].map((sign, idx) => (
+            <span key={idx} className="font-serif text-sm sm:text-base tracking-[0.2em] text-[#deb18a] uppercase select-none">
+              {sign}
+            </span>
+          ))}
         </div>
+      </section>
+
+      {/* Working With Me Section */}
+      <section className="relative z-10 py-20 bg-[#cfb7a7] border-t border-[#3a1906]/10">
+        <motion.div 
+          initial={{ opacity: 0, y: 35 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: "-100px" }}
+          transition={{ duration: 1.0, ease: "easeOut" }}
+          className="max-w-4xl mx-auto px-6 relative z-10 flex flex-col items-center space-y-12"
+        >
+          
+          {/* Header */}
+          <div className="text-center space-y-3">
+            <TextShimmer
+              as="h2"
+              duration={3.5}
+              className="font-serif text-2xl sm:text-3xl font-bold tracking-[0.18em] uppercase leading-relaxed"
+              style={{
+                '--base-color': '#3a1906',
+                '--base-gradient-color': '#deb18a'
+              }}
+            >
+              WORKING WITH ME IS<br />
+              RIGHT FOR THOSE<br />
+              WHO WANT:
+            </TextShimmer>
+            <div className="w-16 h-[1.5px] bg-[#3a1906]/40 mx-auto mt-4" />
+          </div>
+
+          {/* 2-Column Grid of 8 items */}
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-x-12 gap-y-6 sm:gap-y-8 w-full max-w-2xl mx-auto">
+            
+            {/* Item 01 */}
+            <motion.div 
+              initial={{ opacity: 0, y: 15 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6, delay: 0.1 }}
+              className="flex items-center space-x-4"
+            >
+              <span className="font-serif text-2xl sm:text-3xl font-bold text-[#b8922b] tracking-wider select-none shrink-0 w-10 text-right">01</span>
+              <span className="font-serif text-sm sm:text-base font-semibold text-[#3a1906] tracking-wide">Achieve their goals</span>
+            </motion.div>
+
+            {/* Item 02 */}
+            <motion.div 
+              initial={{ opacity: 0, y: 15 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6, delay: 0.25 }}
+              className="flex items-center space-x-4"
+            >
+              <span className="font-serif text-2xl sm:text-3xl font-bold text-[#b8922b] tracking-wider select-none shrink-0 w-10 text-right">02</span>
+              <span className="font-serif text-sm sm:text-base font-semibold text-[#3a1906] tracking-wide">Understand themselves</span>
+            </motion.div>
+
+            {/* Item 03 */}
+            <motion.div 
+              initial={{ opacity: 0, y: 15 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6, delay: 0.4 }}
+              className="flex items-center space-x-4"
+            >
+              <span className="font-serif text-2xl sm:text-3xl font-bold text-[#b8922b] tracking-wider select-none shrink-0 w-10 text-right">03</span>
+              <span className="font-serif text-sm sm:text-base font-semibold text-[#3a1906] tracking-wide">Make wise choices</span>
+            </motion.div>
+
+            {/* Item 04 */}
+            <motion.div 
+              initial={{ opacity: 0, y: 15 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6, delay: 0.55 }}
+              className="flex items-center space-x-4"
+            >
+              <span className="font-serif text-2xl sm:text-3xl font-bold text-[#b8922b] tracking-wider select-none shrink-0 w-10 text-right">04</span>
+              <span className="font-serif text-sm sm:text-base font-semibold text-[#3a1906] tracking-wide">Create positive changes</span>
+            </motion.div>
+
+            {/* Item 05 */}
+            <motion.div 
+              initial={{ opacity: 0, y: 15 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6, delay: 0.7 }}
+              className="flex items-center space-x-4"
+            >
+              <span className="font-serif text-2xl sm:text-3xl font-bold text-[#b8922b] tracking-wider select-none shrink-0 w-10 text-right">05</span>
+              <span className="font-serif text-sm sm:text-base font-semibold text-[#3a1906] tracking-wide">Reconnect and center</span>
+            </motion.div>
+
+            {/* Item 06 */}
+            <motion.div 
+              initial={{ opacity: 0, y: 15 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6, delay: 0.85 }}
+              className="flex items-center space-x-4"
+            >
+              <span className="font-serif text-2xl sm:text-3xl font-bold text-[#b8922b] tracking-wider select-none shrink-0 w-10 text-right">06</span>
+              <span className="font-serif text-sm sm:text-base font-semibold text-[#3a1906] tracking-wide">Find clarity and focus</span>
+            </motion.div>
+
+            {/* Item 07 */}
+            <motion.div 
+              initial={{ opacity: 0, y: 15 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6, delay: 1.0 }}
+              className="flex items-center space-x-4"
+            >
+              <span className="font-serif text-2xl sm:text-3xl font-bold text-[#b8922b] tracking-wider select-none shrink-0 w-10 text-right">07</span>
+              <span className="font-serif text-sm sm:text-base font-semibold text-[#3a1906] tracking-wide">Unlock their potential</span>
+            </motion.div>
+
+            {/* Item 08 */}
+            <motion.div 
+              initial={{ opacity: 0, y: 15 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6, delay: 1.15 }}
+              className="flex items-center space-x-4"
+            >
+              <span className="font-serif text-2xl sm:text-3xl font-bold text-[#b8922b] tracking-wider select-none shrink-0 w-10 text-right">08</span>
+              <span className="font-serif text-sm sm:text-base font-semibold text-[#3a1906] tracking-wide">Live authentically</span>
+            </motion.div>
+
+          </div>
+
+        </motion.div>
       </section>
 
       {/* My Services Section */}
       <section id="services" className="relative z-10 py-24 bg-cover bg-center border-t border-[#deb18a]/10" style={{ backgroundImage: "url('/marble-bg.jpg')" }}>
         <div className="absolute inset-0 bg-[#f9f6f0]/20 z-0 pointer-events-none" />
         
-        <div className="max-w-4xl mx-auto px-6 relative z-10 flex flex-col items-center space-y-16">
+        <motion.div 
+          initial={{ opacity: 0, y: 35 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: "-100px" }}
+          transition={{ duration: 1.0, ease: "easeOut" }}
+          className="max-w-4xl mx-auto px-6 relative z-10 flex flex-col items-center space-y-16"
+        >
           {/* Header */}
           <div className="text-center space-y-4 max-w-2xl">
-            <h2 className="font-serif text-3xl sm:text-4xl font-bold text-[#4f3129] tracking-widest uppercase">
+            <TextShimmer
+              as="h2"
+              duration={3.5}
+              className="font-serif text-3xl sm:text-4xl font-bold tracking-widest uppercase"
+              style={{
+                '--base-color': '#4f3129',
+                '--base-gradient-color': '#deb18a'
+              }}
+            >
               MY SERVICES
-            </h2>
+            </TextShimmer>
             <div className="w-16 h-[1.5px] bg-[#4f3129]/40 mx-auto" />
             <p className="font-sans text-xs sm:text-sm text-[#8c6c51] uppercase tracking-[0.15em] font-semibold">
               Tap to see descriptions
@@ -600,41 +789,24 @@ function Home() {
 
           {/* Service List (Accordion style matching color.png) */}
           <div className="w-full space-y-4">
-            {serviceList.map((service) => (
-              <ServiceAccordion key={service.id} service={service} />
+            {serviceList.map((service, idx) => (
+              <motion.div
+                key={service.id}
+                initial={{ opacity: 0, y: 25 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, margin: "-50px" }}
+                transition={{ duration: 0.8, delay: idx * 0.25, ease: "easeOut" }}
+                className="w-full"
+              >
+                <ServiceAccordion 
+                  service={service} 
+                  isOpen={activeServiceId === service.id}
+                  onToggle={() => setActiveServiceId(activeServiceId === service.id ? null : service.id)}
+                />
+              </motion.div>
             ))}
           </div>
-        </div>
-      </section>
-
-      {/* Testimonial Section */}
-      <section id="testimonials" className="relative z-10 py-20 bg-gradient-to-b from-transparent to-cosmic-950/40 border-t border-gold-500/5">
-        <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="glass-panel p-8 sm:p-12 rounded-3xl relative overflow-hidden flex flex-col md:flex-row items-center gap-8">
-            <div className="absolute top-0 right-0 p-4 opacity-5 pointer-events-none">
-              <Sparkles className="h-60 w-60 text-gold-500" />
-            </div>
-
-            <div className="flex-1 space-y-4">
-              <div className="flex space-x-1 text-gold-400">
-                <span>★</span><span>★</span><span>★</span><span>★</span><span>★</span>
-              </div>
-              <p className="font-playfair text-lg sm:text-xl italic text-slate-200 leading-relaxed">
-                "Madhuri Gupta's reading changed the way I approached my startup launch. Her planetary transit guide helped me select the right time, and the results were beyond expectation."
-              </p>
-              <div>
-                <h4 className="font-serif text-white font-semibold">Amit R.</h4>
-                <p className="text-xs text-gold-400/80">Tech Entrepreneur, Bangalore</p>
-              </div>
-            </div>
-
-            <div className="border-t md:border-t-0 md:border-l border-gold-500/10 pt-6 md:pt-0 md:pl-8 flex flex-col justify-center items-center text-center shrink-0 w-full md:w-auto">
-              <Shield className="h-10 w-10 text-gold-400 mb-2" />
-              <h5 className="font-serif text-white font-medium">100% Confidential</h5>
-              <p className="text-xs text-slate-400 max-w-[200px] mt-1">All birth data and consultations are strictly private.</p>
-            </div>
-          </div>
-        </div>
+        </motion.div>
       </section>
 
     </div>

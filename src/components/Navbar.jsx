@@ -73,20 +73,29 @@ function Navbar() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="relative flex items-center justify-center h-8">
             
-            {/* Branding - Visible only on Mobile */}
+            {/* Branding - Centered on Mobile, Left-aligned on Desktop */}
             <div className="flex justify-center md:hidden w-full">
               <Link to="/" className="flex items-center space-x-2 group">
                 <Sparkles className="h-4 w-4 text-gold-400 group-hover:rotate-12 transition-transform duration-300" />
-                <span className="font-serif text-base font-bold tracking-widest bg-gradient-to-r from-gold-200 via-gold-400 to-gold-600 bg-clip-text text-transparent">
+                <span className="font-serif text-base font-bold tracking-widest text-[#deb18a]">
+                  MADHURI GUPTA
+                </span>
+              </Link>
+            </div>
+
+            <div className="hidden md:flex items-center space-x-2 absolute left-0">
+              <Link to="/" className="flex items-center space-x-2 group">
+                <Sparkles className="h-4 w-4 text-gold-400 group-hover:rotate-12 transition-transform duration-300" />
+                <span className="font-serif text-base font-bold tracking-widest text-[#deb18a] group-hover:text-white transition-colors duration-300">
                   MADHURI GUPTA
                 </span>
               </Link>
             </div>
 
             {/* Desktop Navigation - Centered, Spaced, No Branding, No Capsule (Matches Hero2.png) */}
-            <div className="hidden md:flex items-center space-x-10">
+            <div className="hidden md:flex items-center space-x-6">
               {navItems
-                .filter((item) => ['Home', 'About', 'Services', 'Contact'].includes(item.name))
+                .filter((item) => ['Home', 'About', 'Services', 'Testimonial', 'Contact'].includes(item.name))
                 .map((item) => {
                   const isActive = activeTab === item.name
                   return (
@@ -110,9 +119,16 @@ function Navbar() {
             <div className="hidden md:block absolute right-0">
               <Link
                 to="/booking"
-                className="px-4 py-1.5 font-serif text-[10px] font-bold tracking-widest text-cosmic-950 bg-gradient-to-r from-gold-300 via-gold-400 to-gold-600 rounded hover:from-gold-200 hover:to-gold-500 shadow-[0_2px_12px_rgba(212,175,55,0.2)] hover:shadow-[0_4px_16px_rgba(212,175,55,0.35)] transition-all duration-300 transform hover:-translate-y-0.5 border border-gold-300/30 uppercase"
+                className="btn-10"
               >
-                Book Appointment
+                <div className="slide-bg"></div>
+                <span className="arrow-icon">
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+                    <line x1="5" y1="12" x2="19" y2="12"></line>
+                    <polyline points="12 5 19 12 12 19"></polyline>
+                  </svg>
+                </span>
+                <span className="btn-text">Book Appointment</span>
               </Link>
             </div>
 
