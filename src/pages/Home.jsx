@@ -585,6 +585,22 @@ function Home() {
                   My approach combines classical Parashari and Jaimini Vedic astrology principles with practical, real-world remedies. I decode the complex transits (Gocharas) and planetary cycles (Dashas) to help you make informed choices in career, relationship synastry, and spiritual growth.
                 </p>
               </div>
+
+              {/* Stats Grid */}
+              <div className="grid grid-cols-3 gap-3 sm:gap-4 pt-2 max-w-md mx-auto md:mx-0">
+                <div className="bg-[#3a1906]/10 border border-[#3a1906]/15 py-1.5 px-3 rounded-xl text-center shadow-sm">
+                  <div className="font-serif text-base sm:text-xl font-bold text-[#3a1906]">15+</div>
+                  <div className="font-sans text-[8px] sm:text-[10px] text-[#3a1906]/85 font-bold uppercase tracking-wider leading-tight">Years Exp.</div>
+                </div>
+                <div className="bg-[#3a1906]/10 border border-[#3a1906]/15 py-1.5 px-3 rounded-xl text-center shadow-sm">
+                  <div className="font-serif text-base sm:text-xl font-bold text-[#3a1906]">10K+</div>
+                  <div className="font-sans text-[8px] sm:text-[10px] text-[#3a1906]/85 font-bold uppercase tracking-wider leading-tight">Clients Served</div>
+                </div>
+                <div className="bg-[#3a1906]/10 border border-[#3a1906]/15 py-1.5 px-3 rounded-xl text-center shadow-sm">
+                  <div className="font-serif text-base sm:text-xl font-bold text-[#3a1906]">4.9/5</div>
+                  <div className="font-sans text-[8px] sm:text-[10px] text-[#3a1906]/85 font-bold uppercase tracking-wider leading-tight">Rating</div>
+                </div>
+              </div>
             </motion.div>
           </div>
 
