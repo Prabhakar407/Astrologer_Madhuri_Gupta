@@ -1,162 +1,277 @@
-import React from 'react'
-import { Link } from 'react-router-dom'
-import { motion } from 'framer-motion'
-import { Compass, Heart, Briefcase, Star, CheckCircle, Clock } from 'lucide-react'
+import React from 'react';
+import { Link } from 'react-router-dom';
+import { motion } from 'framer-motion';
+import { 
+  Compass, 
+  Clock, 
+  Sparkles, 
+  FileText, 
+  Video, 
+  Shield, 
+  Heart, 
+  Briefcase, 
+  Star,
+  Tag, 
+  ExternalLink, 
+  ChevronRight,
+  HelpCircle,
+  TrendingUp
+} from 'lucide-react';
 
-function Services() {
+export default function Services() {
   const serviceList = [
     {
       id: 'birth-chart',
-      icon: <Compass className="h-8 w-8 text-gold-400" />,
-      title: 'Detailed Birth Chart Reading',
-      tagline: 'Full Vedic Kundali & Dasha analysis',
-      duration: '60 Mins Session',
-      price: '₹2,500 / $45',
-      features: [
-        'Detailed analysis of all 12 houses',
-        '10-year Mahadasha & Antardasha timeline',
-        'Specific gemstone & mantra remedies',
-        'PDF Copy of your birth chart',
-        'Audio/Video session recording'
+      title: 'Kundali & Birth Chart',
+      type: 'Vedic Reading',
+      duration: '60 Mins',
+      platform: 'Online Zoom',
+      image: 'https://images.unsplash.com/photo-1506318137071-a8e063b4bec0?auto=format&fit=crop&w=800&q=80',
+      amenitiesLeft: [
+        { label: 'Detailed birth chart PDF', icon: 'FileText' },
+        { label: '10-year Mahadasha timeline', icon: 'Clock' },
+        { label: 'Remedy recommendations', icon: 'Sparkles' }
       ],
-      color: 'from-purple-500/10 to-cosmic-950'
-    },
-    {
-      id: 'compatibility',
-      icon: <Heart className="h-8 w-8 text-gold-400" />,
-      title: 'Relationship Compatibility',
-      tagline: 'Synastry and Kundali Milan',
-      duration: '45 Mins Session',
-      price: '₹3,000 / $55',
-      features: [
-        'Ashta Koota matchmaking (36 Gunas)',
-        'Manglik Dosha analysis and remedies',
-        'Emotional & intellectual compatibility scale',
-        'Future relationship transit predictions',
-        'Session recording included'
+      amenitiesRight: [
+        { label: 'Video/Audio recording', icon: 'Video' },
+        { label: 'Follow-up Q&A support', icon: 'HelpCircle' },
+        { label: 'Custom gemstone alignment', icon: 'Shield' }
       ],
-      color: 'from-pink-500/10 to-cosmic-950'
+      feeDetails: '10-year Mahadasha timeline is included in full analysis',
+      price: '₹2,500',
+      durationText: '(60 Mins Session)',
+      minSessions: 'Minimum 1 session'
     },
     {
       id: 'career-wealth',
-      icon: <Briefcase className="h-8 w-8 text-gold-400" />,
       title: 'Career & Wealth Guidance',
-      tagline: '10th House alignment & prosperity',
-      duration: '45 Mins Session',
-      price: '₹2,100 / $39',
-      features: [
-        'Job vs. business suitability analysis',
-        'Auspicious times for financial investments',
-        'Remedies for career blocks (Shani/Rahu)',
-        'Timing of promotions or job switches',
-        'Session recording included'
+      type: 'Career & Finance',
+      duration: '45 Mins',
+      platform: 'Online Zoom',
+      image: 'https://images.unsplash.com/photo-1507207611509-ec012433ff52?auto=format&fit=crop&w=800&q=80',
+      amenitiesLeft: [
+        { label: 'Job vs. Business analysis', icon: 'Briefcase' },
+        { label: 'Investment timing guide', icon: 'TrendingUp' },
+        { label: 'Auspicious wealth transits', icon: 'Sparkles' }
       ],
-      color: 'from-blue-500/10 to-cosmic-950'
+      amenitiesRight: [
+        { label: 'Remedies for career blocks', icon: 'Shield' },
+        { label: 'Career transition timing', icon: 'Clock' },
+        { label: 'Video/Audio recording', icon: 'Video' }
+      ],
+      feeDetails: 'Recommended for professionals experiencing career transitions',
+      price: '₹2,100',
+      durationText: '(45 Mins Session)',
+      minSessions: 'Minimum 1 session'
+    },
+    {
+      id: 'compatibility',
+      title: 'Relationship Compatibility',
+      type: 'Kundali Milan',
+      duration: '45 Mins',
+      platform: 'Online Zoom',
+      image: 'https://images.unsplash.com/photo-1515934751635-c81c6bc9a2d8?auto=format&fit=crop&w=800&q=80',
+      amenitiesLeft: [
+        { label: 'Ashta Koota matching (36 Gunas)', icon: 'Heart' },
+        { label: 'Manglik Dosha analysis', icon: 'Shield' },
+        { label: 'Emotional & mental sync', icon: 'Sparkles' }
+      ],
+      amenitiesRight: [
+        { label: 'Family relationship analysis', icon: 'FileText' },
+        { label: 'Future transit sync', icon: 'Clock' },
+        { label: 'Video/Audio recording', icon: 'Video' }
+      ],
+      feeDetails: 'Includes detail matching reports for both charts',
+      price: '₹3,000',
+      durationText: '(45 Mins Session)',
+      minSessions: 'Minimum 1 session'
     },
     {
       id: 'yearly-transit',
-      icon: <Star className="h-8 w-8 text-gold-400" />,
-      title: 'Yearly Solar Return (Varshphal)',
-      tagline: 'Month-by-month transit guide',
-      duration: '45 Mins Session',
-      price: '₹2,500 / $45',
-      features: [
-        'Month-by-month layout of key events',
-        'Sade Sati & Jupiter transit analysis',
-        'Health & wellness checkpoints',
-        'Personalized calendar for the year',
-        'Session recording included'
+      title: 'Yearly Transit Forecast',
+      type: 'Varshphal',
+      duration: '45 Mins',
+      platform: 'Online Zoom',
+      image: 'https://images.unsplash.com/photo-1451187580459-43490279c0fa?auto=format&fit=crop&w=800&q=80',
+      amenitiesLeft: [
+        { label: 'Month-by-month key events', icon: 'Clock' },
+        { label: 'Sade Sati & Jupiter transits', icon: 'Star' },
+        { label: 'Health & wellness indicators', icon: 'Shield' }
       ],
-      color: 'from-yellow-500/10 to-cosmic-950'
+      amenitiesRight: [
+        { label: 'Auspicious timings (Muhurats)', icon: 'Sparkles' },
+        { label: 'Remedies for transits', icon: 'Shield' },
+        { label: 'Video/Audio recording', icon: 'Video' }
+      ],
+      feeDetails: 'Best booked on birthdays or auspicious new beginnings',
+      price: '₹2,500',
+      durationText: '(45 Mins Session)',
+      minSessions: 'Minimum 1 session'
     }
-  ]
+  ];
+
+  const getIcon = (iconName) => {
+    switch (iconName) {
+      case 'FileText': return <FileText className="w-4 h-4 text-slate-600 shrink-0" />;
+      case 'Clock': return <Clock className="w-4 h-4 text-slate-600 shrink-0" />;
+      case 'Sparkles': return <Sparkles className="w-4 h-4 text-slate-600 shrink-0" />;
+      case 'Video': return <Video className="w-4 h-4 text-slate-600 shrink-0" />;
+      case 'HelpCircle': return <HelpCircle className="w-4 h-4 text-slate-600 shrink-0" />;
+      case 'Shield': return <Shield className="w-4 h-4 text-slate-600 shrink-0" />;
+      case 'Briefcase': return <Briefcase className="w-4 h-4 text-slate-600 shrink-0" />;
+      case 'TrendingUp': return <TrendingUp className="w-4 h-4 text-slate-600 shrink-0" />;
+      case 'Heart': return <Heart className="w-4 h-4 text-slate-600 shrink-0" />;
+      case 'Star': return <Star className="w-4 h-4 text-slate-600 shrink-0" />;
+      default: return null;
+    }
+  };
+
+  const containerVariants = {
+    hidden: { opacity: 0 },
+    visible: {
+      opacity: 1,
+      transition: {
+        staggerChildren: 0.15
+      }
+    }
+  };
+
+  const itemVariants = {
+    hidden: { opacity: 0, y: 30 },
+    visible: { opacity: 1, y: 0, transition: { type: 'spring', stiffness: 100, damping: 15 } }
+  };
 
   return (
-    <div className="pt-24 min-h-screen">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
+    <div className="pt-28 pb-16 min-h-screen bg-white text-slate-900 font-sans selection:bg-[#b8922b]/20 selection:text-[#b8922b]">
+      <div className="max-w-6xl mx-auto px-4 sm:px-6">
         
-        {/* Header */}
-        <div className="text-center max-w-3xl mx-auto mb-16 space-y-4">
-          <span className="font-serif text-gold-400 tracking-widest text-sm uppercase">Sacred Sciences</span>
-          <h1 className="font-serif text-4xl sm:text-5xl font-bold text-white tracking-wide">
-            Astrological Services
-          </h1>
-          <div className="w-16 h-[2px] bg-gold-400 mx-auto" />
-          <p className="text-slate-400 font-light max-w-2xl mx-auto">
-            Choose a reading session to unlock the map of your planetary paths and receive practical remedies for growth.
-          </p>
-        </div>
-
-        {/* Services Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-          {serviceList.map((srv, idx) => (
-            <motion.div
-              key={srv.id}
-              initial={{ opacity: 0, scale: 0.95 }}
-              whileInView={{ opacity: 1, scale: 1 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.6, delay: idx * 0.1 }}
-              className={`glass-panel rounded-3xl p-6 sm:p-8 flex flex-col justify-between border-gold-500/10 bg-gradient-to-br ${srv.color} relative overflow-hidden`}
+        {/* Animated Stack of Cards */}
+        <motion.div 
+          className="space-y-8"
+          variants={containerVariants}
+          initial="hidden"
+          animate="visible"
+        >
+          {serviceList.map((srv) => (
+            <motion.div 
+              key={srv.id} 
+              variants={itemVariants}
+              className="bg-[#faf9f6] rounded-3xl border border-[#eae6df] p-4 sm:p-5 flex flex-col md:flex-row items-center md:items-stretch gap-6 transition-all duration-300 shadow-[0_4px_20px_rgba(79,49,41,0.08)] hover:shadow-[0_12px_30px_rgba(79,49,41,0.18)] hover:border-[#deb18a]/35"
             >
-              <div className="space-y-6">
+              
+              {/* Left Column: Professionally Photographed Image */}
+              <div className="w-full md:w-[280px] h-[190px] sm:h-[210px] relative overflow-hidden rounded-2xl shrink-0 group">
+                <img 
+                  src={srv.image} 
+                  alt={srv.title} 
+                  className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+                />
                 
-                {/* Header info */}
-                <div className="flex items-start justify-between">
-                  <div className="p-3.5 rounded-2xl bg-gold-500/5 border border-gold-500/20">
-                    {srv.icon}
-                  </div>
-                  <div className="text-right">
-                    <span className="block text-2xl font-semibold text-white font-serif">{srv.price}</span>
-                    <span className="inline-flex items-center text-xs text-gold-400 gap-1 bg-gold-500/5 px-2 py-0.5 rounded-full border border-gold-500/10 mt-1">
-                      <Clock className="h-3 w-3" /> {srv.duration}
+                {/* Pill Translucent Button overlay bottom-left */}
+                <button className="absolute bottom-3 left-3 bg-white/80 backdrop-blur-md hover:bg-white text-[11px] font-semibold tracking-wide text-slate-800 py-1.5 px-3.5 rounded-full shadow-sm transition-all flex items-center gap-1 cursor-pointer">
+                  <span>More details</span>
+                  <ChevronRight className="w-3 h-3" />
+                </button>
+              </div>
+
+              {/* Middle Column: Details Grid */}
+              <div className="flex-1 flex flex-col justify-between py-1 w-full">
+                
+                <div>
+                  {/* Title */}
+                  <h2 className="font-serif text-2xl font-bold text-slate-900 tracking-wide mb-2.5">
+                    {srv.title}
+                  </h2>
+
+                  {/* Badges & Indicators */}
+                  <div className="flex items-center gap-3 mb-4">
+                    {/* Property Type Badge (Service Type Badge) */}
+                    <span className="inline-flex items-center gap-1.5 px-3 py-1 bg-[#4f3129] text-white text-[10px] uppercase font-bold tracking-wider rounded-full">
+                      <Compass className="w-3.5 h-3.5" />
+                      <span>{srv.type}</span>
+                    </span>
+
+                    {/* Duration / Platform */}
+                    <span className="text-[11px] font-semibold text-slate-700 tracking-wide bg-[#4f3129]/10 px-2.5 py-1 rounded-md">
+                      {srv.duration}  ·  {srv.platform}
                     </span>
                   </div>
+
+                  {/* Amenities Grid (Service features) */}
+                  <div className="grid grid-cols-2 gap-x-6 gap-y-2 max-w-md">
+                    
+                    {/* Left Column */}
+                    <div className="space-y-1.5">
+                      {srv.amenitiesLeft.map((item, idx) => (
+                        <div key={idx} className="flex items-center gap-2 text-xs text-slate-800">
+                          {getIcon(item.icon)}
+                          <span>{item.label}</span>
+                        </div>
+                      ))}
+                    </div>
+
+                    {/* Right Column */}
+                    <div className="space-y-1.5">
+                      {srv.amenitiesRight.map((item, idx) => (
+                        <div key={idx} className="flex items-center gap-2 text-xs text-slate-800">
+                          {getIcon(item.icon)}
+                          <span>{item.label}</span>
+                        </div>
+                      ))}
+                    </div>
+
+                  </div>
                 </div>
 
-                <div>
-                  <h2 className="font-serif text-2xl font-bold text-white tracking-wide">{srv.title}</h2>
-                  <p className="text-sm text-gold-300/80 font-light mt-1 font-serif tracking-wide">{srv.tagline}</p>
+                {/* Footnote details */}
+                <div className="text-[11px] text-slate-500 italic mt-4 border-t border-[#4f3129]/20 pt-2.5">
+                  {srv.feeDetails}
                 </div>
-
-                {/* Divider */}
-                <div className="h-[1px] bg-gold-500/10 w-full" />
-
-                {/* Features List */}
-                <ul className="space-y-3">
-                  {srv.features.map((feat, fidx) => (
-                    <li key={fidx} className="flex items-start space-x-3 text-sm text-slate-300">
-                      <CheckCircle className="h-4 w-4 text-gold-400 shrink-0 mt-0.5" />
-                      <span>{feat}</span>
-                    </li>
-                  ))}
-                </ul>
 
               </div>
 
-              {/* Action Button */}
-              <div className="pt-8 flex justify-center">
-                <Link
+              {/* Vertical Divider */}
+              <div className="w-[1px] bg-[#4f3129]/20 hidden md:block self-stretch mx-2" />
+
+              {/* Right Column: Price & Action */}
+              <div className="w-full md:w-[210px] flex flex-col justify-between items-center md:items-end text-center md:text-right py-1 shrink-0">
+                
+                {/* Minimum Nights Label (Minimum session limits) */}
+                <span className="text-xs font-medium text-slate-400 font-serif italic mb-1">
+                  {srv.minSessions}
+                </span>
+
+                {/* Price Details */}
+                <div className="mb-4">
+                  <div className="text-3xl font-serif font-bold text-slate-900">
+                    {srv.price}
+                  </div>
+                  <div className="text-[10px] text-slate-500 font-semibold tracking-wider uppercase mt-0.5">
+                    {srv.durationText}
+                  </div>
+                </div>
+
+                {/* Select Button redirects to booking wizard with selected service query param */}
+                <Link 
                   to={`/booking?service=${srv.id}`}
-                  className="btn-10"
+                  className="w-full text-center py-2.5 bg-[#b8922b] hover:bg-[#a27e20] text-white font-semibold text-xs uppercase tracking-wider rounded-lg shadow-sm hover:shadow-md transition-all cursor-pointer block"
                 >
-                  <div className="slide-bg"></div>
-                  <span className="arrow-icon">
-                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
-                      <line x1="5" y1="12" x2="19" y2="12"></line>
-                      <polyline points="12 5 19 12 12 19"></polyline>
-                    </svg>
-                  </span>
-                  <span className="btn-text">Book Session</span>
+                  Select
                 </Link>
+
+                {/* 10% Off Banner */}
+                <div className="text-[9px] text-slate-500 leading-normal mt-3 flex items-start gap-1 text-left w-full border-t border-[#4f3129]/20 pt-2 bg-white/20">
+                  <Tag className="w-3 h-3 text-[#b8922b] shrink-0 mt-0.5" />
+                  <span>We offer 10% off when paid in full at the time of booking.</span>
+                </div>
+
               </div>
 
             </motion.div>
           ))}
-        </div>
+        </motion.div>
 
       </div>
     </div>
-  )
+  );
 }
-
-export default Services

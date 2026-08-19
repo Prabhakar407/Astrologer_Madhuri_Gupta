@@ -6,6 +6,8 @@ import Home from './pages/Home.jsx'
 import About from './pages/About.jsx'
 import Services from './pages/Services.jsx'
 import Booking from './pages/Booking.jsx'
+import Testimonials from './pages/Testimonials.jsx'
+import ContactPage from './pages/ContactPage.jsx'
 
 function AppShell() {
   const location = useLocation()
@@ -22,6 +24,8 @@ function AppShell() {
               <Route path="/about" element={<About />} />
               <Route path="/services" element={<Services />} />
               <Route path="/booking" element={<Booking />} />
+              <Route path="/testimonials" element={<Testimonials />} />
+              <Route path="/contact" element={<ContactPage />} />
             </Routes>
           </main>
         </div>

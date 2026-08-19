@@ -1,7 +1,7 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
 import { motion } from 'framer-motion'
-import { Sparkles, Compass, Heart, Shield, Clock, Globe, Sun, Sprout, Flower2 } from 'lucide-react'
+import { Sparkles, Compass, Heart, Shield, Clock, Globe, Sun, Sprout, Flower2, Briefcase, Target, User, Award, Key, TrendingUp, Trophy, Scale, Scroll, Moon } from 'lucide-react'
 import { TextShimmer } from '../../components/motion-primitives/text-shimmer'
 
 function ScrollCard({ phase, idx }) {
@@ -177,9 +177,12 @@ function ServiceAccordion({ service, isOpen, onToggle }) {
         onClick={onToggle}
         className="w-full px-6 py-4 flex items-center justify-between bg-gradient-to-r from-[#deb18a] via-[#f3dbaf] to-[#deb18a] border border-[#3a1906]/35 rounded-sm hover:scale-[1.01] transition-transform duration-200 cursor-pointer shadow-md text-left"
       >
-        <span className="font-serif text-sm sm:text-base font-bold text-[#3a1906] tracking-wider uppercase">
-          {service.title}
-        </span>
+        <div className="flex items-center space-x-3">
+          {service.icon}
+          <span className="font-serif text-sm sm:text-base font-bold text-[#3a1906] tracking-wider uppercase">
+            {service.title}
+          </span>
+        </div>
         <motion.div
           animate={{ rotate: isOpen ? 180 : 0 }}
           transition={{ duration: 0.3 }}
@@ -252,6 +255,7 @@ function Home() {
       tagline: 'Full Vedic Kundali & Dasha analysis',
       duration: '60 Mins Session',
       price: '₹2,500 / $45',
+      icon: <Moon className="h-5 w-5 text-purple-700 fill-purple-700 shrink-0" />,
       features: [
         'Detailed analysis of all 12 houses',
         '10-year Mahadasha & Antardasha timeline',
@@ -265,6 +269,7 @@ function Home() {
       tagline: 'Synastry and Kundali Milan',
       duration: '45 Mins Session',
       price: '₹3,000 / $55',
+      icon: <Heart className="h-5 w-5 text-rose-600 fill-rose-600 shrink-0" />,
       features: [
         'Ashta Koota matchmaking (36 Gunas)',
         'Manglik Dosha analysis and remedies',
@@ -278,6 +283,7 @@ function Home() {
       tagline: '10th House alignment & prosperity',
       duration: '45 Mins Session',
       price: '₹2,100 / $39',
+      icon: <Briefcase className="h-5 w-5 text-blue-700 fill-blue-700 shrink-0" />,
       features: [
         'Job vs. business suitability analysis',
         'Auspicious times for financial investments',
@@ -291,6 +297,7 @@ function Home() {
       tagline: 'Month-by-month transit guide',
       duration: '45 Mins Session',
       price: '₹2,500 / $45',
+      icon: <Sparkles className="h-5 w-5 text-amber-600 fill-amber-600 shrink-0" />,
       features: [
         'Month-by-month layout of key events',
         'Sade Sati & Jupiter transit analysis',
@@ -496,7 +503,7 @@ function Home() {
             </TextShimmer>
             <div className="w-12 sm:w-16 h-[1.5px] bg-[#4f3129]/40" />
             
-            <p className="font-sans text-[10px] sm:text-sm md:text-base text-[#5c3d31] leading-relaxed">
+            <p className="font-sans text-[10px] sm:text-sm md:text-base font-medium text-[#5c3d31] leading-relaxed">
               Bridging ancient celestial wisdom with modern life choices to bring you clarity, balance, and alignment.
             </p>
             
@@ -577,7 +584,7 @@ function Home() {
               transition={{ duration: 0.8 }}
               className="space-y-6 text-center md:text-left"
             >
-              <div className="space-y-4 font-sans text-sm sm:text-base text-[#4a312a]/95 leading-relaxed font-light">
+              <div className="space-y-4 font-sans text-sm sm:text-base text-[#4a312a]/95 leading-relaxed font-medium">
                 <p>
                   I am a dedicated, spiritual Vedic astrologer and counselor with over ten years of experience guiding souls along their cosmic paths.
                 </p>
@@ -642,7 +649,8 @@ function Home() {
       </section>
 
       {/* Working With Me Section */}
-      <section className="relative z-10 py-20 bg-[#cfb7a7] border-t border-[#3a1906]/10">
+      <section className="relative z-10 py-20 bg-cover bg-center border-t border-[#deb18a]/10" style={{ backgroundImage: "url('/marble-bg.jpg')" }}>
+        <div className="absolute inset-0 bg-[#f9f6f0]/20 z-0 pointer-events-none" />
         <motion.div 
           initial={{ opacity: 0, y: 35 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -678,9 +686,10 @@ function Home() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.6, delay: 0.1 }}
-              className="flex items-center space-x-4"
+              className="flex items-center space-x-3"
             >
               <span className="font-serif text-2xl sm:text-3xl font-bold text-[#b8922b] tracking-wider select-none shrink-0 w-10 text-right">01</span>
+              <Trophy className="h-5 w-5 text-amber-500 fill-amber-500 shrink-0" />
               <span className="font-serif text-sm sm:text-base font-semibold text-[#3a1906] tracking-wide">Achieve their goals</span>
             </motion.div>
 
@@ -690,9 +699,10 @@ function Home() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.6, delay: 0.25 }}
-              className="flex items-center space-x-4"
+              className="flex items-center space-x-3"
             >
               <span className="font-serif text-2xl sm:text-3xl font-bold text-[#b8922b] tracking-wider select-none shrink-0 w-10 text-right">02</span>
+              <User className="h-5 w-5 text-indigo-600 fill-indigo-600 shrink-0" />
               <span className="font-serif text-sm sm:text-base font-semibold text-[#3a1906] tracking-wide">Understand themselves</span>
             </motion.div>
 
@@ -702,9 +712,10 @@ function Home() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.6, delay: 0.4 }}
-              className="flex items-center space-x-4"
+              className="flex items-center space-x-3"
             >
               <span className="font-serif text-2xl sm:text-3xl font-bold text-[#b8922b] tracking-wider select-none shrink-0 w-10 text-right">03</span>
+              <Scale className="h-5 w-5 text-emerald-600 fill-emerald-600 shrink-0" />
               <span className="font-serif text-sm sm:text-base font-semibold text-[#3a1906] tracking-wide">Make wise choices</span>
             </motion.div>
 
@@ -714,9 +725,10 @@ function Home() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.6, delay: 0.55 }}
-              className="flex items-center space-x-4"
+              className="flex items-center space-x-3"
             >
               <span className="font-serif text-2xl sm:text-3xl font-bold text-[#b8922b] tracking-wider select-none shrink-0 w-10 text-right">04</span>
+              <Sun className="h-5 w-5 text-amber-500 fill-amber-500 shrink-0" />
               <span className="font-serif text-sm sm:text-base font-semibold text-[#3a1906] tracking-wide">Create positive changes</span>
             </motion.div>
 
@@ -726,9 +738,10 @@ function Home() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.6, delay: 0.7 }}
-              className="flex items-center space-x-4"
+              className="flex items-center space-x-3"
             >
               <span className="font-serif text-2xl sm:text-3xl font-bold text-[#b8922b] tracking-wider select-none shrink-0 w-10 text-right">05</span>
+              <Heart className="h-5 w-5 text-rose-500 fill-rose-500 shrink-0" />
               <span className="font-serif text-sm sm:text-base font-semibold text-[#3a1906] tracking-wide">Reconnect and center</span>
             </motion.div>
 
@@ -738,9 +751,10 @@ function Home() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.6, delay: 0.85 }}
-              className="flex items-center space-x-4"
+              className="flex items-center space-x-3"
             >
               <span className="font-serif text-2xl sm:text-3xl font-bold text-[#b8922b] tracking-wider select-none shrink-0 w-10 text-right">06</span>
+              <Sparkles className="h-5 w-5 text-[#b8922b] fill-[#b8922b] shrink-0" />
               <span className="font-serif text-sm sm:text-base font-semibold text-[#3a1906] tracking-wide">Find clarity and focus</span>
             </motion.div>
 
@@ -750,9 +764,10 @@ function Home() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.6, delay: 1.0 }}
-              className="flex items-center space-x-4"
+              className="flex items-center space-x-3"
             >
               <span className="font-serif text-2xl sm:text-3xl font-bold text-[#b8922b] tracking-wider select-none shrink-0 w-10 text-right">07</span>
+              <Key className="h-5 w-5 text-teal-600 fill-teal-600 shrink-0" />
               <span className="font-serif text-sm sm:text-base font-semibold text-[#3a1906] tracking-wide">Unlock their potential</span>
             </motion.div>
 
@@ -762,9 +777,10 @@ function Home() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.6, delay: 1.15 }}
-              className="flex items-center space-x-4"
+              className="flex items-center space-x-3"
             >
               <span className="font-serif text-2xl sm:text-3xl font-bold text-[#b8922b] tracking-wider select-none shrink-0 w-10 text-right">08</span>
+              <Award className="h-5 w-5 text-blue-600 fill-blue-600 shrink-0" />
               <span className="font-serif text-sm sm:text-base font-semibold text-[#3a1906] tracking-wide">Live authentically</span>
             </motion.div>
 

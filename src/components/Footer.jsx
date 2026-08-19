@@ -47,6 +47,12 @@ function Footer() {
                 <Link to="/about" className="hover:text-white transition-colors">About Madhuri</Link>
               </li>
               <li>
+                <Link to="/testimonials" className="hover:text-white transition-colors">Testimonials</Link>
+              </li>
+              <li>
+                <Link to="/contact" className="hover:text-white transition-colors">Contact</Link>
+              </li>
+              <li>
                 <Link to="/booking" className="hover:text-white transition-colors">Book a Consultation</Link>
               </li>
             </ul>

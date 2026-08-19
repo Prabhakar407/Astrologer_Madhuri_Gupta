@@ -1,11 +1,25 @@
-import React, { useState, useEffect } from 'react'
-import { useSearchParams } from 'react-router-dom'
-import { motion, AnimatePresence } from 'framer-motion'
-import { Calendar as CalendarIcon, Clock, MapPin, User, Mail, Sparkles, CheckCircle2, AlertTriangle, ArrowLeft } from 'lucide-react'
+import React, { useState, useEffect } from 'react';
+import { useSearchParams } from 'react-router-dom';
+import { motion, AnimatePresence } from 'framer-motion';
+import {
+  Calendar as CalendarIcon,
+  Clock,
+  MapPin,
+  User,
+  Mail,
+  Sparkles,
+  CheckCircle2,
+  AlertTriangle,
+  ArrowLeft,
+  Phone,
+  CreditCard,
+  Check,
+  ShieldCheck
+} from 'lucide-react';
 
-function Booking() {
-  const [searchParams] = useSearchParams()
-  const initialService = searchParams.get('service') || 'birth-chart'
+export default function Booking() {
+  const [searchParams] = useSearchParams();
+  const initialService = searchParams.get('service') || 'birth-chart';
 
   // Form State
   const [formData, setFormData] = useState({
@@ -17,482 +31,675 @@ function Booking() {
     birthTime: '',
     birthPlace: '',
     additionalInfo: ''
-  })
+  });
 
   // Booking Flow State
-  const [step, setStep] = useState(1) // 1: Info & Birth Details, 2: Slot Selection, 3: Success
-  const [selectedDate, setSelectedDate] = useState('')
-  const [availableSlots, setAvailableSlots] = useState([])
-  const [selectedSlot, setSelectedSlot] = useState('')
-  
+  const [step, setStep] = useState(1); // 1: User Details, 2: Date & Time, 3: Payment, 4: Success
+  const [selectedDate, setSelectedDate] = useState('');
+  const [availableSlots, setAvailableSlots] = useState([]);
+  const [selectedSlot, setSelectedSlot] = useState('');
+  const [paymentMethod, setPaymentMethod] = useState('upi');
+
   // Loading & Error States
-  const [loading, setLoading] = useState(false)
-  const [bookingLoading, setBookingLoading] = useState(false)
-  const [error, setError] = useState('')
-  const [bookingResult, setBookingResult] = useState(null)
+  const [loading, setLoading] = useState(false);
+  const [bookingLoading, setBookingLoading] = useState(false);
+  const [error, setError] = useState('');
+  const [bookingResult, setBookingResult] = useState(null);
+
+  const serviceOptions = [
+    { value: 'birth-chart', label: 'Detailed Birth Chart Reading (60 min)', price: '₹2,500' },
+    { value: 'compatibility', label: 'Relationship Compatibility - Kundali Milan (45 min)', price: '₹3,000' },
+    { value: 'career-wealth', label: 'Career & Wealth Guidance (45 min)', price: '₹2,100' },
+    { value: 'yearly-transit', label: 'Yearly Solar Return - Varshphal (45 min)', price: '₹2,500' }
+  ];
 
   // Update form service type if URL parameter changes
   useEffect(() => {
     if (searchParams.get('service')) {
-      setFormData(prev => ({ ...prev, serviceType: searchParams.get('service') }))
+      setFormData(prev => ({ ...prev, serviceType: searchParams.get('service') }));
     }
-  }, [searchParams])
-
-  const serviceOptions = [
-    { value: 'birth-chart', label: 'Detailed Birth Chart Reading (60 min)' },
-    { value: 'compatibility', label: 'Relationship Compatibility - Kundali Milan (45 min)' },
-    { value: 'career-wealth', label: 'Career & Wealth Guidance (45 min)' },
-    { value: 'yearly-transit', label: 'Yearly Solar Return - Varshphal (45 min)' }
-  ]
+  }, [searchParams]);
 
   const handleInputChange = (e) => {
-    const { name, value } = e.target
-    setFormData(prev => ({ ...prev, [name]: value }))
-  }
+    const { name, value } = e.target;
+    setFormData(prev => ({ ...prev, [name]: value }));
+  };
 
-  // Fetch slots from FastAPI backend
-  const handleProceedToSlots = async (e) => {
-    e.preventDefault()
-    if (!formData.name || !formData.email || !formData.birthDate || !formData.birthTime || !formData.birthPlace) {
-      setError('Please fill in all required fields.')
-      return
+  // Submit details to proceed to slots calendar
+  const handleProceedToSlots = (e) => {
+    e.preventDefault();
+    if (!formData.name || !formData.email || !formData.phone || !formData.birthDate || !formData.birthTime || !formData.birthPlace) {
+      setError('Please fill in all required fields.');
+      return;
     }
-    setError('')
-    setLoading(true)
+    setError('');
     
-    // Default selected date to today or birthDate or tomorrow
-    const tomorrow = new Date()
-    tomorrow.setDate(tomorrow.getDate() + 1)
-    const formattedTomorrow = tomorrow.toISOString().split('T')[0]
-    setSelectedDate(formattedTomorrow)
-
-    try {
-      // Query backend for slots on selected date
-      const response = await fetch(`/api/available-slots?date=${formattedTomorrow}`)
-      if (!response.ok) {
-        throw new Error('Failed to load slots from calendar API.')
-      }
-      const data = await response.json()
-      setAvailableSlots(data.slots || [])
-      setStep(2)
-    } catch (err) {
-      console.error(err)
-      // Fallback slots if backend is not reachable during initial development
-      setAvailableSlots(['10:00 AM', '11:30 AM', '02:00 PM', '03:30 PM', '05:00 PM'])
-      setStep(2)
-    } finally {
-      setLoading(false)
-    }
-  }
+    // Set default selected date to tomorrow
+    const tomorrow = new Date();
+    tomorrow.setDate(tomorrow.getDate() + 1);
+    const formattedTomorrow = tomorrow.toISOString().split('T')[0];
+    setSelectedDate(formattedTomorrow);
+    
+    // Mock available slots loading
+    setLoading(true);
+    setTimeout(() => {
+      setAvailableSlots(['10:00 AM', '11:30 AM', '02:00 PM', '03:30 PM', '05:00 PM', '06:30 PM']);
+      setLoading(false);
+      setStep(2);
+    }, 600);
+  };
 
   // Handle changing dates in the slots panel
-  const handleDateChange = async (date) => {
-    setSelectedDate(date)
-    setLoading(true)
-    setError('')
-    try {
-      const response = await fetch(`/api/available-slots?date=${date}`)
-      if (!response.ok) {
-        throw new Error('Failed to load slots.')
+  const handleDateChange = (date) => {
+    setSelectedDate(date);
+    setLoading(true);
+    setTimeout(() => {
+      // Mock daily slots shuffling
+      if (new Date(date).getDay() === 0) { // Sunday
+        setAvailableSlots(['11:00 AM', '01:30 PM', '03:00 PM']);
+      } else {
+        setAvailableSlots(['10:00 AM', '11:30 AM', '02:00 PM', '03:30 PM', '05:00 PM', '06:30 PM']);
       }
-      const data = await response.json()
-      setAvailableSlots(data.slots || [])
-    } catch (err) {
-      console.error(err)
-      setAvailableSlots(['10:00 AM', '11:30 AM', '02:00 PM', '03:30 PM', '05:00 PM'])
-    } finally {
-      setLoading(false)
-    }
-  }
+      setLoading(false);
+    }, 400);
+  };
 
-  // Submit Booking to FastAPI
-  const handleConfirmBooking = async () => {
+  // Proceed to Payment screen
+  const handleProceedToPayment = () => {
     if (!selectedSlot) {
-      setError('Please select a time slot.')
-      return
+      setError('Please select a time slot.');
+      return;
     }
-    setError('')
-    setBookingLoading(true)
+    setError('');
+    setStep(3);
+  };
+
+  // Finalize booking submit (Mocking backend integration)
+  const handleConfirmPayment = () => {
+    setError('');
+    setBookingLoading(true);
 
     const payload = {
       ...formData,
       bookingDate: selectedDate,
-      bookingTime: selectedSlot
-    }
+      bookingTime: selectedSlot,
+      paymentMethod
+    };
 
-    try {
-      const response = await fetch('/api/bookings', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(payload)
-      })
+    setTimeout(() => {
+      // Mock success response
+      setBookingResult({
+        ...payload,
+        jitsiLink: `https://meet.jit.si/astromadhuri-${Math.floor(100000 + Math.random() * 900000)}`
+      });
+      setStep(4);
+      setBookingLoading(false);
+    }, 1500);
+  };
 
-      if (!response.ok) {
-        const errorData = await response.json()
-        throw new Error(errorData.detail || 'Failed to confirm booking.')
-      }
-
-      const result = await response.json()
-      setBookingResult(result)
-      setStep(3)
-    } catch (err) {
-      console.error(err)
-      setError(err.message || 'Connection lost. Please try booking again.')
-    } finally {
-      setBookingLoading(false)
-    }
-  }
+  const activeService = serviceOptions.find(o => o.value === formData.serviceType) || serviceOptions[0];
 
   return (
-    <div className="pt-24 min-h-screen">
-      <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
+    <div 
+      className="pt-10 md:pt-12 min-h-screen relative bg-[#faf6e8]" 
+      style={{ 
+        backgroundImage: "linear-gradient(rgba(250, 246, 232, 0.45), rgba(250, 246, 232, 0.45)), url('/marble-bg.jpg')", 
+        backgroundSize: 'cover', 
+        backgroundPosition: 'center', 
+        backgroundAttachment: 'fixed' 
+      }}
+    >
+      
+      <div className="max-w-2xl mx-auto px-4 sm:px-6 pt-4 pb-8 relative z-10">
         
         {/* Header */}
-        <div className="text-center max-w-2xl mx-auto mb-12 space-y-4">
-          <span className="font-serif text-gold-400 tracking-widest text-sm uppercase">Align with the Stars</span>
-          <h1 className="font-serif text-4xl font-bold text-white tracking-wide">
+        <div className="text-center max-w-xl mx-auto mb-3 space-y-1">
+          <h1 className="font-serif text-2xl sm:text-3xl font-bold text-[#3a1906] tracking-wide">
             Book a Consultation
           </h1>
-          <div className="w-16 h-[2px] bg-gold-400 mx-auto" />
+          <div className="w-12 h-[2px] bg-[#deb18a] mx-auto" />
         </div>
 
-        {/* Progress Tracker */}
-        <div className="flex justify-center items-center space-x-4 mb-10 text-sm font-medium tracking-wide">
-          <div className={`flex items-center space-x-2 ${step >= 1 ? 'text-gold-400' : 'text-slate-500'}`}>
-            <span className={`w-6 h-6 rounded-full flex items-center justify-center border ${step >= 1 ? 'border-gold-400 bg-gold-500/10' : 'border-slate-600'}`}>1</span>
-            <span>Birth Details</span>
-          </div>
-          <div className="h-[1px] w-8 bg-slate-700" />
-          <div className={`flex items-center space-x-2 ${step >= 2 ? 'text-gold-400' : 'text-slate-500'}`}>
-            <span className={`w-6 h-6 rounded-full flex items-center justify-center border ${step >= 2 ? 'border-gold-400 bg-gold-500/10' : 'border-slate-600'}`}>2</span>
-            <span>Select Time</span>
-          </div>
-          <div className="h-[1px] w-8 bg-slate-700" />
-          <div className={`flex items-center space-x-2 ${step >= 3 ? 'text-gold-400' : 'text-slate-500'}`}>
-            <span className={`w-6 h-6 rounded-full flex items-center justify-center border ${step >= 3 ? 'border-gold-400 bg-gold-500/10' : 'border-slate-600'}`}>3</span>
-            <span>Confirmation</span>
-          </div>
-        </div>
+        {/* 3-Step Progress Tracker */}
+        {step <= 3 && (
+          <div className="flex justify-center items-center space-x-2 sm:space-x-3 mb-4 text-xs sm:text-sm font-medium tracking-wide">
+            
+            {/* Step 1 */}
+            <div className={`flex items-center space-x-1.5 ${step === 1 ? 'text-[#b8922b]' : step > 1 ? 'text-green-600' : 'text-gray-500'}`}>
+              <span className={`w-7 h-7 rounded-full flex items-center justify-center border font-bold text-xs transition-all ${
+                step > 1 
+                  ? 'border-green-600 bg-green-500/10 text-green-600' 
+                  : step === 1 
+                    ? 'border-[#b8922b] bg-[#b8922b]/15 text-[#b8922b] ring-2 ring-[#b8922b]/20' 
+                    : 'border-gray-300 bg-gray-100 text-gray-400'
+              }`}>
+                {step > 1 ? <Check className="w-3.5 h-3.5" /> : "1"}
+              </span>
+              <span className="font-serif font-semibold">User Details</span>
+            </div>
 
+            <div className="h-[1px] w-4 sm:w-6 bg-gray-300" />
+
+            {/* Step 2 */}
+            <div className={`flex items-center space-x-1.5 ${step === 2 ? 'text-[#b8922b]' : step > 2 ? 'text-green-600' : 'text-gray-500'}`}>
+              <span className={`w-7 h-7 rounded-full flex items-center justify-center border font-bold text-xs transition-all ${
+                step > 2 
+                  ? 'border-green-600 bg-green-500/10 text-green-600' 
+                  : step === 2 
+                    ? 'border-[#b8922b] bg-[#b8922b]/15 text-[#b8922b] ring-2 ring-[#b8922b]/20' 
+                    : 'border-gray-300 bg-gray-100 text-gray-400'
+              }`}>
+                {step > 2 ? <Check className="w-3.5 h-3.5" /> : "2"}
+              </span>
+              <span className="font-serif font-semibold">Select Slot</span>
+            </div>
+
+            <div className="h-[1px] w-4 sm:w-6 bg-gray-300" />
+
+            {/* Step 3 */}
+            <div className={`flex items-center space-x-1.5 ${step === 3 ? 'text-[#b8922b]' : 'text-gray-500'}`}>
+              <span className={`w-7 h-7 rounded-full flex items-center justify-center border font-bold text-xs transition-all ${
+                step === 3 
+                  ? 'border-[#b8922b] bg-[#b8922b]/15 text-[#b8922b] ring-2 ring-[#b8922b]/20' 
+                  : 'border-gray-300 bg-gray-100 text-gray-400'
+              }`}>
+                3
+              </span>
+              <span className="font-serif font-semibold">Payment</span>
+            </div>
+
+          </div>
+        )}
+
+        {/* Error Alert */}
         {error && (
-          <div className="mb-6 p-4 rounded-xl border border-red-500/30 bg-red-500/5 text-red-300 text-sm flex items-center space-x-3">
-            <AlertTriangle className="h-5 w-5 text-red-400 shrink-0" />
+          <div className="mb-6 p-3 rounded-xl border border-red-200 bg-red-50 text-red-800 text-xs flex items-center space-x-2.5 shadow-sm">
+            <AlertTriangle className="h-4.5 w-4.5 text-red-500 shrink-0" />
             <span>{error}</span>
           </div>
         )}
 
-        <AnimatePresence mode="wait">
+        {/* Main Wizard Form Panels (Reduced size by 1/3, padding to p-4 sm:p-5, min-h to min-h-[280px]) */}
+        <div className="bg-[#4f3129] rounded-3xl p-4 sm:p-5 shadow-2xl border border-[#deb18a]/10 text-white min-h-[280px] flex flex-col justify-between">
           
-          {/* STEP 1: Personal and Birth Details Form */}
-          {step === 1 && (
-            <motion.div
-              key="step1"
-              initial={{ opacity: 0, x: -20 }}
-              animate={{ opacity: 1, x: 0 }}
-              exit={{ opacity: 0, x: 20 }}
-              className="glass-panel p-8 rounded-3xl"
-            >
-              <form onSubmit={handleProceedToSlots} className="space-y-6">
-                <h2 className="font-serif text-xl font-bold text-white border-b border-gold-500/10 pb-3 flex items-center space-x-2">
-                  <User className="h-5 w-5 text-gold-400" />
-                  <span>Personal Information</span>
-                </h2>
-                
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
-                  <div>
-                    <label className="block text-xs font-semibold uppercase tracking-wider text-slate-400 mb-2">Name *</label>
-                    <div className="relative">
-                      <User className="absolute left-4 top-1/2 -translate-y-1/2 h-4 w-4 text-slate-500" />
-                      <input
-                        type="text"
-                        name="name"
-                        required
-                        value={formData.name}
-                        onChange={handleInputChange}
-                        placeholder="John Doe"
-                        className="w-full pl-11 pr-4 py-3 bg-cosmic-950/80 border border-slate-700/60 rounded-xl focus:border-gold-500 focus:outline-none text-white text-sm"
-                      />
+          <AnimatePresence mode="wait">
+            
+            {/* STEP 1: Collect User Details */}
+            {step === 1 && (
+              <motion.div
+                key="step1"
+                initial={{ opacity: 0, y: 12 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: -12 }}
+                transition={{ duration: 0.35 }}
+                className="space-y-4"
+              >
+                <form onSubmit={handleProceedToSlots} className="space-y-4">
+                  
+                  {/* Personal Information Group */}
+                  <div className="space-y-2.5">
+                    <h2 className="font-serif text-lg font-bold text-white border-b border-[#deb18a]/10 pb-1 flex items-center space-x-2">
+                      <User className="h-4.5 w-4.5 text-[#deb18a]" />
+                      <span>Personal Information</span>
+                    </h2>
+                    
+                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                      <div>
+                        <label className="block text-[10px] font-semibold uppercase tracking-wider text-[#deb18a]/80 mb-1">Name *</label>
+                        <div className="relative">
+                          <User className="absolute left-3.5 top-1/2 -translate-y-1/2 h-3.5 w-3.5 text-[#deb18a]/45" />
+                          <input
+                            type="text"
+                            name="name"
+                            required
+                            value={formData.name}
+                            onChange={handleInputChange}
+                            placeholder="John Doe"
+                            className="w-full pl-10 pr-3 py-1.5 bg-white/5 border border-white/10 rounded-xl focus:border-[#b8922b] focus:ring-1 focus:ring-[#b8922b] focus:outline-none text-white text-xs transition-all"
+                          />
+                        </div>
+                      </div>
+
+                      <div>
+                        <label className="block text-[10px] font-semibold uppercase tracking-wider text-[#deb18a]/80 mb-1">Email Address *</label>
+                        <div className="relative">
+                          <Mail className="absolute left-3.5 top-1/2 -translate-y-1/2 h-3.5 w-3.5 text-[#deb18a]/45" />
+                          <input
+                            type="email"
+                            name="email"
+                            required
+                            value={formData.email}
+                            onChange={handleInputChange}
+                            placeholder="john@example.com"
+                            className="w-full pl-10 pr-3 py-1.5 bg-white/5 border border-white/10 rounded-xl focus:border-[#b8922b] focus:ring-1 focus:ring-[#b8922b] focus:outline-none text-white text-xs transition-all"
+                          />
+                        </div>
+                      </div>
+                    </div>
+
+                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                      <div>
+                        <label className="block text-[10px] font-semibold uppercase tracking-wider text-[#deb18a]/80 mb-1">Phone Number *</label>
+                        <div className="relative">
+                          <Phone className="absolute left-3.5 top-1/2 -translate-y-1/2 h-3.5 w-3.5 text-[#deb18a]/45" />
+                          <input
+                            type="tel"
+                            name="phone"
+                            required
+                            value={formData.phone}
+                            onChange={handleInputChange}
+                            placeholder="+91 98765 43210"
+                            className="w-full pl-10 pr-3 py-1.5 bg-white/5 border border-white/10 rounded-xl focus:border-[#b8922b] focus:ring-1 focus:ring-[#b8922b] focus:outline-none text-white text-xs transition-all"
+                          />
+                        </div>
+                      </div>
+
+                      <div>
+                        <label className="block text-[10px] font-semibold uppercase tracking-wider text-[#deb18a]/80 mb-1">Consultation Service *</label>
+                        <div className="relative">
+                          <select
+                            name="serviceType"
+                            value={formData.serviceType}
+                            onChange={handleInputChange}
+                            className="w-full pl-3.5 pr-9 py-1.5 bg-white/5 border border-white/10 rounded-xl focus:border-[#b8922b] focus:ring-1 focus:ring-[#b8922b] focus:outline-none text-white text-xs transition-all appearance-none cursor-pointer"
+                          >
+                            {serviceOptions.map(opt => (
+                              <option key={opt.value} value={opt.value} className="bg-[#4f3129] text-white">
+                                {opt.label} ({opt.price})
+                              </option>
+                            ))}
+                          </select>
+                          <div className="absolute right-3.5 top-1/2 -translate-y-1/2 pointer-events-none text-[#deb18a]/60">
+                            <svg className="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2.5" d="M19 9l-7 7-7-7" />
+                            </svg>
+                          </div>
+                        </div>
+                      </div>
                     </div>
                   </div>
 
-                  <div>
-                    <label className="block text-xs font-semibold uppercase tracking-wider text-slate-400 mb-2">Email Address *</label>
-                    <div className="relative">
-                      <Mail className="absolute left-4 top-1/2 -translate-y-1/2 h-4 w-4 text-slate-500" />
-                      <input
-                        type="email"
-                        name="email"
-                        required
-                        value={formData.email}
-                        onChange={handleInputChange}
-                        placeholder="john@example.com"
-                        className="w-full pl-11 pr-4 py-3 bg-cosmic-950/80 border border-slate-700/60 rounded-xl focus:border-gold-500 focus:outline-none text-white text-sm"
-                      />
+                  {/* Birth Details Group */}
+                  <div className="space-y-2.5 pt-1">
+                    <h2 className="font-serif text-lg font-bold text-white border-b border-[#deb18a]/10 pb-1 flex items-center space-x-2">
+                      <Sparkles className="h-4.5 w-4.5 text-[#deb18a]" />
+                      <span>Vedic Birth Details</span>
+                    </h2>
+
+                    <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
+                      <div>
+                        <label className="block text-[10px] font-semibold uppercase tracking-wider text-[#deb18a]/80 mb-1">Date of Birth *</label>
+                        <input
+                          type="date"
+                          name="birthDate"
+                          required
+                          value={formData.birthDate}
+                          onChange={handleInputChange}
+                          className="w-full px-3 py-1.5 bg-white/5 border border-white/10 rounded-xl focus:border-[#b8922b] focus:ring-1 focus:ring-[#b8922b] focus:outline-none text-white text-xs transition-all"
+                        />
+                      </div>
+
+                      <div>
+                        <label className="block text-[10px] font-semibold uppercase tracking-wider text-[#deb18a]/80 mb-1">Time of Birth *</label>
+                        <input
+                          type="time"
+                          name="birthTime"
+                          required
+                          value={formData.birthTime}
+                          onChange={handleInputChange}
+                          className="w-full px-3 py-1.5 bg-white/5 border border-white/10 rounded-xl focus:border-[#b8922b] focus:ring-1 focus:ring-[#b8922b] focus:outline-none text-white text-xs transition-all"
+                        />
+                      </div>
+
+                      <div>
+                        <label className="block text-[10px] font-semibold uppercase tracking-wider text-[#deb18a]/80 mb-1">Place of Birth *</label>
+                        <div className="relative">
+                          <MapPin className="absolute left-3.5 top-1/2 -translate-y-1/2 h-3.5 w-3.5 text-[#deb18a]/45" />
+                          <input
+                            type="text"
+                            name="birthPlace"
+                            required
+                            value={formData.birthPlace}
+                            onChange={handleInputChange}
+                            placeholder="City, Country"
+                            className="w-full pl-10 pr-3 py-1.5 bg-white/5 border border-white/10 rounded-xl focus:border-[#b8922b] focus:ring-1 focus:ring-[#b8922b] focus:outline-none text-white text-xs transition-all"
+                          />
+                        </div>
+                      </div>
                     </div>
                   </div>
-                </div>
 
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
-                  <div>
-                    <label className="block text-xs font-semibold uppercase tracking-wider text-slate-400 mb-2">Phone Number</label>
-                    <input
-                      type="tel"
-                      name="phone"
-                      value={formData.phone}
+                  {/* Additional Focus Areas */}
+                  <div className="space-y-1.5">
+                    <label className="block text-[10px] font-semibold uppercase tracking-wider text-[#deb18a]/80">Specific Questions or Focus Areas</label>
+                    <textarea
+                      name="additionalInfo"
+                      value={formData.additionalInfo}
                       onChange={handleInputChange}
-                      placeholder="+91 98765 43210"
-                      className="w-full px-4 py-3 bg-cosmic-950/80 border border-slate-700/60 rounded-xl focus:border-gold-500 focus:outline-none text-white text-sm"
+                      rows="2"
+                      placeholder="E.g. career path details..."
+                      className="w-full px-3 py-1.5 bg-white/5 border border-white/10 rounded-xl focus:border-[#b8922b] focus:ring-1 focus:ring-[#b8922b] focus:outline-none text-white text-xs resize-none transition-all"
                     />
                   </div>
 
-                  <div>
-                    <label className="block text-xs font-semibold uppercase tracking-wider text-slate-400 mb-2">Consultation Service *</label>
-                    <select
-                      name="serviceType"
-                      value={formData.serviceType}
-                      onChange={handleInputChange}
-                      className="w-full px-4 py-3 bg-cosmic-950/80 border border-slate-700/60 rounded-xl focus:border-gold-500 focus:outline-none text-white text-sm appearance-none"
+                  <div className="pt-2 flex justify-center">
+                    <button
+                      type="submit"
+                      className="w-1/4 py-3 rounded-xl bg-[#b8922b] hover:bg-[#a27e20] text-white font-bold uppercase tracking-wider shadow-lg active:scale-[0.99] transition-all cursor-pointer text-xs"
                     >
-                      {serviceOptions.map(opt => (
-                        <option key={opt.value} value={opt.value} className="bg-cosmic-900 text-white">{opt.label}</option>
-                      ))}
-                    </select>
+                      Submit
+                    </button>
                   </div>
+
+                </form>
+              </motion.div>
+            )}
+
+            {/* STEP 2: Select Date & Time (Calendar-based booking) */}
+            {step === 2 && (
+              <motion.div
+                key="step2"
+                initial={{ opacity: 0, y: 12 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: -12 }}
+                transition={{ duration: 0.35 }}
+                className="space-y-5"
+              >
+                <div className="flex items-center justify-between border-b border-[#deb18a]/10 pb-3">
+                  <button
+                    onClick={() => setStep(1)}
+                    className="flex items-center space-x-1 text-[#deb18a]/80 hover:text-white transition-colors text-xs font-semibold"
+                  >
+                    <ArrowLeft className="h-3.5 w-3.5" />
+                    <span>Back to Details</span>
+                  </button>
+                  <span className="text-[10px] text-[#deb18a] font-serif uppercase tracking-widest font-bold">Select Session Slot</span>
                 </div>
 
-                <h2 className="font-serif text-xl font-bold text-white border-b border-gold-500/10 pt-4 pb-3 flex items-center space-x-2">
-                  <Sparkles className="h-5 w-5 text-gold-400" />
-                  <span>Vedic Birth Details</span>
-                </h2>
-
-                <div className="grid grid-cols-1 sm:grid-cols-3 gap-6">
-                  <div>
-                    <label className="block text-xs font-semibold uppercase tracking-wider text-slate-400 mb-2">Date of Birth *</label>
-                    <input
-                      type="date"
-                      name="birthDate"
-                      required
-                      value={formData.birthDate}
-                      onChange={handleInputChange}
-                      className="w-full px-4 py-3 bg-cosmic-950/80 border border-slate-700/60 rounded-xl focus:border-gold-500 focus:outline-none text-white text-sm"
-                    />
-                  </div>
-
-                  <div>
-                    <label className="block text-xs font-semibold uppercase tracking-wider text-slate-400 mb-2">Time of Birth *</label>
-                    <input
-                      type="time"
-                      name="birthTime"
-                      required
-                      value={formData.birthTime}
-                      onChange={handleInputChange}
-                      className="w-full px-4 py-3 bg-cosmic-950/80 border border-slate-700/60 rounded-xl focus:border-gold-500 focus:outline-none text-white text-sm"
-                    />
-                  </div>
-
-                  <div>
-                    <label className="block text-xs font-semibold uppercase tracking-wider text-slate-400 mb-2">Place of Birth *</label>
-                    <div className="relative">
-                      <MapPin className="absolute left-4 top-1/2 -translate-y-1/2 h-4 w-4 text-slate-500" />
-                      <input
-                        type="text"
-                        name="birthPlace"
-                        required
-                        value={formData.birthPlace}
-                        onChange={handleInputChange}
-                        placeholder="City, Country"
-                        className="w-full pl-11 pr-4 py-3 bg-cosmic-950/80 border border-slate-700/60 rounded-xl focus:border-gold-500 focus:outline-none text-white text-sm"
-                      />
+                <div className="grid grid-cols-1 sm:grid-cols-12 gap-5 items-start">
+                  
+                  {/* Calendar Widget */}
+                  <div className="sm:col-span-5 space-y-2">
+                    <label className="block text-[10px] font-bold uppercase tracking-wider text-[#deb18a]">Appointment Date</label>
+                    <div className="relative bg-white/5 p-3 rounded-2xl border border-white/10">
+                      <div className="relative">
+                        <CalendarIcon className="absolute left-3 top-1/2 -translate-y-1/2 h-3.5 w-3.5 text-[#deb18a]" />
+                        <input
+                          type="date"
+                          min={new Date(Date.now() + 86400000).toISOString().split('T')[0]} // Min is tomorrow
+                          value={selectedDate}
+                          onChange={(e) => handleDateChange(e.target.value)}
+                          className="w-full pl-9 pr-2 py-2 bg-white/10 border border-white/10 rounded-xl focus:border-[#b8922b] focus:outline-none text-white text-[11px] font-semibold transition-all"
+                        />
+                      </div>
+                      <p className="text-[9px] text-white mt-2 font-light leading-normal">
+                        Select an available calendar date. Only slot times aligning with positive astrological transits are shown.
+                      </p>
                     </div>
                   </div>
+
+                  {/* Available Time Slots Grid */}
+                  <div className="sm:col-span-7 space-y-2">
+                    <label className="block text-[10px] font-bold uppercase tracking-wider text-[#deb18a]">
+                      Available Slots for {new Date(selectedDate).toLocaleDateString(undefined, { weekday: 'short', year: 'numeric', month: 'short', day: 'numeric' })}
+                    </label>
+
+                    {loading ? (
+                      <div className="flex flex-col items-center justify-center py-12 space-y-2 bg-white/5 rounded-2xl border border-white/10">
+                        <div className="w-6 h-6 rounded-full border-2 border-[#b8922b] border-t-transparent animate-spin" />
+                        <span className="text-[10px] text-[#deb18a]/80">Checking astrologer schedule...</span>
+                      </div>
+                    ) : (
+                      <div className="grid grid-cols-2 sm:grid-cols-3 gap-2 bg-white/5 p-3 rounded-2xl border border-white/10">
+                        {availableSlots.map((slot) => (
+                          <button
+                            key={slot}
+                            type="button"
+                            onClick={() => setSelectedSlot(slot)}
+                            className={`py-2 px-1.5 rounded-xl border text-[10px] font-bold tracking-wider uppercase transition-all flex items-center justify-center space-x-1 cursor-pointer ${
+                              selectedSlot === slot
+                                ? 'bg-[#b8922b] text-white border-transparent shadow-md'
+                                : 'bg-white/5 border-white/10 text-white/80 hover:border-[#b8922b]/50 hover:text-white'
+                            }`}
+                          >
+                            <Clock className="h-3 w-3" />
+                            <span>{slot}</span>
+                          </button>
+                        ))}
+                      </div>
+                    )}
+                  </div>
+
                 </div>
 
-                <div>
-                  <label className="block text-xs font-semibold uppercase tracking-wider text-slate-400 mb-2">Specific Questions or Focus Areas</label>
-                  <textarea
-                    name="additionalInfo"
-                    value={formData.additionalInfo}
-                    onChange={handleInputChange}
-                    rows="3"
-                    placeholder="E.g., marriage timing, career path, Sade Sati concerns..."
-                    className="w-full px-4 py-3 bg-cosmic-950/80 border border-slate-700/60 rounded-xl focus:border-gold-500 focus:outline-none text-white text-sm"
-                  />
+                {/* Slot Summary */}
+                {selectedSlot && (
+                  <div className="p-3 rounded-xl bg-[#b8922b]/10 border border-[#b8922b]/20 text-xs flex items-center justify-between text-[#deb18a]">
+                    <span>Selected Date/Time:</span>
+                    <strong className="text-white font-serif tracking-wide">{selectedDate} at {selectedSlot}</strong>
+                  </div>
+                )}
+
+                <div className="pt-3 border-t border-white/5 flex justify-center">
+                  <button
+                    onClick={handleProceedToPayment}
+                    disabled={!selectedSlot || loading}
+                    className="w-1/4 py-3 rounded-xl bg-[#b8922b] hover:bg-[#a27e20] text-white font-bold uppercase tracking-wider shadow-lg active:scale-[0.99] transition-all disabled:opacity-40 cursor-pointer text-xs"
+                  >
+                    Submit
+                  </button>
+                </div>
+              </motion.div>
+            )}
+
+            {/* STEP 3: Payment Portal */}
+            {step === 3 && (
+              <motion.div
+                key="step3"
+                initial={{ opacity: 0, y: 12 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: -12 }}
+                transition={{ duration: 0.35 }}
+                className="space-y-5"
+              >
+                <div className="flex items-center justify-between border-b border-[#deb18a]/10 pb-3">
+                  <button
+                    onClick={() => setStep(2)}
+                    className="flex items-center space-x-1.5 text-[#deb18a]/80 hover:text-white transition-colors text-xs font-semibold"
+                  >
+                    <ArrowLeft className="h-3.5 w-3.5" />
+                    <span>Back to Calendar</span>
+                  </button>
+                  <span className="text-[10px] text-[#deb18a] font-serif uppercase tracking-widest font-bold">Secure Checkout</span>
+                </div>
+
+                <div className="grid grid-cols-1 sm:grid-cols-12 gap-5 items-start">
+                  
+                  {/* Summary Block (Left Column) */}
+                  <div className="sm:col-span-5 bg-white/5 p-4 rounded-2xl border border-white/10 space-y-3 text-xs">
+                    <h3 className="font-serif text-[#deb18a] font-bold border-b border-white/10 pb-1.5">Summary</h3>
+                    
+                    <div className="space-y-2 font-sans">
+                      <p><span className="text-[#deb18a]/60 block text-[9px] uppercase">Service</span> <strong className="text-white font-serif">{activeService.label}</strong></p>
+                      <p><span className="text-[#deb18a]/60 block text-[9px] uppercase">Date & Time</span> <strong className="text-white">{selectedDate} at {selectedSlot}</strong></p>
+                      <p><span className="text-[#deb18a]/60 block text-[9px] uppercase">Client Name</span> <strong className="text-white">{formData.name}</strong></p>
+                      
+                      <div className="pt-2 border-t border-white/10 flex justify-between items-center">
+                        <span className="font-bold text-[#deb18a]">Total:</span>
+                        <span className="text-base font-bold text-white font-serif">{activeService.price}</span>
+                      </div>
+                    </div>
+                  </div>
+
+                  {/* Payment Details (Right Column) */}
+                  <div className="sm:col-span-7 space-y-3">
+                    <label className="block text-[10px] font-bold uppercase tracking-wider text-[#deb18a]">Payment Method</label>
+                    
+                    <div className="grid grid-cols-2 gap-2">
+                      
+                      {/* UPI */}
+                      <button
+                        type="button"
+                        onClick={() => setPaymentMethod('upi')}
+                        className={`p-2.5 rounded-xl border flex flex-col items-center justify-center space-y-0.5 cursor-pointer transition-all ${
+                          paymentMethod === 'upi'
+                            ? 'bg-[#b8922b] text-white border-transparent'
+                            : 'bg-white/5 border-white/10 text-white/70 hover:border-[#b8922b]/50'
+                        }`}
+                      >
+                        <Sparkles className="h-3.5 w-3.5" />
+                        <span className="text-[10px] font-bold">UPI / GPay / Paytm</span>
+                      </button>
+
+                      {/* Card */}
+                      <button
+                        type="button"
+                        onClick={() => setPaymentMethod('card')}
+                        className={`p-2.5 rounded-xl border flex flex-col items-center justify-center space-y-0.5 cursor-pointer transition-all ${
+                          paymentMethod === 'card'
+                            ? 'bg-[#b8922b] text-white border-transparent'
+                            : 'bg-white/5 border-white/10 text-white/70 hover:border-[#b8922b]/50'
+                        }`}
+                      >
+                        <CreditCard className="h-3.5 w-3.5" />
+                        <span className="text-[10px] font-bold">Credit/Debit Card</span>
+                      </button>
+
+                    </div>
+
+                    <div className="bg-white/5 p-3 rounded-xl border border-white/10 min-h-[110px] flex items-center justify-center">
+                      {paymentMethod === 'upi' ? (
+                        <div className="text-center space-y-2 w-full">
+                          <p className="text-[10px] text-[#deb18a]/80">Scan the QR code below using your UPI app</p>
+                          <div className="w-24 h-24 bg-white p-1 rounded-lg mx-auto flex items-center justify-center">
+                            <img
+                              src={`https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=upi%3A%2F%2Fpay%3Fpa%3Dastromadhuri%40upi%26pn%3DAstrologer%2520Madhuri%2520Gupta%26am%3D${activeService.price.replace(/[^\d]/g, '')}%26cu%3DINR%26tn%3DAppointment%2520Booking&color=4f3129`}
+                              alt="Scan to Pay UPI"
+                              className="w-full h-full object-contain"
+                            />
+                          </div>
+                        </div>
+                      ) : (
+                        <div className="space-y-2 w-full">
+                          <div className="space-y-1.5">
+                            <input
+                              type="text"
+                              placeholder="Card Number"
+                              className="w-full px-3 py-1.5 bg-white/10 border border-white/10 rounded-xl focus:border-[#b8922b] focus:outline-none text-white text-[11px] font-mono transition-all"
+                            />
+                            <div className="grid grid-cols-2 gap-2">
+                              <input
+                                type="text"
+                                placeholder="MM/YY"
+                                className="w-full px-3 py-1.5 bg-white/10 border border-white/10 rounded-xl focus:border-[#b8922b] focus:outline-none text-white text-[11px] font-mono transition-all"
+                              />
+                              <input
+                                type="text"
+                                placeholder="CVV"
+                                className="w-full px-3 py-1.5 bg-white/10 border border-white/10 rounded-xl focus:border-[#b8922b] focus:outline-none text-white text-[11px] font-mono transition-all"
+                              />
+                            </div>
+                          </div>
+                        </div>
+                      )}
+                    </div>
+
+                    <div className="flex items-center space-x-1.5 text-[9px] text-gray-400">
+                      <ShieldCheck className="w-3.5 h-3.5 text-green-500 shrink-0" />
+                      <span>Secure 256-bit SSL checkout system.</span>
+                    </div>
+
+                  </div>
+
+                </div>
+
+                <div className="pt-3 border-t border-white/5 flex justify-center">
+                  <button
+                    onClick={handleConfirmPayment}
+                    disabled={bookingLoading}
+                    className="w-1/4 py-3 rounded-xl bg-gradient-to-r from-green-600 to-green-500 hover:brightness-105 text-white font-bold uppercase tracking-wider shadow-lg active:scale-[0.99] transition-all flex items-center justify-center space-x-1.5 cursor-pointer text-xs"
+                  >
+                    {bookingLoading ? (
+                      <>
+                        <div className="w-3 h-3 border-2 border-white border-t-transparent rounded-full animate-spin" />
+                        <span>Verifying...</span>
+                      </>
+                    ) : (
+                      <span>Submit</span>
+                    )}
+                  </button>
+                </div>
+              </motion.div>
+            )}
+
+            {/* STEP 4: Success Panel */}
+            {step === 4 && (
+              <motion.div
+                key="step4"
+                initial={{ opacity: 0, scale: 0.95 }}
+                animate={{ opacity: 1, scale: 0.99 }}
+                className="text-center space-y-5 py-4"
+              >
+                <div className="inline-flex p-3 rounded-full bg-green-500/10 border border-green-500/30 text-green-400">
+                  <CheckCircle2 className="h-10 w-10 animate-[pulse_2s_infinite]" />
+                </div>
+                
+                <div className="space-y-1.5">
+                  <h2 className="font-serif text-2xl font-bold text-white">Consultation Booked!</h2>
+                  <p className="text-[#deb18a]/80 font-light text-xs max-w-sm mx-auto leading-relaxed">
+                    Invitation link has been dispatched to <strong className="text-white font-normal">{formData.email}</strong>.
+                  </p>
+                </div>
+
+                <div className="max-w-sm mx-auto p-4 rounded-2xl bg-white/5 border border-[#deb18a]/10 text-left text-xs space-y-2.5 font-sans">
+                  <h3 className="font-serif text-[#deb18a] font-bold border-b border-white/10 pb-1.5">Session Details</h3>
+                  <p><span className="text-gray-400">Client:</span> <span className="text-white font-serif">{formData.name}</span></p>
+                  <p><span className="text-gray-400">Service:</span> <span className="text-white">{activeService.label}</span></p>
+                  <p><span className="text-gray-400">Date/Time:</span> <span className="text-white">{selectedDate} at {selectedSlot}</span></p>
+                  {bookingResult?.jitsiLink && (
+                    <div className="pt-1.5 border-t border-white/10 mt-1.5">
+                      <span className="block text-[10px] text-gray-400 mb-0.5">Meeting Link (Jitsi):</span>
+                      <a
+                        href={bookingResult.jitsiLink}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="text-xs text-[#b8922b] hover:underline font-mono break-all"
+                      >
+                        {bookingResult.jitsiLink}
+                      </a>
+                    </div>
+                  )}
                 </div>
 
                 <div className="pt-4">
                   <button
-                    type="submit"
-                    disabled={loading}
-                    className="w-full py-4 rounded-xl bg-gradient-to-r from-gold-600 to-gold-400 text-cosmic-950 font-bold uppercase tracking-wider hover:brightness-105 active:scale-[0.99] transition-all disabled:opacity-50"
+                    onClick={() => {
+                      setFormData({
+                        name: '',
+                        email: '',
+                        phone: '',
+                        serviceType: 'birth-chart',
+                        birthDate: '',
+                        birthTime: '',
+                        birthPlace: '',
+                        additionalInfo: ''
+                      });
+                      setSelectedSlot('');
+                      setStep(1);
+                    }}
+                    className="px-5 py-2.5 rounded-full border border-[#deb18a]/30 text-[#deb18a] hover:text-[#4f3129] hover:bg-[#deb18a] hover:border-transparent font-semibold uppercase tracking-wider text-[10px] transition-all duration-300 cursor-pointer"
                   >
-                    {loading ? 'Finding Auspicious Times...' : 'Proceed to Calendar'}
+                    Book Another Reading
                   </button>
                 </div>
-              </form>
-            </motion.div>
-          )}
+              </motion.div>
+            )}
 
-          {/* STEP 2: Time Slot Selection */}
-          {step === 2 && (
-            <motion.div
-              key="step2"
-              initial={{ opacity: 0, x: 20 }}
-              animate={{ opacity: 1, x: 0 }}
-              exit={{ opacity: 0, x: -20 }}
-              className="glass-panel p-8 rounded-3xl space-y-6"
-            >
-              <div className="flex items-center justify-between border-b border-gold-500/10 pb-4">
-                <button
-                  onClick={() => setStep(1)}
-                  className="flex items-center space-x-1 text-slate-400 hover:text-white transition-colors text-sm"
-                >
-                  <ArrowLeft className="h-4 w-4" />
-                  <span>Back to details</span>
-                </button>
-                <span className="text-xs text-gold-400 font-serif uppercase tracking-widest">Select Session Time</span>
-              </div>
+          </AnimatePresence>
 
-              {/* Date Input Selector */}
-              <div className="space-y-2">
-                <label className="block text-xs font-semibold uppercase tracking-wider text-slate-400">Appointment Date</label>
-                <div className="relative max-w-xs">
-                  <CalendarIcon className="absolute left-4 top-1/2 -translate-y-1/2 h-4 w-4 text-slate-500" />
-                  <input
-                    type="date"
-                    min={new Date().toISOString().split('T')[0]}
-                    value={selectedDate}
-                    onChange={(e) => handleDateChange(e.target.value)}
-                    className="w-full pl-11 pr-4 py-3 bg-cosmic-950/80 border border-slate-700/60 rounded-xl focus:border-gold-500 focus:outline-none text-white text-sm"
-                  />
-                </div>
-              </div>
-
-              {/* Available Slots Grid */}
-              <div className="space-y-4">
-                <label className="block text-xs font-semibold uppercase tracking-wider text-slate-400">Available Slots for {new Date(selectedDate).toLocaleDateString(undefined, { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' })}</label>
-                
-                {loading ? (
-                  <div className="flex flex-col items-center justify-center py-12 space-y-2">
-                    <div className="w-8 h-8 rounded-full border-2 border-gold-500 border-t-transparent animate-spin" />
-                    <span className="text-xs text-slate-400">Retrieving slots from Google Calendar...</span>
-                  </div>
-                ) : availableSlots.length === 0 ? (
-                  <div className="text-center py-12 border border-slate-800/80 rounded-2xl bg-cosmic-950/50">
-                    <p className="text-slate-400 text-sm">No available slots found for this date.</p>
-                    <p className="text-xs text-slate-500 mt-1">Please select another date in the calendar above.</p>
-                  </div>
-                ) : (
-                  <div className="grid grid-cols-2 sm:grid-cols-4 gap-4">
-                    {availableSlots.map((slot) => (
-                      <button
-                        key={slot}
-                        onClick={() => setSelectedSlot(slot)}
-                        className={`py-3.5 px-4 rounded-xl border font-medium text-xs tracking-wider uppercase transition-all ${
-                          selectedSlot === slot
-                            ? 'bg-gradient-to-r from-gold-600 to-gold-400 text-cosmic-950 border-transparent shadow-lg shadow-gold-500/10'
-                            : 'bg-cosmic-950/60 border-slate-700/60 text-slate-300 hover:border-gold-400 hover:text-white'
-                        }`}
-                      >
-                        <Clock className="h-3 w-3 inline mr-1.5 -mt-0.5" />
-                        <span>{slot}</span>
-                      </button>
-                    ))}
-                  </div>
-                )}
-              </div>
-
-              {/* Summary panel before confirmation */}
-              <div className="p-4 rounded-2xl bg-gold-500/5 border border-gold-500/10 text-sm space-y-2">
-                <p className="text-slate-400"><strong className="text-gold-300">Consultation:</strong> {serviceOptions.find(o => o.value === formData.serviceType)?.label}</p>
-                <p className="text-slate-400"><strong className="text-gold-300">Name:</strong> {formData.name} ({formData.email})</p>
-                <p className="text-slate-400"><strong className="text-gold-300">Birth Info:</strong> {formData.birthDate} at {formData.birthTime} in {formData.birthPlace}</p>
-                {selectedSlot && (
-                  <p className="text-slate-300 font-medium pt-1 border-t border-gold-500/10 mt-2 flex items-center space-x-1">
-                    <CheckCircle2 className="h-4 w-4 text-green-400 shrink-0" />
-                    <span>Selected {selectedDate} at {selectedSlot}</span>
-                  </p>
-                )}
-              </div>
-
-              <div className="pt-4">
-                <button
-                  onClick={handleConfirmBooking}
-                  disabled={bookingLoading || !selectedSlot}
-                  className="w-full py-4 rounded-xl bg-gradient-to-r from-gold-600 to-gold-400 text-cosmic-950 font-bold uppercase tracking-wider hover:brightness-105 active:scale-[0.99] transition-all disabled:opacity-50"
-                >
-                  {bookingLoading ? 'Registering meeting...' : 'Confirm Consultation Booking'}
-                </button>
-              </div>
-            </motion.div>
-          )}
-
-          {/* STEP 3: Booking Success */}
-          {step === 3 && (
-            <motion.div
-              key="step3"
-              initial={{ opacity: 0, scale: 0.95 }}
-              animate={{ opacity: 1, scale: 1 }}
-              className="glass-panel p-8 sm:p-12 rounded-3xl text-center space-y-6"
-            >
-              <div className="inline-flex p-4 rounded-full bg-green-500/10 border border-green-500/30 text-green-400">
-                <CheckCircle2 className="h-12 w-12 animate-[pulse_2s_infinite]" />
-              </div>
-              
-              <div className="space-y-2">
-                <h2 className="font-serif text-3xl font-bold text-white">Consultation Booked!</h2>
-                <p className="text-slate-300 font-light text-sm max-w-md mx-auto">
-                  Your appointment has been registered with Google Calendar. An invite has been dispatched to <strong className="text-gold-400 font-normal">{formData.email}</strong>.
-                </p>
-              </div>
-
-              <div className="max-w-md mx-auto p-6 rounded-2xl bg-cosmic-950/70 border border-gold-500/10 text-left text-sm space-y-3 font-sans">
-                <h3 className="font-serif text-gold-300 font-semibold border-b border-gold-500/10 pb-2">Session Details</h3>
-                <p><span className="text-slate-400">Client:</span> <span className="text-white">{formData.name}</span></p>
-                <p><span className="text-slate-400">Date/Time:</span> <span className="text-white">{selectedDate} at {selectedSlot}</span></p>
-                {bookingResult?.jitsiLink && (
-                  <div className="pt-2 border-t border-gold-500/10 mt-2">
-                    <span className="block text-xs text-slate-400 mb-1">Meeting Link (Jitsi):</span>
-                    <a
-                      href={bookingResult.jitsiLink}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="text-xs text-blue-400 hover:text-blue-300 underline font-mono break-all"
-                    >
-                      {bookingResult.jitsiLink}
-                    </a>
-                  </div>
-                )}
-              </div>
-
-              <div className="pt-6">
-                <button
-                  onClick={() => {
-                    setFormData({
-                      name: '',
-                      email: '',
-                      phone: '',
-                      serviceType: 'birth-chart',
-                      birthDate: '',
-                      birthTime: '',
-                      birthPlace: '',
-                      additionalInfo: ''
-                    })
-                    setSelectedSlot('')
-                    setStep(1)
-                  }}
-                  className="px-8 py-3.5 rounded-full border border-gold-500/40 text-gold-300 hover:text-cosmic-950 hover:bg-gradient-to-r hover:from-gold-600 hover:to-gold-400 hover:border-transparent font-semibold uppercase tracking-wider text-xs transition-all duration-300"
-                >
-                  Book Another Reading
-                </button>
-              </div>
-            </motion.div>
-          )}
-
-        </AnimatePresence>
+        </div>
 
       </div>
     </div>
-  )
+  );
 }
-
-export default Booking

@@ -21,8 +21,8 @@ function Navbar() {
     { name: 'Home', url: '/', icon: Home },
     { name: 'About', url: '/about', icon: User },
     { name: 'Services', url: '/services', icon: Compass },
-    { name: 'Testimonial', url: '/#testimonials', icon: MessageSquare },
-    { name: 'Contact', url: '/#contact', icon: Phone },
+    { name: 'Testimonial', url: '/testimonials', icon: MessageSquare },
+    { name: 'Contact', url: '/contact', icon: Phone },
     { name: 'Book Appointment', url: '/booking', icon: Calendar }
   ]
 
@@ -37,9 +37,9 @@ function Navbar() {
       setActiveTab('Services')
     } else if (path === '/booking') {
       setActiveTab('Book Appointment')
-    } else if (path === '/' && hash === '#testimonials') {
+    } else if (path === '/testimonials') {
       setActiveTab('Testimonial')
-    } else if (hash === '#contact') {
+    } else if (path === '/contact') {
       setActiveTab('Contact')
     } else if (path === '/') {
       setActiveTab('Home')
