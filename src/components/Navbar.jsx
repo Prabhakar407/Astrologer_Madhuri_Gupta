@@ -1,21 +1,22 @@
-import React, { useState, useEffect } from 'react'
-import { Link, useLocation } from 'react-router-dom'
-import { motion, AnimatePresence } from 'framer-motion'
-import { Home, User, Compass, MessageSquare, Phone, Calendar, Sparkles } from 'lucide-react'
+import React, { useState, useEffect } from 'react';
+import { Link, useLocation } from 'react-router-dom';
+import { motion, AnimatePresence } from 'framer-motion';
+import { Home, User, Compass, MessageSquare, Phone, Calendar, Sparkles, Menu, X } from 'lucide-react';
 
 function Navbar() {
-  const location = useLocation()
-  const [activeTab, setActiveTab] = useState('Home')
-  const [scrolled, setScrolled] = useState(false)
+  const location = useLocation();
+  const [activeTab, setActiveTab] = useState('Home');
+  const [scrolled, setScrolled] = useState(false);
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
-  // Sync scroll detection for header blur
+  // Sync scroll detection for header background transition
   useEffect(() => {
     const handleScroll = () => {
-      setScrolled(window.scrollY > 20)
-    }
-    window.addEventListener('scroll', handleScroll)
-    return () => window.removeEventListener('scroll', handleScroll)
-  }, [])
+      setScrolled(window.scrollY > 20);
+    };
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
 
   const navItems = [
     { name: 'Home', url: '/', icon: Home },
@@ -24,99 +25,90 @@ function Navbar() {
     { name: 'Testimonial', url: '/testimonials', icon: MessageSquare },
     { name: 'Contact', url: '/contact', icon: Phone },
     { name: 'Book Appointment', url: '/booking', icon: Calendar }
-  ]
+  ];
 
-  // Track active tab based on path and hash
+  // Track active tab based on path
   useEffect(() => {
-    const path = location.pathname
-    const hash = location.hash
+    const path = location.pathname;
 
     if (path === '/about') {
-      setActiveTab('About')
+      setActiveTab('About');
     } else if (path === '/services') {
-      setActiveTab('Services')
+      setActiveTab('Services');
     } else if (path === '/booking') {
-      setActiveTab('Book Appointment')
+      setActiveTab('Book Appointment');
     } else if (path === '/testimonials') {
-      setActiveTab('Testimonial')
+      setActiveTab('Testimonial');
     } else if (path === '/contact') {
-      setActiveTab('Contact')
+      setActiveTab('Contact');
     } else if (path === '/') {
-      setActiveTab('Home')
+      setActiveTab('Home');
     }
-  }, [location])
+    
+    // Close mobile menu on path changes
+    setMobileMenuOpen(false);
+  }, [location]);
 
   const handleLinkClick = (e, item) => {
     if (item.url.startsWith('/#')) {
-      const elementId = item.url.substring(2)
+      const elementId = item.url.substring(2);
       if (location.pathname === '/') {
-        e.preventDefault()
-        const el = document.getElementById(elementId)
+        e.preventDefault();
+        const el = document.getElementById(elementId);
         if (el) {
-          el.scrollIntoView({ behavior: 'smooth' })
-          // Manually update active tab and hash
-          setActiveTab(item.name)
-          window.history.pushState(null, '', item.url)
+          el.scrollIntoView({ behavior: 'smooth' });
+          setActiveTab(item.name);
+          window.history.pushState(null, '', item.url);
         }
       }
     }
-  }
+  };
 
   return (
-    <>
-      {/* Top Navbar Header (Branding only on Mobile, Brand + Menu on Desktop) */}
-      <header className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 border-b border-[#deb18a]/15 ${
-        scrolled 
-          ? 'bg-[#4f3129] py-2 shadow-md' 
-          : 'bg-[#4f3129] py-3'
-      }`}>
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="relative flex items-center justify-center h-8">
+    <header className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 border-b border-[#deb18a]/15 ${
+      scrolled 
+        ? 'bg-[#4f3129] py-2 shadow-md' 
+        : 'bg-[#4f3129] py-3.5'
+    }`}>
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="flex items-center justify-between h-9 relative">
+          
+          {/* Left Branding */}
+          <Link to="/" className="flex items-center space-x-2 group">
+            <Sparkles className="h-4.5 w-4.5 text-gold-400 group-hover:rotate-12 transition-transform duration-300" />
+            <span className="font-serif text-base sm:text-lg font-bold tracking-widest text-[#deb18a] group-hover:text-white transition-colors duration-300">
+              MADHURI GUPTA
+            </span>
+          </Link>
+
+          {/* Desktop Center Menu Options */}
+          <div className="hidden md:flex items-center space-x-6 lg:space-x-8 absolute left-1/2 -translate-x-1/2">
+            {navItems
+              .filter((item) => ['Home', 'About', 'Services', 'Testimonial', 'Contact'].includes(item.name))
+              .map((item) => {
+                const isActive = activeTab === item.name;
+                return (
+                  <Link
+                    key={item.name}
+                    to={item.url}
+                    onClick={(e) => handleLinkClick(e, item)}
+                    className={`font-serif text-[12px] lg:text-[13px] font-semibold tracking-[0.2em] uppercase transition-colors duration-300 ${
+                      isActive 
+                        ? 'text-white border-b border-[#deb18a]' 
+                        : 'text-[#deb18a]/80 hover:text-white'
+                    }`}
+                  >
+                    {item.name}
+                  </Link>
+                );
+              })}
+          </div>
+
+          {/* Desktop Right CTA Button and Mobile Menu Toggle Button */}
+          <div className="flex items-center space-x-4">
             
-            {/* Branding - Centered on Mobile, Left-aligned on Desktop */}
-            <div className="flex justify-center md:hidden w-full">
-              <Link to="/" className="flex items-center space-x-2 group">
-                <Sparkles className="h-4 w-4 text-gold-400 group-hover:rotate-12 transition-transform duration-300" />
-                <span className="font-serif text-base font-bold tracking-widest text-[#deb18a]">
-                  MADHURI GUPTA
-                </span>
-              </Link>
-            </div>
-
-            <div className="hidden md:flex items-center space-x-2 absolute left-0">
-              <Link to="/" className="flex items-center space-x-2 group">
-                <Sparkles className="h-4 w-4 text-gold-400 group-hover:rotate-12 transition-transform duration-300" />
-                <span className="font-serif text-base font-bold tracking-widest text-[#deb18a] group-hover:text-white transition-colors duration-300">
-                  MADHURI GUPTA
-                </span>
-              </Link>
-            </div>
-
-            {/* Desktop Navigation - Centered, Spaced, No Branding, No Capsule (Matches Hero2.png) */}
-            <div className="hidden md:flex items-center space-x-6">
-              {navItems
-                .filter((item) => ['Home', 'About', 'Services', 'Testimonial', 'Contact'].includes(item.name))
-                .map((item) => {
-                  const isActive = activeTab === item.name
-                  return (
-                    <Link
-                      key={item.name}
-                      to={item.url}
-                      onClick={(e) => handleLinkClick(e, item)}
-                      className={`font-serif text-[13px] font-semibold tracking-[0.2em] uppercase transition-colors duration-300 ${
-                        isActive 
-                          ? 'text-white' 
-                          : 'text-[#deb18a]/80 hover:text-white'
-                      }`}
-                    >
-                      {item.name}
-                    </Link>
-                  )
-                })}
-            </div>
-
-            {/* Book Appointment CTA Button - Right Aligned on Desktop */}
-            <div className="hidden md:block absolute right-0">
+            {/* Desktop CTA */}
+            <div className="hidden md:block">
               <Link
                 to="/booking"
                 className="btn-10"
@@ -132,50 +124,58 @@ function Navbar() {
               </Link>
             </div>
 
-          </div>
-        </div>
-      </header>
+            {/* Mobile/Tablet Menu Button */}
+            <button
+              onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+              className="md:hidden p-1.5 rounded-lg text-[#deb18a] hover:text-white hover:bg-white/5 focus:outline-none transition-all cursor-pointer"
+              aria-label="Toggle Navigation Options"
+            >
+              {mobileMenuOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
+            </button>
 
-      {/* Mobile Floating Bottom Dock (Visible only on Mobile) */}
-      <div className="md:hidden fixed bottom-6 left-1/2 -translate-x-1/2 z-50 w-[90%] max-w-[420px] mobile-bottom-nav">
-        <div className="lamp-nav-container justify-around py-2 px-3">
-          {navItems.map((item) => {
-            const Icon = item.icon
-            const isActive = activeTab === item.name
-            return (
-              <Link
-                key={item.name}
-                to={item.url}
-                onClick={(e) => handleLinkClick(e, item)}
-                className={`lamp-link p-3 rounded-full shrink-0 flex items-center justify-center transition-colors ${isActive ? 'active text-gold-400' : 'text-slate-400'}`}
-                title={item.name}
-              >
-                <span className="relative z-10">
-                  <Icon className="h-5 w-5 stroke-[2.2]" />
-                </span>
-                
-                {isActive && (
-                  <motion.div
-                    layoutId="mobile-lamp"
-                    className="absolute inset-0 w-full bg-gold-500/5 rounded-full -z-10"
-                    initial={false}
-                    transition={{
-                      type: "spring",
-                      stiffness: 380,
-                      damping: 30
-                    }}
-                  >
-                    {/* Active Indicator Bottom Glow Line */}
-                    <div className="lamp-glow-bar" />
-                  </motion.div>
-                )}
-              </Link>
-            )
-          })}
+          </div>
+
         </div>
       </div>
-    </>
-  )
+
+      {/* Dropdown Mobile Navigation Options (Smooth vertical collapse - 1/2 screen width aligned right) */}
+      <AnimatePresence>
+        {mobileMenuOpen && (
+          <motion.div
+            initial={{ opacity: 0, height: 0 }}
+            animate={{ opacity: 1, height: 'auto' }}
+            exit={{ opacity: 0, height: 0 }}
+            transition={{ duration: 0.25, ease: 'easeInOut' }}
+            className="md:hidden absolute right-0 top-full w-1/2 min-w-[200px] bg-[#4f3129] border-l border-b border-[#deb18a]/15 overflow-hidden shadow-2xl rounded-bl-2xl z-50"
+          >
+            <div className="px-3 py-4 space-y-1.5 flex flex-col font-serif">
+              {navItems.map((item) => {
+                const isActive = activeTab === item.name;
+                return (
+                  <Link
+                    key={item.name}
+                    to={item.url}
+                    onClick={(e) => {
+                      handleLinkClick(e, item);
+                      setMobileMenuOpen(false);
+                    }}
+                    className={`text-xs sm:text-sm font-semibold tracking-[0.18em] uppercase py-2.5 px-4 rounded-xl transition-all ${
+                      isActive 
+                        ? 'bg-[#b8922b]/15 text-white border-l-4 border-[#b8922b]' 
+                        : 'text-[#deb18a]/80 hover:text-white hover:bg-white/5'
+                    }`}
+                  >
+                    {item.name}
+                  </Link>
+                );
+              })}
+            </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
+
+    </header>
+  );
 }
 
-export default Navbar
+export default Navbar;

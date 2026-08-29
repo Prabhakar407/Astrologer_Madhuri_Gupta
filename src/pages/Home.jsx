@@ -1,7 +1,7 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
 import { motion } from 'framer-motion'
-import { Sparkles, Compass, Heart, Shield, Clock, Globe, Sun, Sprout, Flower2, Briefcase, Target, User, Award, Key, TrendingUp, Trophy, Scale, Scroll, Moon } from 'lucide-react'
+import { Sparkles, Compass, Heart, Shield, Clock, Globe, Sun, Sprout, Flower2, Briefcase, Target, User, Award, Key, TrendingUp, Trophy, Scale, Scroll, Moon, Info } from 'lucide-react'
 import { TextShimmer } from '../../components/motion-primitives/text-shimmer'
 
 function ScrollCard({ phase, idx }) {
@@ -182,6 +182,18 @@ function ServiceAccordion({ service, isOpen, onToggle }) {
           <span className="font-serif text-sm sm:text-base font-bold text-[#3a1906] tracking-wider uppercase">
             {service.title}
           </span>
+          {/* Info Icon & Smooth Hover Tooltip Box */}
+          <div className="relative group/info inline-block" onClick={(e) => e.stopPropagation()}>
+            <Info className="h-4 w-4 text-[#3a1906]/60 hover:text-[#3a1906] transition-colors cursor-help shrink-0" />
+            <div className="absolute bottom-full left-1/2 -translate-x-1/2 mb-2.5 w-60 sm:w-64 p-3.5 bg-[#4f3129] border border-[#deb18a]/30 text-[#faf6e8] rounded-xl shadow-xl opacity-0 pointer-events-none group-hover/info:opacity-100 group-hover/info:pointer-events-auto transition-all duration-300 transform translate-y-1 group-hover/info:translate-y-0 z-50 normal-case tracking-normal">
+              <div className="font-serif font-bold text-[9px] text-[#deb18a] uppercase tracking-wider mb-1.5 border-b border-[#deb18a]/20 pb-1">
+                Overview
+              </div>
+              <p className="font-sans text-[11px] leading-relaxed text-[#f5ebd6]/90 font-medium">
+                {service.shortDesc}
+              </p>
+            </div>
+          </div>
         </div>
         <motion.div
           animate={{ rotate: isOpen ? 180 : 0 }}
@@ -250,59 +262,93 @@ function Home() {
 
   const serviceList = [
     {
-      id: 'birth-chart',
-      title: 'Detailed Birth Chart Reading',
+      id: 'vedic-astrology',
+      title: 'Vedic Astrology',
       tagline: 'Full Vedic Kundali & Dasha analysis',
+      shortDesc: 'Detailed analysis of your birth chart (Kundali) to understand planetary cycles, houses strength, and tailored life remedies.',
       duration: '60 Mins Session',
-      price: '₹2,500 / $45',
+      price: '₹2,500',
       icon: <Moon className="h-5 w-5 text-purple-700 fill-purple-700 shrink-0" />,
       features: [
         'Detailed analysis of all 12 houses',
         '10-year Mahadasha & Antardasha timeline',
-        'Specific gemstone & mantra remedies',
-        'PDF Copy of your birth chart'
+        'Planetary cycles interpretation',
+        'Personalized remedies & Gemstones'
       ]
     },
     {
-      id: 'compatibility',
-      title: 'Relationship Compatibility',
-      tagline: 'Synastry and Kundali Milan',
-      duration: '45 Mins Session',
-      price: '₹3,000 / $55',
-      icon: <Heart className="h-5 w-5 text-rose-600 fill-rose-600 shrink-0" />,
+      id: 'vastu-consultation',
+      title: 'Vastu Consultation',
+      tagline: 'Spatial geometry & elemental energy balance',
+      shortDesc: 'Harmonizing the energies of your home, office, or plot using spatial geometry, elemental balance, and classical Vastu remedies.',
+      duration: '90 Mins Session',
+      price: '₹4,500',
+      icon: <Compass className="h-5 w-5 text-teal-600 fill-teal-600 shrink-0" />,
       features: [
-        'Ashta Koota matchmaking (36 Gunas)',
-        'Manglik Dosha analysis and remedies',
-        'Emotional & intellectual compatibility scale',
-        'Future relationship transit predictions'
+        'Spatial layout assessment',
+        'Elemental energy mapping',
+        'Structural blockage remedies',
+        'Detailed correction report PDF'
       ]
     },
     {
-      id: 'career-wealth',
-      title: 'Career & Wealth Guidance',
-      tagline: '10th House alignment & prosperity',
+      id: 'numerology',
+      title: 'Numerology',
+      tagline: 'Destiny numbers & name spelling alignment',
+      shortDesc: 'Decoding the vibrational signature of your birth date, name, and destiny numbers to optimize your path, career, and compatibility.',
       duration: '45 Mins Session',
-      price: '₹2,100 / $39',
-      icon: <Briefcase className="h-5 w-5 text-blue-700 fill-blue-700 shrink-0" />,
+      price: '₹2,100',
+      icon: <Scroll className="h-5 w-5 text-amber-600 fill-amber-600 shrink-0" />,
       features: [
-        'Job vs. business suitability analysis',
-        'Auspicious times for financial investments',
-        'Remedies for career blocks (Shani/Rahu)',
-        'Timing of promotions or job switches'
+        'Destiny & path calculation',
+        'Name vibration alignment',
+        'Personal year predictions',
+        'Name spelling correction'
       ]
     },
     {
-      id: 'yearly-transit',
-      title: 'Yearly Solar Return (Varshphal)',
-      tagline: 'Month-by-month transit guide',
-      duration: '45 Mins Session',
-      price: '₹2,500 / $45',
-      icon: <Sparkles className="h-5 w-5 text-amber-600 fill-amber-600 shrink-0" />,
+      id: 'kp-horoscope',
+      title: 'Krishnamurti Paddhati Horoscope',
+      tagline: 'Precise sub-lord theory timing analysis',
+      shortDesc: 'Applying the advanced KP system (sub-lord theory) for accurate predictive timing of specific life events like career shift, marriage, or travel.',
+      duration: '60 Mins Session',
+      price: '₹3,200',
+      icon: <Clock className="h-5 w-5 text-blue-700 fill-blue-700 shrink-0" />,
       features: [
-        'Month-by-month layout of key events',
-        'Sade Sati & Jupiter transit analysis',
-        'Health & wellness checkpoints',
-        'Personalized calendar for the year'
+        'Sub-lord timing accuracy',
+        'Specific event calculations',
+        'Cuspal chart analysis',
+        'KP chart calculation report'
+      ]
+    },
+    {
+      id: 'prashna-kundli',
+      title: 'Prashna Kundli',
+      tagline: 'Horary chart casting for specific queries',
+      shortDesc: 'Erecting a momentary query chart (horary astrology) to provide direct, specific answers to urgent questions without needing a birth time.',
+      duration: '30 Mins Session',
+      price: '₹1,500',
+      icon: <Shield className="h-5 w-5 text-rose-600 fill-rose-600 shrink-0" />,
+      features: [
+        'Direct answer to one query',
+        'Chart cast at query time',
+        'Immediate transit effects',
+        'Simple action remedies'
+      ]
+    },
+    {
+      id: 'bhrigu-nandi-nadi',
+      title: 'Bhrigu Nandi Nadi Astrology',
+      tagline: 'Palm-leaf combination fate tracing',
+      shortDesc: 'An ancient palm-leaf predictive technique using planetary combinations (conjunctions and transits) to trace past life karma and future destiny.',
+      duration: '60 Mins Session',
+      price: '₹3,500',
+      icon: <Sparkles className="h-5 w-5 text-indigo-600 fill-indigo-600 shrink-0" />,
+      features: [
+        'Conjunction destiny patterns',
+        'Past life karma decoding',
+        'Transits on planetary pairs',
+        'Nadi combination worksheet'
       ]
     }
   ]
@@ -360,7 +406,7 @@ function Home() {
     <div className="relative min-h-screen flex flex-col justify-between overflow-hidden" style={{ background: 'linear-gradient(to bottom, #5d4238 0%, #b39480 50%, #ceb7a6 100%)' }}>
       
       {/* Hero Section */}
-      <section className="relative px-4 sm:px-6 lg:px-8 pt-16 pb-16 min-h-screen flex flex-col items-center justify-start overflow-hidden z-10">
+      <section className="relative px-4 sm:px-6 lg:px-8 pt-20 pb-12 min-h-screen flex flex-col items-center justify-center overflow-hidden z-10">
         {/* Background Image (rose-gold marble without zodiac wheel) */}
         <div 
           className="absolute inset-0 z-0 bg-cover bg-center opacity-95 pointer-events-none" 
@@ -368,6 +414,87 @@ function Home() {
         />
         {/* Top gradient shadow for navbar links contrast */}
         <div className="absolute inset-x-0 top-0 h-28 bg-gradient-to-b from-cosmic-950/40 to-transparent z-0 pointer-events-none" />
+
+        {/* Left Side Decorative Astronomy Graphic (Crescent Moon & Constellation) */}
+        <div className="absolute left-6 xl:left-16 top-1/2 -translate-y-1/2 hidden lg:flex flex-col items-center justify-center z-20 select-none pointer-events-none">
+          <motion.div
+            initial={{ opacity: 0, scale: 0.8, x: -30 }}
+            animate={{ 
+              opacity: 0.45, 
+              scale: 1, 
+              x: 0,
+              y: [0, -10, 0]
+            }}
+            transition={{
+              opacity: { duration: 1.5, ease: "easeOut" },
+              x: { duration: 1.5, ease: "easeOut" },
+              y: { duration: 6, repeat: Infinity, ease: "easeInOut" }
+            }}
+            className="relative"
+          >
+            {/* Fine-line Golden Cosmic SVG */}
+            <svg width="180" height="220" viewBox="0 0 100 120" className="stroke-[#deb18a]/40 stroke-[0.75] fill-none">
+              {/* Crescent Moon */}
+              <path d="M45 25 A 25 25 0 1 0 75 75 A 21 21 0 1 1 45 25 Z" className="stroke-[#b8922b]/50" />
+              {/* Constellation link lines */}
+              <line x1="20" y1="40" x2="35" y2="55" strokeDasharray="1.5,1.5" />
+              <line x1="35" y1="55" x2="15" y2="75" strokeDasharray="1.5,1.5" />
+              <line x1="15" y1="75" x2="30" y2="95" strokeDasharray="1.5,1.5" />
+              <line x1="30" y1="95" x2="55" y2="105" strokeDasharray="1.5,1.5" />
+              {/* Star Nodes */}
+              <circle cx="20" cy="40" r="1.5" className="fill-[#b8922b]/70 stroke-none" />
+              <circle cx="35" cy="55" r="2" className="fill-[#b8922b]/90 stroke-none animate-pulse" />
+              <circle cx="15" cy="75" r="1.5" className="fill-[#b8922b]/70 stroke-none" />
+              <circle cx="30" cy="95" r="2" className="fill-[#b8922b]/90 stroke-none animate-pulse" />
+              <circle cx="55" cy="105" r="1.5" className="fill-[#b8922b]/70 stroke-none" />
+              {/* Shimmering 4-Point Stars */}
+              <path d="M 68 35 Q 68 39 72 39 Q 68 39 68 43 Q 68 39 64 39 Q 68 39 68 35 Z" className="fill-[#b8922b]/80 stroke-none" />
+              <path d="M 28 20 Q 28 23 31 23 Q 28 23 28 26 Q 28 23 25 23 Q 28 23 28 20 Z" className="fill-[#b8922b]/60 stroke-none" />
+            </svg>
+            <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 text-[#4f3129]/5 font-serif text-7xl select-none">
+              ☾
+            </div>
+          </motion.div>
+        </div>
+
+        {/* Right Side Decorative Astronomy Graphic (Sun & Astronomical Rings) */}
+        <div className="absolute right-6 xl:right-16 top-1/2 -translate-y-1/2 hidden lg:flex flex-col items-center justify-center z-20 select-none pointer-events-none">
+          <motion.div
+            initial={{ opacity: 0, scale: 0.8, x: 30 }}
+            animate={{ 
+              opacity: 0.45, 
+              scale: 1, 
+              x: 0,
+              y: [0, -10, 0]
+            }}
+            transition={{
+              opacity: { duration: 1.5, ease: "easeOut" },
+              x: { duration: 1.5, ease: "easeOut" },
+              y: { duration: 6, repeat: Infinity, ease: "easeInOut", delay: 0.5 }
+            }}
+            className="relative"
+          >
+            {/* Fine-line Golden Cosmic Astrolabe SVG */}
+            <svg width="180" height="220" viewBox="0 0 100 120" className="stroke-[#deb18a]/40 stroke-[0.75] fill-none">
+              {/* Main Sun center */}
+              <circle cx="50" cy="55" r="10" className="stroke-[#b8922b]/50" />
+              {/* Sun rays */}
+              <path d="M50 38 L50 43 M50 67 L50 72 M33 55 L38 55 M62 55 L67 55 M38 43 L42 47 M62 67 L58 63 M38 67 L42 63 M62 43 L58 47" className="stroke-[#b8922b]/40" />
+              {/* Outer Orbit ring */}
+              <ellipse cx="50" cy="55" rx="36" ry="16" transform="rotate(-20 50 55)" className="stroke-[#deb18a]/30 stroke-dasharray-[2.5,2.5]" />
+              <ellipse cx="50" cy="55" rx="42" ry="24" transform="rotate(15 50 55)" className="stroke-[#deb18a]/20" />
+              {/* Star Nodes along orbits */}
+              <circle cx="83" cy="40" r="1.5" className="fill-[#b8922b]/70 stroke-none" />
+              <circle cx="16" cy="68" r="2" className="fill-[#b8922b]/90 stroke-none animate-pulse" />
+              {/* Shimmering 4-Point Stars */}
+              <path d="M 75 75 Q 75 78 78 78 Q 75 78 75 81 Q 75 78 72 78 Q 75 78 75 75 Z" className="fill-[#b8922b]/80 stroke-none" />
+              <path d="M 25 25 Q 25 28 28 28 Q 25 28 25 31 Q 25 28 22 28 Q 25 28 25 25 Z" className="fill-[#b8922b]/60 stroke-none" />
+            </svg>
+            <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 text-[#4f3129]/5 font-serif text-7xl select-none">
+              ☼
+            </div>
+          </motion.div>
+        </div>
 
         {/* Hero Content Container */}
         <div className="relative z-10 flex flex-col items-center justify-center text-center max-w-4xl mx-auto space-y-4">
@@ -470,76 +597,148 @@ function Home() {
         </div>
       </section>
 
-
-
       {/* Our Goal Section */}
-      <section className="relative w-full overflow-hidden border-b border-[#deb18a]/10 bg-[#d1b5a7] flex flex-col items-center justify-center">
-        {/* The Background Image, taking full width and scaling height naturally */}
-        <img 
-          src="/goal.png" 
-          alt="Our Goal Background" 
-          className="w-full h-auto pointer-events-none block z-0" 
-        />
-        
-        {/* Text Content Overlay (Left-aligned & Vertically Centered) */}
-        <div className="absolute inset-0 z-10 flex flex-col items-start justify-center p-6 sm:p-12 lg:p-24 text-left">
-          <motion.div 
-            initial={{ opacity: 0, y: 25 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, margin: "-100px" }}
-            transition={{ duration: 1.2, ease: "easeInOut" }}
-            className="-mt-8 sm:-mt-12 lg:-mt-16 max-w-xs sm:max-w-md md:max-w-xl space-y-3 sm:space-y-4"
-          >
-            <TextShimmer
-              as="h2"
-              duration={3.5}
-              className="font-serif text-lg sm:text-3xl md:text-4xl font-bold tracking-widest uppercase"
-              style={{
-                '--base-color': '#4f3129',
-                '--base-gradient-color': '#deb18a'
-              }}
+      <section className="py-6 sm:py-16 lg:py-28 bg-cover bg-center border-b border-[#deb18a]/10 relative" style={{ backgroundImage: "url('/marble-bg.jpg')" }}>
+        <div className="absolute inset-0 bg-[#f9f6f0]/20 z-0 pointer-events-none" />
+
+        {/* Celestial Divider 1 (directly on border line, zero height) */}
+        <div className="absolute top-0 left-0 right-0 w-full z-20 flex items-center justify-center translate-y-[-50%]">
+          <div className="w-full max-w-7xl mx-auto px-6 flex items-center justify-center">
+            <motion.div 
+              initial={{ scaleX: 0 }}
+              whileInView={{ scaleX: 1 }}
+              viewport={{ once: true }}
+              transition={{ duration: 1.2, ease: "easeInOut" }}
+              className="flex-grow h-[1.5px] bg-gradient-to-r from-transparent via-[#4f3129]/30 to-[#4f3129]/70 origin-right"
+            />
+            <motion.div
+              initial={{ opacity: 0, scale: 0, rotate: -45 }}
+              whileInView={{ opacity: 1, scale: 1, rotate: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.8, delay: 0.4 }}
+              className="mx-4 text-[#b8922b] select-none text-lg font-bold"
             >
-              OUR GOAL
-            </TextShimmer>
-            <div className="w-12 sm:w-16 h-[1.5px] bg-[#4f3129]/40" />
-            
-            <p className="font-sans text-[10px] sm:text-sm md:text-base font-medium text-[#5c3d31] leading-relaxed">
-              Bridging ancient celestial wisdom with modern life choices to bring you clarity, balance, and alignment.
-            </p>
-            
-            {/* Goal Points */}
-            <ul className="space-y-2 pt-2 font-serif text-xs sm:text-sm md:text-base text-[#4a312a] font-bold tracking-wide flex flex-col items-start">
-              <li className="flex items-center space-x-2">
-                <span className="text-[#4a312a] font-bold text-[10px] sm:text-[12px] select-none">◆</span>
-                <span>Unlocking Your True Potential</span>
-              </li>
-              <li className="flex items-center space-x-2">
-                <span className="text-[#4a312a] font-bold text-[10px] sm:text-[12px] select-none">◆</span>
-                <span>Helping You Navigate Life’s Transitions</span>
-              </li>
-              <li className="flex items-center space-x-2">
-                <span className="text-[#4a312a] font-bold text-[10px] sm:text-[12px] select-none">◆</span>
-                <span>Connecting You to the Wisdom of the Universe</span>
-              </li>
-            </ul>
-          </motion.div>
+              ✦
+            </motion.div>
+            <motion.div 
+              initial={{ scaleX: 0 }}
+              whileInView={{ scaleX: 1 }}
+              viewport={{ once: true }}
+              transition={{ duration: 1.2, ease: "easeInOut" }}
+              className="flex-grow h-[1.5px] bg-gradient-to-l from-transparent via-[#4f3129]/30 to-[#4f3129]/70 origin-left"
+            />
+          </div>
+        </div>
+
+        <div className="w-full max-w-none px-6 lg:px-16 relative z-10 grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-16 items-center">
+          
+          {/* Left Column: Transparent Image on Left Side (increased size) */}
+          <div className="lg:col-span-8 flex justify-center p-0">
+            <motion.div 
+              initial={{ opacity: 0, scale: 0.95 }}
+              whileInView={{ opacity: 1, scale: 1 }}
+              viewport={{ once: true, margin: "-100px" }}
+              transition={{ duration: 0.8 }}
+              className="w-full bg-transparent flex items-center justify-center p-0"
+            >
+              <img 
+                src="/Goal.png" 
+                alt="Our Goal - Astrological Guidance" 
+                className="w-full h-auto object-contain p-0 m-0"
+              />
+            </motion.div>
+          </div>
+
+          {/* Right Column: Text & Bullet Points (lg:col-span-4) */}
+          <div className="lg:col-span-4 flex flex-col justify-center space-y-6">
+            <motion.div 
+              initial={{ opacity: 0, y: 25 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, margin: "-100px" }}
+              transition={{ duration: 0.8, ease: "easeOut" }}
+              className="space-y-4"
+            >
+              <TextShimmer
+                as="h2"
+                duration={3.5}
+                className="font-serif text-3xl font-bold tracking-widest uppercase text-center lg:text-left"
+                style={{
+                  '--base-color': '#4f3129',
+                  '--base-gradient-color': '#deb18a'
+                }}
+              >
+                OUR GOAL
+              </TextShimmer>
+              <div className="w-16 h-[1.5px] bg-[#4f3129]/40 mx-auto lg:mx-0" />
+              
+              <p className="font-sans text-sm sm:text-base text-[#4a312a]/95 leading-relaxed font-medium text-center lg:text-left">
+                Bridging ancient celestial wisdom with modern life choices to bring you clarity, balance, and alignment.
+              </p>
+              
+              {/* Goal Points */}
+              <ul className="space-y-3 font-serif text-sm sm:text-base text-[#4a312a] font-bold tracking-wide flex flex-col items-center lg:items-start">
+                <li className="flex items-center space-x-2.5">
+                  <span className="text-[#b8922b] font-bold text-[12px] select-none">◆</span>
+                  <span>Unlocking Your True Potential</span>
+                </li>
+                <li className="flex items-center space-x-2.5">
+                  <span className="text-[#b8922b] font-bold text-[12px] select-none">◆</span>
+                  <span>Helping You Navigate Life’s Transitions</span>
+                </li>
+                <li className="flex items-center space-x-2.5">
+                  <span className="text-[#b8922b] font-bold text-[12px] select-none">◆</span>
+                  <span>Connecting You to the Wisdom of the Universe</span>
+                </li>
+              </ul>
+            </motion.div>
+          </div>
+          
         </div>
       </section>
 
       {/* About Me Section */}
-      <section id="about" className="relative z-10 py-24 bg-cover bg-center" style={{ backgroundImage: "url('/marble-bg.jpg')" }}>
+      <section id="about" className="relative z-10 py-10 bg-cover bg-center" style={{ backgroundImage: "url('/marble-bg.jpg')" }}>
         <div className="absolute inset-0 bg-[#f9f6f0]/20 z-0 pointer-events-none" />
+
+        {/* Celestial Divider 2 (directly on border line, zero height) */}
+        <div className="absolute top-0 left-0 right-0 w-full z-20 flex items-center justify-center translate-y-[-50%]">
+          <div className="w-full max-w-7xl mx-auto px-6 flex items-center justify-center">
+            <motion.div 
+              initial={{ scaleX: 0 }}
+              whileInView={{ scaleX: 1 }}
+              viewport={{ once: true }}
+              transition={{ duration: 1.2, ease: "easeInOut" }}
+              className="flex-grow h-[1.5px] bg-gradient-to-r from-transparent via-[#4f3129]/30 to-[#4f3129]/70 origin-right"
+            />
+            <motion.div
+              initial={{ opacity: 0, scale: 0, rotate: -45 }}
+              whileInView={{ opacity: 1, scale: 1, rotate: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.8, delay: 0.4 }}
+              className="mx-4 text-[#b8922b] select-none text-lg font-bold"
+            >
+              ✦
+            </motion.div>
+            <motion.div 
+              initial={{ scaleX: 0 }}
+              whileInView={{ scaleX: 1 }}
+              viewport={{ once: true }}
+              transition={{ duration: 1.2, ease: "easeInOut" }}
+              className="flex-grow h-[1.5px] bg-gradient-to-l from-transparent via-[#4f3129]/30 to-[#4f3129]/70 origin-left"
+            />
+          </div>
+        </div>
         
         <motion.div 
           initial={{ opacity: 0, y: 35 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, margin: "-100px" }}
           transition={{ duration: 1.0, ease: "easeOut" }}
-          className="max-w-6xl mx-auto px-6 relative z-10 flex flex-col items-center space-y-12"
+          className="max-w-6xl mx-auto px-6 relative z-10 flex flex-col items-center space-y-7"
         >
           
           {/* Top Centre Header */}
-          <div className="text-center space-y-4">
+          <div className="text-center space-y-2">
             <TextShimmer
               as="h2"
               duration={3.5}
@@ -649,18 +848,18 @@ function Home() {
       </section>
 
       {/* Working With Me Section */}
-      <section className="relative z-10 py-20 bg-cover bg-center border-t border-[#deb18a]/10" style={{ backgroundImage: "url('/marble-bg.jpg')" }}>
+      <section className="relative z-10 py-10 bg-cover bg-center border-t border-[#deb18a]/10" style={{ backgroundImage: "url('/marble-bg.jpg')" }}>
         <div className="absolute inset-0 bg-[#f9f6f0]/20 z-0 pointer-events-none" />
         <motion.div 
           initial={{ opacity: 0, y: 35 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, margin: "-100px" }}
           transition={{ duration: 1.0, ease: "easeOut" }}
-          className="max-w-4xl mx-auto px-6 relative z-10 flex flex-col items-center space-y-12"
+          className="max-w-4xl mx-auto px-6 relative z-10 flex flex-col items-center space-y-7"
         >
           
           {/* Header */}
-          <div className="text-center space-y-3">
+          <div className="text-center space-y-2">
             <TextShimmer
               as="h2"
               duration={3.5}
@@ -790,18 +989,47 @@ function Home() {
       </section>
 
       {/* My Services Section */}
-      <section id="services" className="relative z-10 py-24 bg-cover bg-center border-t border-[#deb18a]/10" style={{ backgroundImage: "url('/marble-bg.jpg')" }}>
+      <section id="services" className="relative z-10 py-10 bg-cover bg-center border-t border-[#deb18a]/10" style={{ backgroundImage: "url('/marble-bg.jpg')" }}>
         <div className="absolute inset-0 bg-[#f9f6f0]/20 z-0 pointer-events-none" />
+
+        {/* Celestial Divider 3 (directly on border line, zero height) */}
+        <div className="absolute top-0 left-0 right-0 w-full z-20 flex items-center justify-center translate-y-[-50%]">
+          <div className="w-full max-w-7xl mx-auto px-6 flex items-center justify-center">
+            <motion.div 
+              initial={{ scaleX: 0 }}
+              whileInView={{ scaleX: 1 }}
+              viewport={{ once: true }}
+              transition={{ duration: 1.2, ease: "easeInOut" }}
+              className="flex-grow h-[1.5px] bg-gradient-to-r from-transparent via-[#4f3129]/30 to-[#4f3129]/70 origin-right"
+            />
+            <motion.div
+              initial={{ opacity: 0, scale: 0, rotate: -45 }}
+              whileInView={{ opacity: 1, scale: 1, rotate: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.8, delay: 0.4 }}
+              className="mx-4 text-[#b8922b] select-none text-lg font-bold"
+            >
+              ✦
+            </motion.div>
+            <motion.div 
+              initial={{ scaleX: 0 }}
+              whileInView={{ scaleX: 1 }}
+              viewport={{ once: true }}
+              transition={{ duration: 1.2, ease: "easeInOut" }}
+              className="flex-grow h-[1.5px] bg-gradient-to-l from-transparent via-[#4f3129]/30 to-[#4f3129]/70 origin-left"
+            />
+          </div>
+        </div>
         
         <motion.div 
           initial={{ opacity: 0, y: 35 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, margin: "-100px" }}
           transition={{ duration: 1.0, ease: "easeOut" }}
-          className="max-w-4xl mx-auto px-6 relative z-10 flex flex-col items-center space-y-16"
+          className="max-w-4xl mx-auto px-6 relative z-10 flex flex-col items-center space-y-7"
         >
           {/* Header */}
-          <div className="text-center space-y-4 max-w-2xl">
+          <div className="text-center space-y-2 max-w-2xl">
             <TextShimmer
               as="h2"
               duration={3.5}

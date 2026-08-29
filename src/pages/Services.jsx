@@ -21,91 +21,135 @@ import {
 export default function Services() {
   const serviceList = [
     {
-      id: 'birth-chart',
-      title: 'Kundali & Birth Chart',
-      type: 'Vedic Reading',
+      id: 'vedic-astrology',
+      title: 'Vedic Astrology',
+      type: 'Kundali Reading',
       duration: '60 Mins',
       platform: 'Online Zoom',
       image: 'https://images.unsplash.com/photo-1506318137071-a8e063b4bec0?auto=format&fit=crop&w=800&q=80',
       amenitiesLeft: [
         { label: 'Detailed birth chart PDF', icon: 'FileText' },
         { label: '10-year Mahadasha timeline', icon: 'Clock' },
-        { label: 'Remedy recommendations', icon: 'Sparkles' }
+        { label: 'Planetary cycles interpretation', icon: 'Sparkles' }
       ],
       amenitiesRight: [
-        { label: 'Video/Audio recording', icon: 'Video' },
-        { label: 'Follow-up Q&A support', icon: 'HelpCircle' },
-        { label: 'Custom gemstone alignment', icon: 'Shield' }
+        { label: 'Video/Audio recording link', icon: 'Video' },
+        { label: 'Personalized remedies/Gemstones', icon: 'Shield' },
+        { label: 'Follow-up Q&A support', icon: 'HelpCircle' }
       ],
-      feeDetails: '10-year Mahadasha timeline is included in full analysis',
+      feeDetails: 'Comprehensive chart analysis covering health, career, and wealth',
       price: '₹2,500',
       durationText: '(60 Mins Session)',
       minSessions: 'Minimum 1 session'
     },
     {
-      id: 'career-wealth',
-      title: 'Career & Wealth Guidance',
-      type: 'Career & Finance',
-      duration: '45 Mins',
-      platform: 'Online Zoom',
-      image: 'https://images.unsplash.com/photo-1507207611509-ec012433ff52?auto=format&fit=crop&w=800&q=80',
+      id: 'vastu-consultation',
+      title: 'Vastu Consultation',
+      type: 'Spatial Harmonization',
+      duration: '90 Mins',
+      platform: 'Online / Onsite',
+      image: 'https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=800&q=80',
       amenitiesLeft: [
-        { label: 'Job vs. Business analysis', icon: 'Briefcase' },
-        { label: 'Investment timing guide', icon: 'TrendingUp' },
-        { label: 'Auspicious wealth transits', icon: 'Sparkles' }
+        { label: 'Spatial layout assessment', icon: 'Compass' },
+        { label: 'Elemental energy mapping', icon: 'Sparkles' },
+        { label: 'Structural blockage remedies', icon: 'Shield' }
       ],
       amenitiesRight: [
-        { label: 'Remedies for career blocks', icon: 'Shield' },
-        { label: 'Career transition timing', icon: 'Clock' },
-        { label: 'Video/Audio recording', icon: 'Video' }
+        { label: 'Vastu correction report PDF', icon: 'FileText' },
+        { label: 'Detailed follow-up consult', icon: 'Clock' },
+        { label: 'Video/Audio recording link', icon: 'Video' }
       ],
-      feeDetails: 'Recommended for professionals experiencing career transitions',
+      feeDetails: 'Helps align energies without structural demolition',
+      price: '₹4,500',
+      durationText: '(90 Mins Session)',
+      minSessions: 'Minimum 1 session'
+    },
+    {
+      id: 'numerology',
+      title: 'Numerology',
+      type: 'Destiny Numbers',
+      duration: '45 Mins',
+      platform: 'Online Zoom',
+      image: 'https://images.unsplash.com/photo-1518133680487-394a5eec85e6?auto=format&fit=crop&w=800&q=80',
+      amenitiesLeft: [
+        { label: 'Destiny & path calculation', icon: 'Star' },
+        { label: 'Name vibration alignment', icon: 'Sparkles' },
+        { label: 'Personal year predictions', icon: 'Clock' }
+      ],
+      amenitiesRight: [
+        { label: 'Numerology summary sheet', icon: 'FileText' },
+        { label: 'Name spelling correction', icon: 'Shield' },
+        { label: 'Video/Audio recording link', icon: 'Video' }
+      ],
+      feeDetails: 'Excellent for selecting new brand names, phone numbers, or signature changes',
       price: '₹2,100',
       durationText: '(45 Mins Session)',
       minSessions: 'Minimum 1 session'
     },
     {
-      id: 'compatibility',
-      title: 'Relationship Compatibility',
-      type: 'Kundali Milan',
-      duration: '45 Mins',
+      id: 'kp-horoscope',
+      title: 'Krishnamurti Paddhati Horoscope',
+      type: 'KP Astrology',
+      duration: '60 Mins',
       platform: 'Online Zoom',
-      image: 'https://images.unsplash.com/photo-1515934751635-c81c6bc9a2d8?auto=format&fit=crop&w=800&q=80',
+      image: 'https://images.unsplash.com/photo-1507207611509-ec012433ff52?auto=format&fit=crop&w=800&q=80',
       amenitiesLeft: [
-        { label: 'Ashta Koota matching (36 Gunas)', icon: 'Heart' },
-        { label: 'Manglik Dosha analysis', icon: 'Shield' },
-        { label: 'Emotional & mental sync', icon: 'Sparkles' }
+        { label: 'Sub-lord timing accuracy', icon: 'Clock' },
+        { label: 'Specific event calculations', icon: 'TrendingUp' },
+        { label: 'Cuspal chart analysis', icon: 'Compass' }
       ],
       amenitiesRight: [
-        { label: 'Family relationship analysis', icon: 'FileText' },
-        { label: 'Future transit sync', icon: 'Clock' },
-        { label: 'Video/Audio recording', icon: 'Video' }
+        { label: 'KP chart calculation report', icon: 'FileText' },
+        { label: 'Video/Audio recording link', icon: 'Video' },
+        { label: 'Planetary level remedies', icon: 'Shield' }
       ],
-      feeDetails: 'Includes detail matching reports for both charts',
-      price: '₹3,000',
-      durationText: '(45 Mins Session)',
+      feeDetails: 'Accurate predictive timing for marriage, job switches, or property purchases',
+      price: '₹3,200',
+      durationText: '(60 Mins Session)',
       minSessions: 'Minimum 1 session'
     },
     {
-      id: 'yearly-transit',
-      title: 'Yearly Transit Forecast',
-      type: 'Varshphal',
-      duration: '45 Mins',
+      id: 'prashna-kundli',
+      title: 'Prashna Kundli',
+      type: 'Horary Query',
+      duration: '30 Mins',
       platform: 'Online Zoom',
       image: 'https://images.unsplash.com/photo-1451187580459-43490279c0fa?auto=format&fit=crop&w=800&q=80',
       amenitiesLeft: [
-        { label: 'Month-by-month key events', icon: 'Clock' },
-        { label: 'Sade Sati & Jupiter transits', icon: 'Star' },
-        { label: 'Health & wellness indicators', icon: 'Shield' }
+        { label: 'Direct answer to query', icon: 'HelpCircle' },
+        { label: 'Chart cast at query time', icon: 'Clock' },
+        { label: 'Immediate transit effects', icon: 'Sparkles' }
       ],
       amenitiesRight: [
-        { label: 'Auspicious timings (Muhurats)', icon: 'Sparkles' },
-        { label: 'Remedies for transits', icon: 'Shield' },
-        { label: 'Video/Audio recording', icon: 'Video' }
+        { label: 'Video/Audio recording link', icon: 'Video' },
+        { label: 'Simple action remedies', icon: 'Shield' },
+        { label: 'Summary of query chart', icon: 'FileText' }
       ],
-      feeDetails: 'Best booked on birthdays or auspicious new beginnings',
-      price: '₹2,500',
-      durationText: '(45 Mins Session)',
+      feeDetails: 'Ideal when birth time is unknown or for quick, urgent decisions',
+      price: '₹1,500',
+      durationText: '(30 Mins Session)',
+      minSessions: 'Minimum 1 session'
+    },
+    {
+      id: 'bhrigu-nandi-nadi',
+      title: 'Bhrigu Nandi Nadi Astrology',
+      type: 'Nadi Reading',
+      duration: '60 Mins',
+      platform: 'Online Zoom',
+      image: 'https://images.unsplash.com/photo-1512820790803-83ca734da794?auto=format&fit=crop&w=800&q=80',
+      amenitiesLeft: [
+        { label: 'Conjunction destiny patterns', icon: 'Star' },
+        { label: 'Past life karma decoding', icon: 'Sparkles' },
+        { label: 'Transits on planetary pairs', icon: 'Clock' }
+      ],
+      amenitiesRight: [
+        { label: 'Nadi combination worksheet', icon: 'FileText' },
+        { label: 'Video/Audio recording link', icon: 'Video' },
+        { label: 'Specific karma correction list', icon: 'Shield' }
+      ],
+      feeDetails: 'Decodes key life themes and transit triggers based on planetary combinations',
+      price: '₹3,500',
+      durationText: '(60 Mins Session)',
       minSessions: 'Minimum 1 session'
     }
   ];
@@ -122,6 +166,7 @@ export default function Services() {
       case 'TrendingUp': return <TrendingUp className="w-4 h-4 text-slate-600 shrink-0" />;
       case 'Heart': return <Heart className="w-4 h-4 text-slate-600 shrink-0" />;
       case 'Star': return <Star className="w-4 h-4 text-slate-600 shrink-0" />;
+      case 'Compass': return <Compass className="w-4 h-4 text-slate-600 shrink-0" />;
       default: return null;
     }
   };
@@ -156,7 +201,9 @@ export default function Services() {
             <motion.div 
               key={srv.id} 
               variants={itemVariants}
-              className="bg-[#faf9f6] rounded-3xl border border-[#eae6df] p-4 sm:p-5 flex flex-col md:flex-row items-center md:items-stretch gap-6 transition-all duration-300 shadow-[0_4px_20px_rgba(79,49,41,0.08)] hover:shadow-[0_12px_30px_rgba(79,49,41,0.18)] hover:border-[#deb18a]/35"
+              whileHover={{ y: -6, scale: 1.015, borderColor: "#b8922b", boxShadow: "0 20px 45px -10px rgba(79, 49, 41, 0.16)" }}
+              whileTap={{ scale: 0.99 }}
+              className="bg-[#faf9f6] rounded-3xl border border-[#eae6df] p-4 sm:p-5 flex flex-col md:flex-row items-center md:items-stretch gap-6 transition-all duration-300 shadow-[0_4px_20px_rgba(79,49,41,0.08)]"
             >
               
               {/* Left Column: Professionally Photographed Image */}

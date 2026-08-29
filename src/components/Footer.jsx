@@ -60,12 +60,26 @@ function Footer() {
 
           {/* Services */}
           <div>
-            <h3 className="font-serif font-bold text-[#deb18a] mb-4 uppercase tracking-[0.18em] text-xs sm:text-sm">Astrology Readings</h3>
+            <h3 className="font-serif font-bold text-[#deb18a] mb-4 uppercase tracking-[0.18em] text-xs sm:text-sm">Our Services</h3>
             <ul className="space-y-2 text-xs sm:text-sm text-white/80 font-serif tracking-wider uppercase">
-              <li>Kundali & Birth Chart</li>
-              <li>Career & Wealth Guidance</li>
-              <li>Relationship Compatibility</li>
-              <li>Yearly Transit Forecast</li>
+              <li>
+                <Link to="/services" className="hover:text-white transition-colors">Vedic Astrology</Link>
+              </li>
+              <li>
+                <Link to="/services" className="hover:text-white transition-colors">Vastu Consultation</Link>
+              </li>
+              <li>
+                <Link to="/services" className="hover:text-white transition-colors">Numerology</Link>
+              </li>
+              <li>
+                <Link to="/services" className="hover:text-white transition-colors">Krishnamurti Paddhati Horoscope</Link>
+              </li>
+              <li>
+                <Link to="/services" className="hover:text-white transition-colors">Prashna Kundli</Link>
+              </li>
+              <li>
+                <Link to="/services" className="hover:text-white transition-colors">Bhrigu Nandi Nadi Astrology</Link>
+              </li>
             </ul>
           </div>
 

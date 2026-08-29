@@ -17,6 +17,8 @@ import {
   ShieldCheck
 } from 'lucide-react';
 
+const BACKEND_URL = "https://astrologer-madhuri-gupta.onrender.com";
+
 export default function Booking() {
   const [searchParams] = useSearchParams();
   const initialService = searchParams.get('service') || 'birth-chart';
@@ -47,10 +49,12 @@ export default function Booking() {
   const [bookingResult, setBookingResult] = useState(null);
 
   const serviceOptions = [
-    { value: 'birth-chart', label: 'Detailed Birth Chart Reading (60 min)', price: '₹2,500' },
-    { value: 'compatibility', label: 'Relationship Compatibility - Kundali Milan (45 min)', price: '₹3,000' },
-    { value: 'career-wealth', label: 'Career & Wealth Guidance (45 min)', price: '₹2,100' },
-    { value: 'yearly-transit', label: 'Yearly Solar Return - Varshphal (45 min)', price: '₹2,500' }
+    { value: 'vedic-astrology', label: 'Vedic Astrology (60 min)', price: '₹2,500' },
+    { value: 'vastu-consultation', label: 'Vastu Consultation (90 min)', price: '₹4,500' },
+    { value: 'numerology', label: 'Numerology (45 min)', price: '₹2,100' },
+    { value: 'kp-horoscope', label: 'Krishnamurti Paddhati Horoscope (60 min)', price: '₹3,200' },
+    { value: 'prashna-kundli', label: 'Prashna Kundli (30 min)', price: '₹1,500' },
+    { value: 'bhrigu-nandi-nadi', label: 'Bhrigu Nandi Nadi Astrology (60 min)', price: '₹3,500' }
   ];
 
   // Update form service type if URL parameter changes
@@ -66,9 +70,30 @@ export default function Booking() {
   };
 
   // Submit details to proceed to slots calendar
+  // Fetch slots from backend API
+  const fetchSlots = async (date) => {
+    setLoading(true);
+    setError('');
+    try {
+      const response = await fetch(`${BACKEND_URL}/api/available-slots?date=${date}`);
+      if (!response.ok) {
+        throw new Error('Failed to load slots from API.');
+      }
+      const data = await response.json();
+      setAvailableSlots(data.slots || []);
+    } catch (err) {
+      console.error(err);
+      // Fallback slots if backend is offline
+      setAvailableSlots(['10:00 AM', '11:30 AM', '02:00 PM', '03:30 PM', '05:00 PM']);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  // Submit details to proceed to slots calendar
   const handleProceedToSlots = (e) => {
     e.preventDefault();
-    if (!formData.name || !formData.email || !formData.phone || !formData.birthDate || !formData.birthTime || !formData.birthPlace) {
+    if (!formData.name || !formData.email || !formData.phone || !formData.birthDate || !formData.birthTime) {
       setError('Please fill in all required fields.');
       return;
     }
@@ -80,28 +105,14 @@ export default function Booking() {
     const formattedTomorrow = tomorrow.toISOString().split('T')[0];
     setSelectedDate(formattedTomorrow);
     
-    // Mock available slots loading
-    setLoading(true);
-    setTimeout(() => {
-      setAvailableSlots(['10:00 AM', '11:30 AM', '02:00 PM', '03:30 PM', '05:00 PM', '06:30 PM']);
-      setLoading(false);
-      setStep(2);
-    }, 600);
+    setStep(2);
+    fetchSlots(formattedTomorrow);
   };
 
   // Handle changing dates in the slots panel
   const handleDateChange = (date) => {
     setSelectedDate(date);
-    setLoading(true);
-    setTimeout(() => {
-      // Mock daily slots shuffling
-      if (new Date(date).getDay() === 0) { // Sunday
-        setAvailableSlots(['11:00 AM', '01:30 PM', '03:00 PM']);
-      } else {
-        setAvailableSlots(['10:00 AM', '11:30 AM', '02:00 PM', '03:30 PM', '05:00 PM', '06:30 PM']);
-      }
-      setLoading(false);
-    }, 400);
+    fetchSlots(date);
   };
 
   // Proceed to Payment screen
@@ -114,27 +125,50 @@ export default function Booking() {
     setStep(3);
   };
 
-  // Finalize booking submit (Mocking backend integration)
-  const handleConfirmPayment = () => {
+  // Finalize booking submit via backend integration
+  const handleConfirmPayment = async () => {
     setError('');
     setBookingLoading(true);
 
     const payload = {
-      ...formData,
+      name: formData.name,
+      email: formData.email,
+      phone: formData.phone || null,
+      serviceType: formData.serviceType,
+      birthDate: formData.birthDate,
+      birthTime: formData.birthTime,
+      birthPlace: formData.birthPlace || null,
       bookingDate: selectedDate,
       bookingTime: selectedSlot,
-      paymentMethod
+      additionalInfo: formData.additionalInfo || null
     };
 
-    setTimeout(() => {
-      // Mock success response
+    try {
+      const response = await fetch(`${BACKEND_URL}/api/book-appointment`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(payload),
+      });
+
+      if (!response.ok) {
+        const errData = await response.json();
+        throw new Error(errData.detail || 'Failed to complete booking.');
+      }
+
+      const result = await response.json();
       setBookingResult({
         ...payload,
-        jitsiLink: `https://meet.jit.si/astromadhuri-${Math.floor(100000 + Math.random() * 900000)}`
+        jitsiLink: result.jitsiLink,
+        bookingId: result.bookingId
       });
       setStep(4);
+    } catch (err) {
+      setError(err.message || 'Something went wrong during scheduling. Please try again.');
+    } finally {
       setBookingLoading(false);
-    }, 1500);
+    }
   };
 
   const activeService = serviceOptions.find(o => o.value === formData.serviceType) || serviceOptions[0];
@@ -352,13 +386,12 @@ export default function Booking() {
                       </div>
 
                       <div>
-                        <label className="block text-[10px] font-semibold uppercase tracking-wider text-[#deb18a]/80 mb-1">Place of Birth *</label>
+                        <label className="block text-[10px] font-semibold uppercase tracking-wider text-[#deb18a]/80 mb-1">Place of Birth (Optional)</label>
                         <div className="relative">
                           <MapPin className="absolute left-3.5 top-1/2 -translate-y-1/2 h-3.5 w-3.5 text-[#deb18a]/45" />
                           <input
                             type="text"
                             name="birthPlace"
-                            required
                             value={formData.birthPlace}
                             onChange={handleInputChange}
                             placeholder="City, Country"

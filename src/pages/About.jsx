@@ -7,7 +7,7 @@ function About() {
     <div className="min-h-screen bg-[#faf6e8]">
       
       {/* About Page Hero Section */}
-      <section className="relative w-full h-screen min-h-[600px] pt-16 lg:pt-20 flex flex-col justify-center items-center overflow-hidden bg-cover bg-center" style={{ backgroundImage: "url('/marble-bg.jpg')" }}>
+      <section className="relative w-full h-auto min-h-screen pt-28 lg:pt-20 pb-16 flex flex-col justify-center items-center overflow-hidden bg-cover bg-center" style={{ backgroundImage: "url('/marble-bg.jpg')" }}>
         <div className="absolute inset-0 bg-[#faf6e8]/90 z-0 pointer-events-none" />
         
         {/* Symmetrical crescent curved shading at the top to match image_67 */}
@@ -42,10 +42,10 @@ function About() {
               </div>
               
               <motion.div 
-                initial={{ opacity: 0, x: -30 }}
-                whileInView={{ opacity: 1, x: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.8 }}
+                initial={{ opacity: 0, y: 25 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, margin: "-100px" }}
+                transition={{ duration: 0.5, ease: "easeOut" }}
                 className="relative h-[42vh] lg:h-[60vh] max-h-[460px] aspect-[3/4] rounded-sm overflow-hidden p-1.5 border border-[#deb18a]/50 bg-white shadow-2xl"
               >
                 <div className="w-full h-full rounded-sm overflow-hidden relative">
@@ -112,8 +112,8 @@ function About() {
 
             </div>
 
-            {/* Column 3: Symmetrical Arched Image Cluster (lg:col-span-3) */}
-            <div className="lg:col-span-3 flex justify-center relative -translate-y-6 lg:-translate-y-20">
+            {/* Column 3: Symmetrical Arched Image Cluster (lg:col-span-3) - hidden on mobile/tablet */}
+            <div className="hidden lg:flex lg:col-span-3 justify-center relative lg:-translate-y-20">
               
               <div className="relative w-44 h-[270px]">
                 
@@ -151,12 +151,12 @@ function About() {
           <div className="grid grid-cols-1 md:grid-cols-12 gap-8 lg:gap-12 items-center">
             
             {/* Left: Certificate Image Container */}
-            <div className="md:col-span-6 flex justify-center">
+            <div className="hidden md:block md:col-span-6 flex justify-center">
               <motion.div
-                initial={{ opacity: 0, x: -30 }}
-                whileInView={{ opacity: 1, x: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.8 }}
+                initial={{ opacity: 0, y: 25 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, margin: "-100px" }}
+                transition={{ duration: 0.5, ease: "easeOut" }}
                 className="w-full max-w-[480px] p-2 bg-white rounded-lg border border-[#deb18a]/45 shadow-xl hover:shadow-2xl transition-shadow duration-300"
               >
                 <div className="relative aspect-[4/3] rounded overflow-hidden">
@@ -172,26 +172,37 @@ function About() {
             {/* Right: Certificate Details */}
             <div className="md:col-span-6 space-y-5 text-center md:text-left">
               <motion.div
-                initial={{ opacity: 0, x: 30 }}
-                whileInView={{ opacity: 1, x: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.8 }}
+                initial={{ opacity: 0, y: 25 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, margin: "-100px" }}
+                transition={{ duration: 0.5, ease: "easeOut" }}
                 className="space-y-4"
               >
+                {/* Mobile-only Certificate Image (visible on small screens only) */}
+                <div className="block md:hidden w-full max-w-[280px] mx-auto mb-4 p-1.5 bg-white rounded-lg border border-[#deb18a]/45 shadow-md">
+                  <div className="relative aspect-[4/3] rounded overflow-hidden">
+                    <img
+                      src="/certificate.png"
+                      alt="Astrology Certification"
+                      className="w-full h-full object-cover"
+                    />
+                  </div>
+                </div>
+
                 <div className="space-y-1">
                   <h3 className="font-serif text-xl sm:text-2xl font-bold text-[#3a1906] leading-tight">
                     Advanced Astrology & Cosmic Analysis
                   </h3>
-                  <p className="text-xs sm:text-sm font-semibold text-[#b8922b] tracking-wider uppercase">
+                  <p className="hidden md:block text-xs sm:text-sm font-semibold text-[#b8922b] tracking-wider uppercase">
                     The Astrological Society Council
                   </p>
                 </div>
 
-                <p className="text-xs sm:text-sm text-[#4a312a]/85 leading-relaxed font-medium">
+                <p className="hidden md:block text-xs sm:text-sm text-[#4a312a]/85 leading-relaxed font-medium">
                   Formally accredited in classical natal chart analysis, stellar calculations, and transits interpretation. This certification honors rigorous training in Jaimini systems and holistic predictive remedies.
                 </p>
 
-                <div className="pt-2 border-t border-[#3a1906]/10 space-y-2">
+                <div className="hidden md:block pt-2 border-t border-[#3a1906]/10 space-y-2">
                   <div className="flex items-center space-x-2.5 text-xs text-[#3a1906] font-medium justify-center md:justify-start">
                     <span className="w-1.5 h-1.5 rounded-full bg-[#b8922b] shrink-0" />
                     <span>Certified in Natal Chart Interpretation</span>
@@ -206,7 +217,7 @@ function About() {
                   </div>
                 </div>
 
-                <div className="pt-2 text-[10px] text-[#3a1906]/65 font-serif uppercase tracking-widest">
+                <div className="hidden md:block pt-2 text-[10px] text-[#3a1906]/65 font-serif uppercase tracking-widest">
                   Issued: November 12, 2023 • Credential ID: AIAF-89240
                 </div>
 

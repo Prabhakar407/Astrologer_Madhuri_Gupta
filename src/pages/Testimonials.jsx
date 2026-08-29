@@ -230,13 +230,14 @@ export default function Testimonials() {
           {/* Bottom navigation */}
           <div className="flex justify-center items-center gap-6 mt-1 lg:mt-2">
             {/* Previous */}
-            <button
+            <motion.button
               onClick={handlePrevious}
+              whileTap={{ scale: 0.92 }}
               aria-label="Previous testimonial"
               className="w-10 h-10 rounded-full bg-[#faf6e8] border border-[#3a1906]/20 shadow-md flex items-center justify-center hover:bg-[#3a1906] hover:text-white text-[#3a1906] transition-colors cursor-pointer"
             >
               <ChevronLeft className="w-4.5 h-4.5" />
-            </button>
+            </motion.button>
 
             {/* Dots */}
             <div className="flex gap-2">
@@ -256,13 +257,14 @@ export default function Testimonials() {
             </div>
 
             {/* Next */}
-            <button
+            <motion.button
               onClick={handleNext}
+              whileTap={{ scale: 0.92 }}
               aria-label="Next testimonial"
               className="w-10 h-10 rounded-full bg-[#faf6e8] border border-[#3a1906]/20 shadow-md flex items-center justify-center hover:bg-[#3a1906] hover:text-white text-[#3a1906] transition-colors cursor-pointer"
             >
               <ChevronRight className="w-4.5 h-4.5" />
-            </button>
+            </motion.button>
           </div>
 
         </div>

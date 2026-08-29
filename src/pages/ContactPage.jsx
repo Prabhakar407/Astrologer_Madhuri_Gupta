@@ -11,10 +11,60 @@ import {
   MessageCircle
 } from "lucide-react";
 
+const BACKEND_URL = "https://astrologer-madhuri-gupta.onrender.com";
+
 export default function ContactPage() {
-  const handleSubmit = (e) => {
+  const [formData, setFormData] = React.useState({
+    name: "",
+    email: "",
+    phone: "",
+    subject: "Website Contact Form Inquiry",
+    message: ""
+  });
+  const [statusMsg, setStatusMsg] = React.useState("");
+  const [isSuccess, setIsSuccess] = React.useState(false);
+  const [loading, setLoading] = React.useState(false);
+
+  const handleInputChange = (e) => {
+    const { name, value } = e.target;
+    setFormData(prev => ({ ...prev, [name]: value }));
+  };
+
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    // Handle form submit placeholder
+    setLoading(true);
+    setStatusMsg("");
+    setIsSuccess(false);
+
+    try {
+      const response = await fetch(`${BACKEND_URL}/api/contact`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(formData),
+      });
+
+      if (!response.ok) {
+        const errData = await response.json();
+        throw new Error(errData.detail || 'Failed to submit contact query.');
+      }
+
+      setIsSuccess(true);
+      setStatusMsg("Thank you! Your message has been sent successfully.");
+      setFormData({
+        name: "",
+        email: "",
+        phone: "",
+        subject: "Website Contact Form Inquiry",
+        message: ""
+      });
+    } catch (err) {
+      setIsSuccess(false);
+      setStatusMsg(err.message || 'Server error occurred. Please try again.');
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (
@@ -41,8 +91,8 @@ export default function ContactPage() {
                 </p>
               </motion.div>
 
-              {/* 3 Circular Badges Row in Hero (Styled for Dark Background) */}
-              <div className="grid grid-cols-1 sm:grid-cols-3 gap-6 pt-4 border-t border-[#deb18a]/15">
+              {/* Desktop view: 3 Circular Badges Row in Hero (Styled for Dark Background) */}
+              <div className="hidden md:grid md:grid-cols-3 gap-6 pt-4 border-t border-[#deb18a]/15">
                 
                 {/* Phone */}
                 <div className="flex flex-row items-center space-x-3 text-left">
@@ -90,6 +140,69 @@ export default function ContactPage() {
                 </div>
 
               </div>
+
+              {/* Mobile/Tablet view: Flex row splitting text on left and small image on right */}
+              <div className="flex md:hidden flex-row justify-between items-stretch gap-4 pt-4 border-t border-[#deb18a]/15">
+                {/* Left: Contact Info Stack */}
+                <div className="space-y-4 flex-grow">
+                  {/* Phone */}
+                  <div className="flex flex-row items-center space-x-3 text-left">
+                    <div className="w-9 h-9 rounded-full bg-[#b8922b] text-white flex items-center justify-center shadow-md shrink-0">
+                      <Phone className="w-4 h-4" />
+                    </div>
+                    <div>
+                      <h3 className="text-xs font-bold text-white font-serif tracking-tight">
+                        (+91) 98765 43210
+                      </h3>
+                      <p className="text-[9px] text-[#deb18a]/70 font-medium">
+                        Call or WhatsApp
+                      </p>
+                    </div>
+                  </div>
+
+                  {/* Email */}
+                  <div className="flex flex-row items-center space-x-3 text-left">
+                    <div className="w-9 h-9 rounded-full bg-[#b8922b] text-white flex items-center justify-center shadow-md shrink-0">
+                      <Mail className="w-4 h-4" />
+                    </div>
+                    <div className="min-w-0">
+                      <h3 className="text-xs font-bold text-white font-serif tracking-tight break-all">
+                        info@astromadhuri.com
+                      </h3>
+                      <p className="text-[9px] text-[#deb18a]/70 font-medium">
+                        Support Email
+                      </p>
+                    </div>
+                  </div>
+
+                  {/* Location */}
+                  <div className="flex flex-row items-center space-x-3 text-left">
+                    <div className="w-9 h-9 rounded-full bg-[#b8922b] text-white flex items-center justify-center shadow-md shrink-0">
+                      <MapPin className="w-4 h-4" />
+                    </div>
+                    <div>
+                      <h3 className="text-xs font-bold text-white font-serif tracking-tight">
+                        New Delhi, India
+                      </h3>
+                      <p className="text-[9px] text-[#deb18a]/70 font-medium">
+                        Available Globally
+                      </p>
+                    </div>
+                  </div>
+                </div>
+
+                {/* Right: Small Arched Image aligned to the right side */}
+                <div className="flex items-center shrink-0 pr-1">
+                  <div className="w-[100px] sm:w-[130px] aspect-[4/5] rounded-t-full overflow-hidden border-4 border-white shadow-xl bg-white">
+                    <img
+                      src="/contact_office.png"
+                      alt="Madhuri Gupta consulting room"
+                      className="w-full h-full object-cover object-center pointer-events-none"
+                      draggable={false}
+                    />
+                  </div>
+                </div>
+              </div>
             </div>
 
             {/* Spacer Column */}
@@ -105,13 +218,13 @@ export default function ContactPage() {
           <div className="grid grid-cols-1 md:grid-cols-12 gap-8">
             
             {/* Our Location Map Section (Left 7 Columns) */}
-            <div className="md:col-span-7 space-y-3">
+            <div className="md:col-span-7 space-y-3 flex flex-col items-center md:items-start text-center md:text-left">
               <h2 className="text-xl sm:text-2xl font-bold text-[#3a1906] font-serif">
                 Our Location
               </h2>
 
               {/* Google Maps Embed */}
-              <div className="w-full max-w-[450px] h-[170px] rounded-xl overflow-hidden shadow-md border border-gray-150">
+              <div className="w-full max-w-[450px] h-[170px] rounded-xl overflow-hidden shadow-md border border-gray-150 mx-auto md:mx-0">
                 <iframe
                   src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d224345.83606995655!2d77.06889753443152!3d28.527280327339794!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x390cfd5b347eb62d%3A0x52c2b7494e204d!2sNew%20Delhi%2C%20Delhi%2C%20India!5e0!3m2!1sen!2sus!4v1700000000000!5m2!1sen!2sus"
                   className="w-full h-full border-0"
@@ -122,8 +235,8 @@ export default function ContactPage() {
               </div>
             </div>
 
-            {/* Arched image cutout (Right 5 Columns - sits directly on white background with negative margin overlap) */}
-            <div className="md:col-span-5 relative flex justify-center md:justify-end -mt-28 md:-mt-76 z-20">
+            {/* Arched image cutout (Right 5 Columns - sits directly on white background with negative margin overlap) - hidden on mobile/tablet */}
+            <div className="hidden md:flex md:col-span-5 relative justify-end md:-mt-76 z-20">
               <motion.div
                 initial={{ opacity: 0, scale: 0.95 }}
                 animate={{ opacity: 1, scale: 1 }}
@@ -163,6 +276,9 @@ export default function ContactPage() {
                 <div className="space-y-1">
                   <input
                     type="email"
+                    name="email"
+                    value={formData.email}
+                    onChange={handleInputChange}
                     placeholder="Email"
                     required
                     className="w-full bg-white/5 border border-white/20 rounded-xl px-4 py-2.5 text-xs text-white placeholder-[#deb18a]/40 focus:outline-none focus:border-[#b8922b] focus:ring-1 focus:ring-[#b8922b] transition-all"
@@ -172,6 +288,9 @@ export default function ContactPage() {
                 <div className="space-y-1">
                   <input
                     type="text"
+                    name="name"
+                    value={formData.name}
+                    onChange={handleInputChange}
                     placeholder="Name"
                     required
                     className="w-full bg-white/5 border border-white/20 rounded-xl px-4 py-2.5 text-xs text-white placeholder-[#deb18a]/40 focus:outline-none focus:border-[#b8922b] focus:ring-1 focus:ring-[#b8922b] transition-all"
@@ -181,6 +300,9 @@ export default function ContactPage() {
                 <div className="space-y-1">
                   <input
                     type="tel"
+                    name="phone"
+                    value={formData.phone}
+                    onChange={handleInputChange}
                     placeholder="Mobile Number"
                     required
                     className="w-full bg-white/5 border border-white/20 rounded-xl px-4 py-2.5 text-xs text-white placeholder-[#deb18a]/40 focus:outline-none focus:border-[#b8922b] focus:ring-1 focus:ring-[#b8922b] transition-all"
@@ -189,6 +311,9 @@ export default function ContactPage() {
 
                 <div className="space-y-1">
                   <textarea
+                    name="message"
+                    value={formData.message}
+                    onChange={handleInputChange}
                     placeholder="Message"
                     rows={3}
                     required
@@ -196,11 +321,18 @@ export default function ContactPage() {
                   ></textarea>
                 </div>
 
+                {statusMsg && (
+                  <p className={`text-xs font-semibold ${isSuccess ? 'text-green-400' : 'text-red-400'}`}>
+                    {statusMsg}
+                  </p>
+                )}
+
                 <button
                   type="submit"
-                  className="w-fit bg-[#b8922b] hover:bg-[#a27e20] text-white font-bold py-2.5 px-6 rounded-xl transition-all duration-300 cursor-pointer shadow-md hover:shadow-lg text-xs select-none"
+                  disabled={loading}
+                  className="w-fit bg-[#b8922b] hover:bg-[#a27e20] text-white font-bold py-2.5 px-6 rounded-xl transition-all duration-300 cursor-pointer shadow-md hover:shadow-lg text-xs select-none disabled:opacity-50"
                 >
-                  Submit Button
+                  {loading ? "Submitting..." : "Submit Message"}
                 </button>
               </form>
             </div>
