@@ -131,7 +131,7 @@ export default function ContactPage() {
                   </div>
                   <div>
                     <h3 className="text-xs sm:text-sm font-bold text-white font-serif tracking-tight">
-                      New Delhi, India
+                      Agra, Uttar Pradesh, India
                     </h3>
                     <p className="text-[10px] text-[#deb18a]/70 font-medium">
                       Available Globally
@@ -182,7 +182,7 @@ export default function ContactPage() {
                     </div>
                     <div>
                       <h3 className="text-xs font-bold text-white font-serif tracking-tight">
-                        New Delhi, India
+                        Agra, Uttar Pradesh, India
                       </h3>
                       <p className="text-[9px] text-[#deb18a]/70 font-medium">
                         Available Globally
@@ -226,7 +226,7 @@ export default function ContactPage() {
               {/* Google Maps Embed */}
               <div className="w-full max-w-[450px] h-[170px] rounded-xl overflow-hidden shadow-md border border-gray-150 mx-auto md:mx-0">
                 <iframe
-                  src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d224345.83606995655!2d77.06889753443152!3d28.527280327339794!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x390cfd5b347eb62d%3A0x52c2b7494e204d!2sNew%20Delhi%2C%20Delhi%2C%20India!5e0!3m2!1sen!2sus!4v1700000000000!5m2!1sen!2sus"
+                  src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d113579.78737678523!2d77.90997184499092!3d27.17630978716335!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x39740d857c2f41d9%3A0x784aef38a9523b42!2sAgra%2C%20Uttar%20Pradesh!5e0!3m2!1sen!2sin!4v1700000000000!5m2!1sen!2sin"
                   className="w-full h-full border-0"
                   allowFullScreen=""
                   loading="lazy"
