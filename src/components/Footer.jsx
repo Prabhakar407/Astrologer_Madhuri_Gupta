@@ -89,11 +89,11 @@ function Footer() {
             <ul className="space-y-3 text-xs sm:text-sm text-white/90 font-serif tracking-wide">
               <li className="flex items-center space-x-2">
                 <Phone className="h-4 w-4 text-white/80 shrink-0" />
-                <span>+91 98765 43210</span>
+                <span>+91 88815 73437</span>
               </li>
               <li className="flex items-center space-x-2">
                 <Mail className="h-4 w-4 text-white/80 shrink-0" />
-                <span className="break-all">info@astrologermadhuri.com</span>
+                <span className="break-all">sarsajyotish@gmail.com</span>
               </li>
               <li className="flex items-start space-x-2">
                 <MapPin className="h-4 w-4 text-white/80 shrink-0 mt-0.5" />

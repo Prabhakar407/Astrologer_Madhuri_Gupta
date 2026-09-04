@@ -1,7 +1,7 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
 import { motion } from 'framer-motion'
-import { Sparkles, Compass, Heart, Shield, Clock, Globe, Sun, Sprout, Flower2, Briefcase, Target, User, Award, Key, TrendingUp, Trophy, Scale, Scroll, Moon, Info } from 'lucide-react'
+import { Sparkles, Compass, Heart, Shield, Clock, Globe, Sun, Sprout, Flower2, Briefcase, Target, User, Award, Key, TrendingUp, Trophy, Scale, Scroll, Moon, Info, Phone, Mail } from 'lucide-react'
 import { TextShimmer } from '../../components/motion-primitives/text-shimmer'
 
 function ScrollCard({ phase, idx }) {
@@ -214,37 +214,126 @@ function ServiceAccordion({ service, isOpen, onToggle }) {
         className="w-full overflow-hidden"
       >
         <div className="p-5 bg-gradient-to-b from-[#faf6e8] to-[#f4edd9] border-x border-b border-[#3a1906]/20 rounded-b-sm space-y-4 text-[#3b2a1f] shadow-inner">
-          <p className="font-sans text-xs sm:text-sm font-medium tracking-wide italic text-[#4a312a]/95">
-            {service.tagline}
-          </p>
-          <div className="flex items-center justify-between text-xs sm:text-sm font-sans font-bold text-[#3a1906]">
-            <span>Price: {service.price}</span>
-            <span>Duration: {service.duration}</span>
-          </div>
-          <div className="h-[1px] bg-[#3a1906]/10 w-full" />
-          <ul className="space-y-2">
-            {service.features.map((feat, fidx) => (
-              <li key={fidx} className="flex items-start space-x-2 text-xs sm:text-sm text-[#4a312a]/90">
-                <span className="text-[#3a1906] font-bold">•</span>
-                <span>{feat}</span>
-              </li>
-            ))}
-          </ul>
-          <div className="pt-2">
-            <Link
-              to={`/booking?service=${service.id}`}
-              className="btn-10"
-            >
-              <div className="slide-bg"></div>
-              <span className="arrow-icon">
-                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
-                  <line x1="5" y1="12" x2="19" y2="12"></line>
-                  <polyline points="12 5 19 12 12 19"></polyline>
-                </svg>
-              </span>
-              <span className="btn-text">Book Session</span>
-            </Link>
-          </div>
+          {service.id === 'vedic-astrology' ? (
+            <div className="space-y-6">
+              {/* Section 1: Kundli Matching */}
+              <div className="space-y-2.5">
+                <h4 className="font-serif font-bold text-sm sm:text-base text-[#3a1906] tracking-wide uppercase">
+                  Kundli Matching
+                </h4>
+                <ul className="space-y-1.5 font-sans text-xs sm:text-sm text-[#4a312a]/95 font-medium list-none">
+                  <li className="flex items-start space-x-2">
+                    <span className="text-[#b8922b] mt-0.5">•</span>
+                    <span><strong>Ashta Koota Milan:</strong> Comprehensive compatibility analysis using the traditional 36-Guna alignment system.</span>
+                  </li>
+                  <li className="flex items-start space-x-2">
+                    <span className="text-[#b8922b] mt-0.5">•</span>
+                    <span><strong>Dosha Verification:</strong> Deep checking of Manglik Dosha, Bhakoot, Nadi, and potential planetary conflicts.</span>
+                  </li>
+                  <li className="flex items-start space-x-2">
+                    <span className="text-[#b8922b] mt-0.5">•</span>
+                    <span><strong>Remedial Solutions:</strong> Actionable relationship counseling and Vedic remedies to foster long-term harmony.</span>
+                  </li>
+                </ul>
+                <div className="flex items-center justify-between text-xs sm:text-sm font-sans font-bold text-[#3a1906] pt-1">
+                  <span>Price: ₹2,100</span>
+                  <span>Duration: 45 Mins Session</span>
+                </div>
+                <div className="pt-2">
+                  <Link
+                    to="/booking?service=kundli-matching"
+                    className="btn-10"
+                  >
+                    <div className="slide-bg"></div>
+                    <span className="arrow-icon">
+                      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+                        <line x1="5" y1="12" x2="19" y2="12"></line>
+                        <polyline points="12 5 19 12 12 19"></polyline>
+                      </svg>
+                    </span>
+                    <span className="btn-text">Book Appointment</span>
+                  </Link>
+                </div>
+              </div>
+
+              {/* Brown Horizontal Divider */}
+              <div className="h-[1.5px] bg-[#3a1906]/20 w-full my-4" />
+
+              {/* Section 2: Kundli Prediction */}
+              <div className="space-y-2.5">
+                <h4 className="font-serif font-bold text-sm sm:text-base text-[#3a1906] tracking-wide uppercase">
+                  Kundli Prediction
+                </h4>
+                <ul className="space-y-1.5 font-sans text-xs sm:text-sm text-[#4a312a]/95 font-medium list-none">
+                  <li className="flex items-start space-x-2">
+                    <span className="text-[#b8922b] mt-0.5">•</span>
+                    <span><strong>Houses Activation:</strong> Full decoding of your birth chart to map house strengths and planetary influences.</span>
+                  </li>
+                  <li className="flex items-start space-x-2">
+                    <span className="text-[#b8922b] mt-0.5">•</span>
+                    <span><strong>Dasha Timeline:</strong> Predictive timelines for key life events including career, finances, and relationships.</span>
+                  </li>
+                  <li className="flex items-start space-x-2">
+                    <span className="text-[#b8922b] mt-0.5">•</span>
+                    <span><strong>Tailored Remedies:</strong> Practical guidance on suitable gemstones, charity acts, and mantra recitations.</span>
+                  </li>
+                </ul>
+                <div className="flex items-center justify-between text-xs sm:text-sm font-sans font-bold text-[#3a1906] pt-1">
+                  <span>Price: ₹2,500</span>
+                  <span>Duration: 60 Mins Session</span>
+                </div>
+                <div className="pt-2">
+                  <Link
+                    to="/booking?service=kundli-prediction"
+                    className="btn-10"
+                  >
+                    <div className="slide-bg"></div>
+                    <span className="arrow-icon">
+                      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+                        <line x1="5" y1="12" x2="19" y2="12"></line>
+                        <polyline points="12 5 19 12 12 19"></polyline>
+                      </svg>
+                    </span>
+                    <span className="btn-text">Book Appointment</span>
+                  </Link>
+                </div>
+              </div>
+            </div>
+          ) : (
+            <>
+              <p className="font-sans text-xs sm:text-sm font-medium tracking-wide italic text-[#4a312a]/95">
+                {service.tagline}
+              </p>
+              <div className="flex items-center justify-between text-xs sm:text-sm font-sans font-bold text-[#3a1906]">
+                <span>Price: {service.price}</span>
+                <span>Duration: {service.duration}</span>
+              </div>
+              <div className="h-[1px] bg-[#3a1906]/10 w-full" />
+              <ul className="space-y-2">
+                {service.features.map((feat, fidx) => (
+                  <li key={fidx} className="flex items-start space-x-2 text-xs sm:text-sm text-[#4a312a]/90">
+                    <span className="text-[#3a1906] font-bold">•</span>
+                    <span>{feat}</span>
+                  </li>
+                ))}
+              </ul>
+              <div className="pt-2">
+                <Link
+                  to={`/booking?service=${service.id}`}
+                  className="btn-10"
+                >
+                  <div className="slide-bg"></div>
+                  <span className="arrow-icon">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+                      <line x1="5" y1="12" x2="19" y2="12"></line>
+                      <polyline points="12 5 19 12 12 19"></polyline>
+                    </svg>
+                  </span>
+                  <span className="btn-text">Book Session</span>
+                </Link>
+              </div>
+            </>
+          )}
         </div>
       </motion.div>
     </div>
@@ -264,15 +353,15 @@ function Home() {
     {
       id: 'vedic-astrology',
       title: 'Vedic Astrology',
-      tagline: 'Full Vedic Kundali & Dasha analysis',
-      shortDesc: 'Detailed analysis of your birth chart (Kundali) to understand planetary cycles, houses strength, and tailored life remedies.',
-      duration: '60 Mins Session',
-      price: '₹2,500',
+      tagline: 'Kundli Matching & Kundli Prediction',
+      shortDesc: 'Kundli Matching for marital compatibility and Kundli Prediction for career, relationships, and financial guidance.',
+      duration: '45 - 60 Mins',
+      price: '₹2,100 - ₹2,500',
       icon: <Moon className="h-5 w-5 text-purple-700 fill-purple-700 shrink-0" />,
       features: [
-        'Detailed analysis of all 12 houses',
-        '10-year Mahadasha & Antardasha timeline',
-        'Planetary cycles interpretation',
+        'Detailed Guna Milan matching analysis',
+        'In-depth birth chart predictions',
+        'Dasha transit & timing timelines',
         'Personalized remedies & Gemstones'
       ]
     },
@@ -304,51 +393,6 @@ function Home() {
         'Name vibration alignment',
         'Personal year predictions',
         'Name spelling correction'
-      ]
-    },
-    {
-      id: 'kp-horoscope',
-      title: 'Krishnamurti Paddhati Horoscope',
-      tagline: 'Precise sub-lord theory timing analysis',
-      shortDesc: 'Applying the advanced KP system (sub-lord theory) for accurate predictive timing of specific life events like career shift, marriage, or travel.',
-      duration: '60 Mins Session',
-      price: '₹3,200',
-      icon: <Clock className="h-5 w-5 text-blue-700 fill-blue-700 shrink-0" />,
-      features: [
-        'Sub-lord timing accuracy',
-        'Specific event calculations',
-        'Cuspal chart analysis',
-        'KP chart calculation report'
-      ]
-    },
-    {
-      id: 'prashna-kundli',
-      title: 'Prashna Kundli',
-      tagline: 'Horary chart casting for specific queries',
-      shortDesc: 'Erecting a momentary query chart (horary astrology) to provide direct, specific answers to urgent questions without needing a birth time.',
-      duration: '30 Mins Session',
-      price: '₹1,500',
-      icon: <Shield className="h-5 w-5 text-rose-600 fill-rose-600 shrink-0" />,
-      features: [
-        'Direct answer to one query',
-        'Chart cast at query time',
-        'Immediate transit effects',
-        'Simple action remedies'
-      ]
-    },
-    {
-      id: 'bhrigu-nandi-nadi',
-      title: 'Bhrigu Nandi Nadi Astrology',
-      tagline: 'Palm-leaf combination fate tracing',
-      shortDesc: 'An ancient palm-leaf predictive technique using planetary combinations (conjunctions and transits) to trace past life karma and future destiny.',
-      duration: '60 Mins Session',
-      price: '₹3,500',
-      icon: <Sparkles className="h-5 w-5 text-indigo-600 fill-indigo-600 shrink-0" />,
-      features: [
-        'Conjunction destiny patterns',
-        'Past life karma decoding',
-        'Transits on planetary pairs',
-        'Nadi combination worksheet'
       ]
     }
   ]
@@ -497,73 +541,87 @@ function Home() {
         </div>
 
         {/* Hero Content Container */}
-        <div className="relative z-10 flex flex-col items-center justify-center text-center max-w-4xl mx-auto space-y-4">
+        <div className="relative z-10 flex flex-col lg:grid lg:grid-cols-12 items-center justify-center text-center lg:text-left max-w-4xl lg:max-w-6xl lg:w-full lg:px-8 mx-auto space-y-4 lg:space-y-0 lg:gap-12">
           
-          {/* Rotating Zodiac Wheel and Person Container */}
-          <div className="relative w-[min(410px,75vw)] h-[min(410px,75vw)] flex items-center justify-center select-none mb-2">
-            
-            {/* The Rotating Wheel (behind the person) */}
-            <motion.div
-              animate={{ rotate: 360 }}
-              transition={{ duration: 55, ease: 'linear', repeat: Infinity }}
-              className="absolute inset-0 opacity-90"
-              style={{
-                backgroundImage: "url('/wheel.png')",
-                backgroundSize: 'cover',
-                backgroundPosition: 'center center',
-                zIndex: 10
-              }}
-            />
+          {/* Left Column: Rotating Zodiac Wheel, Person, and Contact details below */}
+          <div className="lg:col-span-6 flex flex-col items-center lg:items-start justify-center lg:justify-start w-full">
+            <div className="relative w-[min(410px,75vw)] h-[min(410px,75vw)] lg:w-[410px] lg:h-[410px] flex items-center justify-center select-none mb-2 lg:-ml-2 xl:-ml-6">
+              
+              {/* The Rotating Wheel (behind the person) */}
+              <motion.div
+                animate={{ rotate: 360 }}
+                transition={{ duration: 55, ease: 'linear', repeat: Infinity }}
+                className="absolute inset-0 opacity-90"
+                style={{
+                  backgroundImage: "url('/wheel.png')",
+                  backgroundSize: 'cover',
+                  backgroundPosition: 'center center',
+                  zIndex: 10
+                }}
+              />
 
-            {/* Top Center Lighting Highlight - illuminates the wheel signs as they pass the top center */}
-            <div 
-              className="absolute top-[-15px] left-1/2 -translate-x-1/2 w-32 h-32 rounded-full pointer-events-none mix-blend-screen opacity-95 animate-pulse"
-              style={{
-                background: 'radial-gradient(circle, rgba(253, 224, 71, 0.4) 0%, rgba(222, 177, 138, 0.15) 55%, transparent 75%)',
-                filter: 'blur(3px)',
-                zIndex: 15
-              }}
-            />
-            
-            {/* The Person (Hero_person.png) static in the center */}
-            <div 
-              className="absolute w-[82%] h-[82%] bottom-[7.5%] flex items-end justify-center overflow-hidden"
-              style={{
-                maskImage: 'linear-gradient(to top, transparent 0%, rgba(0,0,0,0.1) 2%, black 8%)',
-                WebkitMaskImage: 'linear-gradient(to top, transparent 0%, rgba(0,0,0,0.1) 2%, black 8%)',
-                zIndex: 20
-              }}
-            >
-              <img 
-                src="/Hero_person.png" 
-                alt="Astrologer Madhuri Gupta" 
-                className="w-full h-auto object-contain object-bottom pointer-events-none"
+              {/* Top Center Lighting Highlight - illuminates the wheel signs as they pass the top center */}
+              <div 
+                className="absolute top-[-15px] left-1/2 -translate-x-1/2 w-32 h-32 rounded-full pointer-events-none mix-blend-screen opacity-95 animate-pulse"
+                style={{
+                  background: 'radial-gradient(circle, rgba(253, 224, 71, 0.4) 0%, rgba(222, 177, 138, 0.15) 55%, transparent 75%)',
+                  filter: 'blur(3px)',
+                  zIndex: 15
+                }}
+              />
+              
+              {/* The Person (Hero_person.png) static in the center */}
+              <div 
+                className="absolute w-[82%] h-[82%] bottom-[7.5%] flex items-end justify-center overflow-hidden"
+                style={{
+                  maskImage: 'linear-gradient(to top, transparent 0%, rgba(0,0,0,0.1) 2%, black 8%)',
+                  WebkitMaskImage: 'linear-gradient(to top, transparent 0%, rgba(0,0,0,0.1) 2%, black 8%)',
+                  zIndex: 20
+                }}
+              >
+                <img 
+                  src="/Hero_person.png" 
+                  alt="Astrologer Madhuri Gupta" 
+                  className="w-full h-auto object-contain object-bottom pointer-events-none"
+                />
+              </div>
+
+              {/* Ground shadow at the bottom of the portrait to soften the edge and add depth */}
+              <div 
+                className="absolute bottom-[6%] left-1/2 -translate-x-1/2 w-[60%] h-[8%] pointer-events-none"
+                style={{
+                  background: 'radial-gradient(ellipse, rgba(79, 49, 41, 0.75) 0%, transparent 75%)',
+                  filter: 'blur(5px)',
+                  zIndex: 21
+                }}
               />
             </div>
 
-            {/* Ground shadow at the bottom of the portrait to soften the edge and add depth */}
-            <div 
-              className="absolute bottom-[6%] left-1/2 -translate-x-1/2 w-[60%] h-[8%] pointer-events-none"
-              style={{
-                background: 'radial-gradient(ellipse, rgba(79, 49, 41, 0.75) 0%, transparent 75%)',
-                filter: 'blur(5px)',
-                zIndex: 21
-              }}
-            />
+            {/* Mobile number and email below the image on large screens */}
+            <div className="hidden lg:flex flex-col items-start justify-start space-y-2 text-[#4f3129]/90 font-sans text-xs sm:text-sm font-semibold tracking-wider lg:-ml-2 xl:-ml-6 select-text pt-3">
+              <a href="tel:+918881573437" className="flex items-center space-x-2.5 hover:text-[#b8922b] transition-colors cursor-pointer">
+                <Phone className="h-4 w-4 text-[#4f3129]/75" />
+                <span>+91 88815 73437</span>
+              </a>
+              <a href="mailto:sarsajyotish@gmail.com" className="flex items-center space-x-2.5 hover:text-[#b8922b] transition-colors cursor-pointer">
+                <Mail className="h-4 w-4 text-[#4f3129]/75" />
+                <span>sarsajyotish@gmail.com</span>
+              </a>
+            </div>
           </div>
 
-          {/* Text and Button Details */}
+          {/* Right Column: Text and Button Details */}
           <motion.div 
             initial={{ opacity: 0, y: 25 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 1.2, ease: "easeInOut" }}
-            className="space-y-3.5 max-w-2xl px-4 flex flex-col items-center -mt-5"
+            className="lg:col-span-6 space-y-4 max-w-2xl px-4 flex flex-col items-center lg:items-start -mt-5 lg:-mt-0"
           >
             {/* Dark copper name with gold light reflection shimmer effect */}
             <TextShimmer
               as="h1"
               duration={3.5}
-              className="font-serif text-3xl sm:text-4xl lg:text-5xl font-bold tracking-[0.2em] uppercase"
+              className="font-serif text-3xl sm:text-4xl lg:text-5xl font-bold tracking-[0.2em] uppercase text-center lg:text-left"
               style={{
                 '--base-color': '#4f3129',
                 '--base-gradient-color': '#deb18a'
@@ -573,11 +631,16 @@ function Home() {
             </TextShimmer>
             
             {/* Darker bronze tagline for high contrast and readability */}
-            <p className="font-sans text-xs sm:text-sm font-semibold tracking-[0.3em] text-[#5c3d31] uppercase">
+            <p className="font-sans text-xs sm:text-sm font-semibold tracking-[0.3em] text-[#5c3d31] uppercase text-center lg:text-left">
               Vedic Astrologer & Spiritual Guide
             </p>
+
+            {/* Detailed cosmic description */}
+            <p className="font-sans text-xs sm:text-sm text-[#4a312a]/90 leading-relaxed font-medium text-center lg:text-left max-w-lg pt-1">
+              Discover clarity and cosmic alignment through precise Vedic wisdom. Offering personalized Kundli analysis, Vastu consultancy, and Numerology to guide your career, relationships, and spiritual growth.
+            </p>
             
-            <div className="pt-4">
+            <div className="pt-4 flex flex-row gap-4 items-center justify-center lg:justify-start flex-wrap">
               <Link
                 to="/booking"
                 className="animated-button"
@@ -590,6 +653,13 @@ function Home() {
                 <svg viewBox="0 0 24 24" className="arr-1" xmlns="http://www.w3.org/2000/svg">
                     <path d="M16.1716 10.9999L10.8076 5.63589L12.2218 4.22168L20 11.9999L12.2218 19.778L10.8076 18.3638L16.1716 12.9999H4V10.9999H16.1716Z"></path>
                 </svg>
+              </Link>
+              
+              <Link
+                to="/about"
+                className="inline-flex items-center justify-center px-6 py-2.5 rounded-full border border-[#deb18a] text-[#4f3129] font-sans text-sm font-semibold uppercase tracking-wider hover:bg-[#deb18a]/20 hover:text-[#4f3129] transition-all duration-300 shadow-sm"
+              >
+                Read More
               </Link>
             </div>
           </motion.div>
@@ -630,27 +700,27 @@ function Home() {
           </div>
         </div>
 
-        <div className="w-full max-w-none px-6 lg:px-16 relative z-10 grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-16 items-center">
+        <div className="w-full max-w-7xl mx-auto px-6 lg:px-16 relative z-10 flex flex-col lg:flex-row items-center justify-between gap-12 lg:gap-20 overflow-visible">
           
-          {/* Left Column: Transparent Image on Left Side (increased size) */}
-          <div className="lg:col-span-8 flex justify-center p-0">
+          {/* Left Column: Enlarged Image Container (taking up 55% width, overflow visible) */}
+          <div className="w-full lg:w-[55%] flex justify-center items-center overflow-visible relative">
             <motion.div 
               initial={{ opacity: 0, scale: 0.95 }}
               whileInView={{ opacity: 1, scale: 1 }}
               viewport={{ once: true, margin: "-100px" }}
               transition={{ duration: 0.8 }}
-              className="w-full bg-transparent flex items-center justify-center p-0"
+              className="w-full flex items-center justify-center p-0 overflow-visible"
             >
               <img 
                 src="/Goal.png" 
                 alt="Our Goal - Astrological Guidance" 
-                className="w-full h-auto object-contain p-0 m-0"
+                className="w-[90%] sm:w-[80%] max-w-[450px] lg:w-[185%] lg:max-w-none h-auto object-contain p-0 m-0 my-0 lg:-my-24 lg:-ml-24 mx-auto lg:mx-0"
               />
             </motion.div>
           </div>
 
-          {/* Right Column: Text & Bullet Points (lg:col-span-4) */}
-          <div className="lg:col-span-4 flex flex-col justify-center space-y-6">
+          {/* Right Column: Text & Bullet Points (taking up 40% width) */}
+          <div className="w-full lg:w-[40%] flex flex-col justify-center space-y-6 z-10">
             <motion.div 
               initial={{ opacity: 0, y: 25 }}
               whileInView={{ opacity: 1, y: 0 }}

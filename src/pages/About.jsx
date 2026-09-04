@@ -17,7 +17,6 @@ function About() {
           
           {/* Upper-Center Header */}
           <div className="text-center space-y-0.5 relative -top-3 lg:-top-6">
-            <span className="font-serif italic font-semibold text-[#3a1906] tracking-[0.25em] text-[11px] sm:text-sm uppercase block select-none">Tarot Reading</span>
             <h1 className="font-serif text-2xl sm:text-3xl lg:text-4xl xl:text-5xl font-bold text-[#3a1906] tracking-wide">
               Personalized Divination
             </h1>
@@ -72,12 +71,12 @@ function About() {
                 </svg>
               </div>
 
-              <div className="relative z-10 space-y-3 font-sans text-xs sm:text-sm text-[#3a1906]/80 leading-relaxed tracking-wide font-medium text-center">
+              <div className="relative z-10 space-y-4 font-sans text-xs sm:text-sm text-[#3a1906]/85 leading-relaxed tracking-wide font-medium text-center">
                 <p>
-                  Discover solutions to dilemmas, gain perspective on life transitions, and harness the power of ancient wisdom to shape your future.
+                  For over 15 years, I have helped individuals translate celestial configurations into clear, real-world direction. Specializing in Janam Kundli analysis, Vastu Shastra, and Numerology, my approach blends the profound depth of traditional planetary wisdom with modern remedial insights.
                 </p>
                 <p>
-                  I interpret the unique positions of the planets at the moment of your birth to uncover your innate strengths.
+                  Honed through formal education in Astrology and Alankar at the prestigious Bharatiya Vidya Bhavan, this cosmic guidance is designed to help you confidently navigate life's career, relationship, and financial pathways.
                 </p>
               </div>
 

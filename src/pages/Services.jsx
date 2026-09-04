@@ -21,23 +21,45 @@ import {
 export default function Services() {
   const serviceList = [
     {
-      id: 'vedic-astrology',
-      title: 'Vedic Astrology',
-      type: 'Kundali Reading',
-      duration: '60 Mins',
+      id: 'kundli-matching',
+      title: 'Kundli Matching',
+      type: 'Relationship Synastry',
+      duration: '45 Mins',
       platform: 'Online Zoom',
       image: 'https://images.unsplash.com/photo-1506318137071-a8e063b4bec0?auto=format&fit=crop&w=800&q=80',
       amenitiesLeft: [
-        { label: 'Detailed birth chart PDF', icon: 'FileText' },
-        { label: '10-year Mahadasha timeline', icon: 'Clock' },
-        { label: 'Planetary cycles interpretation', icon: 'Sparkles' }
+        { label: '36-Guna compatibility report', icon: 'FileText' },
+        { label: 'Manglik Dosha analysis', icon: 'Shield' },
+        { label: 'Nadi & Bhakoot matching details', icon: 'Sparkles' }
       ],
       amenitiesRight: [
+        { label: 'Custom remedial actions PDF', icon: 'FileText' },
         { label: 'Video/Audio recording link', icon: 'Video' },
-        { label: 'Personalized remedies/Gemstones', icon: 'Shield' },
         { label: 'Follow-up Q&A support', icon: 'HelpCircle' }
       ],
-      feeDetails: 'Comprehensive chart analysis covering health, career, and wealth',
+      feeDetails: 'Comprehensive compatibility analysis for relationship alignment and marital longevity',
+      price: '₹2,100',
+      durationText: '(45 Mins Session)',
+      minSessions: 'Minimum 1 session'
+    },
+    {
+      id: 'kundli-prediction',
+      title: 'Kundli Prediction',
+      type: 'Life & Transit Insights',
+      duration: '60 Mins',
+      platform: 'Online Zoom',
+      image: 'https://images.unsplash.com/photo-1532980400857-e8d9d275d858?auto=format&fit=crop&w=800&q=80',
+      amenitiesLeft: [
+        { label: 'Full birth chart analysis PDF', icon: 'FileText' },
+        { label: 'Mahadasha timeline decoding', icon: 'Clock' },
+        { label: 'Planetary transit effects analysis', icon: 'Sparkles' }
+      ],
+      amenitiesRight: [
+        { label: 'Personalized gemstone recommendations', icon: 'Shield' },
+        { label: 'Vedic mantra & charity remedies', icon: 'HelpCircle' },
+        { label: 'Video/Audio recording link', icon: 'Video' }
+      ],
+      feeDetails: 'Detailed mapping of planetary cycles and house strength for career, relationships, and finance',
       price: '₹2,500',
       durationText: '(60 Mins Session)',
       minSessions: 'Minimum 1 session'
@@ -84,72 +106,6 @@ export default function Services() {
       feeDetails: 'Excellent for selecting new brand names, phone numbers, or signature changes',
       price: '₹2,100',
       durationText: '(45 Mins Session)',
-      minSessions: 'Minimum 1 session'
-    },
-    {
-      id: 'kp-horoscope',
-      title: 'Krishnamurti Paddhati Horoscope',
-      type: 'KP Astrology',
-      duration: '60 Mins',
-      platform: 'Online Zoom',
-      image: 'https://images.unsplash.com/photo-1507207611509-ec012433ff52?auto=format&fit=crop&w=800&q=80',
-      amenitiesLeft: [
-        { label: 'Sub-lord timing accuracy', icon: 'Clock' },
-        { label: 'Specific event calculations', icon: 'TrendingUp' },
-        { label: 'Cuspal chart analysis', icon: 'Compass' }
-      ],
-      amenitiesRight: [
-        { label: 'KP chart calculation report', icon: 'FileText' },
-        { label: 'Video/Audio recording link', icon: 'Video' },
-        { label: 'Planetary level remedies', icon: 'Shield' }
-      ],
-      feeDetails: 'Accurate predictive timing for marriage, job switches, or property purchases',
-      price: '₹3,200',
-      durationText: '(60 Mins Session)',
-      minSessions: 'Minimum 1 session'
-    },
-    {
-      id: 'prashna-kundli',
-      title: 'Prashna Kundli',
-      type: 'Horary Query',
-      duration: '30 Mins',
-      platform: 'Online Zoom',
-      image: 'https://images.unsplash.com/photo-1451187580459-43490279c0fa?auto=format&fit=crop&w=800&q=80',
-      amenitiesLeft: [
-        { label: 'Direct answer to query', icon: 'HelpCircle' },
-        { label: 'Chart cast at query time', icon: 'Clock' },
-        { label: 'Immediate transit effects', icon: 'Sparkles' }
-      ],
-      amenitiesRight: [
-        { label: 'Video/Audio recording link', icon: 'Video' },
-        { label: 'Simple action remedies', icon: 'Shield' },
-        { label: 'Summary of query chart', icon: 'FileText' }
-      ],
-      feeDetails: 'Ideal when birth time is unknown or for quick, urgent decisions',
-      price: '₹1,500',
-      durationText: '(30 Mins Session)',
-      minSessions: 'Minimum 1 session'
-    },
-    {
-      id: 'bhrigu-nandi-nadi',
-      title: 'Bhrigu Nandi Nadi Astrology',
-      type: 'Nadi Reading',
-      duration: '60 Mins',
-      platform: 'Online Zoom',
-      image: 'https://images.unsplash.com/photo-1512820790803-83ca734da794?auto=format&fit=crop&w=800&q=80',
-      amenitiesLeft: [
-        { label: 'Conjunction destiny patterns', icon: 'Star' },
-        { label: 'Past life karma decoding', icon: 'Sparkles' },
-        { label: 'Transits on planetary pairs', icon: 'Clock' }
-      ],
-      amenitiesRight: [
-        { label: 'Nadi combination worksheet', icon: 'FileText' },
-        { label: 'Video/Audio recording link', icon: 'Video' },
-        { label: 'Specific karma correction list', icon: 'Shield' }
-      ],
-      feeDetails: 'Decodes key life themes and transit triggers based on planetary combinations',
-      price: '₹3,500',
-      durationText: '(60 Mins Session)',
       minSessions: 'Minimum 1 session'
     }
   ];

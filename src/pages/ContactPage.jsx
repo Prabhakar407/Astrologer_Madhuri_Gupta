@@ -101,7 +101,7 @@ export default function ContactPage() {
                   </div>
                   <div>
                     <h3 className="text-xs sm:text-sm font-bold text-white font-serif tracking-tight">
-                      (+91) 98765 43210
+                      +91 88815 73437
                     </h3>
                     <p className="text-[10px] text-[#deb18a]/70 font-medium">
                       Call or WhatsApp
@@ -116,7 +116,7 @@ export default function ContactPage() {
                   </div>
                   <div className="min-w-0">
                     <h3 className="text-xs sm:text-sm font-bold text-white font-serif tracking-tight break-all">
-                      info@astromadhuri.com
+                      sarsajyotish@gmail.com
                     </h3>
                     <p className="text-[10px] text-[#deb18a]/70 font-medium">
                       Support Email
@@ -152,7 +152,7 @@ export default function ContactPage() {
                     </div>
                     <div>
                       <h3 className="text-xs font-bold text-white font-serif tracking-tight">
-                        (+91) 98765 43210
+                        +91 88815 73437
                       </h3>
                       <p className="text-[9px] text-[#deb18a]/70 font-medium">
                         Call or WhatsApp
@@ -167,7 +167,7 @@ export default function ContactPage() {
                     </div>
                     <div className="min-w-0">
                       <h3 className="text-xs font-bold text-white font-serif tracking-tight break-all">
-                        info@astromadhuri.com
+                        sarsajyotish@gmail.com
                       </h3>
                       <p className="text-[9px] text-[#deb18a]/70 font-medium">
                         Support Email

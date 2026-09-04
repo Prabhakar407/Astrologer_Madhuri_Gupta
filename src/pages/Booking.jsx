@@ -21,7 +21,7 @@ const BACKEND_URL = "https://astrologer-madhuri-gupta.onrender.com";
 
 export default function Booking() {
   const [searchParams] = useSearchParams();
-  const initialService = searchParams.get('service') || 'birth-chart';
+  const initialService = searchParams.get('service') || 'kundli-prediction';
 
   // Form State
   const [formData, setFormData] = useState({
@@ -49,12 +49,10 @@ export default function Booking() {
   const [bookingResult, setBookingResult] = useState(null);
 
   const serviceOptions = [
-    { value: 'vedic-astrology', label: 'Vedic Astrology (60 min)', price: '₹2,500' },
+    { value: 'kundli-matching', label: 'Kundli Matching (45 min)', price: '₹2,100' },
+    { value: 'kundli-prediction', label: 'Kundli Prediction (60 min)', price: '₹2,500' },
     { value: 'vastu-consultation', label: 'Vastu Consultation (90 min)', price: '₹4,500' },
-    { value: 'numerology', label: 'Numerology (45 min)', price: '₹2,100' },
-    { value: 'kp-horoscope', label: 'Krishnamurti Paddhati Horoscope (60 min)', price: '₹3,200' },
-    { value: 'prashna-kundli', label: 'Prashna Kundli (30 min)', price: '₹1,500' },
-    { value: 'bhrigu-nandi-nadi', label: 'Bhrigu Nandi Nadi Astrology (60 min)', price: '₹3,500' }
+    { value: 'numerology', label: 'Numerology (45 min)', price: '₹2,100' }
   ];
 
   // Update form service type if URL parameter changes
@@ -322,7 +320,7 @@ export default function Booking() {
                             required
                             value={formData.phone}
                             onChange={handleInputChange}
-                            placeholder="+91 98765 43210"
+                            placeholder="+91 88815 73437"
                             className="w-full pl-10 pr-3 py-1.5 bg-white/5 border border-white/10 rounded-xl focus:border-[#b8922b] focus:ring-1 focus:ring-[#b8922b] focus:outline-none text-white text-xs transition-all"
                           />
                         </div>
