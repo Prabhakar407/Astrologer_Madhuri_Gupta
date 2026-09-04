@@ -55,8 +55,9 @@ export default function Booking() {
     { value: 'numerology', label: 'Numerology (45 min)', price: '₹2,100' }
   ];
 
-  // Update form service type if URL parameter changes
+  // Update form service type if URL parameter changes and set document title
   useEffect(() => {
+    document.title = "Book Kundli & Vastu Consultation in Agra | Sarsa Jyotish Sansthan";
     if (searchParams.get('service')) {
       setFormData(prev => ({ ...prev, serviceType: searchParams.get('service') }));
     }

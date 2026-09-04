@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import {
   Github,
@@ -53,6 +53,10 @@ function cn(...classes) {
 export default function Testimonials() {
   const [currentIndex, setCurrentIndex] = useState(0);
 
+  useEffect(() => {
+    document.title = "Client Reviews & Testimonials | Astrologer Madhuri Gupta Agra";
+  }, []);
+
   const handleNext = () =>
     setCurrentIndex((index) => (index + 1) % testimonials.length);
   const handlePrevious = () =>
@@ -103,7 +107,8 @@ export default function Testimonials() {
                 >
                   <img
                     src={currentTestimonial.imageUrl}
-                    alt={currentTestimonial.name}
+                    alt={`${currentTestimonial.name} - Astrologer Madhuri Gupta Client Review`}
+                    loading="lazy"
                     className="w-full h-full object-cover pointer-events-none"
                     draggable={false}
                   />
@@ -177,7 +182,8 @@ export default function Testimonials() {
                 >
                   <img
                     src={currentTestimonial.imageUrl}
-                    alt={currentTestimonial.name}
+                    alt={`${currentTestimonial.name} - Astrologer Madhuri Gupta Client Review`}
+                    loading="lazy"
                     className="w-full h-full object-cover pointer-events-none"
                     draggable={false}
                   />

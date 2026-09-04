@@ -343,6 +343,10 @@ function ServiceAccordion({ service, isOpen, onToggle }) {
 function Home() {
   const [activeServiceId, setActiveServiceId] = React.useState(null);
 
+  React.useEffect(() => {
+    document.title = "Best Vedic Astrologer in Agra | Sarsa Jyotish Sansthan";
+  }, []);
+
   const zodiacSigns = [
     'Aries ♈', 'Taurus ♉', 'Gemini ♊', 'Cancer ♋', 
     'Leo ♌', 'Virgo ♍', 'Libra ♎', 'Scorpio ♏', 
@@ -581,7 +585,8 @@ function Home() {
               >
                 <img 
                   src="/Hero_person.png" 
-                  alt="Astrologer Madhuri Gupta" 
+                  alt="Astrologer Madhuri Gupta - Best Vedic Astrologer in Agra" 
+                  fetchPriority="high"
                   className="w-full h-auto object-contain object-bottom pointer-events-none"
                 />
               </div>
@@ -713,7 +718,8 @@ function Home() {
             >
               <img 
                 src="/Goal.png" 
-                alt="Our Goal - Astrological Guidance" 
+                alt="Our Goal - Vedic Astrological Guidance in Agra" 
+                loading="lazy"
                 className="w-[90%] sm:w-[80%] max-w-[450px] lg:w-[185%] lg:max-w-none h-auto object-contain p-0 m-0 my-0 lg:-my-24 lg:-ml-24 mx-auto lg:mx-0"
               />
             </motion.div>
@@ -839,7 +845,8 @@ function Home() {
                 
                 <img 
                   src="/Hero_person.png" 
-                  alt="Madhuri Gupta" 
+                  alt="Astrologer Madhuri Gupta - Vedic Astrologer Agra" 
+                  loading="lazy"
                   className="h-[95%] w-auto object-contain object-bottom pointer-events-none relative z-10" 
                 />
               </motion.div>

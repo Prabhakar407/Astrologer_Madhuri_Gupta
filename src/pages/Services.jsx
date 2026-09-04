@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { 
@@ -142,10 +142,25 @@ export default function Services() {
     visible: { opacity: 1, y: 0, transition: { type: 'spring', stiffness: 100, damping: 15 } }
   };
 
+  useEffect(() => {
+    document.title = "Astrology & Vastu Services in Agra | Sarsa Jyotish Sansthan";
+  }, []);
+
   return (
     <div className="pt-28 pb-16 min-h-screen bg-white text-slate-900 font-sans selection:bg-[#b8922b]/20 selection:text-[#b8922b]">
       <div className="max-w-6xl mx-auto px-4 sm:px-6">
         
+        {/* Page Header with Semantic H1 */}
+        <div className="text-center space-y-2 mb-10">
+          <h1 className="font-serif text-3xl sm:text-4xl font-bold tracking-widest text-[#3a1906] uppercase">
+            Vedic Astrology & Consultation Services
+          </h1>
+          <div className="w-16 h-[1.5px] bg-[#3a1906]/40 mx-auto" />
+          <p className="font-sans text-xs sm:text-sm text-[#8c6c51] uppercase tracking-[0.15em] font-semibold">
+            Authentic Consultations & Remedial Guidance in Agra
+          </p>
+        </div>
+
         {/* Animated Stack of Cards */}
         <motion.div 
           className="space-y-8"
@@ -166,12 +181,16 @@ export default function Services() {
               <div className="w-full md:w-[280px] h-[190px] sm:h-[210px] relative overflow-hidden rounded-2xl shrink-0 group">
                 <img 
                   src={srv.image} 
-                  alt={srv.title} 
+                  alt={`${srv.title} Consultation in Agra`} 
+                  loading="lazy"
                   className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
                 />
                 
                 {/* Pill Translucent Button overlay bottom-left */}
-                <button className="absolute bottom-3 left-3 bg-white/80 backdrop-blur-md hover:bg-white text-[11px] font-semibold tracking-wide text-slate-800 py-1.5 px-3.5 rounded-full shadow-sm transition-all flex items-center gap-1 cursor-pointer">
+                <button 
+                  aria-label={`View details for ${srv.title}`}
+                  className="absolute bottom-3 left-3 bg-white/80 backdrop-blur-md hover:bg-white text-[11px] font-semibold tracking-wide text-slate-800 py-1.5 px-3.5 rounded-full shadow-sm transition-all flex items-center gap-1 cursor-pointer"
+                >
                   <span>More details</span>
                   <ChevronRight className="w-3 h-3" />
                 </button>

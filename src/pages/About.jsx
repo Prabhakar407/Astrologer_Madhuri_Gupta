@@ -1,8 +1,11 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { Link } from 'react-router-dom'
 import { motion } from 'framer-motion'
 
 function About() {
+  useEffect(() => {
+    document.title = "About Astrologer Madhuri Gupta | 15+ Yrs Vedic Experience Agra";
+  }, []);
   return (
     <div className="min-h-screen bg-[#faf6e8]">
       
@@ -50,7 +53,8 @@ function About() {
                 <div className="w-full h-full rounded-sm overflow-hidden relative">
                   <img 
                     src="/Hero_person.png" 
-                    alt="Madhuri Gupta" 
+                    alt="Astrologer Madhuri Gupta - Vedic Astrologer in Agra" 
+                    loading="lazy"
                     className="h-full w-full object-cover object-top pointer-events-none" 
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-[#3a1906]/15 via-transparent to-transparent pointer-events-none" />
@@ -118,12 +122,12 @@ function About() {
                 
                 {/* Top Smaller Arch containing vertical line art (rotated 90 degrees clockwise) */}
                 <div className="absolute top-0 right-0 w-[105px] h-[155px] rounded-t-full rounded-b-2xl overflow-hidden border border-[#b8922b]/35 shadow-md z-10 bg-white rotate-90 transition-transform duration-300">
-                  <img src="/right_top.png" alt="Occult Alignment" className="w-full h-full object-cover object-center pointer-events-none" />
+                  <img src="/right_top.png" alt="Occult Alignment" loading="lazy" className="w-full h-full object-cover object-center pointer-events-none" />
                 </div>
 
                 {/* Bottom Larger Arch containing fanned tarot over zodiac wheel (matching shape of top arch) */}
                 <div className="absolute bottom-12 left-0 w-[125px] h-[155px] rounded-t-full rounded-b-2xl overflow-hidden border border-[#deb18a]/50 shadow-lg z-20 bg-white">
-                  <img src="/right_bottom.png" alt="Tarot & Zodiac spread" className="w-full h-full object-cover object-center pointer-events-none" />
+                  <img src="/right_bottom.png" alt="Tarot & Zodiac spread" loading="lazy" className="w-full h-full object-cover object-center pointer-events-none" />
                 </div>
 
               </div>
@@ -161,7 +165,8 @@ function About() {
                 <div className="relative aspect-[4/3] rounded overflow-hidden">
                   <img
                     src="/certificate.png"
-                    alt="Astrology Certification"
+                    alt="Astrology Certification - Bharatiya Vidya Bhavan"
+                    loading="lazy"
                     className="w-full h-full object-cover"
                   />
                 </div>
@@ -182,7 +187,8 @@ function About() {
                   <div className="relative aspect-[4/3] rounded overflow-hidden">
                     <img
                       src="/certificate.png"
-                      alt="Astrology Certification"
+                      alt="Astrology Certification - Bharatiya Vidya Bhavan"
+                      loading="lazy"
                       className="w-full h-full object-cover"
                     />
                   </div>

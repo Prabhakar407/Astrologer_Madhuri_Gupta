@@ -14,6 +14,10 @@ import {
 const BACKEND_URL = "https://astrologer-madhuri-gupta.onrender.com";
 
 export default function ContactPage() {
+  React.useEffect(() => {
+    document.title = "Contact Astrologer Madhuri Gupta | Sarsa Jyotish Sansthan Agra";
+  }, []);
+
   const [formData, setFormData] = React.useState({
     name: "",
     email: "",
@@ -196,7 +200,8 @@ export default function ContactPage() {
                   <div className="w-[100px] sm:w-[130px] aspect-[4/5] rounded-t-full overflow-hidden border-4 border-white shadow-xl bg-white">
                     <img
                       src="/contact_office.png"
-                      alt="Madhuri Gupta consulting room"
+                      alt="Astrologer Madhuri Gupta Consultation Office Agra"
+                      loading="lazy"
                       className="w-full h-full object-cover object-center pointer-events-none"
                       draggable={false}
                     />
@@ -245,7 +250,8 @@ export default function ContactPage() {
               >
                 <img
                   src="/contact_office.png"
-                  alt="Madhuri Gupta consulting room"
+                  alt="Astrologer Madhuri Gupta Consultation Office Agra"
+                  loading="lazy"
                   className="w-full h-full object-cover object-center pointer-events-none"
                   draggable={false}
                 />
