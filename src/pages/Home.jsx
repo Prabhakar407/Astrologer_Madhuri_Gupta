@@ -458,7 +458,7 @@ function Home() {
         {/* Background Image (rose-gold marble without zodiac wheel) */}
         <div 
           className="absolute inset-0 z-0 bg-cover bg-center opacity-95 pointer-events-none" 
-          style={{ backgroundImage: "url('/marble-bg.jpg')" }}
+          style={{ backgroundImage: "url('/marble-bg.webp')" }}
         />
         {/* Top gradient shadow for navbar links contrast */}
         <div className="absolute inset-x-0 top-0 h-28 bg-gradient-to-b from-cosmic-950/40 to-transparent z-0 pointer-events-none" />
@@ -557,7 +557,7 @@ function Home() {
                 transition={{ duration: 55, ease: 'linear', repeat: Infinity }}
                 className="absolute inset-0 opacity-90"
                 style={{
-                  backgroundImage: "url('/wheel.png')",
+                  backgroundImage: "url('/wheel.webp')",
                   backgroundSize: 'cover',
                   backgroundPosition: 'center center',
                   zIndex: 10
@@ -584,7 +584,7 @@ function Home() {
                 }}
               >
                 <img 
-                  src="/Hero_person.png" 
+                  src="/Hero_person.webp" 
                   alt="Astrologer Madhuri Gupta - Best Vedic Astrologer in Agra" 
                   fetchPriority="high"
                   className="w-full h-auto object-contain object-bottom pointer-events-none"
@@ -673,7 +673,7 @@ function Home() {
       </section>
 
       {/* Our Goal Section */}
-      <section className="py-6 sm:py-16 lg:py-28 bg-cover bg-center border-b border-[#deb18a]/10 relative" style={{ backgroundImage: "url('/marble-bg.jpg')" }}>
+      <section className="py-6 sm:py-16 lg:py-28 bg-cover bg-center border-b border-[#deb18a]/10 relative" style={{ backgroundImage: "url('/marble-bg.webp')" }}>
         <div className="absolute inset-0 bg-[#f9f6f0]/20 z-0 pointer-events-none" />
 
         {/* Celestial Divider 1 (directly on border line, zero height) */}
@@ -717,7 +717,7 @@ function Home() {
               className="w-full flex items-center justify-center p-0 overflow-visible"
             >
               <img 
-                src="/Goal.png" 
+                src="/Goal.webp" 
                 alt="Our Goal - Vedic Astrological Guidance in Agra" 
                 loading="lazy"
                 className="w-[90%] sm:w-[80%] max-w-[450px] lg:w-[185%] lg:max-w-none h-auto object-contain p-0 m-0 my-0 lg:-my-24 lg:-ml-24 mx-auto lg:mx-0"
@@ -773,7 +773,7 @@ function Home() {
       </section>
 
       {/* About Me Section */}
-      <section id="about" className="relative z-10 py-10 bg-cover bg-center" style={{ backgroundImage: "url('/marble-bg.jpg')" }}>
+      <section id="about" className="relative z-10 py-10 bg-cover bg-center" style={{ backgroundImage: "url('/marble-bg.webp')" }}>
         <div className="absolute inset-0 bg-[#f9f6f0]/20 z-0 pointer-events-none" />
 
         {/* Celestial Divider 2 (directly on border line, zero height) */}
@@ -844,7 +844,7 @@ function Home() {
                 <div className="absolute inset-0 bg-[radial-gradient(circle,rgba(222,177,138,0.15)_0%,transparent_70%)]" />
                 
                 <img 
-                  src="/Hero_person.png" 
+                  src="/Hero_person.webp" 
                   alt="Astrologer Madhuri Gupta - Vedic Astrologer Agra" 
                   loading="lazy"
                   className="h-[95%] w-auto object-contain object-bottom pointer-events-none relative z-10" 
@@ -925,7 +925,7 @@ function Home() {
       </section>
 
       {/* Working With Me Section */}
-      <section className="relative z-10 py-10 bg-cover bg-center border-t border-[#deb18a]/10" style={{ backgroundImage: "url('/marble-bg.jpg')" }}>
+      <section className="relative z-10 py-10 bg-cover bg-center border-t border-[#deb18a]/10" style={{ backgroundImage: "url('/marble-bg.webp')" }}>
         <div className="absolute inset-0 bg-[#f9f6f0]/20 z-0 pointer-events-none" />
         <motion.div 
           initial={{ opacity: 0, y: 35 }}
@@ -1066,7 +1066,7 @@ function Home() {
       </section>
 
       {/* My Services Section */}
-      <section id="services" className="relative z-10 py-10 bg-cover bg-center border-t border-[#deb18a]/10" style={{ backgroundImage: "url('/marble-bg.jpg')" }}>
+      <section id="services" className="relative z-10 py-10 bg-cover bg-center border-t border-[#deb18a]/10" style={{ backgroundImage: "url('/marble-bg.webp')" }}>
         <div className="absolute inset-0 bg-[#f9f6f0]/20 z-0 pointer-events-none" />
 
         {/* Celestial Divider 3 (directly on border line, zero height) */}

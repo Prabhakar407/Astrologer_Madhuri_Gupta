@@ -199,7 +199,7 @@ export default function ContactPage() {
                 <div className="flex items-center shrink-0 pr-1">
                   <div className="w-[100px] sm:w-[130px] aspect-[4/5] rounded-t-full overflow-hidden border-4 border-white shadow-xl bg-white">
                     <img
-                      src="/contact_office.png"
+                      src="/contact_office.webp"
                       alt="Astrologer Madhuri Gupta Consultation Office Agra"
                       loading="lazy"
                       className="w-full h-full object-cover object-center pointer-events-none"
@@ -249,7 +249,7 @@ export default function ContactPage() {
                 className="w-[280px] sm:w-[320px] h-[380px] sm:h-[420px] rounded-t-full overflow-hidden border-[6px] border-white shadow-2xl bg-white"
               >
                 <img
-                  src="/contact_office.png"
+                  src="/contact_office.webp"
                   alt="Astrologer Madhuri Gupta Consultation Office Agra"
                   loading="lazy"
                   className="w-full h-full object-cover object-center pointer-events-none"

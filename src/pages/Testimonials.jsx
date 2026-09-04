@@ -16,7 +16,7 @@ const testimonials = [
     title: "Senior Software Engineer, Cloud Infrastructure",
     description:
       "Working with this team completely changed our infrastructure game. The support and expertise were incredible. They delivered beyond our expectations and helped us scale to millions of users.",
-    imageUrl: "/testimonial_michael.png",
+    imageUrl: "/testimonial_michael.webp",
     githubUrl: "#",
     twitterUrl: "#",
     youtubeUrl: "#",
@@ -27,7 +27,7 @@ const testimonials = [
     title: "Lead Data Scientist, InsightX",
     description:
       "The data analytics platform they built gave our team the confidence and tools needed for true data-driven decisions. Their dashboarding capabilities went above and beyond our expectations.",
-    imageUrl: "/testimonial_jessica.png",
+    imageUrl: "/testimonial_jessica.webp",
     githubUrl: "#",
     twitterUrl: "#",
     youtubeUrl: "#",
@@ -38,7 +38,7 @@ const testimonials = [
     title: "VP Product, NovaLabs",
     description:
       "NovaLabs helped our products find the perfect market fit. Their engineering team exceeded every delivery milestone and provided exceptional technical leadership.",
-    imageUrl: "/testimonial_william.png",
+    imageUrl: "/testimonial_william.webp",
     githubUrl: "#",
     twitterUrl: "#",
     youtubeUrl: "#",
@@ -74,7 +74,7 @@ export default function Testimonials() {
   ];
 
   return (
-    <div className="pt-20 min-h-[calc(100vh-80px)] md:min-h-[calc(100vh-80px)] bg-[#faf6e8] bg-cover bg-center flex flex-col justify-center py-6 relative" style={{ backgroundImage: "url('/marble-bg.jpg')" }}>
+    <div className="pt-20 min-h-[calc(100vh-80px)] md:min-h-[calc(100vh-80px)] bg-[#faf6e8] bg-cover bg-center flex flex-col justify-center py-6 relative" style={{ backgroundImage: "url('/marble-bg.webp')" }}>
       <div className="absolute inset-0 bg-[#faf6e8]/90 z-0 pointer-events-none" />
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 w-full flex flex-col space-y-6 lg:space-y-8">

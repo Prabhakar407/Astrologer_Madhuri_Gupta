@@ -176,7 +176,7 @@ export default function Booking() {
     <div 
       className="pt-10 md:pt-12 min-h-screen relative bg-[#faf6e8]" 
       style={{ 
-        backgroundImage: "linear-gradient(rgba(250, 246, 232, 0.45), rgba(250, 246, 232, 0.45)), url('/marble-bg.jpg')", 
+        backgroundImage: "linear-gradient(rgba(250, 246, 232, 0.45), rgba(250, 246, 232, 0.45)), url('/marble-bg.webp')", 
         backgroundSize: 'cover', 
         backgroundPosition: 'center', 
         backgroundAttachment: 'fixed' 

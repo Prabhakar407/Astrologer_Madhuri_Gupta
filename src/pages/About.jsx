@@ -10,7 +10,7 @@ function About() {
     <div className="min-h-screen bg-[#faf6e8]">
       
       {/* About Page Hero Section */}
-      <section className="relative w-full h-auto min-h-screen pt-28 lg:pt-20 pb-16 flex flex-col justify-center items-center overflow-hidden bg-cover bg-center" style={{ backgroundImage: "url('/marble-bg.jpg')" }}>
+      <section className="relative w-full h-auto min-h-screen pt-28 lg:pt-20 pb-16 flex flex-col justify-center items-center overflow-hidden bg-cover bg-center" style={{ backgroundImage: "url('/marble-bg.webp')" }}>
         <div className="absolute inset-0 bg-[#faf6e8]/90 z-0 pointer-events-none" />
         
         {/* Symmetrical crescent curved shading at the top to match image_67 */}
@@ -52,7 +52,7 @@ function About() {
               >
                 <div className="w-full h-full rounded-sm overflow-hidden relative">
                   <img 
-                    src="/Hero_person.png" 
+                    src="/Hero_person.webp" 
                     alt="Astrologer Madhuri Gupta - Vedic Astrologer in Agra" 
                     loading="lazy"
                     className="h-full w-full object-cover object-top pointer-events-none" 
@@ -122,12 +122,12 @@ function About() {
                 
                 {/* Top Smaller Arch containing vertical line art (rotated 90 degrees clockwise) */}
                 <div className="absolute top-0 right-0 w-[105px] h-[155px] rounded-t-full rounded-b-2xl overflow-hidden border border-[#b8922b]/35 shadow-md z-10 bg-white rotate-90 transition-transform duration-300">
-                  <img src="/right_top.png" alt="Occult Alignment" loading="lazy" className="w-full h-full object-cover object-center pointer-events-none" />
+                  <img src="/right_top.webp" alt="Occult Alignment" loading="lazy" className="w-full h-full object-cover object-center pointer-events-none" />
                 </div>
 
                 {/* Bottom Larger Arch containing fanned tarot over zodiac wheel (matching shape of top arch) */}
                 <div className="absolute bottom-12 left-0 w-[125px] h-[155px] rounded-t-full rounded-b-2xl overflow-hidden border border-[#deb18a]/50 shadow-lg z-20 bg-white">
-                  <img src="/right_bottom.png" alt="Tarot & Zodiac spread" loading="lazy" className="w-full h-full object-cover object-center pointer-events-none" />
+                  <img src="/right_bottom.webp" alt="Tarot & Zodiac spread" loading="lazy" className="w-full h-full object-cover object-center pointer-events-none" />
                 </div>
 
               </div>
@@ -164,7 +164,7 @@ function About() {
               >
                 <div className="relative aspect-[4/3] rounded overflow-hidden">
                   <img
-                    src="/certificate.png"
+                    src="/certificate.webp"
                     alt="Astrology Certification - Bharatiya Vidya Bhavan"
                     loading="lazy"
                     className="w-full h-full object-cover"
@@ -186,7 +186,7 @@ function About() {
                 <div className="block md:hidden w-full max-w-[280px] mx-auto mb-4 p-1.5 bg-white rounded-lg border border-[#deb18a]/45 shadow-md">
                   <div className="relative aspect-[4/3] rounded overflow-hidden">
                     <img
-                      src="/certificate.png"
+                      src="/certificate.webp"
                       alt="Astrology Certification - Bharatiya Vidya Bhavan"
                       loading="lazy"
                       className="w-full h-full object-cover"
