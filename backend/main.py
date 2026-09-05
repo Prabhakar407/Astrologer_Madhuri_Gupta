@@ -1,14 +1,16 @@
 import os
 import uuid
 import smtplib
+import socket
+import ssl
 import re
 import html
 import json
 import secrets
 import sqlite3
 import threading
-import time as time_module
-from datetime import datetime, timedelta, time
+import time
+from datetime import datetime, timedelta, time as dt_time
 from email.mime.text import MIMEText
 from email.mime.multipart import MIMEMultipart
 from email.utils import formatdate, make_msgid
@@ -156,7 +158,7 @@ class CacheManager:
 
     def _cleanup_expired_sqlite(self):
         try:
-            now = time_module.time()
+            now = time.time()
             with self.db_lock:
                 conn = sqlite3.connect(self.sqlite_path, check_same_thread=False)
                 cursor = conn.cursor()
@@ -184,7 +186,7 @@ class CacheManager:
 
         # SQLite Fallback
         try:
-            expires_at = time_module.time() + ex
+            expires_at = time.time() + ex
             with self.db_lock:
                 conn = sqlite3.connect(self.sqlite_path, check_same_thread=False)
                 cursor = conn.cursor()
@@ -220,7 +222,7 @@ class CacheManager:
         # SQLite Fallback
         try:
             self._cleanup_expired_sqlite()
-            now = time_module.time()
+            now = time.time()
             with self.db_lock:
                 conn = sqlite3.connect(self.sqlite_path, check_same_thread=False)
                 cursor = conn.cursor()
@@ -425,24 +427,41 @@ def parse_time_string(time_str: str) -> time:
         dt = datetime.strptime(time_str, "%H:%M")
         return dt.time()
     except Exception:
-        return time(10, 0)
+        return dt_time(10, 0)
 
 
 # -----------------------------------------------------------------------------
-# Email Delivery Engine (Resend with SMTP Fallback)
+# Email Delivery Engine (Resend with IPv4-Enforced SMTP Fallback)
 # -----------------------------------------------------------------------------
+
+class IPv4SMTP(smtplib.SMTP):
+    """Custom SMTP client that forces IPv4 connections to prevent network unreachable errors on cloud platforms."""
+    def _get_socket(self, host, port, timeout):
+        for res in socket.getaddrinfo(host, port, socket.AF_INET, socket.SOCK_STREAM):
+            af, socktype, proto, canonname, sa = res
+            try:
+                s = socket.socket(af, socktype, proto)
+                if timeout is not None:
+                    s.settimeout(timeout)
+                s.connect(sa)
+                return s
+            except Exception:
+                if s:
+                    s.close()
+        raise socket.error(f"Could not connect to IPv4 address for {host}:{port}")
+
 
 def send_email_unified(subject: str, text_body: str, html_body: str, to_email: Optional[str] = None) -> bool:
     """
     Unified email dispatcher:
-    1. Attempts delivery via Resend API (custom verified domain, instant inbox).
-    2. Falls back to Gmail SMTP if Resend is unconfigured or encounters an error.
+    1. Attempts delivery via Resend API (HTTPS Port 443, custom verified domain, instant inbox).
+    2. Falls back to Gmail SMTP over IPv4 Port 587 (STARTTLS) if Resend is unconfigured or encounters an error.
     """
     recipient = to_email or os.getenv("SMTP_RECEIVER") or os.getenv("SMTP_EMAIL", "sarsajyotish@gmail.com")
     resend_key = os.getenv("RESEND_API_KEY", "")
     from_email = os.getenv("RESEND_FROM_EMAIL", "AstroAdvice <contact@sarsajyotishsansthan.com>")
 
-    # 1. Try Resend Delivery
+    # 1. Try Resend Delivery (HTTPS port 443 - 100% reliable on Render/Cloud)
     if resend_key and resend_key != "your_resend_api_key_here":
         try:
             resend.api_key = resend_key
@@ -457,18 +476,19 @@ def send_email_unified(subject: str, text_body: str, html_body: str, to_email: O
             print(f"[INFO] Resend email '{subject}' delivered to {recipient}. ID: {res.get('id', 'ok')}")
             return True
         except Exception as res_err:
-            print(f"[WARN] Resend dispatch failed ({res_err}). Attempting SMTP fallback...")
+            print(f"[WARN] Resend dispatch failed ({res_err}). Attempting IPv4 SMTP fallback...")
 
-    # 2. Fallback to SMTP
+    # 2. Fallback to IPv4-Forced SMTP
     return send_smtp_fallback(subject, text_body, html_body, recipient)
 
+
 def send_smtp_fallback(subject: str, text_body: str, html_body: str, recipient: str) -> bool:
-    """Fallback multipart SMTP email sender."""
+    """Fallback multipart SMTP email sender with forced IPv4 socket to prevent [Errno 101] Network is unreachable on Render."""
     sender_email = os.getenv("SMTP_EMAIL")
     sender_password = os.getenv("SMTP_PASSWORD")
 
     if not sender_email or not sender_password or not recipient:
-        print("[WARN] SMTP configurations missing. Email dispatch skipped.")
+        print("[WARN] SMTP configurations missing. Fallback email dispatch skipped.")
         return False
 
     try:
@@ -484,14 +504,18 @@ def send_smtp_fallback(subject: str, text_body: str, html_body: str, recipient: 
         msg.attach(part1)
         msg.attach(part2)
 
-        with smtplib.SMTP_SSL('smtp.gmail.com', 465) as server:
+        # Attempt connection on standard submission Port 587 with STARTTLS using forced IPv4
+        with IPv4SMTP("smtp.gmail.com", 587, timeout=12) as server:
+            server.ehlo()
+            server.starttls(context=ssl.create_default_context())
+            server.ehlo()
             server.login(sender_email, sender_password)
             server.sendmail(sender_email, recipient, msg.as_string())
 
-        print(f"[INFO] Fallback SMTP email '{subject}' dispatched to {recipient}")
+        print(f"[INFO] Fallback SMTP (IPv4 587) email '{subject}' dispatched to {recipient}")
         return True
     except Exception as e:
-        print(f"[ERROR] Failed to dispatch fallback SMTP email: {e}")
+        print(f"[WARN] SMTP delivery attempt failed: {e}")
         return False
 
 # -----------------------------------------------------------------------------
