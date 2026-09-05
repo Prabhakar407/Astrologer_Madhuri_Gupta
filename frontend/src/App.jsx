@@ -55,6 +55,14 @@ function ScrollToHashElement() {
 }
 
 function App() {
+  useEffect(() => {
+    // Silent background pre-warming of cloud server container (e.g., Render free tier wake-up)
+    try {
+      const backendUrl = import.meta.env.VITE_BACKEND_URL || (typeof window !== 'undefined' && (window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1') ? '' : 'https://astrologer-madhuri-gupta.onrender.com');
+      fetch(`${backendUrl}/api/health`, { method: 'GET', keepalive: true }).catch(() => {});
+    } catch (_) {}
+  }, []);
+
   return (
     <Router>
       <ScrollToHashElement />

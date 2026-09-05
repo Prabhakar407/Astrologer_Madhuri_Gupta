@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import {
   Phone,
@@ -8,45 +8,92 @@ import {
   Twitter,
   Youtube,
   Globe,
-  MessageCircle
+  CheckCircle2,
+  AlertTriangle,
+  Send
 } from "lucide-react";
+import EmailOtpModal from "../components/EmailOtpModal.jsx";
 
-const BACKEND_URL = "https://astrologer-madhuri-gupta.onrender.com";
+const BACKEND_URL = import.meta.env.VITE_BACKEND_URL || (typeof window !== 'undefined' && (window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1') ? '' : 'https://astrologer-madhuri-gupta.onrender.com');
 
 export default function ContactPage() {
-  React.useEffect(() => {
+  useEffect(() => {
     document.title = "Contact Astrologer Madhuri Gupta | Sarsa Jyotish Sansthan Agra";
   }, []);
 
-  const [formData, setFormData] = React.useState({
+  // Form State
+  const [formData, setFormData] = useState({
     name: "",
     email: "",
     phone: "",
     subject: "Website Contact Form Inquiry",
     message: ""
   });
-  const [statusMsg, setStatusMsg] = React.useState("");
-  const [isSuccess, setIsSuccess] = React.useState(false);
-  const [loading, setLoading] = React.useState(false);
+
+  // Verification & Status States
+  const [isEmailVerified, setIsEmailVerified] = useState(false);
+  const [verificationToken, setVerificationToken] = useState("");
+  const [showOtpModal, setShowOtpModal] = useState(false);
+
+  const [statusMsg, setStatusMsg] = useState("");
+  const [isSuccess, setIsSuccess] = useState(false);
+  const [loading, setLoading] = useState(false);
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
     setFormData(prev => ({ ...prev, [name]: value }));
+    if (name === "email" && isEmailVerified) {
+      setIsEmailVerified(false);
+      setVerificationToken("");
+    }
   };
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
+  // Professional mobile phone validation (No +91 enforced)
+  const validatePhone = (rawPhone) => {
+    if (!rawPhone) return { valid: false, message: 'Please enter your mobile number.' };
+    const digits = rawPhone.replace(/\D/g, '');
+    if (!digits) return { valid: false, message: 'Please enter a valid mobile number.' };
+    if (/^(\d)\1{7,}$/.test(digits)) {
+      return { valid: false, message: 'Please enter a genuine mobile number.' };
+    }
+    if (digits.length === 10) {
+      if (/^[6-9]/.test(digits)) return { valid: true, digits };
+      return { valid: false, message: '10-digit Indian mobile numbers must start with 6, 7, 8, or 9.' };
+    }
+    if (digits.length === 11 && digits.startsWith('0')) {
+      return { valid: true, digits: digits.slice(1) };
+    }
+    if (digits.length === 12 && digits.startsWith('91')) {
+      return { valid: true, digits: digits.slice(2) };
+    }
+    if (digits.length >= 10 && digits.length <= 15) {
+      return { valid: true, digits };
+    }
+    return { valid: false, message: 'Please enter a valid 10-digit mobile number (e.g. 98881 57343).' };
+  };
+
+  // Submit Contact Query (Asynchronous on backend)
+  const submitContactQuery = async (tokenToUse) => {
     setLoading(true);
     setStatusMsg("");
     setIsSuccess(false);
 
     try {
+      const payload = {
+        name: formData.name.trim(),
+        email: formData.email.trim(),
+        phone: formData.phone.trim(),
+        subject: formData.subject.trim() || "Website Contact Form Inquiry",
+        message: formData.message.trim(),
+        verificationToken: tokenToUse || verificationToken
+      };
+
       const response = await fetch(`${BACKEND_URL}/api/contact`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify(formData),
+        body: JSON.stringify(payload),
       });
 
       if (!response.ok) {
@@ -55,7 +102,7 @@ export default function ContactPage() {
       }
 
       setIsSuccess(true);
-      setStatusMsg("Thank you! Your message has been sent successfully.");
+      setStatusMsg("Thank you! Your message has been sent successfully. Astrologer Madhuri Gupta will connect with you shortly.");
       setFormData({
         name: "",
         email: "",
@@ -63,12 +110,51 @@ export default function ContactPage() {
         subject: "Website Contact Form Inquiry",
         message: ""
       });
+      setIsEmailVerified(false);
+      setVerificationToken("");
     } catch (err) {
       setIsSuccess(false);
-      setStatusMsg(err.message || 'Server error occurred. Please try again.');
+      if (err.message === 'Failed to fetch' || err.message?.includes('NetworkError')) {
+        setStatusMsg('Cannot connect to backend server. Please verify the backend service is running.');
+      } else {
+        setStatusMsg(err.message || 'Server error occurred. Please try again.');
+      }
     } finally {
       setLoading(false);
     }
+  };
+
+  // Form submission click handler (0ms Instant Modal Opening)
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    setStatusMsg("");
+
+    // Form Constraints Validation
+    if (!formData.name.trim() || formData.name.trim().length < 2) {
+      setStatusMsg("Please enter your name (at least 2 characters).");
+      return;
+    }
+    if (!formData.email.trim() || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(formData.email.trim())) {
+      setStatusMsg("Please enter a valid email address.");
+      return;
+    }
+    const phoneCheck = validatePhone(formData.phone);
+    if (!phoneCheck.valid) {
+      setStatusMsg(phoneCheck.message);
+      return;
+    }
+    if (!formData.message.trim() || formData.message.trim().length < 5) {
+      setStatusMsg("Please enter a message (at least 5 characters).");
+      return;
+    }
+
+    // 0ms Instant Modal Opening: User sees modal immediately while OTP request dispatches in background
+    if (!isEmailVerified) {
+      setShowOtpModal(true);
+      return;
+    }
+
+    await submitContactQuery(verificationToken);
   };
 
   return (
@@ -87,15 +173,15 @@ export default function ContactPage() {
                 transition={{ duration: 0.6 }}
                 className="space-y-3"
               >
-                <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold text-white font-serif tracking-wide">
+                <h1 className="text-3xl sm:text-5xl lg:text-6xl font-bold text-white font-serif tracking-wide leading-tight">
                   Contact Us
                 </h1>
-                <p className="text-[#deb18a]/80 max-w-lg text-sm sm:text-base font-light leading-relaxed">
+                <p className="text-[#deb18a]/80 max-w-lg text-xs sm:text-sm md:text-base font-light leading-relaxed">
                   Have questions about your astrological path or booking a consultation? Reach out today, and let us align your cosmic journey together.
                 </p>
               </motion.div>
 
-              {/* Desktop view: 3 Circular Badges Row in Hero (Styled for Dark Background) */}
+              {/* Desktop view: 3 Circular Badges Row in Hero */}
               <div className="hidden md:grid md:grid-cols-3 gap-6 pt-4 border-t border-[#deb18a]/15">
                 
                 {/* Phone */}
@@ -279,48 +365,71 @@ export default function ContactPage() {
               </div>
 
               <form onSubmit={handleSubmit} className="space-y-3">
+                {/* Email Input with Verification Indicator */}
                 <div className="space-y-1">
-                  <input
-                    type="email"
-                    name="email"
-                    value={formData.email}
-                    onChange={handleInputChange}
-                    placeholder="Email"
-                    required
-                    className="w-full bg-white/5 border border-white/20 rounded-xl px-4 py-2.5 text-xs text-white placeholder-[#deb18a]/40 focus:outline-none focus:border-[#b8922b] focus:ring-1 focus:ring-[#b8922b] transition-all"
-                  />
+                  <div className="relative">
+                    <input
+                      type="email"
+                      name="email"
+                      value={formData.email}
+                      onChange={handleInputChange}
+                      placeholder="Email Address"
+                      required
+                      className="w-full bg-white/5 border border-white/20 rounded-xl px-4 py-2.5 pr-24 text-xs text-white placeholder-[#deb18a]/40 focus:outline-none focus:border-[#b8922b] focus:ring-1 focus:ring-[#b8922b] transition-all"
+                    />
+                    {isEmailVerified ? (
+                      <span className="absolute right-3 top-1/2 -translate-y-1/2 flex items-center space-x-1 text-[10px] text-green-400 font-semibold bg-green-950/60 px-2 py-0.5 rounded-full border border-green-500/30">
+                        <CheckCircle2 className="w-3 h-3" />
+                        <span>Verified</span>
+                      </span>
+                    ) : formData.email && /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(formData.email) ? (
+                      <button
+                        type="button"
+                        onClick={() => setShowOtpModal(true)}
+                        className="absolute right-2.5 top-1/2 -translate-y-1/2 text-[10px] text-[#deb18a] hover:text-white bg-white/10 hover:bg-[#b8922b] px-2.5 py-1 rounded-lg transition-all font-medium cursor-pointer"
+                      >
+                        Verify Email
+                      </button>
+                    ) : null}
+                  </div>
                 </div>
                 
+                {/* Name */}
                 <div className="space-y-1">
                   <input
                     type="text"
                     name="name"
                     value={formData.name}
                     onChange={handleInputChange}
-                    placeholder="Name"
+                    placeholder="Full Name"
                     required
                     className="w-full bg-white/5 border border-white/20 rounded-xl px-4 py-2.5 text-xs text-white placeholder-[#deb18a]/40 focus:outline-none focus:border-[#b8922b] focus:ring-1 focus:ring-[#b8922b] transition-all"
                   />
                 </div>
 
+                {/* Mobile Phone (No +91 enforced) */}
                 <div className="space-y-1">
                   <input
                     type="tel"
                     name="phone"
                     value={formData.phone}
                     onChange={handleInputChange}
-                    placeholder="Mobile Number"
+                    placeholder="Mobile Number (e.g. 98881 57343)"
                     required
                     className="w-full bg-white/5 border border-white/20 rounded-xl px-4 py-2.5 text-xs text-white placeholder-[#deb18a]/40 focus:outline-none focus:border-[#b8922b] focus:ring-1 focus:ring-[#b8922b] transition-all"
                   />
+                  <p className="text-[10px] text-[#deb18a]/60 pl-1">
+                    Enter standard 10-digit mobile number (+91 not mandatory)
+                  </p>
                 </div>
 
+                {/* Message */}
                 <div className="space-y-1">
                   <textarea
                     name="message"
                     value={formData.message}
                     onChange={handleInputChange}
-                    placeholder="Message"
+                    placeholder="How can Astrologer Madhuri Gupta assist you?"
                     rows={3}
                     required
                     className="w-full bg-white/5 border border-white/20 rounded-xl px-4 py-2.5 text-xs text-white placeholder-[#deb18a]/40 focus:outline-none focus:border-[#b8922b] focus:ring-1 focus:ring-[#b8922b] transition-all resize-none"
@@ -328,17 +437,30 @@ export default function ContactPage() {
                 </div>
 
                 {statusMsg && (
-                  <p className={`text-xs font-semibold ${isSuccess ? 'text-green-400' : 'text-red-400'}`}>
-                    {statusMsg}
-                  </p>
+                  <div className={`p-2.5 rounded-xl text-xs font-semibold flex items-center space-x-2 ${
+                    isSuccess ? 'bg-green-500/15 border border-green-500/30 text-green-300' : 'bg-red-500/15 border border-red-500/30 text-red-300'
+                  }`}>
+                    {isSuccess ? <CheckCircle2 className="w-4 h-4 shrink-0" /> : <AlertTriangle className="w-4 h-4 shrink-0" />}
+                    <span>{statusMsg}</span>
+                  </div>
                 )}
 
                 <button
                   type="submit"
                   disabled={loading}
-                  className="w-fit bg-[#b8922b] hover:bg-[#a27e20] text-white font-bold py-2.5 px-6 rounded-xl transition-all duration-300 cursor-pointer shadow-md hover:shadow-lg text-xs select-none disabled:opacity-50"
+                  className="w-full sm:w-fit bg-[#b8922b] hover:bg-[#a27e20] text-white font-bold py-2.5 px-6 rounded-xl transition-all duration-300 cursor-pointer shadow-md hover:shadow-lg text-xs select-none disabled:opacity-50 flex items-center justify-center space-x-2"
                 >
-                  {loading ? "Submitting..." : "Submit Message"}
+                  {loading ? (
+                    <>
+                      <div className="w-3.5 h-3.5 border-2 border-white border-t-transparent rounded-full animate-spin" />
+                      <span>Sending Message...</span>
+                    </>
+                  ) : (
+                    <>
+                      <Send className="w-3.5 h-3.5" />
+                      <span>Submit Message</span>
+                    </>
+                  )}
                 </button>
               </form>
             </div>
@@ -366,7 +488,7 @@ export default function ContactPage() {
                   Social Media Links
                 </h2>
                 <div className="flex flex-wrap gap-2.5 justify-center">
-                  {/* WhatsApp (Real Logo & Match Link Color) */}
+                  {/* WhatsApp */}
                   <a
                     href="https://wa.me/918881573437"
                     target="_blank"
@@ -434,6 +556,19 @@ export default function ContactPage() {
           </div>
         </div>
       </section>
+
+      {/* High-Speed 6-Digit Email OTP Modal (Sub-3ms Redis) */}
+      <EmailOtpModal
+        isOpen={showOtpModal}
+        onClose={() => setShowOtpModal(false)}
+        email={formData.email}
+        purpose="contact"
+        onVerified={(token) => {
+          setIsEmailVerified(true);
+          setVerificationToken(token);
+          submitContactQuery(token);
+        }}
+      />
 
     </div>
   );

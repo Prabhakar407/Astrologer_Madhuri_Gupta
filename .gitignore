@@ -8,6 +8,7 @@ pnpm-debug.log*
 lerna-debug.log*
 
 node_modules
+**/node_modules
 dist
 dist-ssr
 *.local
@@ -23,18 +24,32 @@ dist-ssr
 *.sln
 *.sw?
 
-# Vibe Coding Astrologer Madhuri Gupta Secrets
+# Secrets & Configuration Files
 .env
+.env.*
+*.env
+**/.env
+**/.env.*
 service_account.json
+**/service_account.json
 sheets_config.json
+**/sheets_config.json
 calendar_config.json
+**/calendar_config.json
+mock_*.json
+**/mock_*.json
+*.db
+*.sqlite
 
 # Python virtual environment
 .venv
+**/_venv
 venv
+**/venv
 ENV
 pyenv
 __pycache__/
+**/__pycache__/
 *.pyc
 *.pyo
 *.pyd

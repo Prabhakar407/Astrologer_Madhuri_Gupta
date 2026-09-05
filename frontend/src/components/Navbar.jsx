@@ -138,39 +138,46 @@ function Navbar() {
         </div>
       </div>
 
-      {/* Dropdown Mobile Navigation Options (Smooth vertical collapse - 1/2 screen width aligned right) */}
+      {/* Dropdown Mobile Navigation Options (Smooth vertical collapse - aligned right with backdrop) */}
       <AnimatePresence>
         {mobileMenuOpen && (
-          <motion.div
-            initial={{ opacity: 0, height: 0 }}
-            animate={{ opacity: 1, height: 'auto' }}
-            exit={{ opacity: 0, height: 0 }}
-            transition={{ duration: 0.25, ease: 'easeInOut' }}
-            className="md:hidden absolute right-0 top-full w-1/2 min-w-[200px] bg-[#4f3129] border-l border-b border-[#deb18a]/15 overflow-hidden shadow-2xl rounded-bl-2xl z-50"
-          >
-            <div className="px-3 py-4 space-y-1.5 flex flex-col font-serif">
-              {navItems.map((item) => {
-                const isActive = activeTab === item.name;
-                return (
-                  <Link
-                    key={item.name}
-                    to={item.url}
-                    onClick={(e) => {
-                      handleLinkClick(e, item);
-                      setMobileMenuOpen(false);
-                    }}
-                    className={`text-xs sm:text-sm font-semibold tracking-[0.18em] uppercase py-2.5 px-4 rounded-xl transition-all ${
-                      isActive 
-                        ? 'bg-[#b8922b]/15 text-white border-l-4 border-[#b8922b]' 
-                        : 'text-[#deb18a]/80 hover:text-white hover:bg-white/5'
-                    }`}
-                  >
-                    {item.name}
-                  </Link>
-                );
-              })}
-            </div>
-          </motion.div>
+          <>
+            {/* Backdrop overlay for outside tap dismissal */}
+            <div 
+              className="fixed inset-0 top-[50px] bg-black/40 backdrop-blur-[2px] z-40 md:hidden"
+              onClick={() => setMobileMenuOpen(false)}
+            />
+            <motion.div
+              initial={{ opacity: 0, height: 0 }}
+              animate={{ opacity: 1, height: 'auto' }}
+              exit={{ opacity: 0, height: 0 }}
+              transition={{ duration: 0.25, ease: 'easeInOut' }}
+              className="md:hidden absolute right-0 top-full w-2/3 max-w-[260px] min-w-[190px] bg-[#4f3129] border-l border-b border-[#deb18a]/20 overflow-hidden shadow-2xl rounded-bl-2xl z-50"
+            >
+              <div className="px-3 py-4 space-y-1.5 flex flex-col font-serif">
+                {navItems.map((item) => {
+                  const isActive = activeTab === item.name;
+                  return (
+                    <Link
+                      key={item.name}
+                      to={item.url}
+                      onClick={(e) => {
+                        handleLinkClick(e, item);
+                        setMobileMenuOpen(false);
+                      }}
+                      className={`text-xs sm:text-sm font-semibold tracking-[0.18em] uppercase py-2.5 px-4 rounded-xl transition-all ${
+                        isActive 
+                          ? 'bg-[#b8922b]/20 text-white border-l-4 border-[#b8922b]' 
+                          : 'text-[#deb18a]/80 hover:text-white hover:bg-white/5'
+                      }`}
+                    >
+                      {item.name}
+                    </Link>
+                  );
+                })}
+              </div>
+            </motion.div>
+          </>
         )}
       </AnimatePresence>
 

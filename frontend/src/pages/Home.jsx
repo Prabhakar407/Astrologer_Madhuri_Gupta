@@ -2,7 +2,7 @@ import React from 'react'
 import { Link } from 'react-router-dom'
 import { motion } from 'framer-motion'
 import { Sparkles, Compass, Heart, Shield, Clock, Globe, Sun, Sprout, Flower2, Briefcase, Target, User, Award, Key, TrendingUp, Trophy, Scale, Scroll, Moon, Info, Phone, Mail } from 'lucide-react'
-import { TextShimmer } from '../../components/motion-primitives/text-shimmer'
+import { TextShimmer } from '../components/motion-primitives/text-shimmer'
 
 function ScrollCard({ phase, idx }) {
   const canvasVariants = {
