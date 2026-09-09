@@ -6,7 +6,7 @@ import { FaFacebook, FaYoutube, FaWhatsapp } from 'react-icons/fa'
 function Footer() {
   return (
     <footer id="contact" className="relative z-10 bg-[#4f3129] border-t border-[#deb18a]/20 text-[#deb18a] font-serif">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+      <div className="site-container py-12 2xl:py-16">
         <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
           
           {/* Brand Info */}
@@ -63,22 +63,16 @@ function Footer() {
             <h3 className="font-serif font-bold text-[#deb18a] mb-4 uppercase tracking-[0.18em] text-xs sm:text-sm">Our Services</h3>
             <ul className="space-y-2 text-xs sm:text-sm text-white/80 font-serif tracking-wider uppercase">
               <li>
-                <Link to="/services" className="hover:text-white transition-colors">Vedic Astrology</Link>
+                <Link to="/services" className="hover:text-white transition-colors">Kundli Matching</Link>
+              </li>
+              <li>
+                <Link to="/services" className="hover:text-white transition-colors">Kundli Prediction</Link>
               </li>
               <li>
                 <Link to="/services" className="hover:text-white transition-colors">Vastu Consultation</Link>
               </li>
               <li>
                 <Link to="/services" className="hover:text-white transition-colors">Numerology</Link>
-              </li>
-              <li>
-                <Link to="/services" className="hover:text-white transition-colors">Krishnamurti Paddhati Horoscope</Link>
-              </li>
-              <li>
-                <Link to="/services" className="hover:text-white transition-colors">Prashna Kundli</Link>
-              </li>
-              <li>
-                <Link to="/services" className="hover:text-white transition-colors">Bhrigu Nandi Nadi Astrology</Link>
               </li>
             </ul>
           </div>

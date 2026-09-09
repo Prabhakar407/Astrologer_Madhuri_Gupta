@@ -271,14 +271,14 @@ export default function Booking() {
       }}
     >
       
-      <div className="max-w-2xl mx-auto px-4 sm:px-6 pt-4 pb-8 relative z-10">
+      <div className="max-w-2xl 2xl:max-w-3xl 3xl:max-w-4xl mx-auto px-4 sm:px-6 2xl:px-8 pt-4 pb-8 2xl:pt-8 2xl:pb-16 relative z-10">
         
         {/* Header */}
-        <div className="text-center max-w-xl mx-auto mb-3 space-y-1">
-          <h1 className="font-serif text-2xl sm:text-3xl font-bold text-[#3a1906] tracking-wide">
+        <div className="text-center max-w-xl 2xl:max-w-2xl mx-auto mb-3 2xl:mb-6 space-y-1">
+          <h1 className="font-serif text-2xl sm:text-3xl 2xl:text-4xl font-bold text-[#3a1906] tracking-wide">
             Book a Consultation
           </h1>
-          <div className="w-12 h-[2px] bg-[#deb18a] mx-auto" />
+          <div className="w-12 2xl:w-16 h-[2px] bg-[#deb18a] mx-auto" />
         </div>
 
         {/* 3-Step Progress Tracker */}

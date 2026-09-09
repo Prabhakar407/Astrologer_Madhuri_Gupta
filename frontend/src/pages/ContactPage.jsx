@@ -161,8 +161,8 @@ export default function ContactPage() {
     <div className="min-h-screen bg-white">
       
       {/* Top Header Section (Dark Brown Background) */}
-      <section className="bg-[#4f3129] relative pt-24 pb-12 md:pb-16 z-10">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <section className="bg-[#4f3129] relative pt-24 2xl:pt-32 pb-12 md:pb-16 2xl:pb-24 z-10">
+        <div className="w-full max-w-7xl 2xl:max-w-[1600px] 3xl:max-w-[1920px] mx-auto px-4 sm:px-6 lg:px-8 2xl:px-12">
           <div className="grid grid-cols-1 md:grid-cols-12 gap-8 items-center relative">
             
             {/* Header Text & Contact Info Cards (Left 7 Columns) */}
@@ -304,18 +304,18 @@ export default function ContactPage() {
       </section>
 
       {/* Contact Info Row (Below Header, aligns alongside the hanging arch image) */}
-      <section className="bg-white pt-6 pb-16 relative z-10">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid grid-cols-1 md:grid-cols-12 gap-8">
+      <section className="bg-white pt-6 pb-16 2xl:pb-24 relative z-10">
+        <div className="w-full max-w-7xl 2xl:max-w-[1600px] 3xl:max-w-[1920px] mx-auto px-4 sm:px-6 lg:px-8 2xl:px-12">
+          <div className="grid grid-cols-1 md:grid-cols-12 gap-8 2xl:gap-12">
             
             {/* Our Location Map Section (Left 7 Columns) */}
             <div className="md:col-span-7 space-y-3 flex flex-col items-center md:items-start text-center md:text-left">
-              <h2 className="text-xl sm:text-2xl font-bold text-[#3a1906] font-serif">
+              <h2 className="text-xl sm:text-2xl 2xl:text-3xl font-bold text-[#3a1906] font-serif">
                 Our Location
               </h2>
 
               {/* Google Maps Embed */}
-              <div className="w-full max-w-[450px] h-[170px] rounded-xl overflow-hidden shadow-md border border-gray-150 mx-auto md:mx-0">
+              <div className="w-full max-w-[450px] 2xl:max-w-[550px] h-[170px] 2xl:h-[220px] rounded-xl overflow-hidden shadow-md border border-gray-150 mx-auto md:mx-0">
                 <iframe
                   src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d113579.78737678523!2d77.90997184499092!3d27.17630978716335!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x39740d857c2f41d9%3A0x784aef38a9523b42!2sAgra%2C%20Uttar%20Pradesh!5e0!3m2!1sen!2sin!4v1700000000000!5m2!1sen!2sin"
                   className="w-full h-full border-0"
@@ -327,12 +327,12 @@ export default function ContactPage() {
             </div>
 
             {/* Arched image cutout (Right 5 Columns - sits directly on white background with negative margin overlap) - hidden on mobile/tablet */}
-            <div className="hidden md:flex md:col-span-5 relative justify-end md:-mt-76 z-20">
+            <div className="hidden md:flex md:col-span-5 relative justify-end md:-mt-76 2xl:-mt-96 z-20">
               <motion.div
                 initial={{ opacity: 0, scale: 0.95 }}
                 animate={{ opacity: 1, scale: 1 }}
                 transition={{ duration: 0.8, delay: 0.2 }}
-                className="w-[280px] sm:w-[320px] h-[380px] sm:h-[420px] rounded-t-full overflow-hidden border-[6px] border-white shadow-2xl bg-white"
+                className="w-[280px] sm:w-[320px] 2xl:w-[380px] h-[380px] sm:h-[420px] 2xl:h-[480px] rounded-t-full overflow-hidden border-[6px] 2xl:border-[8px] border-white shadow-2xl bg-white"
               >
                 <img
                   src="/contact_office.webp"
@@ -349,8 +349,8 @@ export default function ContactPage() {
       </section>
 
       {/* Bottom Form & Map Section */}
-      <section className="bg-white pb-24 relative z-10 border-t border-gray-100 pt-8 md:pt-10">
-        <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+      <section className="bg-white pb-24 2xl:pb-32 relative z-10 border-t border-gray-100 pt-8 md:pt-10 2xl:pt-16">
+        <div className="w-full max-w-5xl 2xl:max-w-6xl 3xl:max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 2xl:px-12">
           <div className="grid grid-cols-1 md:grid-cols-12 gap-8 items-start">
             
             {/* Get In Touch Form (Left 6 Columns) */}

@@ -4,6 +4,7 @@
   "version": "1.0.0",
   "scripts": {
     "dev": "npm --prefix frontend run dev",
+    "dev:all": "concurrently \"npm run backend\" \"npm run dev\"",
     "build": "npm --prefix frontend run build",
     "preview": "npm --prefix frontend run preview",
     "backend": "cd backend && .venv/bin/uvicorn main:app --reload --port 8000"

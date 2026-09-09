@@ -10,24 +10,24 @@ function About() {
     <div className="min-h-screen bg-[#faf6e8]">
       
       {/* About Page Hero Section */}
-      <section className="relative w-full h-auto min-h-screen pt-28 lg:pt-20 pb-16 flex flex-col justify-center items-center overflow-hidden bg-cover bg-center" style={{ backgroundImage: "url('/marble-bg.webp')" }}>
+      <section className="relative w-full h-auto min-h-screen pt-24 lg:pt-16 2xl:pt-16 pb-16 flex flex-col justify-start items-center overflow-hidden bg-cover bg-center" style={{ backgroundImage: "url('/marble-bg.webp')" }}>
         <div className="absolute inset-0 bg-[#faf6e8]/90 z-0 pointer-events-none" />
         
         {/* Symmetrical crescent curved shading at the top to match image_67 */}
         <div className="absolute top-0 left-0 right-0 h-32 bg-gradient-to-b from-[#eadecc]/30 to-transparent pointer-events-none z-0" />
 
-        <div className="w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 flex flex-col justify-center space-y-6 lg:space-y-8 h-full">
+        <div className="w-full max-w-7xl 2xl:max-w-[1600px] 3xl:max-w-[1920px] mx-auto px-4 sm:px-6 lg:px-8 2xl:px-12 relative z-10 flex flex-col justify-start space-y-6 lg:space-y-8 2xl:space-y-10 h-full">
           
           {/* Upper-Center Header */}
-          <div className="text-center space-y-0.5 relative -top-3 lg:-top-6">
-            <h1 className="font-serif text-2xl sm:text-3xl lg:text-4xl xl:text-5xl font-bold text-[#3a1906] tracking-wide">
+          <div className="text-center space-y-0.5 relative -top-4 lg:-top-8">
+            <h1 className="font-serif text-2xl sm:text-3xl lg:text-4xl xl:text-5xl 2xl:text-6xl font-bold text-[#3a1906] tracking-wide">
               Personalized Divination
             </h1>
-            <div className="w-10 h-[1.5px] bg-[#3a1906]/30 mx-auto mt-1" />
+            <div className="w-10 2xl:w-16 h-[1.5px] bg-[#3a1906]/30 mx-auto mt-1 2xl:mt-2" />
           </div>
 
           {/* Symmetrical 3-Column Grid representing image_67.png */}
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-8 items-center w-full">
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-8 2xl:gap-12 items-center w-full">
             
             {/* Column 1: Large Vertical Rectangular Photo of Smiling Woman (lg:col-span-4) */}
             <div className="lg:col-span-4 flex justify-center relative">
@@ -140,18 +140,18 @@ function About() {
       </section>
 
       {/* Certification Section */}
-      <section className="py-16 bg-[#faf6e8] relative z-10 border-t border-[#deb18a]/20">
-        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+      <section className="py-16 2xl:py-24 bg-[#faf6e8] relative z-10 border-t border-[#deb18a]/20">
+        <div className="max-w-6xl 2xl:max-w-7xl 3xl:max-w-[1700px] mx-auto px-4 sm:px-6 lg:px-8 2xl:px-12">
           
-          <div className="text-center space-y-1 mb-12">
-            <span className="font-serif italic font-semibold text-[#b8922b] tracking-[0.25em] text-[10px] sm:text-xs uppercase block">Official Certification</span>
-            <h2 className="font-serif text-2xl sm:text-3xl font-bold text-[#3a1906] tracking-wide uppercase">
+          <div className="text-center space-y-1 mb-12 2xl:mb-16">
+            <span className="font-serif italic font-semibold text-[#b8922b] tracking-[0.25em] text-[10px] sm:text-xs 2xl:text-sm uppercase block">Official Certification</span>
+            <h2 className="font-serif text-2xl sm:text-3xl 2xl:text-4xl font-bold text-[#3a1906] tracking-wide uppercase">
               Professional Qualifications & Honors
             </h2>
-            <div className="w-12 h-[1.5px] bg-[#3a1906]/35 mx-auto mt-2" />
+            <div className="w-12 2xl:w-16 h-[1.5px] bg-[#3a1906]/35 mx-auto mt-2" />
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-12 gap-8 lg:gap-12 items-center">
+          <div className="grid grid-cols-1 md:grid-cols-12 gap-8 lg:gap-12 2xl:gap-16 items-center">
             
             {/* Left: Certificate Image Container */}
             <div className="hidden md:block md:col-span-6 flex justify-center">

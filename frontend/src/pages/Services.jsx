@@ -147,23 +147,23 @@ export default function Services() {
   }, []);
 
   return (
-    <div className="pt-28 pb-16 min-h-screen bg-white text-slate-900 font-sans selection:bg-[#b8922b]/20 selection:text-[#b8922b]">
-      <div className="max-w-6xl mx-auto px-4 sm:px-6">
+    <div className="pt-28 2xl:pt-36 pb-16 2xl:pb-24 min-h-screen bg-white text-slate-900 font-sans selection:bg-[#b8922b]/20 selection:text-[#b8922b]">
+      <div className="w-full max-w-6xl 2xl:max-w-7xl 3xl:max-w-[1700px] 4xl:max-w-[2100px] mx-auto px-4 sm:px-6 2xl:px-12">
         
         {/* Page Header with Semantic H1 */}
-        <div className="text-center space-y-2 mb-10">
-          <h1 className="font-serif text-3xl sm:text-4xl font-bold tracking-widest text-[#3a1906] uppercase">
+        <div className="text-center space-y-2 mb-10 2xl:mb-14">
+          <h1 className="font-serif text-3xl sm:text-4xl 2xl:text-5xl font-bold tracking-widest text-[#3a1906] uppercase">
             Vedic Astrology & Consultation Services
           </h1>
-          <div className="w-16 h-[1.5px] bg-[#3a1906]/40 mx-auto" />
-          <p className="font-sans text-xs sm:text-sm text-[#8c6c51] uppercase tracking-[0.15em] font-semibold">
+          <div className="w-16 2xl:w-24 h-[1.5px] bg-[#3a1906]/40 mx-auto" />
+          <p className="font-sans text-xs sm:text-sm 2xl:text-base text-[#8c6c51] uppercase tracking-[0.15em] font-semibold">
             Authentic Consultations & Remedial Guidance in Agra
           </p>
         </div>
 
         {/* Animated Stack of Cards */}
         <motion.div 
-          className="space-y-8"
+          className="space-y-8 2xl:space-y-10"
           variants={containerVariants}
           initial="hidden"
           animate="visible"
@@ -174,11 +174,11 @@ export default function Services() {
               variants={itemVariants}
               whileHover={{ y: -6, scale: 1.015, borderColor: "#b8922b", boxShadow: "0 20px 45px -10px rgba(79, 49, 41, 0.16)" }}
               whileTap={{ scale: 0.99 }}
-              className="bg-[#faf9f6] rounded-3xl border border-[#eae6df] p-4 sm:p-5 flex flex-col md:flex-row items-center md:items-stretch gap-6 transition-all duration-300 shadow-[0_4px_20px_rgba(79,49,41,0.08)]"
+              className="bg-[#faf9f6] rounded-3xl border border-[#eae6df] p-4 sm:p-5 2xl:p-7 flex flex-col md:flex-row items-center md:items-stretch gap-6 2xl:gap-8 transition-all duration-300 shadow-[0_4px_20px_rgba(79,49,41,0.08)]"
             >
               
               {/* Left Column: Professionally Photographed Image */}
-              <div className="w-full md:w-[280px] h-[190px] sm:h-[210px] relative overflow-hidden rounded-2xl shrink-0 group">
+              <div className="w-full md:w-[280px] 2xl:w-[340px] 3xl:w-[380px] h-[190px] sm:h-[210px] 2xl:h-[250px] relative overflow-hidden rounded-2xl shrink-0 group">
                 <img 
                   src={srv.image} 
                   alt={`${srv.title} Consultation in Agra`} 

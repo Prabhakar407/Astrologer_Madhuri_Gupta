@@ -67,22 +67,22 @@ function Navbar() {
   return (
     <header className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 border-b border-[#deb18a]/15 ${
       scrolled 
-        ? 'bg-[#4f3129] py-2 shadow-md' 
-        : 'bg-[#4f3129] py-3.5'
+        ? 'bg-[#4f3129] py-2 2xl:py-3 3xl:py-4 4xl:py-5 5xl:py-6 shadow-md' 
+        : 'bg-[#4f3129] py-3 2xl:py-4 3xl:py-5 4xl:py-6 5xl:py-8'
     }`}>
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex items-center justify-between h-9 relative">
+      <div className="site-container">
+        <div className="flex items-center justify-between h-9 2xl:h-12 3xl:h-14 4xl:h-16 5xl:h-24 relative">
           
           {/* Left Branding */}
-          <Link to="/" className="flex items-center space-x-2 group">
-            <Sparkles className="h-4.5 w-4.5 text-gold-400 group-hover:rotate-12 transition-transform duration-300" />
-            <span className="font-serif text-base sm:text-lg font-bold tracking-widest text-[#deb18a] group-hover:text-white transition-colors duration-300">
+          <Link to="/" className="flex items-center space-x-2 2xl:space-x-3 5xl:space-x-5 shrink-0 group">
+            <Sparkles className="h-4.5 w-4.5 2xl:h-6 2xl:w-6 3xl:h-7 3xl:w-7 4xl:h-8 4xl:w-8 5xl:h-12 5xl:w-12 text-gold-400 group-hover:rotate-12 transition-transform duration-300 shrink-0" />
+            <span className="font-serif text-base sm:text-lg 2xl:text-xl 3xl:text-2xl 4xl:text-3xl 5xl:text-5xl font-bold tracking-widest text-[#deb18a] group-hover:text-white transition-colors duration-300 whitespace-nowrap">
               MADHURI GUPTA
             </span>
           </Link>
 
-          {/* Desktop Center Menu Options */}
-          <div className="hidden md:flex items-center space-x-6 lg:space-x-8 absolute left-1/2 -translate-x-1/2">
+          {/* Desktop Center Menu Options (Only on xl+ to prevent overlap on iPad / tablets) */}
+          <div className="hidden xl:flex items-center space-x-5 2xl:space-x-6 3xl:space-x-8 4xl:space-x-10 5xl:space-x-12 mx-auto px-4">
             {navItems
               .filter((item) => ['Home', 'About', 'Services', 'Testimonial', 'Contact'].includes(item.name))
               .map((item) => {
@@ -92,10 +92,10 @@ function Navbar() {
                     key={item.name}
                     to={item.url}
                     onClick={(e) => handleLinkClick(e, item)}
-                    className={`font-serif text-[12px] lg:text-[13px] font-semibold tracking-[0.2em] uppercase transition-colors duration-300 ${
+                    className={`font-serif text-xs 2xl:text-base 3xl:text-lg 4xl:text-xl 5xl:text-3xl font-semibold tracking-[0.2em] uppercase transition-colors duration-300 pb-0.5 whitespace-nowrap ${
                       isActive 
-                        ? 'text-white border-b border-[#deb18a]' 
-                        : 'text-[#deb18a]/80 hover:text-white'
+                        ? 'text-[#deb18a] border-b-2 border-[#deb18a]' 
+                        : 'text-white hover:text-[#deb18a]'
                     }`}
                   >
                     {item.name}
@@ -104,11 +104,11 @@ function Navbar() {
               })}
           </div>
 
-          {/* Desktop Right CTA Button and Mobile Menu Toggle Button */}
-          <div className="flex items-center space-x-4">
+          {/* Right CTA Button & Mobile/Tablet Menu Button */}
+          <div className="flex items-center space-x-3 2xl:space-x-4 shrink-0">
             
-            {/* Desktop CTA */}
-            <div className="hidden md:block">
+            {/* CTA Button */}
+            <div className="hidden sm:block pr-1 sm:pr-2 lg:pr-3">
               <Link
                 to="/booking"
                 className="btn-10"
@@ -124,13 +124,13 @@ function Navbar() {
               </Link>
             </div>
 
-            {/* Mobile/Tablet Menu Button */}
+            {/* Mobile / Tablet Menu Button (Active on screens < xl including iPad/iPads) */}
             <button
               onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-              className="md:hidden p-1.5 rounded-lg text-[#deb18a] hover:text-white hover:bg-white/5 focus:outline-none transition-all cursor-pointer"
+              className="xl:hidden p-1.5 2xl:p-2 rounded-lg text-[#deb18a] hover:text-white hover:bg-white/5 focus:outline-none transition-all cursor-pointer"
               aria-label="Toggle Navigation Options"
             >
-              {mobileMenuOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
+              {mobileMenuOpen ? <X className="h-6 w-6 2xl:h-8 2xl:w-8" /> : <Menu className="h-6 w-6 2xl:h-8 2xl:w-8" />}
             </button>
 
           </div>
@@ -144,7 +144,7 @@ function Navbar() {
           <>
             {/* Backdrop overlay for outside tap dismissal */}
             <div 
-              className="fixed inset-0 top-[50px] bg-black/40 backdrop-blur-[2px] z-40 md:hidden"
+              className="fixed inset-0 top-[50px] 2xl:top-[70px] bg-black/40 backdrop-blur-[2px] z-40 xl:hidden"
               onClick={() => setMobileMenuOpen(false)}
             />
             <motion.div
@@ -152,9 +152,9 @@ function Navbar() {
               animate={{ opacity: 1, height: 'auto' }}
               exit={{ opacity: 0, height: 0 }}
               transition={{ duration: 0.25, ease: 'easeInOut' }}
-              className="md:hidden absolute right-0 top-full w-2/3 max-w-[260px] min-w-[190px] bg-[#4f3129] border-l border-b border-[#deb18a]/20 overflow-hidden shadow-2xl rounded-bl-2xl z-50"
+              className="xl:hidden absolute right-0 top-full w-3/4 max-w-[280px] sm:max-w-[320px] 2xl:max-w-[380px] bg-[#4f3129] border-l border-b border-[#deb18a]/20 overflow-hidden shadow-2xl rounded-bl-2xl z-50"
             >
-              <div className="px-3 py-4 space-y-1.5 flex flex-col font-serif">
+              <div className="px-3 py-4 2xl:px-5 2xl:py-6 space-y-1.5 2xl:space-y-2.5 flex flex-col font-serif">
                 {navItems.map((item) => {
                   const isActive = activeTab === item.name;
                   return (
@@ -165,10 +165,10 @@ function Navbar() {
                         handleLinkClick(e, item);
                         setMobileMenuOpen(false);
                       }}
-                      className={`text-xs sm:text-sm font-semibold tracking-[0.18em] uppercase py-2.5 px-4 rounded-xl transition-all ${
+                      className={`text-xs sm:text-sm 2xl:text-base 3xl:text-lg font-semibold tracking-[0.18em] uppercase py-2.5 px-4 2xl:py-3.5 2xl:px-5 rounded-xl transition-all ${
                         isActive 
-                          ? 'bg-[#b8922b]/20 text-white border-l-4 border-[#b8922b]' 
-                          : 'text-[#deb18a]/80 hover:text-white hover:bg-white/5'
+                          ? 'bg-[#b8922b]/20 text-[#deb18a] border-l-4 border-[#deb18a]' 
+                          : 'text-white hover:text-[#deb18a] hover:bg-white/5'
                       }`}
                     >
                       {item.name}

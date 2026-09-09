@@ -14,7 +14,7 @@ function AppShell() {
   const isHome = location.pathname === '/'
 
   return (
-    <div className="relative min-h-screen bg-cosmic-950 text-slate-100 flex flex-col font-sans overflow-x-hidden selection:bg-gold-500/30 selection:text-gold-200">
+    <div className="relative min-h-screen bg-cosmic-950 text-slate-100 flex flex-col font-sans overflow-x-hidden selection:bg-[#3a1906] selection:text-[#faf6e8]">
       <div className={isHome ? 'hero-page-shell' : ''}>
         <div className={isHome ? 'hero-unified-frame' : ''}>
           <Navbar />
