@@ -203,13 +203,13 @@ export default function EmailOtpModal({
   return (
     <AnimatePresence>
       {isOpen && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/75 backdrop-blur-md">
+        <div className="fixed inset-0 z-[100] flex items-center justify-center p-3 sm:p-4 bg-black/75 backdrop-blur-md">
           <motion.div
             initial={{ opacity: 0, scale: 0.94, y: 15 }}
             animate={{ opacity: 1, scale: 1, y: 0 }}
             exit={{ opacity: 0, scale: 0.94, y: 15 }}
             transition={{ duration: 0.25, ease: 'easeOut' }}
-            className="bg-[#4f3129] border border-[#deb18a]/35 rounded-3xl p-6 sm:p-8 max-w-md w-full shadow-2xl text-white relative space-y-5"
+            className="bg-[#4f3129] border border-[#deb18a]/35 rounded-3xl p-4 sm:p-8 max-w-md w-full shadow-2xl text-white relative space-y-4 sm:space-y-5"
           >
             {/* Close Button */}
             <button
@@ -223,21 +223,21 @@ export default function EmailOtpModal({
 
             {/* Header */}
             <div className="text-center space-y-2">
-              <div className="w-13 h-13 rounded-full bg-[#b8922b]/20 border border-[#b8922b]/50 text-[#deb18a] flex items-center justify-center mx-auto shadow-inner">
-                <KeyRound className="w-6 h-6" />
+              <div className="w-11 h-11 sm:w-13 sm:h-13 rounded-full bg-[#b8922b]/20 border border-[#b8922b]/50 text-white flex items-center justify-center mx-auto shadow-inner">
+                <KeyRound className="w-5 h-5 sm:w-6 sm:h-6 text-[#dfb260]" />
               </div>
-              <h3 className="font-serif text-2xl font-bold text-white tracking-wide">
+              <h3 className="font-serif text-xl sm:text-2xl font-bold text-white tracking-wide">
                 Verify Your Email
               </h3>
-              <p className="text-xs text-[#deb18a]/85 leading-relaxed max-w-xs mx-auto">
+              <p className="text-xs sm:text-sm text-white/90 leading-relaxed max-w-xs mx-auto">
                 Enter the 6-digit security code sent to <br />
-                <strong className="text-white font-medium break-all">{email}</strong>
+                <strong className="text-white font-semibold break-all">{email}</strong>
               </p>
             </div>
 
             {/* Success Notification */}
             {successMsg && (
-              <div className="p-2.5 rounded-xl bg-green-500/15 border border-green-500/30 text-green-300 text-xs text-center flex items-center justify-center space-x-1.5 shadow-sm">
+              <div className="p-2.5 rounded-xl bg-green-500/20 border border-green-500/40 text-green-200 text-xs text-center flex items-center justify-center space-x-1.5 shadow-sm">
                 <CheckCircle2 className="w-4 h-4 shrink-0" />
                 <span>{successMsg}</span>
               </div>
@@ -245,7 +245,7 @@ export default function EmailOtpModal({
 
             {/* Error Notification */}
             {error && (
-              <div className="p-2.5 rounded-xl bg-red-500/15 border border-red-500/30 text-red-300 text-xs text-center flex items-center justify-center space-x-1.5 shadow-sm">
+              <div className="p-2.5 rounded-xl bg-red-500/20 border border-red-500/40 text-red-200 text-xs text-center flex items-center justify-center space-x-1.5 shadow-sm">
                 <AlertTriangle className="w-4 h-4 shrink-0" />
                 <span>{error}</span>
               </div>
@@ -253,10 +253,10 @@ export default function EmailOtpModal({
 
             {/* 6-Digit Individual Input Grid */}
             <div className="space-y-2">
-              <label className="block text-[10px] font-bold uppercase tracking-widest text-[#deb18a] text-center">
+              <label className="block text-xs font-bold uppercase tracking-widest text-white text-center">
                 Security Verification Code
               </label>
-              <div className="flex justify-center items-center gap-2 sm:gap-2.5" onPaste={handlePaste}>
+              <div className="flex justify-center items-center gap-1.5 sm:gap-2.5" onPaste={handlePaste}>
                 {digits.map((digit, idx) => (
                   <input
                     key={idx}
@@ -267,7 +267,7 @@ export default function EmailOtpModal({
                     value={digit}
                     onChange={(e) => handleDigitChange(idx, e.target.value)}
                     onKeyDown={(e) => handleKeyDown(idx, e)}
-                    className="w-11 h-13 sm:w-12 sm:h-14 text-center text-xl sm:text-2xl font-mono font-bold bg-white/10 border border-[#deb18a]/35 rounded-xl focus:border-[#deb18a] focus:ring-2 focus:ring-[#b8922b]/50 focus:outline-none text-white transition-all shadow-inner"
+                    className="w-9 h-11 xs:w-10 xs:h-12 sm:w-12 sm:h-14 text-center text-lg xs:text-xl sm:text-2xl font-mono font-bold bg-white/10 border border-white/30 rounded-xl focus:border-[#dfb260] focus:ring-2 focus:ring-[#b8922b]/50 focus:outline-none text-white transition-all shadow-inner"
                   />
                 ))}
               </div>
@@ -279,7 +279,7 @@ export default function EmailOtpModal({
                 type="button"
                 onClick={() => verifyOtpCode()}
                 disabled={loading || digits.join('').length !== 6}
-                className="w-full py-3.5 rounded-xl bg-gradient-to-r from-[#b8922b] to-[#a27e20] hover:brightness-110 active:scale-[0.99] disabled:opacity-40 text-white font-bold uppercase tracking-wider text-xs shadow-lg transition-all flex items-center justify-center space-x-2 cursor-pointer"
+                className="w-full py-3.5 rounded-xl bg-gradient-to-r from-[#b8922b] to-[#a27e20] hover:brightness-110 active:scale-[0.99] disabled:opacity-40 text-white font-bold uppercase tracking-wider text-xs sm:text-sm shadow-lg transition-all flex items-center justify-center space-x-2 cursor-pointer"
               >
                 {loading ? (
                   <>
@@ -297,7 +297,7 @@ export default function EmailOtpModal({
               {/* 60s Resend Timer */}
               <div className="text-center">
                 {resendTimer > 0 ? (
-                  <span className="text-[11px] text-[#deb18a]/70 font-medium">
+                  <span className="text-xs text-white/80 font-medium">
                     Resend available in <strong className="text-white font-bold">{resendTimer}s</strong>
                   </span>
                 ) : (
@@ -305,7 +305,7 @@ export default function EmailOtpModal({
                     type="button"
                     onClick={requestOtp}
                     disabled={loading}
-                    className="text-xs text-[#deb18a] hover:text-white font-semibold hover:underline flex items-center justify-center space-x-1.5 mx-auto cursor-pointer transition-colors"
+                    className="text-xs sm:text-sm text-white hover:text-white font-semibold hover:underline flex items-center justify-center space-x-1.5 mx-auto cursor-pointer transition-colors"
                   >
                     <RefreshCw className="w-3.5 h-3.5" />
                     <span>Resend Security Code</span>
@@ -315,8 +315,8 @@ export default function EmailOtpModal({
             </div>
 
             {/* Security Footer Note */}
-            <div className="flex items-center justify-center space-x-1.5 text-[10px] text-white/40 pt-1 border-t border-white/10">
-              <Lock className="w-3 h-3 text-[#deb18a]/60" />
+            <div className="flex items-center justify-center space-x-1.5 text-xs text-white/60 pt-1 border-t border-white/10">
+              <Lock className="w-3.5 h-3.5 text-white/70" />
               <span>Encrypted via Upstash Serverless Redis & Resend TLS</span>
             </div>
           </motion.div>

@@ -948,7 +948,7 @@ def get_available_slots(date: str = Query(..., pattern=r"^\d{4}-\d{2}-\d{2}$")):
         for slot in default_slots:
             slot_time = parse_time_string(slot)
             slot_start = datetime.combine(start_dt.date(), slot_time)
-            slot_end = slot_start + timedelta(minutes=60)
+            slot_end = slot_start + timedelta(minutes=30)
             
             overlap_count = 0
             for event in events:
@@ -1030,7 +1030,7 @@ def background_booking_pipeline(
     # 2. Dual Google Sheets Logging
     try:
         timestamp = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
-        row_data = [timestamp, name, email, phone, service_type, booking_date, booking_time, "60 Mins", birth_details_str]
+        row_data = [timestamp, name, email, phone, service_type, booking_date, booking_time, "30 Mins", birth_details_str]
         headers = ["Timestamp", "Full Name", "Email", "Phone", "Service Name", "Date", "Time Slot", "Duration", "Birth Details"]
         append_row_to_sheet("Bookings", row_data, headers)
         print(f"[ASYNC] Dual Google Sheets updated successfully for {name}.")
@@ -1218,7 +1218,7 @@ def process_booking_creation(booking: BookingCreate, background_tasks: Backgroun
     booking_date_obj = datetime.strptime(booking_date, "%Y-%m-%d")
     slot_time = parse_time_string(booking_time)
     start_time = datetime.combine(booking_date_obj.date(), slot_time)
-    end_time = start_time + timedelta(minutes=60)
+    end_time = start_time + timedelta(minutes=30)
 
     # 3. Generate instant unique meeting ID & Jitsi Link
     meeting_id = str(uuid.uuid4())[:8]

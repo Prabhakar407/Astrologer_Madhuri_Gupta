@@ -45,7 +45,7 @@ function ScrollCard({ phase, idx }) {
     <motion.div 
       initial="hidden"
       whileInView="visible"
-      viewport={{ once: true, margin: "-120px" }}
+      viewport={{ once: true, margin: "-20px" }}
       className="flex flex-col items-center relative w-full max-w-[260px] mx-auto pb-12"
     >
       {/* Top hanging thread loop (hanging from horizontal line cord) */}
@@ -109,16 +109,16 @@ function ScrollCard({ phase, idx }) {
 
                 {/* Title */}
                 <div className="space-y-0.5 text-center">
-                  <span className="font-sans text-[9px] font-bold tracking-[0.2em] text-[#deb18a]/70 uppercase block">
+                  <span className="font-sans text-[9px] font-bold tracking-[0.2em] text-white/80 uppercase block">
                     {phase.phase}
                   </span>
-                  <h3 className="font-serif text-sm font-bold text-[#deb18a] tracking-wider uppercase leading-snug">
+                  <h3 className="font-serif text-sm font-bold text-white tracking-wider uppercase leading-snug">
                     {phase.title}
                   </h3>
                 </div>
 
                 {/* Description */}
-                <p className="font-sans text-xs text-[#f5ebd6]/85 font-light leading-relaxed max-w-[190px] text-center">
+                <p className="font-sans text-xs text-white/90 font-normal leading-relaxed max-w-[190px] text-center">
                   {phase.desc}
                 </p>
               </motion.div>
@@ -171,21 +171,27 @@ function ScrollCard({ phase, idx }) {
 
 function ServiceAccordion({ service, isOpen, onToggle }) {
   return (
-    <div className="w-full max-w-2xl 2xl:max-w-3xl 3xl:max-w-4xl mx-auto flex flex-col items-center">
+    <div className="w-full mx-auto flex flex-col items-center select-none">
       {/* Accordion Header */}
       <button 
         onClick={onToggle}
-        className="w-full px-6 py-4 2xl:px-7 2xl:py-2.5 3xl:px-8 3xl:py-3 flex items-center justify-between bg-gradient-to-r from-[#deb18a] via-[#f3dbaf] to-[#deb18a] border border-[#3a1906]/35 rounded-sm hover:scale-[1.01] transition-transform duration-200 cursor-pointer shadow-md text-left"
+        className="w-full px-5 sm:px-6 py-4 flex items-center justify-between bg-gradient-to-r from-[#deb18a] via-[#f3dbaf] to-[#deb18a] border border-[#3a1906]/35 rounded-sm hover:scale-[1.01] transition-transform duration-200 cursor-pointer shadow-md text-left"
       >
-        <div className="flex items-center space-x-3 2xl:space-x-4">
+        <div className="flex items-center space-x-3 min-w-0">
           {service.icon}
-          <span className="font-serif text-sm sm:text-base 2xl:text-[15px] 3xl:text-[17.5px] 4xl:text-[20px] font-bold text-[#3a1906] tracking-wider uppercase">
+          <span className="font-serif text-sm sm:text-base font-bold text-[#3a1906] tracking-wider uppercase truncate">
             {service.title}
           </span>
-          {/* Info Icon & Smooth Hover Tooltip Box */}
-          <div className="relative group/info inline-block" onClick={(e) => e.stopPropagation()}>
+          {/* Info Icon & Smooth Hover/Touch Tooltip Box */}
+          <div 
+            className="relative group/info inline-block shrink-0 focus:outline-none"
+            tabIndex={0}
+            role="button"
+            aria-label="View service overview"
+            onClick={(e) => e.stopPropagation()}
+          >
             <Info className="h-4 w-4 2xl:h-5 2xl:w-5 text-[#3a1906]/60 hover:text-[#3a1906] transition-colors cursor-help shrink-0" />
-            <div className="absolute bottom-full left-1/2 -translate-x-1/2 mb-2.5 w-60 sm:w-64 2xl:w-72 p-3.5 2xl:p-4 bg-[#4f3129] border border-[#deb18a]/30 text-[#faf6e8] rounded-xl shadow-xl opacity-0 pointer-events-none group-hover/info:opacity-100 group-hover/info:pointer-events-auto transition-all duration-300 transform translate-y-1 group-hover/info:translate-y-0 z-50 normal-case tracking-normal">
+            <div className="absolute bottom-full left-[-20px] sm:left-1/2 sm:-translate-x-1/2 mb-2.5 w-60 sm:w-64 2xl:w-72 max-w-[calc(100vw-3rem)] p-3.5 2xl:p-4 bg-[#4f3129] border border-[#deb18a]/30 text-[#faf6e8] rounded-xl shadow-xl opacity-0 pointer-events-none group-hover/info:opacity-100 group-hover/info:pointer-events-auto group-focus/info:opacity-100 group-focus/info:pointer-events-auto transition-all duration-300 transform translate-y-1 group-hover/info:translate-y-0 group-focus/info:translate-y-0 z-50 normal-case tracking-normal">
               <div className="font-serif font-bold text-[9px] 2xl:text-[11px] text-[#deb18a] uppercase tracking-wider mb-1.5 border-b border-[#deb18a]/20 pb-1">
                 Overview
               </div>
@@ -198,7 +204,7 @@ function ServiceAccordion({ service, isOpen, onToggle }) {
         <motion.div
           animate={{ rotate: isOpen ? 180 : 0 }}
           transition={{ duration: 0.3 }}
-          className="text-[#3a1906]"
+          className="text-[#3a1906] shrink-0 ml-2"
         >
           <svg className="h-5 w-5 2xl:h-6 2xl:w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2">
             <path strokeLinecap="round" strokeLinejoin="round" d="M19 9l-7 7-7-7" />
@@ -213,127 +219,38 @@ function ServiceAccordion({ service, isOpen, onToggle }) {
         transition={{ duration: 0.4, ease: "easeInOut" }}
         className="w-full overflow-hidden"
       >
-        <div className="p-5 2xl:p-7 3xl:p-8 bg-gradient-to-b from-[#faf6e8] to-[#f4edd9] border-x border-b border-[#3a1906]/20 rounded-b-sm space-y-4 2xl:space-y-6 text-[#3b2a1f] shadow-inner">
-          {service.id === 'vedic-astrology' ? (
-            <div className="space-y-6 2xl:space-y-8">
-              {/* Section 1: Kundli Matching */}
-              <div className="space-y-2.5 2xl:space-y-3.5">
-                <h4 className="font-serif font-bold text-sm sm:text-base 2xl:text-xl 3xl:text-2xl text-[#3a1906] tracking-wide uppercase">
-                  Kundli Matching
-                </h4>
-                <ul className="space-y-1.5 2xl:space-y-2.5 font-sans text-xs sm:text-sm 2xl:text-lg 3xl:text-xl text-[#4a312a]/95 font-medium list-none">
-                  <li className="flex items-start space-x-2">
-                    <span className="text-[#b8922b] mt-0.5">•</span>
-                    <span><strong>Ashta Koota Milan:</strong> Comprehensive compatibility analysis using the traditional 36-Guna alignment system.</span>
-                  </li>
-                  <li className="flex items-start space-x-2">
-                    <span className="text-[#b8922b] mt-0.5">•</span>
-                    <span><strong>Dosha Verification:</strong> Deep checking of Manglik Dosha, Bhakoot, Nadi, and potential planetary conflicts.</span>
-                  </li>
-                  <li className="flex items-start space-x-2">
-                    <span className="text-[#b8922b] mt-0.5">•</span>
-                    <span><strong>Remedial Solutions:</strong> Actionable relationship counseling and Vedic remedies to foster long-term harmony.</span>
-                  </li>
-                </ul>
-                <div className="flex items-center justify-between text-xs sm:text-sm 2xl:text-lg 3xl:text-xl font-sans font-bold text-[#3a1906] pt-1">
-                  <span>Price: ₹2,100</span>
-                  <span>Duration: 45 Mins Session</span>
-                </div>
-                <div className="pt-2">
-                  <Link
-                    to="/booking?service=kundli-matching"
-                    className="btn-10"
-                  >
-                    <div className="slide-bg"></div>
-                    <span className="arrow-icon">
-                      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
-                        <line x1="5" y1="12" x2="19" y2="12"></line>
-                        <polyline points="12 5 19 12 12 19"></polyline>
-                      </svg>
-                    </span>
-                    <span className="btn-text">Book Appointment</span>
-                  </Link>
-                </div>
-              </div>
-
-              {/* Brown Horizontal Divider */}
-              <div className="h-[1.5px] bg-[#3a1906]/20 w-full my-4 2xl:my-6" />
-
-              {/* Section 2: Kundli Prediction */}
-              <div className="space-y-2.5 2xl:space-y-3.5">
-                <h4 className="font-serif font-bold text-sm sm:text-base 2xl:text-xl 3xl:text-2xl text-[#3a1906] tracking-wide uppercase">
-                  Kundli Prediction
-                </h4>
-                <ul className="space-y-1.5 2xl:space-y-2.5 font-sans text-xs sm:text-sm 2xl:text-lg 3xl:text-xl text-[#4a312a]/95 font-medium list-none">
-                  <li className="flex items-start space-x-2">
-                    <span className="text-[#b8922b] mt-0.5">•</span>
-                    <span><strong>Houses Activation:</strong> Full decoding of your birth chart to map house strengths and planetary influences.</span>
-                  </li>
-                  <li className="flex items-start space-x-2">
-                    <span className="text-[#b8922b] mt-0.5">•</span>
-                    <span><strong>Dasha Timeline:</strong> Predictive timelines for key life events including career, finances, and relationships.</span>
-                  </li>
-                  <li className="flex items-start space-x-2">
-                    <span className="text-[#b8922b] mt-0.5">•</span>
-                    <span><strong>Tailored Remedies:</strong> Practical guidance on suitable gemstones, charity acts, and mantra recitations.</span>
-                  </li>
-                </ul>
-                <div className="flex items-center justify-between text-xs sm:text-sm 2xl:text-lg 3xl:text-xl font-sans font-bold text-[#3a1906] pt-1">
-                  <span>Price: ₹2,500</span>
-                  <span>Duration: 60 Mins Session</span>
-                </div>
-                <div className="pt-2">
-                  <Link
-                    to="/booking?service=kundli-prediction"
-                    className="btn-10"
-                  >
-                    <div className="slide-bg"></div>
-                    <span className="arrow-icon">
-                      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
-                        <line x1="5" y1="12" x2="19" y2="12"></line>
-                        <polyline points="12 5 19 12 12 19"></polyline>
-                      </svg>
-                    </span>
-                    <span className="btn-text">Book Appointment</span>
-                  </Link>
-                </div>
-              </div>
-            </div>
-          ) : (
-            <>
-              <p className="font-sans text-xs sm:text-sm 2xl:text-lg 3xl:text-xl font-medium tracking-wide italic text-[#4a312a]/95">
-                {service.tagline}
-              </p>
-              <div className="flex items-center justify-between text-xs sm:text-sm 2xl:text-lg 3xl:text-xl font-sans font-bold text-[#3a1906]">
-                <span>Price: {service.price}</span>
-                <span>Duration: {service.duration}</span>
-              </div>
-              <div className="h-[1px] bg-[#3a1906]/10 w-full" />
-              <ul className="space-y-2 2xl:space-y-3">
-                {service.features.map((feat, fidx) => (
-                  <li key={fidx} className="flex items-start space-x-2 text-xs sm:text-sm 2xl:text-lg 3xl:text-xl text-[#4a312a]/90">
-                    <span className="text-[#3a1906] font-bold">•</span>
-                    <span>{feat}</span>
-                  </li>
-                ))}
-              </ul>
-              <div className="pt-2">
-                <Link
-                  to={`/booking?service=${service.id}`}
-                  className="btn-10"
-                >
-                  <div className="slide-bg"></div>
-                  <span className="arrow-icon">
-                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
-                      <line x1="5" y1="12" x2="19" y2="12"></line>
-                      <polyline points="12 5 19 12 12 19"></polyline>
-                    </svg>
-                  </span>
-                  <span className="btn-text">Book Session</span>
-                </Link>
-              </div>
-            </>
-          )}
+        <div className="p-5 2xl:p-7 3xl:p-8 bg-gradient-to-b from-[#faf6e8] to-[#f4edd9] border-x border-b border-[#3a1906]/20 rounded-b-sm space-y-3.5 2xl:space-y-5 text-[#3b2a1f] shadow-inner">
+          <p className="font-sans text-xs sm:text-sm 2xl:text-lg 3xl:text-xl font-medium tracking-wide italic text-[#4a312a]/95">
+            {service.tagline}
+          </p>
+          <div className="flex items-center justify-between text-xs sm:text-sm 2xl:text-lg 3xl:text-xl font-sans font-bold text-[#3a1906]">
+            <span>Price: {service.price}</span>
+            <span>Duration: {service.duration}</span>
+          </div>
+          <div className="h-[1px] bg-[#3a1906]/10 w-full" />
+          <ul className="space-y-2 2xl:space-y-3">
+            {service.features.map((feat, fidx) => (
+              <li key={fidx} className="flex items-start space-x-2 text-xs sm:text-sm 2xl:text-lg 3xl:text-xl text-[#4a312a]/90">
+                <span className="text-[#3a1906] font-bold">•</span>
+                <span>{feat}</span>
+              </li>
+            ))}
+          </ul>
+          <div className="pt-2">
+            <Link
+              to={`/booking?service=${service.id}`}
+              className="btn-10"
+            >
+              <div className="slide-bg"></div>
+              <span className="arrow-icon">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+                  <line x1="5" y1="12" x2="19" y2="12"></line>
+                  <polyline points="12 5 19 12 12 19"></polyline>
+                </svg>
+              </span>
+              <span className="btn-text">Book Appointment</span>
+            </Link>
+          </div>
         </div>
       </motion.div>
     </div>
@@ -355,18 +272,31 @@ function Home() {
 
   const serviceList = [
     {
-      id: 'vedic-astrology',
-      title: 'Vedic Astrology',
-      tagline: 'Kundli Matching & Kundli Prediction',
-      shortDesc: 'Kundli Matching for marital compatibility and Kundli Prediction for career, relationships, and financial guidance.',
-      duration: '45 - 60 Mins',
-      price: '₹2,100 - ₹2,500',
+      id: 'kundli-matching',
+      title: 'Kundli Matching',
+      tagline: 'Compatibility & marital synastry analysis',
+      shortDesc: 'Comprehensive Ashta Koota 36-Guna matching, Manglik and Nadi Dosha verification, and remedies for harmonious marriage.',
+      duration: '30 Mins Session',
+      price: '₹2,100',
+      icon: <Heart className="h-5 w-5 text-rose-700 fill-rose-700 shrink-0" />,
+      features: [
+        '36-Guna compatibility analysis',
+        'Manglik & Nadi Dosha verification',
+        'Relationship counseling & remedies'
+      ]
+    },
+    {
+      id: 'kundli-prediction',
+      title: 'Kundli Prediction',
+      tagline: 'Birth chart decoding & dasha timelines',
+      shortDesc: 'In-depth Janam Kundli analysis decoding all 12 houses, Mahadasha cycles, and predictive timelines for career, finance, and relationships.',
+      duration: '30 Mins Session',
+      price: '₹2,500',
       icon: <Moon className="h-5 w-5 text-purple-700 fill-purple-700 shrink-0" />,
       features: [
-        'Detailed Guna Milan matching analysis',
-        'In-depth birth chart predictions',
-        'Dasha transit & timing timelines',
-        'Personalized remedies & Gemstones'
+        'Birth chart & houses decoding',
+        'Dasha timeline & life predictions',
+        'Personalized gemstone & mantra remedies'
       ]
     },
     {
@@ -374,7 +304,7 @@ function Home() {
       title: 'Vastu Consultation',
       tagline: 'Spatial geometry & elemental energy balance',
       shortDesc: 'Harmonizing the energies of your home, office, or plot using spatial geometry, elemental balance, and classical Vastu remedies.',
-      duration: '90 Mins Session',
+      duration: '30 Mins Session',
       price: '₹4,500',
       icon: <Compass className="h-5 w-5 text-teal-600 fill-teal-600 shrink-0" />,
       features: [
@@ -389,7 +319,7 @@ function Home() {
       title: 'Numerology',
       tagline: 'Destiny numbers & name spelling alignment',
       shortDesc: 'Decoding the vibrational signature of your birth date, name, and destiny numbers to optimize your path, career, and compatibility.',
-      duration: '45 Mins Session',
+      duration: '30 Mins Session',
       price: '₹2,100',
       icon: <Scroll className="h-5 w-5 text-amber-600 fill-amber-600 shrink-0" />,
       features: [
@@ -660,14 +590,11 @@ function Home() {
               <h2 className="font-serif text-[11px] xs:text-xs sm:text-sm lg:text-base 2xl:text-3xl 3xl:text-4xl 4xl:text-5xl 5xl:text-6xl font-bold tracking-wider text-[#3a1906]">
                 Ancient Wisdom. Practical Clarity.
               </h2>
-              <p className="font-sans text-[9.5px] xs:text-[10.5px] sm:text-xs lg:text-sm 2xl:text-2xl 3xl:text-3xl 4xl:text-4xl 5xl:text-5xl text-[#3a1906]/95 font-medium leading-tight sm:leading-relaxed">
-                Grounded guidance to help you navigate life’s major decisions:
-              </p>
               
               <ul className="space-y-1 sm:space-y-1.5 2xl:space-y-4 3xl:space-y-6 4xl:space-y-8 5xl:space-y-10 font-sans text-[9.5px] xs:text-[10.5px] sm:text-xs lg:text-sm 2xl:text-2xl 3xl:text-3xl 4xl:text-4xl 5xl:text-5xl text-[#3a1906]/95 font-normal list-none text-left">
                 <li className="flex items-start space-x-1.5 sm:space-x-2 2xl:space-x-3.5 3xl:space-x-4 4xl:space-x-6">
                   <span className="text-[#b8922b] font-bold text-xs sm:text-sm 2xl:text-3xl 3xl:text-4xl 4xl:text-5xl 5xl:text-6xl mt-[-1px]">•</span>
-                  <span><strong className="font-bold text-[#3a1906]">Kundli Analysis:</strong> Uncover your life path and career trajectory.</span>
+                  <span><strong className="font-bold text-[#3a1906]">Vedic Astrology:</strong> In-depth Kundli prediction and Kundli matching for life, career, and marital harmony.</span>
                 </li>
                 <li className="flex items-start space-x-1.5 sm:space-x-2 2xl:space-x-3.5 3xl:space-x-4 4xl:space-x-6">
                   <span className="text-[#b8922b] font-bold text-xs sm:text-sm 2xl:text-3xl 3xl:text-4xl 4xl:text-5xl 5xl:text-6xl mt-[-1px]">•</span>
@@ -743,7 +670,7 @@ function Home() {
         <motion.div 
           initial={{ opacity: 0, y: 35 }}
           whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, margin: "-100px" }}
+          viewport={{ once: true, margin: "-20px" }}
           transition={{ duration: 1.0, ease: "easeOut" }}
           className="w-full max-w-7xl 2xl:max-w-[1500px] 3xl:max-w-[1750px] 4xl:max-w-[2100px] mx-auto px-6 lg:px-16 2xl:px-12 3xl:px-16 relative z-10 flex flex-col items-center space-y-6 2xl:space-y-4 3xl:space-y-5"
         >
@@ -769,7 +696,7 @@ function Home() {
               <motion.div 
                 initial={{ opacity: 0, scale: 0.95 }}
                 whileInView={{ opacity: 1, scale: 1 }}
-                viewport={{ once: true, margin: "-100px" }}
+                viewport={{ once: true, margin: "-20px" }}
                 transition={{ duration: 0.8 }}
                 className="w-full flex items-center justify-center p-0 overflow-visible"
               >
@@ -816,7 +743,7 @@ function Home() {
       </section>
 
       {/* About Me Section - Scaled to 50vh on 2K/3K/4K so Our Goal + About Me = 1 Screen Height */}
-      <section id="about" className="relative z-10 py-14 sm:py-20 lg:py-24 2xl:pt-14 2xl:pb-8 3xl:pt-16 3xl:pb-10 4xl:pt-20 4xl:pb-12 2xl:min-h-[50svh] 3xl:min-h-[50svh] 4xl:min-h-[50svh] 2xl:h-[50svh] 3xl:h-[50svh] 4xl:h-[50svh] flex flex-col justify-start bg-cover bg-center overflow-hidden" style={{ backgroundImage: "url('/marble-bg.webp')" }}>
+      <section id="about" className="relative z-10 py-14 sm:py-20 lg:py-24 2xl:pt-14 2xl:pb-14 3xl:pt-16 3xl:pb-16 4xl:pt-20 4xl:pb-20 2xl:min-h-[50svh] 3xl:min-h-[50svh] 4xl:min-h-[50svh] 2xl:h-[50svh] 3xl:h-[50svh] 4xl:h-[50svh] flex flex-col justify-start bg-cover bg-center overflow-hidden" style={{ backgroundImage: "url('/marble-bg.webp')" }}>
         <div className="absolute inset-0 bg-[#f9f6f0]/20 z-0 pointer-events-none" />
 
         {/* Celestial Divider 2 (directly on border line, zero height) */}
@@ -851,7 +778,7 @@ function Home() {
         <motion.div 
           initial={{ opacity: 0, y: 35 }}
           whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, margin: "-100px" }}
+          viewport={{ once: true, margin: "-20px" }}
           transition={{ duration: 1.0, ease: "easeOut" }}
           className="max-w-6xl 2xl:max-w-7xl 3xl:max-w-[1700px] 4xl:max-w-[2100px] mx-auto px-6 2xl:px-12 3xl:px-16 relative z-10 flex flex-col items-center space-y-7 2xl:space-y-4 3xl:space-y-5"
         >
@@ -936,7 +863,7 @@ function Home() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.8, delay: 0.2 }}
-            className="pt-4 2xl:pt-1 3xl:pt-2 text-center w-full"
+            className="pt-4 2xl:pt-3 3xl:pt-4 4xl:pt-5 2xl:pb-3 3xl:pb-4 text-center w-full"
           >
             <Link
               to="/about"
@@ -956,10 +883,10 @@ function Home() {
       </section>
 
       {/* Marquee Banner Section (Placed above Services) */}
-      <section className="relative z-10 bg-[#3a1906] border-y border-[#deb18a]/20 py-2.5 sm:py-3.5 2xl:py-2.5 3xl:py-3 overflow-hidden shadow-md">
+      <section className="relative z-10 bg-[#3a1906] border-y border-white/20 py-2.5 sm:py-3.5 2xl:py-2.5 3xl:py-3 overflow-hidden shadow-md">
         <div className="flex whitespace-nowrap gap-12 2xl:gap-14 3xl:gap-18 animate-marquee">
           {[...zodiacSigns, ...zodiacSigns].map((sign, idx) => (
-            <span key={idx} className="font-serif text-sm sm:text-base 2xl:text-lg 3xl:text-xl 4xl:text-2xl tracking-[0.2em] text-[#deb18a] uppercase select-none">
+            <span key={idx} className="font-serif text-sm sm:text-base 2xl:text-lg 3xl:text-xl 4xl:text-2xl tracking-[0.2em] text-white uppercase select-none font-medium">
               {sign}
             </span>
           ))}
@@ -972,7 +899,7 @@ function Home() {
         <motion.div 
           initial={{ opacity: 0, y: 35 }}
           whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, margin: "-100px" }}
+          viewport={{ once: true, margin: "-20px" }}
           transition={{ duration: 1.0, ease: "easeOut" }}
           className="max-w-4xl 2xl:max-w-[90vw] 3xl:max-w-[90vw] 4xl:max-w-[90vw] mx-auto px-6 2xl:px-10 3xl:px-16 relative z-10 flex flex-col items-center space-y-7 2xl:space-y-5 3xl:space-y-6"
         >
@@ -995,8 +922,8 @@ function Home() {
             <div className="w-16 2xl:w-16 3xl:w-20 h-[1.5px] bg-[#3a1906]/40 mx-auto mt-2 2xl:mt-2.5" />
           </div>
 
-          {/* Responsive Grid of 8 items: 2 columns with ~20vw gap between columns on 2K/3K/4K */}
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-x-12 2xl:gap-x-[20vw] 3xl:gap-x-[20vw] 4xl:gap-x-[20vw] gap-y-6 sm:gap-y-8 2xl:gap-y-3.5 3xl:gap-y-4 w-full max-w-2xl 2xl:max-w-[85vw] 3xl:max-w-[85vw] 4xl:max-w-[85vw] mx-auto">
+          {/* Responsive Grid of 8 items: 2 columns with balanced middle gap on 2K/3K/4K */}
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-x-8 lg:gap-x-12 2xl:gap-x-16 3xl:gap-x-24 4xl:gap-x-32 gap-y-6 sm:gap-y-8 2xl:gap-y-3.5 3xl:gap-y-4 w-full max-w-2xl lg:max-w-4xl 2xl:max-w-6xl 3xl:max-w-7xl mx-auto">
             
             {/* Item 01 */}
             <motion.div 
@@ -1008,7 +935,7 @@ function Home() {
             >
               <span className="font-serif text-2xl sm:text-3xl 2xl:text-2xl 3xl:text-3xl 4xl:text-4xl font-bold text-[#b8922b] tracking-wider shrink-0 w-10 2xl:w-12 3xl:w-14 text-right select-none">01</span>
               <span className="text-[1.35em] leading-none shrink-0 drop-shadow-sm select-none">🎯</span>
-              <span className="font-serif text-sm sm:text-base 2xl:text-lg 3xl:text-xl 4xl:text-2xl font-semibold text-[#3a1906] tracking-wide">Achieve Their Life Goals</span>
+              <span className="font-serif text-sm sm:text-base 2xl:text-lg 3xl:text-xl 4xl:text-2xl font-semibold text-[#3a1906] tracking-wide lg:whitespace-nowrap">Achieve Their Life Goals</span>
             </motion.div>
 
             {/* Item 02 */}
@@ -1021,7 +948,7 @@ function Home() {
             >
               <span className="font-serif text-2xl sm:text-3xl 2xl:text-2xl 3xl:text-3xl 4xl:text-4xl font-bold text-[#b8922b] tracking-wider shrink-0 w-10 2xl:w-12 3xl:w-14 text-right select-none">02</span>
               <span className="text-[1.35em] leading-none shrink-0 drop-shadow-sm select-none">🧘</span>
-              <span className="font-serif text-sm sm:text-base 2xl:text-lg 3xl:text-xl 4xl:text-2xl font-semibold text-[#3a1906] tracking-wide">Gain Deeper Self-Awareness</span>
+              <span className="font-serif text-sm sm:text-base 2xl:text-lg 3xl:text-xl 4xl:text-2xl font-semibold text-[#3a1906] tracking-wide lg:whitespace-nowrap">Gain Deeper Self-Awareness</span>
             </motion.div>
 
             {/* Item 03 */}
@@ -1034,7 +961,7 @@ function Home() {
             >
               <span className="font-serif text-2xl sm:text-3xl 2xl:text-2xl 3xl:text-3xl 4xl:text-4xl font-bold text-[#b8922b] tracking-wider shrink-0 w-10 2xl:w-12 3xl:w-14 text-right select-none">03</span>
               <span className="text-[1.35em] leading-none shrink-0 drop-shadow-sm select-none">💡</span>
-              <span className="font-serif text-sm sm:text-base 2xl:text-lg 3xl:text-xl 4xl:text-2xl font-semibold text-[#3a1906] tracking-wide">Make Confident Decisions</span>
+              <span className="font-serif text-sm sm:text-base 2xl:text-lg 3xl:text-xl 4xl:text-2xl font-semibold text-[#3a1906] tracking-wide lg:whitespace-nowrap">Make Confident Decisions</span>
             </motion.div>
 
             {/* Item 04 */}
@@ -1047,20 +974,20 @@ function Home() {
             >
               <span className="font-serif text-2xl sm:text-3xl 2xl:text-2xl 3xl:text-3xl 4xl:text-4xl font-bold text-[#b8922b] tracking-wider shrink-0 w-10 2xl:w-12 3xl:w-14 text-right select-none">04</span>
               <span className="text-[1.35em] leading-none shrink-0 drop-shadow-sm select-none">✨</span>
-              <span className="font-serif text-sm sm:text-base 2xl:text-lg 3xl:text-xl 4xl:text-2xl font-semibold text-[#3a1906] tracking-wide">Create Positive Life Changes</span>
+              <span className="font-serif text-sm sm:text-base 2xl:text-lg 3xl:text-xl 4xl:text-2xl font-semibold text-[#3a1906] tracking-wide lg:whitespace-nowrap">Create Positive Life Changes</span>
             </motion.div>
 
             {/* Item 05 */}
             <motion.div 
               initial={{ opacity: 0, y: 15 }}
               whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ motion: true }}
+              viewport={{ once: true }}
               transition={{ duration: 0.6, delay: 0.7 }}
               className="flex items-center space-x-3"
             >
               <span className="font-serif text-2xl sm:text-3xl 2xl:text-2xl 3xl:text-3xl 4xl:text-4xl font-bold text-[#b8922b] tracking-wider shrink-0 w-10 2xl:w-12 3xl:w-14 text-right select-none">05</span>
               <span className="text-[1.35em] leading-none shrink-0 drop-shadow-sm select-none">⚖️</span>
-              <span className="font-serif text-sm sm:text-base 2xl:text-lg 3xl:text-xl 4xl:text-2xl font-semibold text-[#3a1906] tracking-wide">Find Balance and Inner Peace</span>
+              <span className="font-serif text-sm sm:text-base 2xl:text-lg 3xl:text-xl 4xl:text-2xl font-semibold text-[#3a1906] tracking-wide lg:whitespace-nowrap">Find Balance and Inner Peace</span>
             </motion.div>
 
             {/* Item 06 */}
@@ -1073,7 +1000,7 @@ function Home() {
             >
               <span className="font-serif text-2xl sm:text-3xl 2xl:text-2xl 3xl:text-3xl 4xl:text-4xl font-bold text-[#b8922b] tracking-wider shrink-0 w-10 2xl:w-12 3xl:w-14 text-right select-none">06</span>
               <span className="text-[1.35em] leading-none shrink-0 drop-shadow-sm select-none">🔍</span>
-              <span className="font-serif text-sm sm:text-base 2xl:text-lg 3xl:text-xl 4xl:text-2xl font-semibold text-[#3a1906] tracking-wide">Gain Clarity and Direction</span>
+              <span className="font-serif text-sm sm:text-base 2xl:text-lg 3xl:text-xl 4xl:text-2xl font-semibold text-[#3a1906] tracking-wide lg:whitespace-nowrap">Gain Clarity and Direction</span>
             </motion.div>
 
             {/* Item 07 */}
@@ -1086,7 +1013,7 @@ function Home() {
             >
               <span className="font-serif text-2xl sm:text-3xl 2xl:text-2xl 3xl:text-3xl 4xl:text-4xl font-bold text-[#b8922b] tracking-wider shrink-0 w-10 2xl:w-12 3xl:w-14 text-right select-none">07</span>
               <span className="text-[1.35em] leading-none shrink-0 drop-shadow-sm select-none">🚀</span>
-              <span className="font-serif text-sm sm:text-base 2xl:text-lg 3xl:text-xl 4xl:text-2xl font-semibold text-[#3a1906] tracking-wide">Unlock Their Full Potential</span>
+              <span className="font-serif text-sm sm:text-base 2xl:text-lg 3xl:text-xl 4xl:text-2xl font-semibold text-[#3a1906] tracking-wide lg:whitespace-nowrap">Unlock Their Full Potential</span>
             </motion.div>
 
             {/* Item 08 */}
@@ -1099,7 +1026,7 @@ function Home() {
             >
               <span className="font-serif text-2xl sm:text-3xl 2xl:text-2xl 3xl:text-3xl 4xl:text-4xl font-bold text-[#b8922b] tracking-wider shrink-0 w-10 2xl:w-12 3xl:w-14 text-right select-none">08</span>
               <span className="text-[1.35em] leading-none shrink-0 drop-shadow-sm select-none">🌿</span>
-              <span className="font-serif text-sm sm:text-base 2xl:text-lg 3xl:text-xl 4xl:text-2xl font-semibold text-[#3a1906] tracking-wide">Live with Purpose and Authenticity</span>
+              <span className="font-serif text-sm sm:text-base 2xl:text-lg 3xl:text-xl 4xl:text-2xl font-semibold text-[#3a1906] tracking-wide lg:whitespace-nowrap">Live with Purpose and Authenticity</span>
             </motion.div>
 
           </div>
@@ -1108,7 +1035,7 @@ function Home() {
       </section>
 
       {/* My Services Section - Min-height responsive for 2K/3K/4K viewports (height not fixed, expands naturally) */}
-      <section id="services" className="relative z-10 py-12 sm:py-16 lg:py-20 2xl:pt-14 2xl:pb-8 3xl:pt-16 3xl:pb-10 4xl:pt-20 4xl:pb-12 2xl:min-h-[50svh] 3xl:min-h-[50svh] 4xl:min-h-[50svh] flex flex-col justify-start bg-cover bg-center border-t border-[#deb18a]/10" style={{ backgroundImage: "url('/marble-bg.webp')" }}>
+      <section id="services" className="relative z-10 py-12 sm:py-16 lg:py-20 2xl:pt-14 2xl:pb-4 3xl:pt-16 3xl:pb-5 4xl:pt-20 4xl:pb-6 2xl:min-h-0 3xl:min-h-0 4xl:min-h-0 flex flex-col justify-start bg-cover bg-center border-t border-[#deb18a]/10" style={{ backgroundImage: "url('/marble-bg.webp')" }}>
         <div className="absolute inset-0 bg-[#f9f6f0]/20 z-0 pointer-events-none" />
 
         {/* Celestial Divider 3 (directly on border line, zero height) */}
@@ -1143,12 +1070,12 @@ function Home() {
         <motion.div 
           initial={{ opacity: 0, y: 35 }}
           whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, margin: "-100px" }}
+          viewport={{ once: true, margin: "-20px" }}
           transition={{ duration: 1.0, ease: "easeOut" }}
-          className="max-w-4xl 2xl:max-w-5xl 3xl:max-w-6xl 4xl:max-w-7xl mx-auto px-6 2xl:px-10 3xl:px-16 relative z-10 flex flex-col items-center space-y-7 2xl:space-y-6 3xl:space-y-8"
+          className="max-w-6xl 2xl:max-w-[90vw] 3xl:max-w-[90vw] 4xl:max-w-[90vw] mx-auto px-6 2xl:px-10 3xl:px-16 relative z-10 flex flex-col items-center space-y-7 2xl:space-y-6 3xl:space-y-8"
         >
           {/* Header */}
-          <div className="text-center space-y-2 2xl:space-y-1 max-w-2xl 2xl:max-w-3xl 3xl:max-w-4xl flex flex-col items-center">
+          <div className="text-center space-y-2 max-w-2xl flex flex-col items-center">
             <TextShimmer
               as="h2"
               duration={3.5}
@@ -1166,15 +1093,15 @@ function Home() {
             </p>
           </div>
 
-          {/* Service List (Accordion style matching color.png) */}
-          <div className="w-full space-y-4 2xl:space-y-3 3xl:space-y-3.5">
+          {/* 2-Column x 2-Row Responsive Grid on Tablet, Laptop, and 2K/3K/4K */}
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-x-8 lg:gap-x-12 2xl:gap-x-[12vw] 3xl:gap-x-[12vw] 4xl:gap-x-[12vw] gap-y-4 sm:gap-y-6 w-full max-w-5xl 2xl:max-w-[85vw] 3xl:max-w-[85vw] 4xl:max-w-[85vw] mx-auto items-start">
             {serviceList.map((service, idx) => (
               <motion.div
                 key={service.id}
                 initial={{ opacity: 0, y: 25 }}
                 whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true, margin: "-50px" }}
-                transition={{ duration: 0.8, delay: idx * 0.25, ease: "easeOut" }}
+                viewport={{ once: true, margin: "-20px" }}
+                transition={{ duration: 0.8, delay: idx * 0.15, ease: "easeOut" }}
                 className="w-full"
               >
                 <ServiceAccordion 

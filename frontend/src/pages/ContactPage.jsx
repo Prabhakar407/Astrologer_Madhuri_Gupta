@@ -161,39 +161,39 @@ export default function ContactPage() {
     <div className="min-h-screen bg-white">
       
       {/* Top Header Section (Dark Brown Background) */}
-      <section className="bg-[#4f3129] relative pt-24 2xl:pt-32 pb-12 md:pb-16 2xl:pb-24 z-10">
-        <div className="w-full max-w-7xl 2xl:max-w-[1600px] 3xl:max-w-[1920px] mx-auto px-4 sm:px-6 lg:px-8 2xl:px-12">
+      <section className="contact-hero-section bg-[#4f3129] relative z-10">
+        <div className="w-full max-w-7xl 2xl:max-w-[1600px] 3xl:max-w-[1920px] 4xl:max-w-[2400px] 5xl:max-w-[3200px] mx-auto px-4 sm:px-6 lg:px-8 2xl:px-12 4xl:px-16 5xl:px-24">
           <div className="grid grid-cols-1 md:grid-cols-12 gap-8 items-center relative">
             
             {/* Header Text & Contact Info Cards (Left 7 Columns) */}
-            <div className="md:col-span-7 space-y-6 text-left relative z-10">
+            <div className="md:col-span-7 space-y-4 lg:space-y-5 2xl:space-y-6 text-left relative z-10">
               <motion.div
-                initial={{ opacity: 0, y: -20 }}
+                initial={{ opacity: 0, y: 0 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.6 }}
                 className="space-y-3"
               >
-                <h1 className="text-3xl sm:text-5xl lg:text-6xl font-bold text-white font-serif tracking-wide leading-tight">
+                <h1 className="text-3xl sm:text-5xl lg:text-6xl 2xl:text-6xl 3xl:text-7xl 4xl:text-8xl 5xl:text-9xl font-bold text-white font-serif tracking-wide leading-tight">
                   Contact Us
                 </h1>
-                <p className="text-[#deb18a]/80 max-w-lg text-xs sm:text-sm md:text-base font-light leading-relaxed">
+                <p className="text-white/90 max-w-lg 3xl:max-w-2xl 4xl:max-w-3xl 5xl:max-w-4xl text-sm sm:text-base md:text-lg 3xl:text-xl 4xl:text-2xl 5xl:text-3xl font-normal leading-relaxed">
                   Have questions about your astrological path or booking a consultation? Reach out today, and let us align your cosmic journey together.
                 </p>
               </motion.div>
 
-              {/* Desktop view: 3 Circular Badges Row in Hero */}
-              <div className="hidden md:grid md:grid-cols-3 gap-6 pt-4 border-t border-[#deb18a]/15">
+              {/* Contact Info Badges in Hero: Stacked on tablet (md to lg) to prevent right image overlap, 3-cols on xl desktop */}
+              <div className="hidden md:grid md:grid-cols-1 xl:grid-cols-3 gap-3.5 xl:gap-6 pt-5 border-t border-white/20">
                 
                 {/* Phone */}
                 <div className="flex flex-row items-center space-x-3 text-left">
-                  <div className="w-10 h-10 rounded-full bg-[#b8922b] text-white flex items-center justify-center shadow-md shrink-0">
-                    <Phone className="w-4.5 h-4.5" />
+                  <div className="w-10 h-10 lg:w-11 lg:h-11 3xl:w-14 3xl:h-14 4xl:w-16 4xl:h-16 rounded-full bg-[#b8922b] text-white flex items-center justify-center shadow-md shrink-0">
+                    <Phone className="w-4.5 h-4.5 lg:w-5 lg:h-5 3xl:w-6 3xl:h-6 4xl:w-7 4xl:h-7" />
                   </div>
                   <div>
-                    <h3 className="text-xs sm:text-sm font-bold text-white font-serif tracking-tight">
+                    <h3 className="text-xs sm:text-sm lg:text-base 3xl:text-xl font-bold text-white font-serif tracking-tight whitespace-nowrap">
                       +91 88815 73437
                     </h3>
-                    <p className="text-[10px] text-[#deb18a]/70 font-medium">
+                    <p className="text-xs sm:text-sm 3xl:text-base text-white/90 font-medium">
                       Call or WhatsApp
                     </p>
                   </div>
@@ -201,14 +201,14 @@ export default function ContactPage() {
 
                 {/* Email */}
                 <div className="flex flex-row items-center space-x-3 text-left">
-                  <div className="w-10 h-10 rounded-full bg-[#b8922b] text-white flex items-center justify-center shadow-md shrink-0">
-                    <Mail className="w-4.5 h-4.5" />
+                  <div className="w-10 h-10 lg:w-11 lg:h-11 3xl:w-14 3xl:h-14 4xl:w-16 4xl:h-16 rounded-full bg-[#b8922b] text-white flex items-center justify-center shadow-md shrink-0">
+                    <Mail className="w-4.5 h-4.5 lg:w-5 lg:h-5 3xl:w-6 3xl:h-6 4xl:w-7 4xl:h-7" />
                   </div>
                   <div className="min-w-0">
-                    <h3 className="text-xs sm:text-sm font-bold text-white font-serif tracking-tight break-all">
+                    <h3 className="text-xs sm:text-sm lg:text-sm xl:text-base 3xl:text-xl font-bold text-white font-sans lowercase tracking-tight whitespace-nowrap">
                       sarsajyotish@gmail.com
                     </h3>
-                    <p className="text-[10px] text-[#deb18a]/70 font-medium">
+                    <p className="text-xs sm:text-sm 3xl:text-base text-white/90 font-medium">
                       Support Email
                     </p>
                   </div>
@@ -216,14 +216,14 @@ export default function ContactPage() {
 
                 {/* Location */}
                 <div className="flex flex-row items-center space-x-3 text-left">
-                  <div className="w-10 h-10 rounded-full bg-[#b8922b] text-white flex items-center justify-center shadow-md shrink-0">
-                    <MapPin className="w-4.5 h-4.5" />
+                  <div className="w-10 h-10 lg:w-11 lg:h-11 3xl:w-14 3xl:h-14 4xl:w-16 4xl:h-16 rounded-full bg-[#b8922b] text-white flex items-center justify-center shadow-md shrink-0">
+                    <MapPin className="w-4.5 h-4.5 lg:w-5 lg:h-5 3xl:w-6 3xl:h-6 4xl:w-7 4xl:h-7" />
                   </div>
                   <div>
-                    <h3 className="text-xs sm:text-sm font-bold text-white font-serif tracking-tight">
+                    <h3 className="text-xs sm:text-sm lg:text-base 3xl:text-xl font-bold text-white font-serif tracking-tight whitespace-nowrap">
                       Agra, Uttar Pradesh, India
                     </h3>
-                    <p className="text-[10px] text-[#deb18a]/70 font-medium">
+                    <p className="text-xs sm:text-sm 3xl:text-base text-white/90 font-medium whitespace-nowrap">
                       Available Globally
                     </p>
                   </div>
@@ -231,50 +231,50 @@ export default function ContactPage() {
 
               </div>
 
-              {/* Mobile/Tablet view: Flex row splitting text on left and small image on right */}
-              <div className="flex md:hidden flex-row justify-between items-stretch gap-4 pt-4 border-t border-[#deb18a]/15">
+              {/* Mobile view: Flex row splitting text on left and small image on right */}
+              <div className="flex md:hidden flex-row justify-between items-stretch gap-3 pt-4 border-t border-white/20">
                 {/* Left: Contact Info Stack */}
-                <div className="space-y-4 flex-grow">
+                <div className="space-y-3.5 flex-grow min-w-0">
                   {/* Phone */}
-                  <div className="flex flex-row items-center space-x-3 text-left">
-                    <div className="w-9 h-9 rounded-full bg-[#b8922b] text-white flex items-center justify-center shadow-md shrink-0">
-                      <Phone className="w-4 h-4" />
+                  <div className="flex flex-row items-center space-x-2.5 sm:space-x-3 text-left">
+                    <div className="w-9 h-9 sm:w-10 sm:h-10 rounded-full bg-[#b8922b] text-white flex items-center justify-center shadow-md shrink-0">
+                      <Phone className="w-4 h-4 sm:w-4.5 sm:h-4.5" />
                     </div>
-                    <div>
-                      <h3 className="text-xs font-bold text-white font-serif tracking-tight">
+                    <div className="min-w-0">
+                      <h3 className="text-xs sm:text-sm font-bold text-white font-serif tracking-tight whitespace-nowrap">
                         +91 88815 73437
                       </h3>
-                      <p className="text-[9px] text-[#deb18a]/70 font-medium">
+                      <p className="text-[11px] sm:text-xs text-white/90 font-medium">
                         Call or WhatsApp
                       </p>
                     </div>
                   </div>
 
                   {/* Email */}
-                  <div className="flex flex-row items-center space-x-3 text-left">
-                    <div className="w-9 h-9 rounded-full bg-[#b8922b] text-white flex items-center justify-center shadow-md shrink-0">
-                      <Mail className="w-4 h-4" />
+                  <div className="flex flex-row items-center space-x-2.5 sm:space-x-3 text-left">
+                    <div className="w-9 h-9 sm:w-10 sm:h-10 rounded-full bg-[#b8922b] text-white flex items-center justify-center shadow-md shrink-0">
+                      <Mail className="w-4 h-4 sm:w-4.5 sm:h-4.5" />
                     </div>
                     <div className="min-w-0">
-                      <h3 className="text-xs font-bold text-white font-serif tracking-tight break-all">
+                      <h3 className="text-xs sm:text-sm font-bold text-white font-sans lowercase tracking-tight whitespace-nowrap">
                         sarsajyotish@gmail.com
                       </h3>
-                      <p className="text-[9px] text-[#deb18a]/70 font-medium">
+                      <p className="text-[11px] sm:text-xs text-white/90 font-medium">
                         Support Email
                       </p>
                     </div>
                   </div>
 
                   {/* Location */}
-                  <div className="flex flex-row items-center space-x-3 text-left">
-                    <div className="w-9 h-9 rounded-full bg-[#b8922b] text-white flex items-center justify-center shadow-md shrink-0">
-                      <MapPin className="w-4 h-4" />
+                  <div className="flex flex-row items-center space-x-2.5 sm:space-x-3 text-left">
+                    <div className="w-9 h-9 sm:w-10 sm:h-10 rounded-full bg-[#b8922b] text-white flex items-center justify-center shadow-md shrink-0">
+                      <MapPin className="w-4 h-4 sm:w-4.5 sm:h-4.5" />
                     </div>
-                    <div>
-                      <h3 className="text-xs font-bold text-white font-serif tracking-tight">
+                    <div className="min-w-0">
+                      <h3 className="text-xs sm:text-sm font-bold text-white font-serif tracking-tight whitespace-nowrap">
                         Agra, Uttar Pradesh, India
                       </h3>
-                      <p className="text-[9px] text-[#deb18a]/70 font-medium">
+                      <p className="text-[11px] sm:text-xs text-white/90 font-medium whitespace-nowrap">
                         Available Globally
                       </p>
                     </div>
@@ -283,7 +283,7 @@ export default function ContactPage() {
 
                 {/* Right: Small Arched Image aligned to the right side */}
                 <div className="flex items-center shrink-0 pr-1">
-                  <div className="w-[100px] sm:w-[130px] aspect-[4/5] rounded-t-full overflow-hidden border-4 border-white shadow-xl bg-white">
+                  <div className="w-[85px] sm:w-[120px] aspect-[4/5] rounded-t-full overflow-hidden shadow-xl">
                     <img
                       src="/contact_office.webp"
                       alt="Astrologer Madhuri Gupta Consultation Office Agra"
@@ -304,35 +304,37 @@ export default function ContactPage() {
       </section>
 
       {/* Contact Info Row (Below Header, aligns alongside the hanging arch image) */}
-      <section className="bg-white pt-6 pb-16 2xl:pb-24 relative z-10">
-        <div className="w-full max-w-7xl 2xl:max-w-[1600px] 3xl:max-w-[1920px] mx-auto px-4 sm:px-6 lg:px-8 2xl:px-12">
-          <div className="grid grid-cols-1 md:grid-cols-12 gap-8 2xl:gap-12">
+      <section className="bg-white pt-4 md:pt-4 2xl:pt-6 pb-6 md:pb-6 2xl:pb-14 relative z-10">
+        <div className="w-full max-w-7xl 2xl:max-w-[1600px] 3xl:max-w-[1920px] 4xl:max-w-[2400px] 5xl:max-w-[3200px] mx-auto px-4 sm:px-6 lg:px-8 2xl:px-12 4xl:px-16 5xl:px-24">
+          <div className="grid grid-cols-1 md:grid-cols-12 gap-8 2xl:gap-12 items-start">
             
-            {/* Our Location Map Section (Left 7 Columns) */}
-            <div className="md:col-span-7 space-y-3 flex flex-col items-center md:items-start text-center md:text-left">
-              <h2 className="text-xl sm:text-2xl 2xl:text-3xl font-bold text-[#3a1906] font-serif">
-                Our Location
-              </h2>
+            {/* Our Location Map Section (Matches EXACT width and alignment of Get in Touch form) */}
+            <div className="md:col-span-7 space-y-2 flex flex-col items-center md:items-start text-center md:text-left w-full 3xl:pl-10 4xl:pl-20 5xl:pl-28">
+              <div className="w-full max-w-md lg:max-w-lg 2xl:max-w-xl 3xl:max-w-2xl 4xl:max-w-3xl 5xl:max-w-4xl space-y-2">
+                <h2 className="text-lg sm:text-xl 2xl:text-2xl 3xl:text-3xl 4xl:text-4xl 5xl:text-5xl font-bold text-[#3a1906] font-serif">
+                  Our Location
+                </h2>
 
-              {/* Google Maps Embed */}
-              <div className="w-full max-w-[450px] 2xl:max-w-[550px] h-[170px] 2xl:h-[220px] rounded-xl overflow-hidden shadow-md border border-gray-150 mx-auto md:mx-0">
-                <iframe
-                  src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d113579.78737678523!2d77.90997184499092!3d27.17630978716335!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x39740d857c2f41d9%3A0x784aef38a9523b42!2sAgra%2C%20Uttar%20Pradesh!5e0!3m2!1sen!2sin!4v1700000000000!5m2!1sen!2sin"
-                  className="w-full h-full border-0"
-                  allowFullScreen=""
-                  loading="lazy"
-                  title="Astro Madhuri Location Office Map"
-                ></iframe>
+                {/* Google Maps Embed - Width identically constrained to match Get in Touch form */}
+                <div className="w-full h-[150px] sm:h-[170px] md:h-[180px] 2xl:h-[230px] 3xl:h-[280px] 4xl:h-[360px] 5xl:h-[460px] rounded-2xl 3xl:rounded-[28px] 4xl:rounded-[36px] overflow-hidden shadow-md border border-gray-150">
+                  <iframe
+                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d113579.78737678523!2d77.90997184499092!3d27.17630978716335!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x39740d857c2f41d9%3A0x784aef38a9523b42!2sAgra%2C%20Uttar%20Pradesh!5e0!3m2!1sen!2sin!4v1700000000000!5m2!1sen!2sin"
+                    className="w-full h-full border-0"
+                    allowFullScreen=""
+                    loading="lazy"
+                    title="Astro Madhuri Location Office Map"
+                  ></iframe>
+                </div>
               </div>
             </div>
 
-            {/* Arched image cutout (Right 5 Columns - sits directly on white background with negative margin overlap) - hidden on mobile/tablet */}
-            <div className="hidden md:flex md:col-span-5 relative justify-end md:-mt-76 2xl:-mt-96 z-20">
+            {/* Arched image cutout (Right 5 Columns - NO white border/outline, perfectly clean arch) */}
+            <div className="hidden md:flex md:col-span-5 relative justify-center 2xl:justify-end md:-mt-36 lg:-mt-40 2xl:-mt-[300px] 3xl:-mt-[400px] 4xl:-mt-[540px] 5xl:-mt-[740px] z-30">
               <motion.div
                 initial={{ opacity: 0, scale: 0.95 }}
                 animate={{ opacity: 1, scale: 1 }}
                 transition={{ duration: 0.8, delay: 0.2 }}
-                className="w-[280px] sm:w-[320px] 2xl:w-[380px] h-[380px] sm:h-[420px] 2xl:h-[480px] rounded-t-full overflow-hidden border-[6px] 2xl:border-[8px] border-white shadow-2xl bg-white"
+                className="w-[280px] sm:w-[340px] 2xl:w-[480px] 3xl:w-[680px] 4xl:w-[940px] 5xl:w-[1300px] h-[360px] sm:h-[430px] 2xl:h-[620px] 3xl:h-[860px] 4xl:h-[1180px] 5xl:h-[1620px] rounded-t-full overflow-hidden shadow-2xl"
               >
                 <img
                   src="/contact_office.webp"
@@ -348,132 +350,131 @@ export default function ContactPage() {
         </div>
       </section>
 
-      {/* Bottom Form & Map Section */}
-      <section className="bg-white pb-24 2xl:pb-32 relative z-10 border-t border-gray-100 pt-8 md:pt-10 2xl:pt-16">
-        <div className="w-full max-w-5xl 2xl:max-w-6xl 3xl:max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 2xl:px-12">
-          <div className="grid grid-cols-1 md:grid-cols-12 gap-8 items-start">
+      {/* Bottom Form & QR Section - Vertically Aligned with Map on the Exact Same Axis */}
+      <section className="bg-white pb-16 2xl:pb-24 relative z-10 border-t border-gray-100 pt-6 md:pt-8 2xl:pt-12">
+        <div className="w-full max-w-7xl 2xl:max-w-[1600px] 3xl:max-w-[1920px] 4xl:max-w-[2400px] 5xl:max-w-[3200px] mx-auto px-4 sm:px-6 lg:px-8 2xl:px-12 4xl:px-16 5xl:px-24">
+          <div className="grid grid-cols-1 md:grid-cols-12 gap-8 2xl:gap-12 items-start">
             
-            {/* Get In Touch Form (Left 6 Columns) */}
-            <div className="md:col-span-6 bg-[#4f3129] rounded-3xl p-6 sm:p-8 shadow-xl space-y-4 text-[#faf6e8]">
-              <div className="space-y-1.5">
-                <h2 className="text-xl sm:text-2xl font-bold font-serif">
-                  Get In Touch !
-                </h2>
-                <p className="text-[#deb18a]/80 text-[11px] sm:text-xs font-light leading-relaxed">
-                  Fill out the form below to receive a personalized callback regarding cosmic charts and readings.
-                </p>
-              </div>
-
-              <form onSubmit={handleSubmit} className="space-y-3">
-                {/* Email Input with Verification Indicator */}
+            {/* Get In Touch Form (Exact same column md:col-span-7 and width constraints as Location Map) */}
+            <div className="md:col-span-7 flex flex-col items-center md:items-start text-center md:text-left w-full 3xl:pl-10 4xl:pl-20 5xl:pl-28">
+              <div className="w-full max-w-md lg:max-w-lg 2xl:max-w-xl 3xl:max-w-2xl 4xl:max-w-3xl 5xl:max-w-4xl bg-[#4f3129] rounded-2xl 3xl:rounded-3xl p-4 sm:p-5 2xl:p-7 3xl:p-8 shadow-xl space-y-3 2xl:space-y-4 text-white">
                 <div className="space-y-1">
-                  <div className="relative">
-                    <input
-                      type="email"
-                      name="email"
-                      value={formData.email}
-                      onChange={handleInputChange}
-                      placeholder="Email Address"
-                      required
-                      className="w-full bg-white/5 border border-white/20 rounded-xl px-4 py-2.5 pr-24 text-xs text-white placeholder-[#deb18a]/40 focus:outline-none focus:border-[#b8922b] focus:ring-1 focus:ring-[#b8922b] transition-all"
-                    />
-                    {isEmailVerified ? (
-                      <span className="absolute right-3 top-1/2 -translate-y-1/2 flex items-center space-x-1 text-[10px] text-green-400 font-semibold bg-green-950/60 px-2 py-0.5 rounded-full border border-green-500/30">
-                        <CheckCircle2 className="w-3 h-3" />
-                        <span>Verified</span>
-                      </span>
-                    ) : formData.email && /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(formData.email) ? (
-                      <button
-                        type="button"
-                        onClick={() => setShowOtpModal(true)}
-                        className="absolute right-2.5 top-1/2 -translate-y-1/2 text-[10px] text-[#deb18a] hover:text-white bg-white/10 hover:bg-[#b8922b] px-2.5 py-1 rounded-lg transition-all font-medium cursor-pointer"
-                      >
-                        Verify Email
-                      </button>
-                    ) : null}
-                  </div>
-                </div>
-                
-                {/* Name */}
-                <div className="space-y-1">
-                  <input
-                    type="text"
-                    name="name"
-                    value={formData.name}
-                    onChange={handleInputChange}
-                    placeholder="Full Name"
-                    required
-                    className="w-full bg-white/5 border border-white/20 rounded-xl px-4 py-2.5 text-xs text-white placeholder-[#deb18a]/40 focus:outline-none focus:border-[#b8922b] focus:ring-1 focus:ring-[#b8922b] transition-all"
-                  />
-                </div>
-
-                {/* Mobile Phone (No +91 enforced) */}
-                <div className="space-y-1">
-                  <input
-                    type="tel"
-                    name="phone"
-                    value={formData.phone}
-                    onChange={handleInputChange}
-                    placeholder="Mobile Number (e.g. 98881 57343)"
-                    required
-                    className="w-full bg-white/5 border border-white/20 rounded-xl px-4 py-2.5 text-xs text-white placeholder-[#deb18a]/40 focus:outline-none focus:border-[#b8922b] focus:ring-1 focus:ring-[#b8922b] transition-all"
-                  />
-                  <p className="text-[10px] text-[#deb18a]/60 pl-1">
-                    Enter standard 10-digit mobile number (+91 not mandatory)
+                  <h2 className="text-xl sm:text-2xl 2xl:text-3xl font-bold font-serif text-white">
+                    Get In Touch !
+                  </h2>
+                  <p className="text-white/90 text-xs sm:text-sm font-normal leading-relaxed">
+                    Fill out the form below to receive a personalized callback.
                   </p>
                 </div>
 
-                {/* Message */}
-                <div className="space-y-1">
-                  <textarea
-                    name="message"
-                    value={formData.message}
-                    onChange={handleInputChange}
-                    placeholder="How can Astrologer Madhuri Gupta assist you?"
-                    rows={3}
-                    required
-                    className="w-full bg-white/5 border border-white/20 rounded-xl px-4 py-2.5 text-xs text-white placeholder-[#deb18a]/40 focus:outline-none focus:border-[#b8922b] focus:ring-1 focus:ring-[#b8922b] transition-all resize-none"
-                  ></textarea>
-                </div>
-
-                {statusMsg && (
-                  <div className={`p-2.5 rounded-xl text-xs font-semibold flex items-center space-x-2 ${
-                    isSuccess ? 'bg-green-500/15 border border-green-500/30 text-green-300' : 'bg-red-500/15 border border-red-500/30 text-red-300'
-                  }`}>
-                    {isSuccess ? <CheckCircle2 className="w-4 h-4 shrink-0" /> : <AlertTriangle className="w-4 h-4 shrink-0" />}
-                    <span>{statusMsg}</span>
+                <form onSubmit={handleSubmit} className="space-y-2.5 2xl:space-y-3">
+                  {/* Email Input with Verification Indicator */}
+                  <div className="space-y-1">
+                    <div className="relative">
+                      <input
+                        type="email"
+                        name="email"
+                        value={formData.email}
+                        onChange={handleInputChange}
+                        placeholder="Email Address"
+                        required
+                        className="w-full bg-white/10 border border-white/25 rounded-lg px-3.5 py-2 pr-24 text-xs sm:text-sm text-white placeholder-white/60 focus:outline-none focus:border-[#b8922b] focus:ring-1 focus:ring-[#b8922b] transition-all"
+                      />
+                      {isEmailVerified ? (
+                        <span className="absolute right-2.5 top-1/2 -translate-y-1/2 flex items-center space-x-1 text-[11px] text-green-300 font-semibold bg-green-950/80 px-2 py-0.5 rounded-full border border-green-500/40">
+                          <CheckCircle2 className="w-3 h-3" />
+                          <span>Verified</span>
+                        </span>
+                      ) : formData.email && /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(formData.email) ? (
+                        <button
+                          type="button"
+                          onClick={() => setShowOtpModal(true)}
+                          className="absolute right-2 top-1/2 -translate-y-1/2 text-[11px] text-white hover:text-white bg-[#b8922b] hover:bg-[#a27e20] px-2.5 py-1 rounded-md transition-all font-semibold cursor-pointer shadow-sm"
+                        >
+                          Verify
+                        </button>
+                      ) : null}
+                    </div>
                   </div>
-                )}
+                  
+                  {/* Name */}
+                  <div className="space-y-1">
+                    <input
+                      type="text"
+                      name="name"
+                      value={formData.name}
+                      onChange={handleInputChange}
+                      placeholder="Full Name"
+                      required
+                      className="w-full bg-white/10 border border-white/25 rounded-lg px-3.5 py-2 text-xs sm:text-sm text-white placeholder-white/60 focus:outline-none focus:border-[#b8922b] focus:ring-1 focus:ring-[#b8922b] transition-all"
+                    />
+                  </div>
 
-                <button
-                  type="submit"
-                  disabled={loading}
-                  className="w-full sm:w-fit bg-[#b8922b] hover:bg-[#a27e20] text-white font-bold py-2.5 px-6 rounded-xl transition-all duration-300 cursor-pointer shadow-md hover:shadow-lg text-xs select-none disabled:opacity-50 flex items-center justify-center space-x-2"
-                >
-                  {loading ? (
-                    <>
-                      <div className="w-3.5 h-3.5 border-2 border-white border-t-transparent rounded-full animate-spin" />
-                      <span>Sending Message...</span>
-                    </>
-                  ) : (
-                    <>
-                      <Send className="w-3.5 h-3.5" />
-                      <span>Submit Message</span>
-                    </>
+                  {/* Mobile Phone (No +91 enforced) */}
+                  <div className="space-y-1">
+                    <input
+                      type="tel"
+                      name="phone"
+                      value={formData.phone}
+                      onChange={handleInputChange}
+                      placeholder="Mobile Number (e.g. 98881 57343)"
+                      required
+                      className="w-full bg-white/10 border border-white/25 rounded-lg px-3.5 py-2 text-xs sm:text-sm text-white placeholder-white/60 focus:outline-none focus:border-[#b8922b] focus:ring-1 focus:ring-[#b8922b] transition-all"
+                    />
+                  </div>
+
+                  {/* Message */}
+                  <div className="space-y-1">
+                    <textarea
+                      name="message"
+                      value={formData.message}
+                      onChange={handleInputChange}
+                      placeholder="How can Astrologer Madhuri Gupta assist you?"
+                      rows={2}
+                      required
+                      className="w-full bg-white/10 border border-white/25 rounded-lg px-3.5 py-2 text-xs sm:text-sm text-white placeholder-white/60 focus:outline-none focus:border-[#b8922b] focus:ring-1 focus:ring-[#b8922b] transition-all resize-none"
+                    ></textarea>
+                  </div>
+
+                  {statusMsg && (
+                    <div className={`p-2.5 rounded-lg text-xs font-semibold flex items-center space-x-2 ${
+                      isSuccess ? 'bg-green-500/20 border border-green-500/40 text-green-200' : 'bg-red-500/20 border border-red-500/40 text-red-200'
+                    }`}>
+                      {isSuccess ? <CheckCircle2 className="w-4 h-4 shrink-0" /> : <AlertTriangle className="w-4 h-4 shrink-0" />}
+                      <span>{statusMsg}</span>
+                    </div>
                   )}
-                </button>
-              </form>
+
+                  <button
+                    type="submit"
+                    disabled={loading}
+                    className="w-full sm:w-fit bg-[#b8922b] hover:bg-[#a27e20] text-white font-bold py-2 px-6 rounded-lg transition-all duration-300 cursor-pointer shadow-md hover:shadow-lg text-xs sm:text-sm select-none disabled:opacity-50 flex items-center justify-center space-x-1.5"
+                  >
+                    {loading ? (
+                      <>
+                        <div className="w-3.5 h-3.5 border-2 border-white border-t-transparent rounded-full animate-spin" />
+                        <span>Sending...</span>
+                      </>
+                    ) : (
+                      <>
+                        <Send className="w-3.5 h-3.5" />
+                        <span>Submit Message</span>
+                      </>
+                    )}
+                  </button>
+                </form>
+              </div>
             </div>
 
-            {/* QR & Social Media Column (Right 6 Columns) */}
-            <div className="md:col-span-6 space-y-6 flex flex-col justify-start items-start md:items-center pl-0 md:pl-8 pr-0 md:pr-24">
+            {/* QR & Social Media Column (Right 5 Columns md:col-span-5) */}
+            <div className="md:col-span-5 flex flex-col items-center md:items-start justify-start w-full space-y-4 pt-1 3xl:pl-6 4xl:pl-12 5xl:pl-16">
               
               {/* WhatsApp QR Code Section */}
-              <div className="space-y-2 flex flex-col items-center w-full md:pr-4 pt-6 md:pt-12">
-                <p className="text-sm font-bold text-[#3a1906] tracking-wider uppercase font-serif text-center whitespace-nowrap">
-                  Scan the qr to message on whatsapp
+              <div className="space-y-1.5 flex flex-col items-center md:items-start w-full">
+                <p className="text-xs sm:text-sm font-bold text-[#3a1906] tracking-wider uppercase font-serif text-center md:text-left">
+                  Scan to message on WhatsApp
                 </p>
-                <div className="w-36 h-36 md:w-40 md:h-40 bg-white p-2 rounded-lg shadow-md border border-gray-150 flex items-center justify-center">
+                <div className="w-28 h-28 sm:w-32 sm:h-32 bg-white p-1.5 rounded-lg shadow-md border border-gray-150 flex items-center justify-center">
                   <img
                     src="https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=https%3A%2F%2Fwa.me%2F918881573437&color=4f3129"
                     alt="Scan to Chat on WhatsApp"
@@ -483,11 +484,11 @@ export default function ContactPage() {
               </div>
 
               {/* Social Media Links Section */}
-              <div className="space-y-3 pt-4 border-t border-gray-100 flex flex-col items-center w-full md:pr-4">
-                <h2 className="text-xl sm:text-2xl font-bold text-[#3a1906] font-serif text-center">
+              <div className="space-y-2.5 pt-3 border-t border-gray-100 flex flex-col items-center md:items-start w-full">
+                <h2 className="text-base sm:text-lg font-bold text-[#3a1906] font-serif">
                   Social Media Links
                 </h2>
-                <div className="flex flex-wrap gap-2.5 justify-center">
+                <div className="flex flex-wrap gap-2 justify-center md:justify-start">
                   {/* WhatsApp */}
                   <a
                     href="https://wa.me/918881573437"

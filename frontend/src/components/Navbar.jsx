@@ -75,8 +75,8 @@ function Navbar() {
           
           {/* Left Branding */}
           <Link to="/" className="flex items-center space-x-2 2xl:space-x-3 5xl:space-x-5 shrink-0 group">
-            <Sparkles className="h-4.5 w-4.5 2xl:h-6 2xl:w-6 3xl:h-7 3xl:w-7 4xl:h-8 4xl:w-8 5xl:h-12 5xl:w-12 text-gold-400 group-hover:rotate-12 transition-transform duration-300 shrink-0" />
-            <span className="font-serif text-base sm:text-lg 2xl:text-xl 3xl:text-2xl 4xl:text-3xl 5xl:text-5xl font-bold tracking-widest text-[#deb18a] group-hover:text-white transition-colors duration-300 whitespace-nowrap">
+            <Sparkles className="h-5 w-5 sm:h-5.5 sm:w-5.5 lg:h-6 lg:w-6 2xl:h-7 2xl:w-7 3xl:h-8 3xl:w-8 4xl:h-9 4xl:w-9 5xl:h-14 5xl:w-14 text-gold-400 group-hover:rotate-12 transition-transform duration-300 shrink-0" />
+            <span className="font-serif text-lg sm:text-xl lg:text-2xl 2xl:text-2xl 3xl:text-3xl 4xl:text-4xl 5xl:text-6xl font-bold tracking-widest text-white group-hover:text-[#deb18a] transition-colors duration-300 whitespace-nowrap">
               MADHURI GUPTA
             </span>
           </Link>
@@ -94,8 +94,8 @@ function Navbar() {
                     onClick={(e) => handleLinkClick(e, item)}
                     className={`font-serif text-xs 2xl:text-base 3xl:text-lg 4xl:text-xl 5xl:text-3xl font-semibold tracking-[0.2em] uppercase transition-colors duration-300 pb-0.5 whitespace-nowrap ${
                       isActive 
-                        ? 'text-[#deb18a] border-b-2 border-[#deb18a]' 
-                        : 'text-white hover:text-[#deb18a]'
+                        ? 'text-[#dfb260] border-b-2 border-[#dfb260]' 
+                        : 'text-white hover:text-[#dfb260]'
                     }`}
                   >
                     {item.name}

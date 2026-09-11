@@ -9,25 +9,25 @@ function About() {
   return (
     <div className="min-h-screen bg-[#faf6e8]">
       
-      {/* About Page Hero Section */}
-      <section className="relative w-full h-auto min-h-screen pt-24 lg:pt-16 2xl:pt-16 pb-16 flex flex-col justify-start items-center overflow-hidden bg-cover bg-center" style={{ backgroundImage: "url('/marble-bg.webp')" }}>
+      {/* About Page Hero Section: Full screen (< lg) so only Hero appears on load, reduced bottom gap and precise top clearance on 2K/3K/4K */}
+      <section className="relative w-full h-auto min-h-[100svh] min-h-[100dvh] lg:min-h-0 pt-20 sm:pt-24 md:pt-28 lg:pt-24 xl:pt-28 2xl:pt-48 3xl:pt-60 4xl:pt-76 5xl:pt-96 pb-12 sm:pb-16 md:pb-16 lg:pb-12 xl:pb-14 2xl:pb-8 3xl:pb-8 4xl:pb-10 5xl:pb-12 flex flex-col justify-center lg:justify-start 2xl:justify-start items-center overflow-hidden bg-cover bg-center" style={{ backgroundImage: "url('/marble-bg.webp')" }}>
         <div className="absolute inset-0 bg-[#faf6e8]/90 z-0 pointer-events-none" />
         
-        {/* Symmetrical crescent curved shading at the top to match image_67 */}
+        {/* Symmetrical crescent curved shading at the top */}
         <div className="absolute top-0 left-0 right-0 h-32 bg-gradient-to-b from-[#eadecc]/30 to-transparent pointer-events-none z-0" />
 
-        <div className="w-full max-w-7xl 2xl:max-w-[1600px] 3xl:max-w-[1920px] mx-auto px-4 sm:px-6 lg:px-8 2xl:px-12 relative z-10 flex flex-col justify-start space-y-6 lg:space-y-8 2xl:space-y-10 h-full">
+        <div className="w-full max-w-7xl 2xl:max-w-[1600px] 3xl:max-w-[1920px] 4xl:max-w-[2400px] 5xl:max-w-[3200px] mx-auto px-4 sm:px-6 md:px-8 lg:px-8 2xl:px-12 4xl:px-16 5xl:px-24 relative z-10 flex flex-col justify-center lg:justify-start 2xl:justify-start space-y-6 sm:space-y-8 md:space-y-10 lg:space-y-6 xl:space-y-8 2xl:space-y-8 3xl:space-y-8 4xl:space-y-10 my-auto lg:my-0">
           
-          {/* Upper-Center Header */}
-          <div className="text-center space-y-0.5 relative -top-4 lg:-top-8">
-            <h1 className="font-serif text-2xl sm:text-3xl lg:text-4xl xl:text-5xl 2xl:text-6xl font-bold text-[#3a1906] tracking-wide">
+          {/* Upper-Center Header (with distinct clear padding below navbar on 2K/3K/4K) */}
+          <div className="text-center space-y-1 relative pt-2 sm:pt-3 md:pt-4 lg:pt-2 2xl:pt-6 3xl:pt-8 4xl:pt-10 5xl:pt-12 mb-1 sm:mb-2 md:mb-4 lg:mb-1 2xl:mb-4 3xl:mb-5">
+            <h1 className="font-serif text-lg min-[360px]:text-xl sm:text-2xl md:text-3xl lg:text-3xl xl:text-4xl 2xl:text-5xl 3xl:text-6xl font-bold text-[#3a1906] tracking-wide whitespace-nowrap">
               Personalized Divination
             </h1>
-            <div className="w-10 2xl:w-16 h-[1.5px] bg-[#3a1906]/30 mx-auto mt-1 2xl:mt-2" />
+            <div className="w-10 md:w-14 2xl:w-16 h-[1.5px] bg-[#3a1906]/30 mx-auto mt-1.5 2xl:mt-2" />
           </div>
 
           {/* Symmetrical 3-Column Grid representing image_67.png */}
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-8 2xl:gap-12 items-center w-full">
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 md:gap-10 lg:gap-8 xl:gap-10 2xl:gap-12 items-center lg:items-start w-full">
             
             {/* Column 1: Large Vertical Rectangular Photo of Smiling Woman (lg:col-span-4) */}
             <div className="lg:col-span-4 flex justify-center relative">
@@ -46,9 +46,9 @@ function About() {
               <motion.div 
                 initial={{ opacity: 0, y: 25 }}
                 whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true, margin: "-100px" }}
+                viewport={{ once: true }}
                 transition={{ duration: 0.5, ease: "easeOut" }}
-                className="relative h-[42vh] lg:h-[60vh] max-h-[460px] aspect-[3/4] rounded-sm overflow-hidden p-1.5 border border-[#deb18a]/50 bg-white shadow-2xl"
+                className="relative h-[38vh] sm:h-[42vh] md:h-[48vh] lg:h-[48vh] xl:h-[54vh] max-h-[440px] md:max-h-[480px] lg:max-h-[460px] aspect-[3/4] rounded-sm overflow-hidden p-1.5 border border-[#deb18a]/50 bg-white shadow-2xl"
               >
                 <div className="w-full h-full rounded-sm overflow-hidden relative">
                   <img 
@@ -63,7 +63,7 @@ function About() {
             </div>
 
             {/* Column 2: Center Paragraphs, Minimalist Button & Small Photo (lg:col-span-5) */}
-            <div className="lg:col-span-5 flex flex-col justify-center space-y-5 relative text-center">
+            <div className="lg:col-span-5 flex flex-col justify-start relative text-center">
               
               {/* Diamond grid graphic watermark in background */}
               <div className="absolute inset-0 z-0 flex items-center justify-center pointer-events-none opacity-[0.05]">
@@ -75,39 +75,36 @@ function About() {
                 </svg>
               </div>
 
-              <div className="relative z-10 space-y-4 font-sans text-xs sm:text-sm text-[#3a1906]/85 leading-relaxed tracking-wide font-medium text-center">
+              <div className="relative z-10 font-sans text-xs sm:text-sm md:text-base lg:text-xs xl:text-sm 2xl:text-base text-[#3a1906]/85 leading-relaxed tracking-wide font-medium text-center">
                 <p>
-                  For over 15 years, I have helped individuals translate celestial configurations into clear, real-world direction. Specializing in Janam Kundli analysis, Vastu Shastra, and Numerology, my approach blends the profound depth of traditional planetary wisdom with modern remedial insights.
-                </p>
-                <p>
-                  Honed through formal education in Astrology and Alankar at the prestigious Bharatiya Vidya Bhavan, this cosmic guidance is designed to help you confidently navigate life's career, relationship, and financial pathways.
+                  I have spent over 15 years helping people find answers, overcome challenges, and make better life decisions through Vedic Astrology, Numerology, and Vastu. My consultations focus on providing clear, practical guidance for relationships, career, finances, and overall well-being. I believe astrology should not only offer insights but also help create positive change in everyday life.
                 </p>
               </div>
 
               {/* Row: Minimalist More Info Button & Stats below */}
-              <div className="relative z-10 flex flex-col items-center pt-1 space-y-4">
+              <div className="relative z-10 flex flex-col items-center pt-5 sm:pt-6 md:pt-7 lg:pt-5 xl:pt-6 2xl:pt-4 space-y-4 sm:space-y-5 md:space-y-6 2xl:space-y-3">
                 
                 {/* Minimalist outline button */}
                 <Link 
                   to="/booking" 
-                  className="px-5 py-2 border border-[#3a1906]/60 text-[#3a1906] font-serif text-[10px] tracking-widest uppercase hover:bg-[#3a1906] hover:text-[#faf6e8] transition-all duration-300 shrink-0"
+                  className="px-6 sm:px-7 md:px-8 py-2 sm:py-2.5 md:py-3 border border-[#3a1906]/60 text-[#3a1906] font-serif text-[10px] sm:text-xs md:text-xs tracking-widest uppercase hover:bg-[#3a1906] hover:text-[#faf6e8] transition-all duration-300 shrink-0 shadow-sm"
                 >
                   More Info
                 </Link>
 
                 {/* 3 Stats Boxes */}
-                <div className="flex flex-row items-center justify-center gap-3 sm:gap-4 w-full pt-2">
-                  <div className="bg-[#3a1906]/5 border border-[#3a1906]/15 rounded-xl px-4 py-2 text-center shrink-0 min-w-[90px]">
-                    <div className="font-serif text-sm sm:text-base lg:text-lg font-bold text-[#b8922b]">15+</div>
-                    <div className="text-[8px] sm:text-[9px] text-[#3a1906]/75 font-bold uppercase tracking-wider">Years Exp.</div>
+                <div className="flex flex-row items-center justify-center gap-3 sm:gap-4 md:gap-6 w-full pt-1 md:pt-2 2xl:pt-1">
+                  <div className="bg-[#3a1906]/5 border border-[#3a1906]/15 rounded-xl px-4 sm:px-5 md:px-6 py-2 sm:py-2.5 md:py-3 text-center shrink-0 min-w-[90px] sm:min-w-[105px] md:min-w-[120px]">
+                    <div className="font-serif text-sm sm:text-base md:text-lg lg:text-base xl:text-lg font-bold text-[#b8922b]">15+</div>
+                    <div className="text-[8px] sm:text-[9px] md:text-[10px] text-[#3a1906]/75 font-bold uppercase tracking-wider">Years Exp.</div>
                   </div>
-                  <div className="bg-[#3a1906]/5 border border-[#3a1906]/15 rounded-xl px-4 py-2 text-center shrink-0 min-w-[110px]">
-                    <div className="font-serif text-sm sm:text-base lg:text-lg font-bold text-[#b8922b]">10K+</div>
-                    <div className="text-[8px] sm:text-[9px] text-[#3a1906]/75 font-bold uppercase tracking-wider">Clients Served</div>
+                  <div className="bg-[#3a1906]/5 border border-[#3a1906]/15 rounded-xl px-4 sm:px-5 md:px-6 py-2 sm:py-2.5 md:py-3 text-center shrink-0 min-w-[110px] sm:min-w-[125px] md:min-w-[140px]">
+                    <div className="font-serif text-sm sm:text-base md:text-lg lg:text-base xl:text-lg font-bold text-[#b8922b]">10K+</div>
+                    <div className="text-[8px] sm:text-[9px] md:text-[10px] text-[#3a1906]/75 font-bold uppercase tracking-wider">Clients Served</div>
                   </div>
-                  <div className="bg-[#3a1906]/5 border border-[#3a1906]/15 rounded-xl px-4 py-2 text-center shrink-0 min-w-[90px]">
-                    <div className="font-serif text-sm sm:text-base lg:text-lg font-bold text-[#b8922b]">4.9/5</div>
-                    <div className="text-[8px] sm:text-[9px] text-[#3a1906]/75 font-bold uppercase tracking-wider">Rating</div>
+                  <div className="bg-[#3a1906]/5 border border-[#3a1906]/15 rounded-xl px-4 sm:px-5 md:px-6 py-2 sm:py-2.5 md:py-3 text-center shrink-0 min-w-[90px] sm:min-w-[105px] md:min-w-[120px]">
+                    <div className="font-serif text-sm sm:text-base md:text-lg lg:text-base xl:text-lg font-bold text-[#b8922b]">4.9/5</div>
+                    <div className="text-[8px] sm:text-[9px] md:text-[10px] text-[#3a1906]/75 font-bold uppercase tracking-wider">Rating</div>
                   </div>
                 </div>
 
@@ -116,7 +113,7 @@ function About() {
             </div>
 
             {/* Column 3: Symmetrical Arched Image Cluster (lg:col-span-3) - hidden on mobile/tablet */}
-            <div className="hidden lg:flex lg:col-span-3 justify-center relative lg:-translate-y-20">
+            <div className="hidden lg:flex lg:col-span-3 justify-center relative">
               
               <div className="relative w-44 h-[270px]">
                 
@@ -139,11 +136,11 @@ function About() {
         </div>
       </section>
 
-      {/* Certification Section */}
-      <section className="py-16 2xl:py-24 bg-[#faf6e8] relative z-10 border-t border-[#deb18a]/20">
-        <div className="max-w-6xl 2xl:max-w-7xl 3xl:max-w-[1700px] mx-auto px-4 sm:px-6 lg:px-8 2xl:px-12">
+      {/* Certification Section: Standard comfortable spacing on mobile/tablet/laptop, reduced top spacing specifically on 2K/3K/4K */}
+      <section className="pt-12 sm:pt-14 md:pt-16 lg:pt-12 xl:pt-14 2xl:pt-4 3xl:pt-4 4xl:pt-5 5xl:pt-6 pb-12 sm:pb-14 md:pb-16 lg:pb-12 xl:pb-14 2xl:pb-16 3xl:pb-20 4xl:pb-24 bg-[#faf6e8] relative z-10 border-t border-[#deb18a]/20">
+        <div className="max-w-6xl 2xl:max-w-7xl 3xl:max-w-[1700px] mx-auto px-4 sm:px-6 md:px-8 lg:px-8 2xl:px-12">
           
-          <div className="text-center space-y-1 mb-12 2xl:mb-16">
+          <div className="text-center space-y-1 mb-8 sm:mb-10 md:mb-12 lg:mb-8 xl:mb-10 2xl:mb-6 3xl:mb-6 4xl:mb-8">
             <span className="font-serif italic font-semibold text-[#b8922b] tracking-[0.25em] text-[10px] sm:text-xs 2xl:text-sm uppercase block">Official Certification</span>
             <h2 className="font-serif text-2xl sm:text-3xl 2xl:text-4xl font-bold text-[#3a1906] tracking-wide uppercase">
               Professional Qualifications & Honors
@@ -151,16 +148,16 @@ function About() {
             <div className="w-12 2xl:w-16 h-[1.5px] bg-[#3a1906]/35 mx-auto mt-2" />
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-12 gap-8 lg:gap-12 2xl:gap-16 items-center">
+          <div className="grid grid-cols-1 md:grid-cols-12 gap-8 md:gap-10 lg:gap-10 xl:gap-12 2xl:gap-16 items-center">
             
             {/* Left: Certificate Image Container */}
             <div className="hidden md:block md:col-span-6 flex justify-center">
               <motion.div
                 initial={{ opacity: 0, y: 25 }}
                 whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true, margin: "-100px" }}
+                viewport={{ once: true }}
                 transition={{ duration: 0.5, ease: "easeOut" }}
-                className="w-full max-w-[480px] p-2 bg-white rounded-lg border border-[#deb18a]/45 shadow-xl hover:shadow-2xl transition-shadow duration-300"
+                className="w-full max-w-[440px] lg:max-w-[460px] 2xl:max-w-[480px] p-2 bg-white rounded-lg border border-[#deb18a]/45 shadow-xl hover:shadow-2xl transition-shadow duration-300"
               >
                 <div className="relative aspect-[4/3] rounded overflow-hidden">
                   <img
@@ -174,11 +171,11 @@ function About() {
             </div>
 
             {/* Right: Certificate Details */}
-            <div className="md:col-span-6 space-y-5 text-center md:text-left">
+            <div className="md:col-span-6 space-y-4 md:space-y-5 text-center md:text-left">
               <motion.div
                 initial={{ opacity: 0, y: 25 }}
                 whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true, margin: "-100px" }}
+                viewport={{ once: true }}
                 transition={{ duration: 0.5, ease: "easeOut" }}
                 className="space-y-4"
               >
