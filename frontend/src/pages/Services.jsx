@@ -147,8 +147,9 @@ export default function Services() {
   }, []);
 
   return (
-    <div className="pt-24 sm:pt-28 lg:pt-32 2xl:pt-40 3xl:pt-48 4xl:pt-60 5xl:pt-80 pb-16 2xl:pb-24 min-h-screen bg-white text-slate-900 font-sans selection:bg-[#b8922b]/20 selection:text-[#b8922b]">
-      <div className="w-full max-w-6xl 2xl:max-w-7xl 3xl:max-w-[1700px] 4xl:max-w-[2100px] mx-auto px-4 sm:px-6 2xl:px-12">
+    <div className="pt-24 sm:pt-28 lg:pt-32 2xl:pt-40 3xl:pt-48 4xl:pt-60 5xl:pt-80 pb-16 2xl:pb-24 min-h-screen bg-[#F3E7D5] bg-cover bg-center text-[#3a1906] font-sans selection:bg-[#3a1906] selection:text-[#F3E7D5] relative" style={{ backgroundImage: "url('/marble-bg.webp')" }}>
+      <div className="absolute inset-0 bg-[#F3E7D5]/90 z-0 pointer-events-none" />
+      <div className="w-full max-w-6xl 2xl:max-w-7xl 3xl:max-w-[1700px] 4xl:max-w-[2100px] mx-auto px-4 sm:px-6 2xl:px-12 relative z-10">
         
         {/* Page Header with Semantic H1 */}
         <div className="text-center space-y-2 mb-10 2xl:mb-14 5xl:mb-20">
@@ -174,7 +175,7 @@ export default function Services() {
               variants={itemVariants}
               whileHover={{ y: -6, scale: 1.015, borderColor: "#b8922b", boxShadow: "0 20px 45px -10px rgba(79, 49, 41, 0.16)" }}
               whileTap={{ scale: 0.99 }}
-              className="bg-[#faf9f6] rounded-3xl border border-[#eae6df] p-5 sm:p-6 2xl:p-7 flex flex-col lg:flex-row items-stretch gap-6 2xl:gap-8 transition-all duration-300 shadow-[0_4px_20px_rgba(79,49,41,0.08)]"
+              className="bg-white/90 rounded-3xl border border-[#deb18a]/40 p-5 sm:p-6 2xl:p-7 flex flex-col lg:flex-row items-stretch gap-6 2xl:gap-8 transition-all duration-300 shadow-[0_4px_20px_rgba(79,49,41,0.08)] backdrop-blur-sm"
             >
               
               {/* Left Column: Professionally Photographed Image */}

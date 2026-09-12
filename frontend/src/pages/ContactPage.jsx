@@ -158,7 +158,7 @@ export default function ContactPage() {
   };
 
   return (
-    <div className="min-h-screen bg-white">
+    <div className="min-h-screen bg-[#F3E7D5]">
       
       {/* Top Header Section (Dark Brown Background) */}
       <section className="contact-hero-section bg-[#4f3129] relative z-10">
@@ -304,7 +304,7 @@ export default function ContactPage() {
       </section>
 
       {/* Contact Info Row (Below Header, aligns alongside the hanging arch image) */}
-      <section className="bg-white pt-4 md:pt-4 2xl:pt-6 pb-6 md:pb-6 2xl:pb-14 relative z-10">
+      <section className="bg-[#F3E7D5] pt-4 md:pt-4 2xl:pt-6 pb-6 md:pb-6 2xl:pb-14 relative z-10">
         <div className="w-full max-w-7xl 2xl:max-w-[1600px] 3xl:max-w-[1920px] 4xl:max-w-[2400px] 5xl:max-w-[3200px] mx-auto px-4 sm:px-6 lg:px-8 2xl:px-12 4xl:px-16 5xl:px-24">
           <div className="grid grid-cols-1 md:grid-cols-12 gap-8 2xl:gap-12 items-start">
             
@@ -316,7 +316,7 @@ export default function ContactPage() {
                 </h2>
 
                 {/* Google Maps Embed - Width identically constrained to match Get in Touch form */}
-                <div className="w-full h-[150px] sm:h-[170px] md:h-[180px] 2xl:h-[230px] 3xl:h-[280px] 4xl:h-[360px] 5xl:h-[460px] rounded-2xl 3xl:rounded-[28px] 4xl:rounded-[36px] overflow-hidden shadow-md border border-gray-150">
+                <div className="w-full h-[150px] sm:h-[170px] md:h-[180px] 2xl:h-[230px] 3xl:h-[280px] 4xl:h-[360px] 5xl:h-[460px] rounded-2xl 3xl:rounded-[28px] 4xl:rounded-[36px] overflow-hidden shadow-md border border-[#deb18a]/30">
                   <iframe
                     src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d113579.78737678523!2d77.90997184499092!3d27.17630978716335!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x39740d857c2f41d9%3A0x784aef38a9523b42!2sAgra%2C%20Uttar%20Pradesh!5e0!3m2!1sen!2sin!4v1700000000000!5m2!1sen!2sin"
                     className="w-full h-full border-0"
@@ -351,7 +351,7 @@ export default function ContactPage() {
       </section>
 
       {/* Bottom Form & QR Section - Vertically Aligned with Map on the Exact Same Axis */}
-      <section className="bg-white pb-16 2xl:pb-24 relative z-10 border-t border-gray-100 pt-6 md:pt-8 2xl:pt-12">
+      <section className="bg-[#F3E7D5] pb-16 2xl:pb-24 relative z-10 border-t border-[#deb18a]/20 pt-6 md:pt-8 2xl:pt-12">
         <div className="w-full max-w-7xl 2xl:max-w-[1600px] 3xl:max-w-[1920px] 4xl:max-w-[2400px] 5xl:max-w-[3200px] mx-auto px-4 sm:px-6 lg:px-8 2xl:px-12 4xl:px-16 5xl:px-24">
           <div className="grid grid-cols-1 md:grid-cols-12 gap-8 2xl:gap-12 items-start">
             

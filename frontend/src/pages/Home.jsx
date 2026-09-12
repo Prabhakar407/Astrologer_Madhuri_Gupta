@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom'
 import { motion } from 'framer-motion'
 import { Sparkles, Compass, Heart, Shield, Clock, Globe, Sun, Sprout, Flower2, Briefcase, Target, User, Award, Key, TrendingUp, Trophy, Scale, Scroll, Moon, Info, Phone, Mail } from 'lucide-react'
 import { TextShimmer } from '../components/motion-primitives/text-shimmer'
+import VideoHeroCurtain from '../components/VideoHeroCurtain.jsx'
 
 function ScrollCard({ phase, idx }) {
   const canvasVariants = {
@@ -191,7 +192,7 @@ function ServiceAccordion({ service, isOpen, onToggle }) {
             onClick={(e) => e.stopPropagation()}
           >
             <Info className="h-4 w-4 2xl:h-5 2xl:w-5 text-[#3a1906]/60 hover:text-[#3a1906] transition-colors cursor-help shrink-0" />
-            <div className="absolute bottom-full left-[-20px] sm:left-1/2 sm:-translate-x-1/2 mb-2.5 w-60 sm:w-64 2xl:w-72 max-w-[calc(100vw-3rem)] p-3.5 2xl:p-4 bg-[#4f3129] border border-[#deb18a]/30 text-[#faf6e8] rounded-xl shadow-xl opacity-0 pointer-events-none group-hover/info:opacity-100 group-hover/info:pointer-events-auto group-focus/info:opacity-100 group-focus/info:pointer-events-auto transition-all duration-300 transform translate-y-1 group-hover/info:translate-y-0 group-focus/info:translate-y-0 z-50 normal-case tracking-normal">
+            <div className="absolute bottom-full left-[-20px] sm:left-1/2 sm:-translate-x-1/2 mb-2.5 w-60 sm:w-64 2xl:w-72 max-w-[calc(100vw-3rem)] p-3.5 2xl:p-4 bg-[#4f3129] border border-[#deb18a]/30 text-[#F3E7D5] rounded-xl shadow-xl opacity-0 pointer-events-none group-hover/info:opacity-100 group-hover/info:pointer-events-auto group-focus/info:opacity-100 group-focus/info:pointer-events-auto transition-all duration-300 transform translate-y-1 group-hover/info:translate-y-0 group-focus/info:translate-y-0 z-50 normal-case tracking-normal">
               <div className="font-serif font-bold text-[9px] 2xl:text-[11px] text-[#deb18a] uppercase tracking-wider mb-1.5 border-b border-[#deb18a]/20 pb-1">
                 Overview
               </div>
@@ -219,7 +220,7 @@ function ServiceAccordion({ service, isOpen, onToggle }) {
         transition={{ duration: 0.4, ease: "easeInOut" }}
         className="w-full overflow-hidden"
       >
-        <div className="p-5 2xl:p-7 3xl:p-8 bg-gradient-to-b from-[#faf6e8] to-[#f4edd9] border-x border-b border-[#3a1906]/20 rounded-b-sm space-y-3.5 2xl:space-y-5 text-[#3b2a1f] shadow-inner">
+        <div className="p-5 2xl:p-7 3xl:p-8 bg-gradient-to-b from-[#F3E7D5] to-[#ece0cd] border-x border-b border-[#3a1906]/20 rounded-b-sm space-y-3.5 2xl:space-y-5 text-[#3b2a1f] shadow-inner">
           <p className="font-sans text-xs sm:text-sm 2xl:text-lg 3xl:text-xl font-medium tracking-wide italic text-[#4a312a]/95">
             {service.tagline}
           </p>
@@ -381,17 +382,21 @@ function Home() {
   }
 
   return (
-    <div className="relative min-h-screen flex flex-col justify-between overflow-hidden" style={{ background: 'linear-gradient(to bottom, #5d4238 0%, #b39480 50%, #ceb7a6 100%)' }}>
+    <div className="relative min-h-screen flex flex-col justify-between overflow-hidden bg-[#F3E7D5]">
       
-      {/* Hero Section */}
-      <section className="relative px-3 sm:px-6 lg:px-8 py-6 sm:py-8 lg:py-0 min-h-[calc(100svh-3.5rem)] lg:min-h-screen lg:h-screen flex flex-col justify-center items-center overflow-hidden z-10 2xl:py-20 3xl:py-24 4xl:py-32">
+      {/* 1. New Video Hero Curtain Section (Autoplaying repeated Hero.mp4 with luxury bottom-up sheet curtain slide) */}
+      <VideoHeroCurtain />
+
+      {/* 2. Astrological Consultation Profile Section (Shifted below video hero) */}
+      <section id="consultation-hero" className="relative px-3 sm:px-6 lg:px-8 py-14 sm:py-16 lg:py-20 min-h-[calc(100svh-3.5rem)] lg:min-h-screen flex flex-col justify-center items-center overflow-hidden z-10 2xl:py-20 3xl:py-24 4xl:py-32 bg-[#F3E7D5] border-b border-[#deb18a]/20">
         {/* Background Image (rose-gold marble without zodiac wheel) */}
         <div 
-          className="absolute inset-0 z-0 bg-cover bg-center opacity-95 pointer-events-none" 
+          className="absolute inset-0 z-0 bg-cover bg-center pointer-events-none" 
           style={{ backgroundImage: "url('/marble-bg.webp')" }}
         />
+        <div className="absolute inset-0 bg-[#F3E7D5]/90 z-0 pointer-events-none" />
         {/* Top gradient shadow for navbar links contrast */}
-        <div className="absolute inset-x-0 top-0 h-28 bg-gradient-to-b from-cosmic-950/40 to-transparent z-0 pointer-events-none" />
+        <div className="absolute inset-x-0 top-0 h-28 bg-gradient-to-b from-[#eadecc]/30 to-transparent z-0 pointer-events-none" />
 
         {/* Left Side Decorative Astronomy Graphic (Crescent Moon & Constellation) */}
         <div className="absolute left-4 xl:left-8 2xl:left-12 3xl:left-16 4xl:left-24 top-1/2 -translate-y-1/2 hidden lg:flex flex-col items-center justify-center z-20 select-none pointer-events-none">
@@ -635,8 +640,8 @@ function Home() {
       </section>
 
       {/* Our Goal Section - Scaled to 50vh on 2K/3K/4K so Our Goal + About Me = 1 Screen Height */}
-      <section className="py-14 sm:py-20 lg:py-24 2xl:pt-14 2xl:pb-8 3xl:pt-16 3xl:pb-10 4xl:pt-20 4xl:pb-12 2xl:min-h-[50svh] 3xl:min-h-[50svh] 4xl:min-h-[50svh] 2xl:h-[50svh] 3xl:h-[50svh] 4xl:h-[50svh] flex flex-col justify-start bg-cover bg-center border-b border-[#deb18a]/10 relative overflow-hidden" style={{ backgroundImage: "url('/marble-bg.webp')" }}>
-        <div className="absolute inset-0 bg-[#f9f6f0]/20 z-0 pointer-events-none" />
+      <section className="py-14 sm:py-20 lg:py-24 2xl:pt-14 2xl:pb-8 3xl:pt-16 3xl:pb-10 4xl:pt-20 4xl:pb-12 2xl:min-h-[50svh] 3xl:min-h-[50svh] 4xl:min-h-[50svh] 2xl:h-[50svh] 3xl:h-[50svh] 4xl:h-[50svh] flex flex-col justify-start bg-cover bg-center bg-[#F3E7D5] border-b border-[#deb18a]/20 relative overflow-hidden" style={{ backgroundImage: "url('/marble-bg.webp')" }}>
+        <div className="absolute inset-0 bg-[#F3E7D5]/90 z-0 pointer-events-none" />
 
         {/* Celestial Divider 1 (directly on border line, zero height) */}
         <div className="absolute top-0 left-0 right-0 w-full z-20 flex items-center justify-center translate-y-[-50%]">
@@ -743,8 +748,8 @@ function Home() {
       </section>
 
       {/* About Me Section - Scaled to 50vh on 2K/3K/4K so Our Goal + About Me = 1 Screen Height */}
-      <section id="about" className="relative z-10 py-14 sm:py-20 lg:py-24 2xl:pt-14 2xl:pb-14 3xl:pt-16 3xl:pb-16 4xl:pt-20 4xl:pb-20 2xl:min-h-[50svh] 3xl:min-h-[50svh] 4xl:min-h-[50svh] 2xl:h-[50svh] 3xl:h-[50svh] 4xl:h-[50svh] flex flex-col justify-start bg-cover bg-center overflow-hidden" style={{ backgroundImage: "url('/marble-bg.webp')" }}>
-        <div className="absolute inset-0 bg-[#f9f6f0]/20 z-0 pointer-events-none" />
+      <section id="about" className="relative z-10 py-14 sm:py-20 lg:py-24 2xl:pt-14 2xl:pb-14 3xl:pt-16 3xl:pb-16 4xl:pt-20 4xl:pb-20 2xl:min-h-[50svh] 3xl:min-h-[50svh] 4xl:min-h-[50svh] 2xl:h-[50svh] 3xl:h-[50svh] 4xl:h-[50svh] flex flex-col justify-start bg-cover bg-center bg-[#F3E7D5] overflow-hidden" style={{ backgroundImage: "url('/marble-bg.webp')" }}>
+        <div className="absolute inset-0 bg-[#F3E7D5]/90 z-0 pointer-events-none" />
 
         {/* Celestial Divider 2 (directly on border line, zero height) */}
         <div className="absolute top-0 left-0 right-0 w-full z-20 flex items-center justify-center translate-y-[-50%]">
@@ -894,8 +899,8 @@ function Home() {
       </section>
 
       {/* Working With Me Section - Min-height balanced for 2K/3K/4K viewports with 20% width screen gap */}
-      <section className="relative z-10 py-8 sm:py-12 lg:py-16 2xl:pt-14 2xl:pb-8 3xl:pt-16 3xl:pb-10 4xl:pt-20 4xl:pb-12 2xl:min-h-[46svh] 3xl:min-h-[46svh] 4xl:min-h-[46svh] flex flex-col justify-start bg-cover bg-center border-t border-[#deb18a]/10" style={{ backgroundImage: "url('/marble-bg.webp')" }}>
-        <div className="absolute inset-0 bg-[#f9f6f0]/20 z-0 pointer-events-none" />
+      <section className="relative z-10 py-8 sm:py-12 lg:py-16 2xl:pt-14 2xl:pb-8 3xl:pt-16 3xl:pb-10 4xl:pt-20 4xl:pb-12 2xl:min-h-[46svh] 3xl:min-h-[46svh] 4xl:min-h-[46svh] flex flex-col justify-start bg-cover bg-center bg-[#F3E7D5] border-t border-[#deb18a]/20" style={{ backgroundImage: "url('/marble-bg.webp')" }}>
+        <div className="absolute inset-0 bg-[#F3E7D5]/90 z-0 pointer-events-none" />
         <motion.div 
           initial={{ opacity: 0, y: 35 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -1035,8 +1040,8 @@ function Home() {
       </section>
 
       {/* My Services Section - Min-height responsive for 2K/3K/4K viewports (height not fixed, expands naturally) */}
-      <section id="services" className="relative z-10 py-12 sm:py-16 lg:py-20 2xl:pt-14 2xl:pb-4 3xl:pt-16 3xl:pb-5 4xl:pt-20 4xl:pb-6 2xl:min-h-0 3xl:min-h-0 4xl:min-h-0 flex flex-col justify-start bg-cover bg-center border-t border-[#deb18a]/10" style={{ backgroundImage: "url('/marble-bg.webp')" }}>
-        <div className="absolute inset-0 bg-[#f9f6f0]/20 z-0 pointer-events-none" />
+      <section id="services" className="relative z-10 py-12 sm:py-16 lg:py-20 2xl:pt-14 2xl:pb-4 3xl:pt-16 3xl:pb-5 4xl:pt-20 4xl:pb-6 2xl:min-h-0 3xl:min-h-0 4xl:min-h-0 flex flex-col justify-start bg-cover bg-center bg-[#F3E7D5] border-t border-[#deb18a]/20" style={{ backgroundImage: "url('/marble-bg.webp')" }}>
+        <div className="absolute inset-0 bg-[#F3E7D5]/90 z-0 pointer-events-none" />
 
         {/* Celestial Divider 3 (directly on border line, zero height) */}
         <div className="absolute top-0 left-0 right-0 w-full z-20 flex items-center justify-center translate-y-[-50%]">

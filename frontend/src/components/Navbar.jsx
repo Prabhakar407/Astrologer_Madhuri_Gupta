@@ -67,22 +67,22 @@ function Navbar() {
   return (
     <header className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 border-b border-[#deb18a]/15 ${
       scrolled 
-        ? 'bg-[#4f3129] py-2 2xl:py-3 3xl:py-4 4xl:py-5 5xl:py-6 shadow-md' 
-        : 'bg-[#4f3129] py-3 2xl:py-4 3xl:py-5 4xl:py-6 5xl:py-8'
+        ? 'bg-[#4f3129] py-2 2xl:py-3 3xl:py-4 4xl:py-5 5xl:py-4 shadow-md' 
+        : 'bg-[#4f3129] py-3 2xl:py-4 3xl:py-5 4xl:py-6 5xl:py-5'
     }`}>
       <div className="site-container">
-        <div className="flex items-center justify-between h-9 2xl:h-12 3xl:h-14 4xl:h-16 5xl:h-24 relative">
+        <div className="flex items-center justify-between h-9 2xl:h-12 3xl:h-14 4xl:h-16 5xl:h-16 relative">
           
           {/* Left Branding */}
-          <Link to="/" className="flex items-center space-x-2 2xl:space-x-3 5xl:space-x-5 shrink-0 group">
-            <Sparkles className="h-5 w-5 sm:h-5.5 sm:w-5.5 lg:h-6 lg:w-6 2xl:h-7 2xl:w-7 3xl:h-8 3xl:w-8 4xl:h-9 4xl:w-9 5xl:h-14 5xl:w-14 text-gold-400 group-hover:rotate-12 transition-transform duration-300 shrink-0" />
-            <span className="font-serif text-lg sm:text-xl lg:text-2xl 2xl:text-2xl 3xl:text-3xl 4xl:text-4xl 5xl:text-6xl font-bold tracking-widest text-white group-hover:text-[#deb18a] transition-colors duration-300 whitespace-nowrap">
+          <Link to="/" className="flex items-center space-x-2 2xl:space-x-3 5xl:space-x-4 shrink-0 group">
+            <Sparkles className="h-5 w-5 sm:h-5.5 sm:w-5.5 lg:h-6 lg:w-6 2xl:h-7 2xl:w-7 3xl:h-8 3xl:w-8 4xl:h-9 4xl:w-9 5xl:h-10 5xl:w-10 text-gold-400 group-hover:rotate-12 transition-transform duration-300 shrink-0" />
+            <span className="font-serif text-lg sm:text-xl lg:text-2xl 2xl:text-2xl 3xl:text-3xl 4xl:text-4xl 5xl:text-4xl font-bold tracking-widest text-white group-hover:text-[#deb18a] transition-colors duration-300 whitespace-nowrap">
               MADHURI GUPTA
             </span>
           </Link>
 
           {/* Desktop Center Menu Options (Only on xl+ to prevent overlap on iPad / tablets) */}
-          <div className="hidden xl:flex items-center space-x-5 2xl:space-x-6 3xl:space-x-8 4xl:space-x-10 5xl:space-x-12 mx-auto px-4">
+          <div className="hidden xl:flex items-center space-x-5 2xl:space-x-6 3xl:space-x-8 4xl:space-x-10 5xl:space-x-10 mx-auto px-4">
             {navItems
               .filter((item) => ['Home', 'About', 'Services', 'Testimonial', 'Contact'].includes(item.name))
               .map((item) => {
@@ -92,7 +92,7 @@ function Navbar() {
                     key={item.name}
                     to={item.url}
                     onClick={(e) => handleLinkClick(e, item)}
-                    className={`font-serif text-xs 2xl:text-base 3xl:text-lg 4xl:text-xl 5xl:text-3xl font-semibold tracking-[0.2em] uppercase transition-colors duration-300 pb-0.5 whitespace-nowrap ${
+                    className={`font-serif text-xs 2xl:text-base 3xl:text-lg 4xl:text-xl 5xl:text-xl font-semibold tracking-[0.2em] uppercase transition-colors duration-300 pb-0.5 whitespace-nowrap ${
                       isActive 
                         ? 'text-[#dfb260] border-b-2 border-[#dfb260]' 
                         : 'text-white hover:text-[#dfb260]'

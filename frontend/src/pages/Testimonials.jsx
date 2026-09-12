@@ -55,8 +55,8 @@ export default function Testimonials() {
   const currentTestimonial = testimonials[currentIndex];
 
   return (
-    <div className="pt-24 sm:pt-28 lg:pt-24 2xl:pt-36 3xl:pt-40 4xl:pt-48 min-h-[calc(100vh-80px)] bg-[#faf6e8] bg-cover bg-center flex flex-col justify-center py-6 2xl:py-12 relative" style={{ backgroundImage: "url('/marble-bg.webp')" }}>
-      <div className="absolute inset-0 bg-[#faf6e8]/90 z-0 pointer-events-none" />
+    <div className="pt-24 sm:pt-28 lg:pt-24 2xl:pt-36 3xl:pt-40 4xl:pt-48 min-h-[calc(100vh-80px)] bg-[#F3E7D5] bg-cover bg-center flex flex-col justify-center py-6 2xl:py-12 relative" style={{ backgroundImage: "url('/marble-bg.webp')" }}>
+      <div className="absolute inset-0 bg-[#F3E7D5]/90 z-0 pointer-events-none" />
 
       <div className="max-w-7xl 2xl:max-w-[1500px] 3xl:max-w-[1800px] mx-auto px-4 sm:px-6 lg:px-8 relative z-10 w-full flex flex-col space-y-6 lg:space-y-10 2xl:space-y-12">
         
@@ -98,7 +98,7 @@ export default function Testimonials() {
             </div>
 
             {/* Content Card (Overlapping Left Frame on desktop, neatly stacked on tablet) */}
-            <div className="bg-[#faf6e8]/95 backdrop-blur-md border border-[#deb18a]/50 rounded-3xl shadow-xl p-6 lg:p-8 2xl:p-10 3xl:p-12 ml-0 lg:ml-[-60px] 2xl:ml-[-80px] 3xl:ml-[-100px] mt-[-24px] lg:mt-0 z-10 w-full max-w-lg 2xl:max-w-xl 3xl:max-w-2xl flex-1 relative">
+            <div className="bg-[#F3E7D5]/95 backdrop-blur-md border border-[#deb18a]/50 rounded-3xl shadow-xl p-6 lg:p-8 2xl:p-10 3xl:p-12 ml-0 lg:ml-[-60px] 2xl:ml-[-80px] 3xl:ml-[-100px] mt-[-24px] lg:mt-0 z-10 w-full max-w-lg 2xl:max-w-xl 3xl:max-w-2xl flex-1 relative">
               
               {/* Elegant Sparkle decoration */}
               <div className="absolute top-5 right-5 2xl:top-7 2xl:right-7 opacity-30 text-[#b8922b] pointer-events-none">
@@ -205,7 +205,7 @@ export default function Testimonials() {
               onClick={handlePrevious}
               whileTap={{ scale: 0.92 }}
               aria-label="Previous testimonial"
-              className="w-10 h-10 rounded-full bg-[#faf6e8] border border-[#3a1906]/20 shadow-md flex items-center justify-center hover:bg-[#3a1906] hover:text-white text-[#3a1906] transition-colors cursor-pointer"
+              className="w-10 h-10 rounded-full bg-[#F3E7D5] border border-[#3a1906]/20 shadow-md flex items-center justify-center hover:bg-[#3a1906] hover:text-white text-[#3a1906] transition-colors cursor-pointer"
             >
               <ChevronLeft className="w-4.5 h-4.5" />
             </motion.button>
@@ -232,7 +232,7 @@ export default function Testimonials() {
               onClick={handleNext}
               whileTap={{ scale: 0.92 }}
               aria-label="Next testimonial"
-              className="w-10 h-10 rounded-full bg-[#faf6e8] border border-[#3a1906]/20 shadow-md flex items-center justify-center hover:bg-[#3a1906] hover:text-white text-[#3a1906] transition-colors cursor-pointer"
+              className="w-10 h-10 rounded-full bg-[#F3E7D5] border border-[#3a1906]/20 shadow-md flex items-center justify-center hover:bg-[#3a1906] hover:text-white text-[#3a1906] transition-colors cursor-pointer"
             >
               <ChevronRight className="w-4.5 h-4.5" />
             </motion.button>

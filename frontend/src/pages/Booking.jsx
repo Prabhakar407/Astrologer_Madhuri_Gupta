@@ -254,9 +254,9 @@ export default function Booking() {
 
   return (
     <div 
-      className="booking-page-root px-4 sm:px-6 2xl:px-8 relative bg-[#faf6e8]" 
+      className="booking-page-root px-4 sm:px-6 2xl:px-8 relative bg-[#F3E7D5]" 
       style={{ 
-        backgroundImage: "linear-gradient(rgba(250, 246, 232, 0.45), rgba(250, 246, 232, 0.45)), url('/marble-bg.webp')", 
+        backgroundImage: "linear-gradient(rgba(243, 231, 213, 0.45), rgba(243, 231, 213, 0.45)), url('/marble-bg.webp')", 
         backgroundSize: 'cover', 
         backgroundPosition: 'center', 
         backgroundAttachment: 'fixed' 

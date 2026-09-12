@@ -6,6 +6,10 @@
   --font-playfair: "IBM Plex Sans", sans-serif;
   --font-ibm: "IBM Plex Sans", sans-serif;
   
+  --breakpoint-sm: 640px;
+  --breakpoint-md: 768px;
+  --breakpoint-lg: 1024px;
+  --breakpoint-xl: 1280px;
   --breakpoint-2xl: 1536px;
   --breakpoint-3xl: 1920px;
   --breakpoint-4xl: 2560px;
@@ -43,6 +47,11 @@ html, body, button, input, select, textarea {
   font-optical-sizing: auto;
   font-style: normal;
   font-variation-settings: "wdth" 100;
+}
+
+body {
+  background-color: #F3E7D5;
+  color: #3a1906;
 }
 
 .ibm-plex-sans {
@@ -302,7 +311,7 @@ html, body, button, input, select, textarea {
   width: 8px;
 }
 ::-webkit-scrollbar-track {
-  background: #050508;
+  background: #F3E7D5;
 }
 ::-webkit-scrollbar-thumb {
   background: rgba(212, 175, 55, 0.3);
@@ -315,14 +324,14 @@ html, body, button, input, select, textarea {
 /* Global High-Contrast Text Selection - Guarantees all text is clearly highlighted and copyable */
 ::selection {
   background-color: #3a1906 !important;
-  color: #faf6e8 !important;
-  -webkit-text-fill-color: #faf6e8 !important;
+  color: #F3E7D5 !important;
+  -webkit-text-fill-color: #F3E7D5 !important;
 }
 
 ::-moz-selection {
   background-color: #3a1906 !important;
-  color: #faf6e8 !important;
-  -webkit-text-fill-color: #faf6e8 !important;
+  color: #F3E7D5 !important;
+  -webkit-text-fill-color: #F3E7D5 !important;
 }
 
 /* Hide default router layouts if any */
@@ -602,14 +611,14 @@ html, body, button, input, select, textarea {
 
 .hero-secondary-button:active {
   background-color: #3a1906;
-  color: #faf6e8;
+  color: #F3E7D5;
   transform: scale(0.96);
 }
 
 @media (hover: hover) {
   .hero-secondary-button:hover {
     background-color: #3a1906;
-    color: #faf6e8;
+    color: #F3E7D5;
   }
 }
 
@@ -663,7 +672,7 @@ html, body, button, input, select, textarea {
   position: relative;
   width: 184px;
   height: 32px;
-  background: #faf6e8;
+  background: #F3E7D5;
   border: 1px solid rgba(58, 25, 6, 0.25);
   border-radius: 9999px;
   display: inline-flex;
@@ -692,7 +701,7 @@ html, body, button, input, select, textarea {
   position: absolute;
   left: 8px;
   z-index: 2;
-  color: #faf6e8;
+  color: #F3E7D5;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -725,7 +734,7 @@ html, body, button, input, select, textarea {
   }
   .btn-10:hover .btn-text {
     left: 16px;
-    color: #faf6e8;
+    color: #F3E7D5;
     padding-right: 28px;
   }
 }

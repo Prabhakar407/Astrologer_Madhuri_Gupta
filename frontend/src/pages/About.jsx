@@ -7,11 +7,11 @@ function About() {
     document.title = "About Astrologer Madhuri Gupta | 15+ Yrs Vedic Experience Agra";
   }, []);
   return (
-    <div className="min-h-screen bg-[#faf6e8]">
+    <div className="min-h-screen bg-[#F3E7D5]">
       
       {/* About Page Hero Section: Full screen (< lg) so only Hero appears on load, reduced bottom gap and precise top clearance on 2K/3K/4K */}
       <section className="relative w-full h-auto min-h-[100svh] min-h-[100dvh] lg:min-h-0 pt-20 sm:pt-24 md:pt-28 lg:pt-24 xl:pt-28 2xl:pt-48 3xl:pt-60 4xl:pt-76 5xl:pt-96 pb-12 sm:pb-16 md:pb-16 lg:pb-12 xl:pb-14 2xl:pb-8 3xl:pb-8 4xl:pb-10 5xl:pb-12 flex flex-col justify-center lg:justify-start 2xl:justify-start items-center overflow-hidden bg-cover bg-center" style={{ backgroundImage: "url('/marble-bg.webp')" }}>
-        <div className="absolute inset-0 bg-[#faf6e8]/90 z-0 pointer-events-none" />
+        <div className="absolute inset-0 bg-[#F3E7D5]/90 z-0 pointer-events-none" />
         
         {/* Symmetrical crescent curved shading at the top */}
         <div className="absolute top-0 left-0 right-0 h-32 bg-gradient-to-b from-[#eadecc]/30 to-transparent pointer-events-none z-0" />
@@ -87,7 +87,7 @@ function About() {
                 {/* Minimalist outline button */}
                 <Link 
                   to="/booking" 
-                  className="px-6 sm:px-7 md:px-8 py-2 sm:py-2.5 md:py-3 border border-[#3a1906]/60 text-[#3a1906] font-serif text-[10px] sm:text-xs md:text-xs tracking-widest uppercase hover:bg-[#3a1906] hover:text-[#faf6e8] transition-all duration-300 shrink-0 shadow-sm"
+                  className="px-6 sm:px-7 md:px-8 py-2 sm:py-2.5 md:py-3 border border-[#3a1906]/60 text-[#3a1906] font-serif text-[10px] sm:text-xs md:text-xs tracking-widest uppercase hover:bg-[#3a1906] hover:text-[#F3E7D5] transition-all duration-300 shrink-0 shadow-sm"
                 >
                   More Info
                 </Link>
@@ -137,7 +137,7 @@ function About() {
       </section>
 
       {/* Certification Section: Standard comfortable spacing on mobile/tablet/laptop, reduced top spacing specifically on 2K/3K/4K */}
-      <section className="pt-12 sm:pt-14 md:pt-16 lg:pt-12 xl:pt-14 2xl:pt-4 3xl:pt-4 4xl:pt-5 5xl:pt-6 pb-12 sm:pb-14 md:pb-16 lg:pb-12 xl:pb-14 2xl:pb-16 3xl:pb-20 4xl:pb-24 bg-[#faf6e8] relative z-10 border-t border-[#deb18a]/20">
+      <section className="pt-12 sm:pt-14 md:pt-16 lg:pt-12 xl:pt-14 2xl:pt-4 3xl:pt-4 4xl:pt-5 5xl:pt-6 pb-12 sm:pb-14 md:pb-16 lg:pb-12 xl:pb-14 2xl:pb-16 3xl:pb-20 4xl:pb-24 bg-[#F3E7D5] relative z-10 border-t border-[#deb18a]/20">
         <div className="max-w-6xl 2xl:max-w-7xl 3xl:max-w-[1700px] mx-auto px-4 sm:px-6 md:px-8 lg:px-8 2xl:px-12">
           
           <div className="text-center space-y-1 mb-8 sm:mb-10 md:mb-12 lg:mb-8 xl:mb-10 2xl:mb-6 3xl:mb-6 4xl:mb-8">
