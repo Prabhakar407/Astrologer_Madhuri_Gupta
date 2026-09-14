@@ -1,9 +1,9 @@
 @import "tailwindcss";
 
 @theme {
-  --font-serif: "IBM Plex Sans", sans-serif;
-  --font-sans: "IBM Plex Sans", sans-serif;
-  --font-playfair: "IBM Plex Sans", sans-serif;
+  --font-serif: "Playfair Display", "Cormorant Garamond", Georgia, serif;
+  --font-sans: "IBM Plex Sans", -apple-system, BlinkMacSystemFont, sans-serif;
+  --font-playfair: "Playfair Display", "Cormorant Garamond", Georgia, serif;
   --font-ibm: "IBM Plex Sans", sans-serif;
   
   --breakpoint-sm: 640px;

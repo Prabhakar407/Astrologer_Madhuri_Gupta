@@ -62,6 +62,13 @@ function VideoHeroCurtain() {
   const isTransitioningRef = useRef(false);
   const touchStartY = useRef(0);
   const touchStartX = useRef(0);
+  const touchStartScrollY = useRef(0);
+
+  // Reliable scroll-up state tracking
+  const wasBelowTopRef = useRef(false);
+  const canRetractOnScrollUpRef = useRef(false);
+  const idleTimerRef = useRef(null);
+  const openTimestampRef = useRef(0);
 
   // Keep ref in sync with state
   useEffect(() => {
@@ -87,38 +94,57 @@ function VideoHeroCurtain() {
   const openSlider = useCallback(() => {
     if (isTransitioningRef.current) return;
     isTransitioningRef.current = true;
+    openTimestampRef.current = Date.now();
+    wasBelowTopRef.current = false;
+    canRetractOnScrollUpRef.current = false;
     setIsSliderOpen(true);
+    window.scrollTo({ top: 0, behavior: 'instant' });
+    
+    // Enable retraction only after slider has fully settled at the top
     setTimeout(() => {
       isTransitioningRef.current = false;
-    }, 800);
+      canRetractOnScrollUpRef.current = true;
+    }, 1000);
   }, []);
 
   const closeSlider = useCallback((e) => {
     e?.stopPropagation();
     if (isTransitioningRef.current) return;
     isTransitioningRef.current = true;
+    canRetractOnScrollUpRef.current = false;
     setIsSliderOpen(false);
-    window.scrollTo({ top: 0, behavior: 'smooth' });
+    window.scrollTo({ top: 0, behavior: 'instant' });
     setTimeout(() => {
       isTransitioningRef.current = false;
-    }, 800);
+    }, 900);
   }, []);
 
   const scrollToNextSection = () => {
-    const nextEl = document.getElementById('consultation-hero');
-    if (nextEl) {
-      nextEl.scrollIntoView({ behavior: 'smooth' });
+    const heroEl = heroRef.current;
+    if (heroEl) {
+      const target = heroEl.offsetTop + heroEl.offsetHeight;
+      window.scrollTo({ top: target, behavior: 'smooth' });
     }
   };
 
-  // Intercept wheel, touch, and scroll interactions at the top of the hero
+  // Intercept wheel, touch, and scroll interactions with strict two-phase control
   useEffect(() => {
-    // Wheel listener (passive: false so we can preventDefault and stop unwanted page jumps)
+    const scheduleRestingAtTop = () => {
+      if (idleTimerRef.current) clearTimeout(idleTimerRef.current);
+      idleTimerRef.current = setTimeout(() => {
+        if (window.scrollY <= 8 && isSliderOpenRef.current) {
+          wasBelowTopRef.current = false;
+          canRetractOnScrollUpRef.current = true;
+        }
+      }, 500);
+    };
+
+    // Wheel listener (passive: false to manage smooth two-phase hero reveal)
     const handleWheel = (e) => {
       const isAtTop = window.scrollY <= 8;
 
       // 1. If at top and curtain is CLOSED:
-      // Scrolling DOWN must drop the curtain smoothly from the top, NOT scroll the page away!
+      // Scrolling DOWN must drop the curtain smoothly, keep next section hidden, and fix slider over video
       if (isAtTop && !isSliderOpenRef.current) {
         if (e.deltaY > 3) {
           e.preventDefault();
@@ -129,20 +155,34 @@ function VideoHeroCurtain() {
 
       // 2. If at top and curtain is OPEN:
       if (isAtTop && isSliderOpenRef.current) {
-        // Scrolling UP must smoothly retract the curtain back up to reveal video
-        if (e.deltaY < -5) {
+        const now = Date.now();
+        const timeSinceOpen = now - openTimestampRef.current;
+
+        // While curtain is opening (and for 1100ms after), absorb downward wheel events
+        // so user stays fixed on the hero and doesn't instantly jump into the next section
+        if (timeSinceOpen < 1100 && e.deltaY > 0) {
+          e.preventDefault();
+          return;
+        }
+
+        // When scrolling up from Our Goal section (or below), wasBelowTopRef is true.
+        // As long as the user arrived from below or hasn't settled at the top,
+        // ALL upward wheel momentum is absorbed so the slider STAYS OPEN!
+        if (wasBelowTopRef.current || !canRetractOnScrollUpRef.current) {
+          if (e.deltaY < 0) {
+            e.preventDefault();
+            scheduleRestingAtTop();
+            return;
+          }
+        }
+
+        // Only if user has already arrived, stopped scrolling, and is settled at the top
+        // (canRetractOnScrollUpRef is true), and scrolls UP AGAIN deliberately:
+        if (canRetractOnScrollUpRef.current && e.deltaY < -12) {
           e.preventDefault();
           closeSlider();
           return;
         }
-
-        // If currently animating down, absorb wheel down events so user sees the curtain drop
-        if (isTransitioningRef.current && e.deltaY > 0) {
-          e.preventDefault();
-          return;
-        }
-
-        // If done animating and user scrolls DOWN: allow normal scroll down to consultation section
       }
     };
 
@@ -150,10 +190,12 @@ function VideoHeroCurtain() {
     const handleTouchStart = (e) => {
       touchStartY.current = e.touches[0].clientY;
       touchStartX.current = e.touches[0].clientX;
+      touchStartScrollY.current = window.scrollY;
     };
 
     const handleTouchMove = (e) => {
       const isAtTop = window.scrollY <= 8;
+      const startedAtTop = touchStartScrollY.current <= 8;
       const currentY = e.touches[0].clientY;
       const currentX = e.touches[0].clientX;
       const deltaY = touchStartY.current - currentY; // positive = swipe up = scroll down
@@ -173,16 +215,27 @@ function VideoHeroCurtain() {
 
       // 2. If at top and curtain is OPEN:
       if (isAtTop && isSliderOpenRef.current) {
-        // Swipe down = scroll up -> retract curtain
-        if (deltaY < -12) {
+        const now = Date.now();
+        const timeSinceOpen = now - openTimestampRef.current;
+
+        // Absorb downward swipe while slider is opening
+        if (timeSinceOpen < 1100 && deltaY > 0) {
           if (e.cancelable) e.preventDefault();
-          closeSlider();
           return;
         }
 
-        // Absorb during transition
-        if (isTransitioningRef.current && deltaY > 0) {
+        // If touch gesture started while scrolling up from below, do NOT retract curtain!
+        if (!startedAtTop || wasBelowTopRef.current || !canRetractOnScrollUpRef.current) {
+          if (deltaY < 0) {
+            scheduleRestingAtTop();
+            return;
+          }
+        }
+
+        // Only if touch gesture started while ALREADY rested at the top, swipe down -> retract curtain
+        if (startedAtTop && canRetractOnScrollUpRef.current && deltaY < -24) {
           if (e.cancelable) e.preventDefault();
+          closeSlider();
           return;
         }
       }
@@ -196,17 +249,25 @@ function VideoHeroCurtain() {
           e.preventDefault();
           openSlider();
         } else if (isSliderOpenRef.current && (e.key === 'ArrowUp' || e.key === 'PageUp')) {
-          e.preventDefault();
-          closeSlider();
+          if (canRetractOnScrollUpRef.current) {
+            e.preventDefault();
+            closeSlider();
+          }
         }
       }
     };
 
-    // Scroll listener: keep slider state open when scrolling further down page
+    // Scroll listener: track when user is below top vs. arriving back at top
     const handleScroll = () => {
       const currentScrollY = window.scrollY;
-      if (currentScrollY > 120 && !isSliderOpenRef.current) {
-        setIsSliderOpen(true);
+      if (currentScrollY > 15) {
+        wasBelowTopRef.current = true;
+        canRetractOnScrollUpRef.current = false;
+        if (!isSliderOpenRef.current) {
+          setIsSliderOpen(true);
+        }
+      } else if (currentScrollY <= 8) {
+        scheduleRestingAtTop();
       }
     };
 
@@ -217,6 +278,7 @@ function VideoHeroCurtain() {
     window.addEventListener('scroll', handleScroll, { passive: true });
 
     return () => {
+      if (idleTimerRef.current) clearTimeout(idleTimerRef.current);
       window.removeEventListener('wheel', handleWheel);
       window.removeEventListener('touchstart', handleTouchStart);
       window.removeEventListener('touchmove', handleTouchMove);
