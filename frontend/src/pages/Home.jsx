@@ -6,6 +6,7 @@ import { TextShimmer } from '../components/motion-primitives/text-shimmer'
 import VideoHeroCurtain from '../components/VideoHeroCurtain.jsx'
 import ServicesSection from '../components/ServicesSection.jsx'
 import TestimonialsSection from '../components/TestimonialsSection.jsx'
+import OurGoalSection from '../components/OurGoalSection.jsx'
 
 function ScrollCard({ phase, idx }) {
   const canvasVariants = {
@@ -238,116 +239,11 @@ function Home() {
       {/* 1. New Video Hero Curtain Section (Autoplaying repeated Hero.mp4 with luxury bottom-up sheet curtain slide) */}
       <VideoHeroCurtain />
 
-      {/* Our Goal Section - Scaled to 50vh on 2K/3K/4K so Our Goal + About Me = 1 Screen Height */}
-      <section className="py-14 sm:py-20 lg:py-24 2xl:pt-14 2xl:pb-8 3xl:pt-16 3xl:pb-10 4xl:pt-20 4xl:pb-12 2xl:min-h-[50svh] 3xl:min-h-[50svh] 4xl:min-h-[50svh] 2xl:h-[50svh] 3xl:h-[50svh] 4xl:h-[50svh] flex flex-col justify-start bg-cover bg-center bg-[#F3E7D5] border-b border-[#deb18a]/20 relative overflow-hidden" style={{ backgroundImage: "url('/marble-bg.webp')" }}>
-        <div className="absolute inset-0 bg-[#F3E7D5]/90 z-0 pointer-events-none" />
+      {/* Our Goal Section */}
+      <OurGoalSection />
 
-        {/* Celestial Divider 1 (directly on border line, zero height) */}
-        <div className="absolute top-0 left-0 right-0 w-full z-20 flex items-center justify-center translate-y-[-50%]">
-          <div className="w-full max-w-7xl mx-auto px-6 flex items-center justify-center">
-            <motion.div 
-              initial={{ scaleX: 0 }}
-              whileInView={{ scaleX: 1 }}
-              viewport={{ once: true }}
-              transition={{ duration: 1.2, ease: "easeInOut" }}
-              className="flex-grow h-[1.5px] bg-gradient-to-r from-transparent via-[#4f3129]/30 to-[#4f3129]/70 origin-right"
-            />
-            <motion.div 
-              initial={{ opacity: 0, scale: 0, rotate: -45 }}
-              whileInView={{ opacity: 1, scale: 1, rotate: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.8, delay: 0.4 }}
-              className="mx-4 text-[#b8922b] select-none text-lg font-bold"
-            >
-              ✦
-            </motion.div>
-            <motion.div 
-              initial={{ scaleX: 0 }}
-              whileInView={{ scaleX: 1 }}
-              viewport={{ once: true }}
-              transition={{ duration: 1.2, ease: "easeInOut" }}
-              className="flex-grow h-[1.5px] bg-gradient-to-l from-transparent via-[#4f3129]/30 to-[#4f3129]/70 origin-left"
-            />
-          </div>
-        </div>
-
-        <motion.div 
-          initial={{ opacity: 0, y: 35 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, margin: "-20px" }}
-          transition={{ duration: 1.0, ease: "easeOut" }}
-          className="w-full max-w-7xl 2xl:max-w-[1500px] 3xl:max-w-[1750px] 4xl:max-w-[2100px] mx-auto px-6 lg:px-16 2xl:px-12 3xl:px-16 relative z-10 flex flex-col items-center space-y-6 2xl:space-y-4 3xl:space-y-5"
-        >
-          {/* Top Centre Header */}
-          <div className="text-center space-y-2 2xl:space-y-1">
-            <TextShimmer
-              as="h2"
-              duration={3.5}
-              className="font-serif text-3xl 2xl:text-2xl 3xl:text-3xl 4xl:text-4xl font-bold tracking-widest uppercase text-center"
-              style={{
-                '--base-color': '#4f3129',
-                '--base-gradient-color': '#deb18a'
-              }}
-            >
-              OUR GOAL
-            </TextShimmer>
-            <div className="w-16 2xl:w-16 3xl:w-20 h-[1.5px] bg-[#4f3129]/40 mx-auto" />
-          </div>
-
-          <div className="w-full flex flex-col lg:flex-row items-center justify-between gap-8 lg:gap-16 2xl:gap-14 3xl:gap-20 overflow-visible">
-            {/* Left Column: Image Container */}
-            <div className="w-full lg:w-[55%] flex justify-center items-center overflow-visible relative">
-              <motion.div 
-                initial={{ opacity: 0, scale: 0.95 }}
-                whileInView={{ opacity: 1, scale: 1 }}
-                viewport={{ once: true, margin: "-20px" }}
-                transition={{ duration: 0.8 }}
-                className="w-full flex items-center justify-center p-0 overflow-visible"
-              >
-                <img 
-                  src="/Goal.webp" 
-                  alt="Our Goal - Vedic Astrological Guidance in Agra" 
-                  loading="lazy"
-                  className="w-[90%] sm:w-[80%] max-w-[450px] lg:w-[160%] lg:max-w-none 2xl:w-[100%] 3xl:w-[110%] 4xl:w-[120%] 2xl:max-h-[30svh] 3xl:max-h-[32svh] 4xl:max-h-[34svh] h-auto object-contain p-0 m-0 my-0 lg:-my-16 lg:-ml-16 2xl:my-0 2xl:ml-0 mx-auto lg:mx-0"
-                />
-              </motion.div>
-            </div>
-
-            {/* Right Column: Bullet Points - laptop size standard text-sm sm:text-base */}
-            <div className="w-full lg:w-[45%] flex flex-col justify-center space-y-4 2xl:space-y-2 3xl:space-y-2.5 z-10">
-              <ul className="space-y-3.5 sm:space-y-4 2xl:space-y-1.5 3xl:space-y-2 4xl:space-y-2.5 font-serif text-sm sm:text-base 2xl:text-lg 3xl:text-xl 4xl:text-2xl text-[#4a312a] font-bold tracking-wide flex flex-col items-start text-left">
-                <li className="flex items-center space-x-3 sm:space-x-3.5 2xl:space-x-4">
-                  <span className="text-[1.35em] leading-none shrink-0 drop-shadow-sm select-none">❤️</span>
-                  <span>Relationships</span>
-                </li>
-                <li className="flex items-center space-x-3 sm:space-x-3.5 2xl:space-x-4">
-                  <span className="text-[1.35em] leading-none shrink-0 drop-shadow-sm select-none">💼</span>
-                  <span>Career</span>
-                </li>
-                <li className="flex items-center space-x-3 sm:space-x-3.5 2xl:space-x-4">
-                  <span className="text-[1.35em] leading-none shrink-0 drop-shadow-sm select-none">🏡</span>
-                  <span>Home Energy</span>
-                </li>
-                <li className="flex items-center space-x-3 sm:space-x-3.5 2xl:space-x-4">
-                  <span className="text-[1.35em] leading-none shrink-0 drop-shadow-sm select-none">💰</span>
-                  <span>Prosperity</span>
-                </li>
-                <li className="flex items-center space-x-3 sm:space-x-3.5 2xl:space-x-4">
-                  <span className="text-[1.35em] leading-none shrink-0 drop-shadow-sm select-none">🌟</span>
-                  <span>Life Decisions</span>
-                </li>
-                <li className="flex items-center space-x-3 sm:space-x-3.5 2xl:space-x-4">
-                  <span className="text-[1.35em] leading-none shrink-0 drop-shadow-sm select-none">🕉️</span>
-                  <span>Spiritual Growth</span>
-                </li>
-              </ul>
-            </div>
-          </div>
-        </motion.div>
-      </section>
-
-      {/* About Me Section - Scaled to 50vh on 2K/3K/4K so Our Goal + About Me = 1 Screen Height */}
-      <section id="about" className="relative z-10 py-14 sm:py-20 lg:py-24 2xl:pt-14 2xl:pb-14 3xl:pt-16 3xl:pb-16 4xl:pt-20 4xl:pb-20 2xl:min-h-[50svh] 3xl:min-h-[50svh] 4xl:min-h-[50svh] 2xl:h-[50svh] 3xl:h-[50svh] 4xl:h-[50svh] flex flex-col justify-start bg-cover bg-center bg-[#F3E7D5] overflow-hidden" style={{ backgroundImage: "url('/marble-bg.webp')" }}>
+      {/* About Me Section - Scaled to 50vh on 2K/3K/4K with top distance matching Testimonials */}
+      <section id="about" className="relative z-10 pt-4 sm:pt-6 pb-12 sm:pb-16 lg:pt-6 lg:pb-20 2xl:pt-6 2xl:pb-14 3xl:pt-8 3xl:pb-16 4xl:pt-10 4xl:pb-20 2xl:min-h-[50svh] 3xl:min-h-[50svh] 4xl:min-h-[50svh] 2xl:h-[50svh] 3xl:h-[50svh] 4xl:h-[50svh] flex flex-col justify-start bg-cover bg-center bg-[#F3E7D5] overflow-hidden" style={{ backgroundImage: "url('/marble-bg.webp')" }}>
         <div className="absolute inset-0 bg-[#F3E7D5]/90 z-0 pointer-events-none" />
 
         {/* Celestial Divider 2 (directly on border line, zero height) */}
@@ -497,8 +393,8 @@ function Home() {
         </div>
       </section>
 
-      {/* Working With Me Section - Min-height balanced for 2K/3K/4K viewports with 20% width screen gap */}
-      <section className="relative z-10 py-8 sm:py-12 lg:py-16 2xl:pt-14 2xl:pb-8 3xl:pt-16 3xl:pb-10 4xl:pt-20 4xl:pb-12 2xl:min-h-[46svh] 3xl:min-h-[46svh] 4xl:min-h-[46svh] flex flex-col justify-start bg-cover bg-center bg-[#F3E7D5] border-t border-[#deb18a]/20" style={{ backgroundImage: "url('/marble-bg.webp')" }}>
+      {/* Working With Me Section - Moved text upward with top padding matching Testimonials */}
+      <section className="relative z-10 pt-4 sm:pt-6 pb-10 sm:pb-14 lg:pt-6 lg:pb-16 2xl:pt-6 2xl:pb-10 3xl:pt-8 3xl:pb-12 4xl:pt-10 4xl:pb-14 2xl:min-h-[46svh] 3xl:min-h-[46svh] 4xl:min-h-[46svh] flex flex-col justify-start bg-cover bg-center bg-[#F3E7D5] border-t border-[#deb18a]/20" style={{ backgroundImage: "url('/marble-bg.webp')" }}>
         <div className="absolute inset-0 bg-[#F3E7D5]/90 z-0 pointer-events-none" />
         <motion.div 
           initial={{ opacity: 0, y: 35 }}

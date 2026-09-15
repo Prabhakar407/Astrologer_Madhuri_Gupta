@@ -216,7 +216,7 @@ function BigQuote({ className = "", color = INK, flip = false }) {
 }
 
 /* ------------------------------------------------------------------ */
-/*  Card 1 — Victoria Linton (Shown on Mobile & Desktop)               */
+/*  Card 1 — Pooja Sharma (Shown on Mobile & Desktop)                  */
 /* ------------------------------------------------------------------ */
 
 function VictoriaCard() {
@@ -227,23 +227,21 @@ function VictoriaCard() {
         style={{ backgroundColor: CREAM }}
       >
         <img
-          src="/testimonials/victoria.png"
+          src="/testimonials/pooja.jpg"
           onError={(e) => { e.currentTarget.src = "/testimonial_ananya.webp"; }}
-          alt="Victoria Linton"
+          alt="Pooja Sharma"
           className="w-14 h-14 sm:w-16 sm:h-16 rounded-full object-cover absolute -left-5 sm:-left-6 top-1/2 -translate-y-1/2"
           style={{ boxShadow: `0 0 0 5px ${BG}` }}
         />
         <BigQuote className="text-4xl sm:text-5xl absolute top-2.5 right-5 text-[#775347]/90" />
         <h3 className="font-display text-base sm:text-lg font-bold" style={{ color: INK }}>
-          Victoria Linton
+          Pooja Sharma
         </h3>
         <div className="mt-0.5">
           <Stars filled={5} size={12} color={GOLD} />
         </div>
         <p className="font-body text-[11.5px] sm:text-[12px] leading-relaxed mt-1.5" style={{ color: MUTED }}>
-          Praedam ssou neque viverra justo uttrices eut. Eat leiem ioxum dolor
-          amet consettetur adipiscing. Vitae nunc bed veiit dignisses, in
-          hendrerit gravida
+          &ldquo;Madhuri ji&apos;s deep insight during our Kundli matching resolved all our anxieties. Her practical remedies brought immense harmony and confidence to both our families.&rdquo;
         </p>
       </div>
     </div>
@@ -251,7 +249,7 @@ function VictoriaCard() {
 }
 
 /* ------------------------------------------------------------------ */
-/*  Card 2 — Dmitri Woodhouse (Hidden on Mobile)                       */
+/*  Card 2 — Vikram Malhotra (Hidden on Mobile)                        */
 /* ------------------------------------------------------------------ */
 
 function DmitriCard() {
@@ -262,22 +260,22 @@ function DmitriCard() {
         style={{ backgroundColor: CREAM }}
       >
         <img
-          src="/testimonials/dmitri.png"
+          src="/testimonials/vikram.jpg"
           onError={(e) => { e.currentTarget.src = "/testimonial_vikram.webp"; }}
-          alt="Dmitri Woodhouse"
+          alt="Vikram Malhotra"
           className="w-14 h-14 sm:w-15 sm:h-15 rounded-full object-cover absolute top-1/2 -translate-y-1/2 -right-5 sm:-right-6"
           style={{ boxShadow: `0 0 0 5px ${BG}` }}
         />
         <p className="font-body text-[12px] sm:text-[12.5px] leading-relaxed font-medium" style={{ color: INK }}>
-          &ldquo;Mauris in aliquam es fringilla morbi tincidunt auque amet dul massa&rdquo;
+          &ldquo;Her planetary cycle and Dasha analysis accurately pinpointed the exact month for my business expansion. Truly life-changing guidance.&rdquo;
         </p>
         <div className="flex flex-wrap items-end justify-between gap-2 mt-2.5">
           <div>
             <p className="font-body text-[11px] font-bold tracking-wider uppercase" style={{ color: INK }}>
-              DMITRI WOODHOUSE
+              VIKRAM MALHOTRA
             </p>
             <p className="font-body text-[10px]" style={{ color: MUTED }}>
-              @yournamehose
+              @vikram.malhotra
             </p>
           </div>
           <div className="pr-1">
@@ -290,7 +288,7 @@ function DmitriCard() {
 }
 
 /* ------------------------------------------------------------------ */
-/*  Card 3 — Excellent Job! (Fanny Dean) (Shown on Mobile & Desktop)   */
+/*  Card 3 — Excellent Guidance! (Dr. Meenakshi Iyer)                  */
 /* ------------------------------------------------------------------ */
 
 function ExcellentJobCard() {
@@ -299,9 +297,9 @@ function ExcellentJobCard() {
       {/* Centered Top Avatar */}
       <div className="flex justify-center absolute top-0 left-0 right-0 z-10">
         <img
-          src="/testimonials/fanny.png"
-          onError={(e) => { e.currentTarget.src = "https://i.pravatar.cc/300?img=47"; }}
-          alt="Fanny Dean"
+          src="/testimonials/meenakshi.jpg"
+          onError={(e) => { e.currentTarget.src = "/testimonial_ananya.webp"; }}
+          alt="Dr. Meenakshi Iyer"
           className="w-18 h-18 sm:w-20 sm:h-20 laptop-hero-avatar rounded-full object-cover"
           style={{ boxShadow: `0 0 0 5px ${BG}` }}
         />
@@ -311,7 +309,7 @@ function ExcellentJobCard() {
       >
         <div className="space-y-1 mt-0.5">
           <h3 className="font-display text-lg sm:text-xl font-bold tracking-wide uppercase" style={{ color: INK }}>
-            EXCELLENT JOB!
+            EXCELLENT GUIDANCE!
           </h3>
           <div className="flex justify-center mt-1">
             <Stars filled={5} size={12} color="#A39587" dim="#D5C7B8" />
@@ -321,10 +319,10 @@ function ExcellentJobCard() {
           className="font-body text-[11.5px] sm:text-[12px] laptop-hero-quote leading-relaxed my-2 max-w-[28ch] mx-auto"
           style={{ color: MUTED }}
         >
-          &ldquo;A scelerisque purus pursper eget eget at tellus. Amet cursus sit amet pinises sit justo. Varius sit amet&rdquo;
+          &ldquo;Astrologer Madhuri Gupta&apos;s profound Vedic wisdom and compassionate counseling helped me navigate a critical life crossroads with absolute peace and certainty.&rdquo;
         </p>
         <p className="font-script text-3xl sm:text-3xl select-none" style={{ color: INK }}>
-          Fanny Dean
+          Dr. Meenakshi Iyer
         </p>
       </div>
     </div>
@@ -332,7 +330,7 @@ function ExcellentJobCard() {
 }
 
 /* ------------------------------------------------------------------ */
-/*  Card 4 — Client Review (Hidden on Mobile)                          */
+/*  Card 4 — Client Review (Rohit Agarwal)                             */
 /* ------------------------------------------------------------------ */
 
 function ClientReviewCard() {
@@ -344,22 +342,22 @@ function ClientReviewCard() {
           style={{ backgroundColor: TAN_CHIP }}
         >
           <h3 className="font-display text-sm sm:text-base font-bold" style={{ color: INK }}>
-            Client Review
+            Rohit Agarwal
           </h3>
           <span className="font-body text-[11px] font-medium" style={{ color: "#4A3F2C" }}>
-            @ArtfulWotton
+            @rohitagarwal_up
           </span>
         </div>
         <div className="p-4 sm:p-4.5 flex-1 flex flex-col justify-between">
           <p className="font-body text-[12px] leading-relaxed" style={{ color: INK }}>
-            &ldquo;Rhoncus neque viverra justo uttrices duist lorem dolor and consect adipiscing.&rdquo;
+            &ldquo;The Vastu space corrections suggested for our new residence improved our family&apos;s health and financial stability within months.&rdquo;
           </p>
           <div className="flex items-center justify-between mt-3.5 pt-2 border-t border-black/5">
             <span
               className="font-body text-[11px] font-bold tracking-wider hover:text-[#b8922b] transition-colors cursor-pointer"
               style={{ color: INK }}
             >
-              READ MORE &nbsp;&#8594;
+              VERIFIED REVIEW &nbsp;&#8594;
             </span>
             <div className="flex items-center gap-3" style={{ color: MUTED }}>
               <Heart size={15} className="hover:text-red-500 transition-colors cursor-pointer" />
@@ -374,7 +372,7 @@ function ClientReviewCard() {
 }
 
 /* ------------------------------------------------------------------ */
-/*  Card 5 — Nelly Vane (Hidden on Mobile)                             */
+/*  Card 5 — Neha Agnihotri (Hidden on Mobile)                         */
 /* ------------------------------------------------------------------ */
 
 function NellyCard() {
@@ -387,9 +385,9 @@ function NellyCard() {
         {/* Left Avatar */}
         <div className="absolute left-3.5 sm:left-4 top-1/2 -translate-y-1/2">
           <img
-            src="/testimonials/nelly.png"
-            onError={(e) => { e.currentTarget.src = "https://i.pravatar.cc/150?img=28"; }}
-            alt="Nelly Vane"
+            src="/testimonials/ananya.jpg"
+            onError={(e) => { e.currentTarget.src = "/testimonial_ananya.webp"; }}
+            alt="Neha Agnihotri"
             className="w-13 h-13 sm:w-14 sm:h-14 rounded-full object-cover"
           />
         </div>
@@ -404,10 +402,10 @@ function NellyCard() {
         </div>
 
         <h3 className="font-display text-xs sm:text-sm font-bold tracking-wider uppercase" style={{ color: INK }}>
-          NELLY VANE
+          NEHA AGNIHOTRI
         </h3>
         <p className="font-body text-[11px] leading-snug mt-0.5" style={{ color: MUTED }}>
-          Aorem ctus ot conscoteter viven uttrics, dit fortor er aoec dvenit blissus mg el at tellus
+          Very precise Janam Kundli predictions without unnecessary superstitions. Her remedies are simple and highly effective.
         </p>
         <div className="flex items-center gap-1.5 mt-1.5">
           <Stars filled={5} size={11} color={GOLD} />
@@ -421,7 +419,7 @@ function NellyCard() {
 }
 
 /* ------------------------------------------------------------------ */
-/*  Card 6 — Top-notch! (Hidden on Mobile)                             */
+/*  Card 6 — Truly Accurate! (Rajesh K. Verma)                         */
 /* ------------------------------------------------------------------ */
 
 function TopNotchCard() {
@@ -430,13 +428,13 @@ function TopNotchCard() {
       <div className="rounded-[1.75rem] bg-white floating-card-shadow p-4 sm:p-4.5 h-full flex flex-col justify-between border border-white/80">
         <div>
           <h3 className="font-display text-lg sm:text-xl font-bold text-center" style={{ color: INK }}>
-            Top-notch!
+            Truly Accurate!
           </h3>
           <p
             className="font-body text-[11.5px] leading-relaxed text-center mt-1.5"
             style={{ color: MUTED }}
           >
-            Rhoncus ame neque viverra justo uoc consec dot. Eut lorem ipsum dolor sit amet consectetor
+            Her birth chart reading explained long-standing career blocks and provided the exact timeline when things would turn around.
           </p>
           <div className="flex items-center justify-center gap-1.5 mt-2">
             <Stars filled={5} size={11} color="#A39587" dim="#D5C7B8" />
@@ -450,17 +448,17 @@ function TopNotchCard() {
           style={{ borderColor: "rgba(0,0,0,0.06)" }}
         >
           <img
-            src="/testimonials/hindley.png"
+            src="/testimonials/rajesh.jpg"
             onError={(e) => { e.currentTarget.src = "/testimonial_rajesh.webp"; }}
-            alt="Hindley Micawber"
+            alt="Rajesh K. Verma"
             className="w-9 h-9 sm:w-10 sm:h-10 rounded-full object-cover"
           />
           <div>
             <p className="font-body text-[11.5px] font-bold" style={{ color: INK }}>
-              Hindley Micawber
+              Rajesh K. Verma
             </p>
             <p className="font-body text-[10px]" style={{ color: MUTED }}>
-              @yyzosocialmedia
+              @rajeshverma_in
             </p>
           </div>
         </div>
@@ -470,7 +468,7 @@ function TopNotchCard() {
 }
 
 /* ------------------------------------------------------------------ */
-/*  Card 7 — Testimonial (Catherine Doe) (Shown on Mobile & Desktop)   */
+/*  Card 7 — Priya Chawla (Shown on Mobile & Desktop)                  */
 /* ------------------------------------------------------------------ */
 
 function CatherineCard() {
@@ -482,9 +480,9 @@ function CatherineCard() {
         style={{ boxShadow: `0 0 0 4px ${BG}` }}
       >
         <img
-          src="/testimonials/catherine.png"
-          onError={(e) => { e.currentTarget.src = "https://i.pravatar.cc/300?img=44"; }}
-          alt="Catherine Doe"
+          src="/testimonials/priya.jpg"
+          onError={(e) => { e.currentTarget.src = "/testimonial_ananya.webp"; }}
+          alt="Priya Chawla"
           className="w-full h-full object-cover object-top"
         />
       </div>
@@ -498,11 +496,10 @@ function CatherineCard() {
             TESTIMONIAL
           </h4>
           <p className="font-body text-[11.5px] leading-relaxed mt-1" style={{ color: INK }}>
-            &ldquo;In hac habitasse platea dictumst quisque{" "}
-            <span className="underline decoration-[#7C7059]/40 underline-offset-2">sagitise</span> pur corvallis.&rdquo;
+            &ldquo;Her gemstone recommendation and personalized mantra remedies helped resolve long-standing hurdles in my professional life.&rdquo;
           </p>
           <p className="font-body text-[10.5px] font-medium mt-1" style={{ color: MUTED }}>
-            @CatherineDoe
+            @priyachawla
           </p>
         </div>
 
@@ -524,7 +521,7 @@ function CatherineCard() {
 }
 
 /* ------------------------------------------------------------------ */
-/*  Card 8 — Recommended! (Hidden on Mobile)                           */
+/*  Card 8 — Recommended! (Sunita Rawat)                               */
 /* ------------------------------------------------------------------ */
 
 function RecommendedCard() {
@@ -534,9 +531,9 @@ function RecommendedCard() {
         {/* Top Photo */}
         <div className="relative w-full h-24 sm:h-28 laptop-rec-photo overflow-hidden">
           <img
-            src="/testimonials/recommended.png"
-            onError={(e) => { e.currentTarget.src = "https://i.pravatar.cc/400?img=45"; }}
-            alt="Recommended"
+            src="/testimonials/sunita.jpg"
+            onError={(e) => { e.currentTarget.src = "/testimonial_ananya.webp"; }}
+            alt="Sunita Rawat"
             className="w-full h-full object-cover object-top"
           />
           {/* Bookmark Ribbon */}
@@ -557,7 +554,7 @@ function RecommendedCard() {
             <Stars filled={5} size={10} color={GOLD} />
           </div>
           <p className="font-body text-[9.5px] leading-snug mt-1" style={{ color: MUTED }}>
-            &ldquo;Detailart morta tristique et nexus blands iniarded&rdquo;
+            &ldquo;Remarkably compassionate guidance that brought peace to our family.&rdquo;
           </p>
         </div>
       </div>
@@ -566,7 +563,7 @@ function RecommendedCard() {
 }
 
 /* ------------------------------------------------------------------ */
-/*  Card 9 — Jane (Hidden on Mobile)                                   */
+/*  Card 9 — Kavita Desai (Hidden on Mobile)                           */
 /* ------------------------------------------------------------------ */
 
 function JaneCard() {
@@ -577,18 +574,16 @@ function JaneCard() {
         className="relative rounded-[1.5rem] bg-white floating-card-shadow p-3.5 sm:p-4 border border-white/80"
       >
         <p className="font-body text-[11.5px] leading-relaxed font-medium" style={{ color: "#3A3120" }}>
-          &ldquo;Vestibulum mattis enim aulit{" "}
-          <span className="underline decoration-[#7C7059]/40 underline-offset-2">fortor</span> se ullamcorper morbi
-          pretium&rdquo;
+          &ldquo;Her precise muhurta timing for our property registration saved us from unforeseen legal complications.&rdquo;
         </p>
         <div className="flex items-end justify-between mt-2">
           <BigQuote className="text-3xl text-[#775347]/90 leading-none" flip />
           <div className="text-right">
             <p className="font-script text-xl leading-none select-none" style={{ color: "#3A3120" }}>
-              Jane
+              Kavita
             </p>
             <p className="font-body text-[10px] mt-0.5" style={{ color: "#5A5038" }}>
-              @JaneProkofich
+              @kavitadesai
             </p>
           </div>
         </div>
@@ -599,14 +594,14 @@ function JaneCard() {
         />
       </div>
 
-      {/* Jane's Avatar below with Diamond Motif */}
+      {/* Kavita's Avatar below with Diamond Motif */}
       <div className="absolute bottom-0 right-3 flex flex-col items-center">
         {/* Subtle sparkle diamond pointer connecting to tail */}
         <div className="w-2.5 h-2.5 rotate-45 bg-[#E7DAC8] -mb-1 z-0 shadow-sm" />
         <img
-          src="/testimonials/jane.png"
-          onError={(e) => { e.currentTarget.src = "https://i.pravatar.cc/150?img=48"; }}
-          alt="Jane"
+          src="/testimonials/kavita.jpg"
+          onError={(e) => { e.currentTarget.src = "/testimonial_ananya.webp"; }}
+          alt="Kavita Desai"
           className="w-11 h-11 sm:w-13 sm:h-13 rounded-full object-cover relative z-10"
           style={{ boxShadow: `0 0 0 4px ${BG}` }}
         />
@@ -616,16 +611,37 @@ function JaneCard() {
 }
 
 /* ------------------------------------------------------------------ */
-/*  Animation Cell Wrapper                                             */
+/*  Animation Variants & Cell Wrapper                                  */
 /* ------------------------------------------------------------------ */
+
+const gridContainerVariants = {
+  hidden: { opacity: 0 },
+  visible: {
+    opacity: 1,
+    transition: {
+      staggerChildren: 0.14,
+      delayChildren: 0.1,
+    },
+  },
+};
+
+const cellVariants = {
+  hidden: { opacity: 0, y: 32, scale: 0.94 },
+  visible: {
+    opacity: 1,
+    y: 0,
+    scale: 1,
+    transition: {
+      duration: 0.6,
+      ease: [0.16, 1, 0.3, 1],
+    },
+  },
+};
 
 function Cell({ children, className = "" }) {
   return (
     <motion.div
-      initial={{ opacity: 0, y: 14 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true, margin: "200px" }}
-      transition={{ duration: 0.45, ease: [0.22, 1, 0.36, 1] }}
+      variants={cellVariants}
       className={`w-full ${className}`}
     >
       {children}
@@ -693,7 +709,13 @@ export default function TestimonialsSection() {
 
       <div className="relative z-10 max-w-7xl 2xl:max-w-[1440px] 3xl:max-w-[1680px] mx-auto px-6 sm:px-8">
         {/* Section Header */}
-        <div className="text-center space-y-1 mb-3.5 sm:mb-4.5 testimonial-header-box">
+        <motion.div 
+          initial={{ opacity: 0, y: -16 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, amount: 0.1 }}
+          transition={{ duration: 0.6, ease: "easeOut" }}
+          className="text-center space-y-1 mb-3.5 sm:mb-4.5 testimonial-header-box"
+        >
           <TextShimmer
             as="h2"
             duration={3.5}
@@ -709,16 +731,22 @@ export default function TestimonialsSection() {
           <p className="font-sans text-[11px] sm:text-xs text-[#7C7059] tracking-widest uppercase font-semibold">
             Words of Trust & Guidance
           </p>
-        </div>
+        </motion.div>
 
-        {/* Responsive Collage Grid: Only 3 cards on mobile, full 9 cards on tablet/desktop */}
-        <div className="testimonial-collage-grid">
-          {/* Card 1: Victoria Linton (Mobile Card 1) */}
+        {/* Responsive Collage Grid with Sequential Staggered Entrance Animation */}
+        <motion.div 
+          variants={gridContainerVariants}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, amount: 0.05 }}
+          className="testimonial-collage-grid"
+        >
+          {/* Card 1: Pooja Sharma (Mobile Card 1) */}
           <Cell className="cell-victoria">
             <VictoriaCard />
           </Cell>
 
-          {/* Card 3: Fanny Dean Hero Center (Mobile Card 2) */}
+          {/* Card 3: Dr. Meenakshi Iyer Hero Center (Mobile Card 2) */}
           <Cell className="cell-fanny">
             <ExcellentJobCard />
           </Cell>
@@ -728,22 +756,22 @@ export default function TestimonialsSection() {
             <ClientReviewCard />
           </Cell>
 
-          {/* Card 2: Dmitri Woodhouse (Desktop/Tablet only) */}
+          {/* Card 2: Vikram Malhotra (Desktop/Tablet only) */}
           <Cell className="cell-dmitri hidden md:block">
             <DmitriCard />
           </Cell>
 
-          {/* Card 5: Nelly Vane (Desktop/Tablet only) */}
+          {/* Card 5: Neha Agnihotri (Desktop/Tablet only) */}
           <Cell className="cell-nelly hidden md:block">
             <NellyCard />
           </Cell>
 
-          {/* Card 6: Top-notch! (Desktop/Tablet only) */}
+          {/* Card 6: Truly Accurate! (Desktop/Tablet only) */}
           <Cell className="cell-topnotch hidden md:block">
             <TopNotchCard />
           </Cell>
 
-          {/* Card 7: Catherine Doe (Mobile Card 3) */}
+          {/* Card 7: Priya Chawla (Mobile Card 3) */}
           <Cell className="cell-catherine">
             <CatherineCard />
           </Cell>
@@ -753,11 +781,11 @@ export default function TestimonialsSection() {
             <RecommendedCard />
           </Cell>
 
-          {/* Card 9: Jane (Desktop/Tablet only) */}
+          {/* Card 9: Kavita Desai (Desktop/Tablet only) */}
           <Cell className="cell-jane hidden md:block">
             <JaneCard />
           </Cell>
-        </div>
+        </motion.div>
       </div>
     </section>
   );

@@ -79,19 +79,25 @@ function Footer() {
 
           {/* Contact */}
           <div>
-            <h3 className="font-serif font-bold text-white mb-4 uppercase tracking-[0.18em] text-xs sm:text-sm 2xl:text-base 3xl:text-lg">Contact Info</h3>
-            <ul className="space-y-3 text-xs sm:text-sm 2xl:text-base 3xl:text-lg text-white font-serif tracking-wide">
+            <h3 className="font-serif font-bold text-white mb-4 uppercase tracking-[0.18em] text-xs sm:text-sm 2xl:text-base 3xl:text-lg">Contact Us</h3>
+            <ul className="space-y-3 text-xs sm:text-sm 2xl:text-base 3xl:text-lg text-white/90 font-serif tracking-wide">
               <li className="flex items-center space-x-2 2xl:space-x-3">
-                <Phone className="h-4 w-4 2xl:h-6 2xl:w-6 text-white shrink-0" />
-                <span>+91 88815 73437</span>
+                <Phone className="h-4 w-4 2xl:h-6 2xl:w-6 text-[#dfb260] shrink-0" />
+                <a href="tel:+918881573437" className="font-sans font-medium text-xs sm:text-sm 2xl:text-base 3xl:text-lg text-white/90 hover:text-[#dfb260] transition-colors tracking-normal">
+                  +91 88815 73437
+                </a>
               </li>
               <li className="flex items-center space-x-2 2xl:space-x-3">
-                <Mail className="h-4 w-4 2xl:h-6 2xl:w-6 text-white shrink-0" />
-                <span className="break-all font-sans lowercase">sarsajyotish@gmail.com</span>
+                <Mail className="h-4 w-4 2xl:h-6 2xl:w-6 text-[#dfb260] shrink-0" />
+                <a href="mailto:sarsajyotish@gmail.com" className="break-all font-sans font-medium text-xs sm:text-sm 2xl:text-base 3xl:text-lg text-white/90 hover:text-[#dfb260] transition-colors lowercase">
+                  sarsajyotish@gmail.com
+                </a>
               </li>
               <li className="flex items-start space-x-2 2xl:space-x-3">
-                <MapPin className="h-4 w-4 2xl:h-6 2xl:w-6 text-white shrink-0 mt-0.5" />
-                <span>Agra, Uttar Pradesh, India (Available Globally Online)</span>
+                <MapPin className="h-4 w-4 2xl:h-6 2xl:w-6 text-[#dfb260] shrink-0 mt-0.5" />
+                <span className="font-sans text-xs sm:text-sm 2xl:text-base 3xl:text-lg text-white/90 leading-snug">
+                  Agra, Uttar Pradesh, India (Available Globally Online)
+                </span>
               </li>
             </ul>
           </div>
